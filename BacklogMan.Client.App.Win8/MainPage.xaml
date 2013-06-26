@@ -5,9 +5,19 @@
     xmlns:local="using:BacklogMan.Client.App.Win8"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContext="{Binding Main, Source={StaticResource Locator}}">
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-
+        <ListView ItemsSource="{Binding Projects}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Description}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

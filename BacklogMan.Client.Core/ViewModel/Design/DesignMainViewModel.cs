@@ -38,5 +38,18 @@ namespace BacklogMan.Client.Core.ViewModel.Design
         {
             get; set;
         }
+
+
+        public string ApiKey
+        {
+            get 
+            {
+                return "asdfjapsoidfasjdf";
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

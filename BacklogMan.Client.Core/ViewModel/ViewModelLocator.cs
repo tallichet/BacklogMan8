@@ -29,5 +29,13 @@ namespace BacklogMan.Client.Core.ViewModel
                 SimpleIoc.Default.Register<IMainViewModel, ViewModel.Runtime.MainViewModel>();
             }
         }
+
+        public IMainViewModel Main
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<IMainViewModel>();
+            }
+        }
     }
 }
