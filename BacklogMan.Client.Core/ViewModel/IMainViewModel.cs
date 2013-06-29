@@ -18,5 +18,7 @@ namespace BacklogMan.Client.Core.ViewModel
         /// Api key used to login on backlog man
         /// </summary>
         string ApiKey { get; set; }
+
+        Model.Project CurrentProject { get; set; }
     }
 }

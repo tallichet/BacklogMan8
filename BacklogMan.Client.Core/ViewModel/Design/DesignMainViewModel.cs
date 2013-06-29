@@ -36,7 +36,8 @@ namespace BacklogMan.Client.Core.ViewModel.Design
 
         public System.Collections.ObjectModel.ObservableCollection<Model.Project> Projects
         {
-            get; set;
+            get;
+            set;
         }
 
 
@@ -50,6 +51,13 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             {
                 throw new NotImplementedException();
             }
+        }
+
+
+        public Model.Project CurrentProject
+        {
+            get { return Projects.First(); }
+            set { throw new NotImplementedException(); }
         }
     }
 }

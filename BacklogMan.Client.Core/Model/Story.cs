@@ -48,11 +48,19 @@ namespace BacklogMan.Client.Core.Model
         {
             get
             {
-                
+                switch (Status)
+                {
+                    case StoryStatus.InProgress:
+                        return "in_progress";
+                    default:
+                        return Status.ToString().ToLower();
+                }
             }
             set 
-            { 
-
+            {
+                StoryStatus s;
+                if (Enum.TryParse<StoryStatus>(value.Replace("_", ""), true, out s))
+                    Status = s;
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,7 +18,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         public MainViewModel()
         {
             Projects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
-            ApiKey = "d6e4dc02f5cd443a3a480ae5debd6ddf7bec0707".ToUpper();
+            ApiKey = "d6e4dc02f5cd443a3a480ae5debd6ddf7bec0707";
 
             Init();
         }
@@ -35,39 +36,31 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
         public string ApiKey
         {
-            get; 
-            set;
+            get
+            {
+                return ServiceLocator.Current.GetInstance<Service.INetworkService>().APIKey;
+            }
+            set 
+            {
+                ServiceLocator.Current.GetInstance<Service.INetworkService>().APIKey = value;
+            }
         }
 
         private async Task DownloadProjects()
         {
-            try
+            this.Projects.Clear();
+
+            var projects = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadProjects();
+            foreach (var p in projects)
             {
-                var client = new HttpClient();
-
-                //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", ApiKey);
-
-                client.DefaultRequestHeaders.Add("Authorization", "token d6e4dc02f5cd443a3a480ae5debd6ddf7bec0707");
-
-                using (var stream = await client.GetStreamAsync("https://app.backlogman.com/api/projects/"))
-                {
-                    Projects.Clear();
-
-                    var serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(List<Model.Project>));
-                    foreach (var p in serializer.ReadObject(stream) as List<Model.Project>)
-                    {
-                        Projects.Add(p);
-                    }
-                }
+                this.Projects.Add(p);
             }
-            catch (WebException webEx)
-            {
-                Debug.WriteLine(new StreamReader(webEx.Response.GetResponseStream()).ReadToEnd());
-            }
-            catch (HttpRequestException httpEx)
-            {
-                Debug.WriteLine(httpEx.StackTrace);
-            }
+        }
+
+
+        public Model.Project CurrentProject
+        {
+            get;set;
         }
     }
 }

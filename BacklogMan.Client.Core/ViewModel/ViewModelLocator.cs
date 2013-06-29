@@ -27,6 +27,7 @@ namespace BacklogMan.Client.Core.ViewModel
             {
                 // Create run time view services and models
                 SimpleIoc.Default.Register<IMainViewModel, ViewModel.Runtime.MainViewModel>();
+                SimpleIoc.Default.Register<Service.INetworkService, Service.NetworkService>();
             }
         }
 
