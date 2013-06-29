@@ -18,6 +18,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         public MainViewModel()
         {
             Projects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
+            BacklogStories = new System.Collections.ObjectModel.ObservableCollection<Model.Story>();
             ApiKey = "d6e4dc02f5cd443a3a480ae5debd6ddf7bec0707";
 
             Init();
@@ -61,6 +62,36 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         public Model.Project CurrentProject
         {
             get;set;
+        }
+
+        private Model.Backlog currentBacklog = null;
+        public Model.Backlog CurrentBacklog
+        {
+            get
+            {
+                return currentBacklog;
+            }
+            set
+            {
+                currentBacklog = value;
+                refreshStories();
+            }
+        }
+
+        public System.Collections.ObjectModel.ObservableCollection<Model.Story> BacklogStories
+        {
+            get;
+            private set;
+        }
+
+        private async void refreshStories()
+        {
+            BacklogStories.Clear();
+            var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentProject.Id, CurrentBacklog.id);
+            foreach (var s in stories)
+            {
+                BacklogStories.Add(s);
+            }
         }
     }
 }

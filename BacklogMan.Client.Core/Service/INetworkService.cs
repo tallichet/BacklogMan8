@@ -12,12 +12,12 @@ namespace BacklogMan.Client.Core.Service
         string APIKey { get; set; }
 
         Task<List<Model.Project>> DownloadProjects();
-        Task<Model.Project> DownloadProject(string projectId);
+        Task<Model.Project> DownloadProject(int projectId);
 
-        Task<List<Model.Backlog>> DownloadBacklogs(string projectId);
-        Task<Model.Backlog> DownloadBacklog(string projectId, string backlogId);
+        Task<List<Model.Backlog>> DownloadBacklogs(int projectId);
+        Task<Model.Backlog> DownloadBacklog(int projectId, int backlogId);
 
-        Task<List<Model.Story>> DownloadStories(string projectId, string backlogId);
-        Task<Model.Story> DownloadStory(string projectId, string backlogId, string stroyId);
+        Task<List<Model.Story>> DownloadStories(int projectId, int backlogId);
+        Task<Model.Story> DownloadStory(int projectId, int backlogId, int stroyId);
     }
 }

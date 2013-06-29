@@ -19,6 +19,19 @@ namespace BacklogMan.Client.Core.ViewModel
         /// </summary>
         string ApiKey { get; set; }
 
+        /// <summary>
+        /// The currently selected project
+        /// </summary>
         Model.Project CurrentProject { get; set; }
+
+        /// <summary>
+        /// The currently selected backlog
+        /// </summary>
+        Model.Backlog CurrentBacklog { get; set; }
+
+        /// <summary>
+        /// Stories of the current backlog
+        /// </summary>
+        ObservableCollection<Model.Story> BacklogStories { get; }
     }
 }

@@ -31,7 +31,36 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                     new Model.BacklogmanUser() {FullName = "cedric", Email = "cedric@suisse.ch"},
                 }
             });
-
+            BacklogStories = new System.Collections.ObjectModel.ObservableCollection<Model.Story>();
+            BacklogStories.Add(new Model.Story()
+            {
+                AsUser = "Designer",
+                Goal = "have a design view model",
+                Result = "degign more easily",
+                Points = 5,
+                Status = Model.StoryStatus.ToDo,
+                Theme = "Design",
+                Code = "JDG1",
+                AcceptanceCriteria = @"- etre beau
+- doit avoir assez de contenu
+- voilà quoi",
+                ColorString = "#FF0011"
+            });
+            BacklogStories.Add(new Model.Story()
+            {
+                AsUser = "Developer",
+                Goal = "see stories of my backlog",
+                Result = "choose what to do next",
+                Points = 8,
+                Status = Model.StoryStatus.InProgress,
+                Theme = "Design",
+                Code = "JDG1",
+                AcceptanceCriteria = @"- première ligne
+- 2ème ligne
+- 3ème ligne
+- 4ème ligne",
+                ColorString = "#00FF33"
+            });
         }
 
         public System.Collections.ObjectModel.ObservableCollection<Model.Project> Projects
@@ -58,6 +87,25 @@ namespace BacklogMan.Client.Core.ViewModel.Design
         {
             get { return Projects.First(); }
             set { throw new NotImplementedException(); }
+        }
+
+
+        public Model.Backlog CurrentBacklog
+        {
+            get
+            {
+                return CurrentProject.Backlogs.First();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public System.Collections.ObjectModel.ObservableCollection<Model.Story> BacklogStories
+        {
+            get;
+            set;
         }
     }
 }
