@@ -47,6 +47,7 @@
             ItemsSource="{Binding Source={StaticResource groupedItemsViewSource}}"
             ItemTemplate="{StaticResource BacklogManStandard250x250ItemTemplate}"
             SelectionMode="None"
+            IsItemClickEnabled="True" ItemClick="BacklogItemClicked"
             IsSwipeEnabled="false">
 
             <GridView.ItemsPanel>

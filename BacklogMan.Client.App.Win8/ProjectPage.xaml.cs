@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -40,6 +41,16 @@ namespace BacklogMan.Client.App.Win8
         {
             // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
             // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
+        }
+
+        private void BacklogItemClicked(object sender, ItemClickEventArgs e)
+        {
+            var backlog = e.ClickedItem as Core.Model.Backlog;
+
+            var vm = ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>();
+            vm.CurrentBacklog = backlog;
+
+            this.Frame.Navigate(typeof(BacklogPage));
         }
     }
 }

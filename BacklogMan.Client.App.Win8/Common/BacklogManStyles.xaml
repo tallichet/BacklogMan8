@@ -33,4 +33,21 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="BacklogManStory500x130ItemTemplate">
+        <Grid Height="110" Width="480" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
+                <Image Source="{Binding Image}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
+            </Border>
+            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
+                <TextBlock Text="{Binding Description}" Style="{StaticResource TitleTextStyle}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Points}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap"/>
+                <!--<TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextStyle}" MaxHeight="60"/>-->
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
 </ResourceDictionary>

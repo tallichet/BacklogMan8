@@ -66,6 +66,15 @@ namespace BacklogMan.Client.Core.Model
 
         [IgnoreDataMember]
         public StoryStatus Status { get; set; }
+
+        [IgnoreDataMember]
+        public string Description
+        {
+            get
+            {
+                return string.Format("As {0}, I want to {1}, so I can {2}", AsUser, Goal, Result);
+            }
+        }
     }
 
     public enum StoryStatus
