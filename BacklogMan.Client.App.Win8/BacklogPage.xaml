@@ -6,6 +6,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BacklogMan.Client.App.Win8"
     xmlns:common="using:BacklogMan.Client.App.Win8.Common"
+    xmlns:ctrl="using:BacklogMan.Client.App.Win8.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -39,6 +40,7 @@
             Padding="120,126,120,50"
             ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
             ItemTemplate="{StaticResource BacklogManStory500x130ItemTemplate}"
+            IsItemClickEnabled="True" ItemClick="showStory"
             SelectionMode="None"
             IsSwipeEnabled="false">
 
@@ -88,6 +90,10 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Text="Backlog" Style="{StaticResource PageHeaderTextStyle}" Grid.Column="1" IsHitTestVisible="false" />
         </Grid>
+        
+        <Grid x:Name="storyEditorLayer" Grid.RowSpan="2" Background="#80000000" Visibility="Collapsed" Tapped="StoryLayerTapped">
+            <ctrl:StoryEditor x:Name="storyEditor" HorizontalAlignment="Center" VerticalAlignment="Center" Tapped="StoryTapped" />
+        </Grid>
 
         <VisualStateManager.VisualStateGroups>
 
@@ -130,6 +136,27 @@
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
+            </VisualStateGroup>
+            
+            <VisualStateGroup x:Name="StoryLayerStates">
+                <VisualStateGroup.States>
+                    <VisualState x:Name="StoryLayerCollapsed">
+                        <Storyboard BeginTime="0:0:0" Duration="0:0:0">
+                            <ObjectAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:0" 
+                                                           Storyboard.TargetName="storyEditorLayer" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="StoryLayerVisible">
+                        <Storyboard BeginTime="0:0:0" Duration="0:0:0">
+                            <ObjectAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:0" 
+                                                           Storyboard.TargetName="storyEditorLayer" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup.States>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>

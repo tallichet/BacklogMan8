@@ -41,5 +41,36 @@ namespace BacklogMan.Client.App.Win8
             // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
             // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
         }
+
+        private void StoryTapped(object sender, TappedRoutedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void StoryLayerTapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!e.Handled)
+            {
+                HideStoryEditor();
+            }
+        }
+
+        public void ShowStoryEditor()
+        {
+            VisualStateManager.GoToState(this, "StoryLayerVisible", true);
+        }
+
+        public void HideStoryEditor()
+        {
+            VisualStateManager.GoToState(this, "StoryLayerCollapsed", true);
+        }
+
+        private void showStory(object sender, ItemClickEventArgs e)
+        {
+            var story = e.ClickedItem as Core.Model.Story;
+
+            ShowStoryEditor();
+            storyEditor.DataContext = story;
+        }
     }
 }
