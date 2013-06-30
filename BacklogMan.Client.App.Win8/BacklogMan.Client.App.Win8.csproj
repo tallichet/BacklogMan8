@@ -122,6 +122,8 @@
     <Compile Include="Controls\StoryEditor.xaml.cs">
       <DependentUpon>StoryEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ColorConverter.cs" />
+    <Compile Include="Converters\StringColorToSolidColorBrushConverter.cs" />
     <Compile Include="ProjectPage.xaml.cs">
       <DependentUpon>ProjectPage.xaml</DependentUpon>
     </Compile>
