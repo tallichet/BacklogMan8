@@ -1,0 +1,33 @@
+﻿<Page
+    x:Name="self"
+    x:Class="BacklogMan.Client.App.Win8.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BacklogMan.Client.App.Win8"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" MinWidth="400" />
+                <ColumnDefinition Width="*" MinWidth="400" />
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Fill="DarkGray" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="2" Grid.Column="0" />
+            
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Margin="10">
+                <TextBlock Text="Username (email)" Style="{StaticResource CaptionTextStyle}"/>
+                <TextBox Text="{Binding Path=Username, ElementName=self, Mode=TwoWay}" />
+                <TextBlock Text="Password" Style="{StaticResource CaptionTextStyle}"/>
+                <PasswordBox Password="{Binding Path=Password, ElementName=self, Mode=TwoWay}" />
+                <Button Command="{Binding LoginCommand, ElementName=self}" HorizontalAlignment="Right"
+                        Content="Login"/>
+            </StackPanel>
+            
+            <Rectangle Fill="DarkGray" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="2" Grid.Column="1" />
+        </Grid>
+    </Grid>
+</Page>

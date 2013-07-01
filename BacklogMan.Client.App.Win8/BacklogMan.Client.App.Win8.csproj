@@ -125,6 +125,9 @@
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Converters\EmailToGravatarUriConverter.cs" />
     <Compile Include="Converters\StringColorToSolidColorBrushConverter.cs" />
+    <Compile Include="LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProjectPage.xaml.cs">
       <DependentUpon>ProjectPage.xaml</DependentUpon>
     </Compile>
@@ -166,6 +169,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\StoryEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -22,7 +22,8 @@
     
     <!-- Buttons -->
     <SolidColorBrush x:Key="BackButtonForegroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
-    <SolidColorBrush x:Key="ButtonForegroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
+    <SolidColorBrush x:Key="ButtonForegroundThemeBrush" Color="{StaticResource BacklogManButtonForegroudColor}" />
+    <SolidColorBrush x:Key="ButtonBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
     
     <DataTemplate x:Key="BacklogManStandard250x250ItemTemplate">
         <Grid HorizontalAlignment="Left" Width="250" Height="250">

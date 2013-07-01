@@ -19,14 +19,16 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         {
             Projects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
             BacklogStories = new System.Collections.ObjectModel.ObservableCollection<Model.Story>();
-            ApiKey = "d6e4dc02f5cd443a3a480ae5debd6ddf7bec0707";
 
             Init();
         }
 
         private async void Init()
         {
-            await DownloadProjects();
+            if (!string.IsNullOrEmpty(ApiKey))
+            {
+                await DownloadProjects();
+            }
         }
 
         public System.Collections.ObjectModel.ObservableCollection<Model.Project> Projects
@@ -44,6 +46,8 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             set 
             {
                 ServiceLocator.Current.GetInstance<Service.INetworkService>().APIKey = value;
+                ServiceLocator.Current.GetInstance<Service.INetworkService>().ClearCache();
+                Init();
             }
         }
 
@@ -84,6 +88,20 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             private set;
         }
 
+        public async Task<bool> GetApiKey(string username, string password)
+        {
+            try
+            {
+                this.ApiKey = await ServiceLocator.Current.GetInstance<Service.INetworkService>().GetApiKey(username, password);
+                SaveApiKey(this.ApiKey);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         private async void refreshStories()
         {
             BacklogStories.Clear();
@@ -92,6 +110,17 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             {
                 BacklogStories.Add(s);
             }
+        }
+
+        private void SaveApiKey(string apiKey)
+        {
+            // TODO: save the key for both Win8 and WinPhone8
+        }
+
+        private string LoadApiKey()
+        {
+            // TODO: load the key for both Win8 and WinPhone8
+            return null;
         }
     }
 }

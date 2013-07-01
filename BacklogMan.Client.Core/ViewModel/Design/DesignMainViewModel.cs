@@ -107,5 +107,11 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             get;
             set;
         }
+
+
+        public Task<bool> GetApiKey(string Username, string Password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

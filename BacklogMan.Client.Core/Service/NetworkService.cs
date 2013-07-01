@@ -18,15 +18,20 @@ namespace BacklogMan.Client.Core.Service
         {
             get
             {
-                if (APIKey == null) 
-                    throw new ArgumentNullException("API key not set");
                 if (client == null)
                 {
                     client = new HttpClient();
-                    client.DefaultRequestHeaders.Add("Authorization", "token " + APIKey);
+                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    if (APIKey != null)
+                        client.DefaultRequestHeaders.Add("Authorization", "token " + APIKey);
                 }
                 return client;
             }
+        }
+
+        public void ClearCache()
+        {
+            client = null;
         }
 
         public async Task<T> DownloadDocument<T>(Uri url)
@@ -79,6 +84,48 @@ namespace BacklogMan.Client.Core.Service
         {
             var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/backlogs/" + backlogId + "/stories/" + storyId + "/");
             return DownloadDocument<Model.Story>(uri);        
+        }
+
+
+        public async Task<string> GetApiKey(string username, string password)
+        {
+            var uri = new Uri(BacklogManApiBaseUri, "./api-token-auth/");
+
+
+            using (var stream = new System.IO.MemoryStream()) 
+            {
+                var content = new StringContent(
+                    Helper.Serialize<Internal.GetApiTokenRequestContent>(new Internal.GetApiTokenRequestContent() { Username = username, Password = password }),
+                    Encoding.UTF8,
+                    "application/json");
+                
+                stream.Position = 0;
+
+                var response = await Client.PostAsync(uri, content);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized) 
+                {
+                    throw new Exception("Unauthorized");
+                }
+                if (response.StatusCode == System.Net.HttpStatusCode.Forbidden) 
+                {
+                    throw new Exception("Forbidden");
+                }
+                if (response.IsSuccessStatusCode == false) 
+                {
+                    var reason = response.ReasonPhrase;
+                    var answer = await response.Content.ReadAsStringAsync();
+                    throw new Exception("Unknwon error");
+                }
+
+                using (var answerStream = await response.Content.ReadAsStreamAsync())
+                {
+                    var serializer2 = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(Internal.GetApiTokenResponseContent));
+
+                    var responseData = serializer2.ReadObject(answerStream) as Internal.GetApiTokenResponseContent;
+                    return responseData.ApiToken;
+                }
+            }
         }
     }
 }

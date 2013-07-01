@@ -33,5 +33,12 @@ namespace BacklogMan.Client.Core.ViewModel
         /// Stories of the current backlog
         /// </summary>
         ObservableCollection<Model.Story> BacklogStories { get; }
+
+        /// <summary>
+        /// Try to get a new API Key
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <param name="Password"></param>
+        Task<bool> GetApiKey(string Username, string Password);
     }
 }

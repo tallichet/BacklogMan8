@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -61,12 +62,23 @@ namespace BacklogMan.Client.App.Win8
 
             if (rootFrame.Content == null)
             {
-                // When the navigation stack isn't restored navigate to the first page,
-                // configuring the new page by passing required information as a navigation
-                // parameter
-                if (!rootFrame.Navigate(typeof(ProjectsPage), args.Arguments))
+                if (string.IsNullOrEmpty(ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().ApiKey))
                 {
-                    throw new Exception("Failed to create initial page");
+                    if (!rootFrame.Navigate(typeof(LoginPage), args.Arguments))
+                    {
+                        throw new Exception("Failed to create initial page");
+                    }
+                }
+
+                else
+                {
+                    // When the navigation stack isn't restored navigate to the first page,
+                    // configuring the new page by passing required information as a navigation
+                    // parameter
+                    if (!rootFrame.Navigate(typeof(ProjectsPage), args.Arguments))
+                    {
+                        throw new Exception("Failed to create initial page");
+                    }
                 }
             }
             // Ensure the current window is active
