@@ -23,5 +23,9 @@ namespace BacklogMan.Client.Core.Service
         Task<string> GetApiKey(string username, string password);
 
         void ClearCache();
+
+
+        Task<bool> MoveStory(int projectId, int targetBacklogId, int movedStoryId, int[] storyIdOrder);
+        Task<bool> OrderBacklog(int projectId, int movedBacklog, int[] backlogIdOrder);
     }
 }

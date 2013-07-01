@@ -90,41 +90,71 @@ namespace BacklogMan.Client.Core.Service
         public async Task<string> GetApiKey(string username, string password)
         {
             var uri = new Uri(BacklogManApiBaseUri, "./api-token-auth/");
+            
+            var responseData = await PostData<Internal.GetApiTokenRequestContent, Internal.GetApiTokenResponseContent>(uri, new Internal.GetApiTokenRequestContent() { Username = username, Password = password });
+
+            return responseData.ApiToken;
+        }
 
 
-            using (var stream = new System.IO.MemoryStream()) 
+        public async Task<bool> MoveStory(int projectId, int targetBacklogId, int movedStoryId, int[] storyIdOrder)
+        {
+            var uri = new Uri(BacklogManApiBaseUri, "./project/" + projectId + "/_move_story/");
+            
+            var request = new Internal.MoveStoryRequest() 
             {
-                var content = new StringContent(
-                    Helper.Serialize<Internal.GetApiTokenRequestContent>(new Internal.GetApiTokenRequestContent() { Username = username, Password = password }),
-                    Encoding.UTF8,
-                    "application/json");
-                
-                stream.Position = 0;
+                MovedStory = movedStoryId,
+                TargetBacklog = targetBacklogId,
+                StoryOrder = storyIdOrder
+            };
 
-                var response = await Client.PostAsync(uri, content);
+            var result = await PostData<Internal.MoveStoryRequest, Internal.Result>(uri, request);
 
-                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized) 
-                {
-                    throw new Exception("Unauthorized");
-                }
-                if (response.StatusCode == System.Net.HttpStatusCode.Forbidden) 
-                {
-                    throw new Exception("Forbidden");
-                }
-                if (response.IsSuccessStatusCode == false) 
-                {
-                    var reason = response.ReasonPhrase;
-                    var answer = await response.Content.ReadAsStringAsync();
-                    throw new Exception("Unknwon error");
-                }
+            return result.Ok ;
+        }
 
-                using (var answerStream = await response.Content.ReadAsStreamAsync())
-                {
-                    var serializer2 = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(Internal.GetApiTokenResponseContent));
+        public async Task<bool> OrderBacklog(int projectId, int movedBacklog, int[] backlogIdOrder)
+        {
+            var uri = new Uri(BacklogManApiBaseUri, "./project/" + projectId + "/_order_backlog/");
 
-                    var responseData = serializer2.ReadObject(answerStream) as Internal.GetApiTokenResponseContent;
-                    return responseData.ApiToken;
-                }
+            var request = new Internal.OrderBacklogRequest()
+            {
+                MovedBacklog = movedBacklog,
+                BacklogOrder = backlogIdOrder
+            };
+
+            var result = await PostData<Internal.OrderBacklogRequest, Internal.Result>(uri, request);
+
+            return result.Ok;
+        }
+
+        private async Task<R> PostData<T, R>(Uri uri, T objectToSend)
+        {
+            var content = new StringContent(
+                Helper.Serialize<T>(objectToSend),
+                Encoding.UTF8,
+                "application/json");
+
+            var response = await Client.PostAsync(uri, content);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new Exception("Unauthorized");
+            }
+            if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            {
+                throw new Exception("Forbidden");
+            }
+            if (response.IsSuccessStatusCode == false)
+            {
+                throw new Exception("Unknwon error");
+            }
+
+            using (var answerStream = await response.Content.ReadAsStreamAsync())
+            {
+                var serializer= new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(R));
+
+                return (R)serializer.ReadObject(answerStream);
             }
         }
     }
