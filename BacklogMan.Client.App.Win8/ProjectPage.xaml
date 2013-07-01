@@ -45,11 +45,32 @@
             IsSwipeEnabled="false">
 
             <GridView.Header>
-                <StackPanel Width="480" Margin="0,4,14,0" DataContext="{Binding Path=Main.CurrentProject, Source={StaticResource Locator}}" >
-                    <TextBlock Text="{Binding Name}" Margin="0,0,18,20" Style="{StaticResource SubheaderTextStyle}" MaxHeight="60"/>
-                    <Image Source="{Binding Image}" Height="400" Margin="0,0,18,20" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
-                    <TextBlock Text="{Binding Description}" Margin="0,0,18,0" Style="{StaticResource BodyTextStyle}"/>
-                </StackPanel>
+                <ScrollViewer VerticalScrollMode="Auto" HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Width="480" Margin="0,4,14,0" DataContext="{Binding Path=Main.CurrentProject, Source={StaticResource Locator}}" >
+                        <TextBlock Text="{Binding Name}" Margin="0,0,18,20" Style="{StaticResource SubheaderTextStyle}" MaxHeight="60"/>
+                        <TextBlock Text="{Binding Description}" Margin="0,0,18,0" Style="{StaticResource BodyTextStyle}"/>
+                        <ItemsControl ItemsSource="{Binding Users}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Source="{Binding Email, Converter={StaticResource EmailToGravatarUriConverter}}" Grid.RowSpan="2" Margin="0" />
+                                        <TextBlock Text="{Binding FullName}" Style="{StaticResource TitleTextStyle}" Grid.Row="0" Grid.Column="1" Margin="10" />
+                                        <TextBlock Text="{Binding Email}" Style="{StaticResource TitleTextStyle}" Grid.Row="1" Grid.Column="1" Margin="10" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                    </ScrollViewer>
             </GridView.Header>
             <GridView.ItemContainerStyle>
                 <Style TargetType="FrameworkElement">

@@ -123,6 +123,7 @@
       <DependentUpon>StoryEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ColorConverter.cs" />
+    <Compile Include="Converters\EmailToGravatarUriConverter.cs" />
     <Compile Include="Converters\StringColorToSolidColorBrushConverter.cs" />
     <Compile Include="ProjectPage.xaml.cs">
       <DependentUpon>ProjectPage.xaml</DependentUpon>

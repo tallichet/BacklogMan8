@@ -5,15 +5,25 @@
     xmlns:converters="using:BacklogMan.Client.App.Win8.Converters">
 
     <converters:ColorConverter x:Key="ColorConverter" />
+    <converters:EmailToGravatarUriConverter x:Key="EmailToGravatarUriConverter" />
 
+    <!-- Colors -->
     <Color x:Key="BacklogManTitleBackgroudColor">#0f787e</Color>
     <Color x:Key="BacklogManTitleForegroudColor">#fbffdb</Color>
     <Color x:Key="BacklogManButtonBackgroudColor">#ff5900</Color>
     <Color x:Key="BacklogManButtonForegroudColor">#fbffdb</Color>
+    <!-- Application bar -->
+    <LinearGradientBrush x:Key="AppBarBackgroundThemeBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource BacklogManTitleBackgroudColor}" />
+        <GradientStop Offset="1" Color="#0c6267" />
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="AppBarBorderThemeBrush" Color="{StaticResource BacklogManTitleBackgroudColor}" />
+    <SolidColorBrush x:Key="AppBarItemForegroundThemeBrush" Color="{StaticResource BacklogManTitleForegroudColor}" />
     
+    <!-- Buttons -->
+    <SolidColorBrush x:Key="BackButtonForegroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
+    <SolidColorBrush x:Key="ButtonForegroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
     
-
-
     <DataTemplate x:Key="BacklogManStandard250x250ItemTemplate">
         <Grid HorizontalAlignment="Left" Width="250" Height="250">
             <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}">
@@ -45,11 +55,15 @@
 
     <DataTemplate x:Key="BacklogManStory500x130ItemTemplate">
         <Grid Height="110" Width="480" Margin="10">
+            <Grid.Background>
+                <SolidColorBrush Color="{StaticResource BacklogManTitleForegroudColor}" />
+            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Rectangle Width="5" VerticalAlignment="Stretch" Grid.Column="0">
+            <Rectangle Width="5" VerticalAlignment="Stretch" Grid.Column="0" Margin="5">
                 <Rectangle.Fill>
                     <SolidColorBrush Color="{Binding ColorString, Converter={StaticResource ColorConverter}}" />
                 </Rectangle.Fill>
@@ -76,6 +90,22 @@
                 </StackPanel>
             <!--<TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextStyle}" MaxHeight="60"/>-->
             </StackPanel>
+            
+            <Grid Grid.Column="2" VerticalAlignment="Top">
+                <Ellipse Width="50" Height="50" >
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="{StaticResource BacklogManTitleBackgroudColor}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <TextBlock Text="{Binding Points}" Style="{StaticResource TitleTextStyle}" TextWrapping="NoWrap" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{StaticResource BacklogManTitleForegroudColor}"/>
+                    </TextBlock.Foreground>
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform Y="0"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </Grid>
         </Grid>
     </DataTemplate>
 
