@@ -42,7 +42,8 @@
             ItemTemplate="{StaticResource BacklogManBacklog500x130ItemTemplate}"
             IsItemClickEnabled="True" ItemClick="BacklogItemClicked"
             SelectionMode="None"
-            IsSwipeEnabled="false">
+            IsSwipeEnabled="false"
+            CanReorderItems="True" AllowDrop="True" >
 
             <GridView.Header>
                 <ScrollViewer VerticalScrollMode="Auto" HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Auto">
