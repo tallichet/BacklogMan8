@@ -63,35 +63,52 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Rectangle Width="5" VerticalAlignment="Stretch" Grid.Column="0" Margin="5">
+            <!-- Story color -->
+            <Rectangle Width="5" VerticalAlignment="Stretch" Grid.Column="0" Margin="5" HorizontalAlignment="Left">
                 <Rectangle.Fill>
                     <SolidColorBrush Color="{Binding ColorString, Converter={StaticResource ColorConverter}}" />
                 </Rectangle.Fill>
             </Rectangle>
-            <!--<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
-                <Image Source="{Binding Image}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
-            </Border>-->
+            
+            <TextBlock Text="{Binding Code}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,5,5,5"
+                       FontSize="20">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="{StaticResource BacklogManTitleBackgroudColor}" />
+                </TextBlock.Foreground>
+            </TextBlock> 
+                        
+            <!-- as a ... -->
             <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
-                <StackPanel Orientation="Horizontal">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
                     <TextBlock Text="As" Style="{StaticResource TitleTextStyle}" FontWeight="Bold" Margin="0,0,5,0"/>
-                    <TextBlock Text="{Binding AsUser}" Style="{StaticResource TitleTextStyle}" TextWrapping="Wrap"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="I want to " Style="{StaticResource TitleTextStyle}" FontWeight="Bold" Margin="0,0,5,0"/>
-                    <TextBlock Text="{Binding Goal}" Style="{StaticResource TitleTextStyle}" TextWrapping="Wrap"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="So I can " Style="{StaticResource TitleTextStyle}" FontWeight="Bold" Margin="0,0,5,0"/>
-                    <TextBlock Text="{Binding Result}" Style="{StaticResource TitleTextStyle}" TextWrapping="Wrap"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Points}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="0,0,5,0"/>
-                    <TextBlock Text=" Points" Style="{StaticResource CaptionTextStyle}"/>
-                </StackPanel>
+                    <TextBlock Text="{Binding AsUser}" Style="{StaticResource TitleTextStyle}" TextWrapping="Wrap" Grid.Column="1"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="I want to" Style="{StaticResource TitleTextStyle}" FontWeight="Bold" Margin="0,0,5,0"/>
+                    <TextBlock Text="{Binding Goal}" Style="{StaticResource TitleTextStyle}" TextWrapping="Wrap" Grid.Column="1"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="So I can" Style="{StaticResource TitleTextStyle}" FontWeight="Bold" Margin="0,0,5,0"/>
+                    <TextBlock Text="{Binding Result}" Style="{StaticResource TitleTextStyle}" TextWrapping="Wrap" Grid.Column="1"/>
+                </Grid>
+                
             <!--<TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextStyle}" MaxHeight="60"/>-->
             </StackPanel>
             
-            <Grid Grid.Column="2" VerticalAlignment="Top">
+            <!-- Points -->
+            <Grid Grid.Column="2" VerticalAlignment="Top" Margin="5">
                 <Ellipse Width="50" Height="50" >
                     <Ellipse.Fill>
                         <SolidColorBrush Color="{StaticResource BacklogManTitleBackgroudColor}" />
