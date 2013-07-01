@@ -6,6 +6,13 @@
 
     <converters:ColorConverter x:Key="ColorConverter" />
 
+    <Color x:Key="BacklogManTitleBackgroudColor">#0f787e</Color>
+    <Color x:Key="BacklogManTitleForegroudColor">#fbffdb</Color>
+    <Color x:Key="BacklogManButtonBackgroudColor">#ff5900</Color>
+    <Color x:Key="BacklogManButtonForegroudColor">#fbffdb</Color>
+    
+    
+
 
     <DataTemplate x:Key="BacklogManStandard250x250ItemTemplate">
         <Grid HorizontalAlignment="Left" Width="250" Height="250">
