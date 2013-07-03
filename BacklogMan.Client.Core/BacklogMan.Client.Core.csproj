@@ -46,6 +46,7 @@
     <Compile Include="Service\INetworkService.cs" />
     <Compile Include="Service\Internal\GetApiToken.cs" />
     <Compile Include="Service\Internal\Reorder.cs" />
+    <Compile Include="Service\IStorageService.cs" />
     <Compile Include="Service\NetworkService.cs" />
     <Compile Include="ViewModel\Design\DesignMainViewModel.cs" />
     <Compile Include="ViewModel\IMainViewModel.cs" />

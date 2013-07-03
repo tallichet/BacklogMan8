@@ -32,6 +32,8 @@ namespace BacklogMan.Client.App.Win8
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            Core.ViewModel.ViewModelLocator.RegisterStorageService<StorageServiceWinRT>();
         }
 
         /// <summary>

@@ -20,6 +20,13 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             Projects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
             BacklogStories = new System.Collections.ObjectModel.ObservableCollection<Model.Story>();
 
+            string apiKey;
+            if (ServiceLocator.Current.GetInstance<Service.IStorageService>().TryLoadSetting<string>("ApiKey", out apiKey))
+            {
+                // Do not use the global setter to prevent clear + init method calls
+                ServiceLocator.Current.GetInstance<Service.INetworkService>().APIKey = apiKey;
+            }
+
             Init();
         }
 
@@ -93,10 +100,10 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             try
             {
                 this.ApiKey = await ServiceLocator.Current.GetInstance<Service.INetworkService>().GetApiKey(username, password);
-                SaveApiKey(this.ApiKey);
+                ServiceLocator.Current.GetInstance<Service.IStorageService>().SaveSetting<string>("ApiKey", this.ApiKey);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -110,17 +117,6 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             {
                 BacklogStories.Add(s);
             }
-        }
-
-        private void SaveApiKey(string apiKey)
-        {
-            // TODO: save the key for both Win8 and WinPhone8
-        }
-
-        private string LoadApiKey()
-        {
-            // TODO: load the key for both Win8 and WinPhone8
-            return null;
         }
     }
 }
