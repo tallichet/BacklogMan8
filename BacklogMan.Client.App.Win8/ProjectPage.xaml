@@ -13,10 +13,10 @@
     <Page.Resources>
 
         <!-- Collection of items displayed by this page -->
-        <CollectionViewSource
+        <!--<CollectionViewSource
             x:Name="itemsViewSource"
             Source="{Binding Path=CurrentProject.Backlogs}"
-            />
+            />-->
     </Page.Resources>
 
     <!--
@@ -31,6 +31,7 @@
         </Grid.RowDefinitions>
 
         <!-- Horizontal scrolling grid used in most view states -->
+        <!--ItemsSource="{Binding Source={StaticResource itemsViewSource}}"-->
         <GridView
             x:Name="itemGridView"
             AutomationProperties.AutomationId="ItemGridView"
@@ -38,11 +39,11 @@
             TabIndex="1"
             Grid.RowSpan="2"
             Padding="120,126,120,50"
-            ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
+            
             ItemTemplate="{StaticResource BacklogManBacklog500x130ItemTemplate}"
             IsItemClickEnabled="True" ItemClick="BacklogItemClicked"
             SelectionMode="None"
-            IsSwipeEnabled="false"
+            IsSwipeEnabled="True"
             CanReorderItems="True" AllowDrop="True" >
 
             <GridView.Header>
@@ -81,6 +82,7 @@
         </GridView>
 
         <!-- Vertical scrolling list only used when snapped -->
+        <!--ItemsSource="{Binding Source={StaticResource itemsViewSource}}"-->
         <ListView
             x:Name="itemListView"
             AutomationProperties.AutomationId="ItemListView"
@@ -88,8 +90,7 @@
             TabIndex="1"
             Grid.Row="1"
             Visibility="Collapsed"
-            Padding="10,0,0,60"
-            ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
+            Padding="10,0,0,60"            
             ItemTemplate="{StaticResource Standard80ItemTemplate}"
             IsItemClickEnabled="True" ItemClick="BacklogItemClicked"
             SelectionMode="None"

@@ -43,6 +43,7 @@
     <Compile Include="Model\Project.cs" />
     <Compile Include="Model\Story.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReorderableCollection.cs" />
     <Compile Include="Service\INetworkService.cs" />
     <Compile Include="Service\Internal\GetApiToken.cs" />
     <Compile Include="Service\Internal\Reorder.cs" />

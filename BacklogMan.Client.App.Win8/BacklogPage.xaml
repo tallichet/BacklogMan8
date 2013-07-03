@@ -42,7 +42,8 @@
             ItemTemplate="{StaticResource BacklogManStory500x130ItemTemplate}"
             IsItemClickEnabled="True" ItemClick="showStory"
             SelectionMode="None"
-            IsSwipeEnabled="false">
+            CanReorderItems="True" AllowDrop="True"
+            IsSwipeEnabled="True">
 
             <GridView.Header>
                 <StackPanel Width="480" Margin="0,4,14,0" DataContext="{Binding Path=Main.CurrentBacklog, Source={StaticResource Locator}}">

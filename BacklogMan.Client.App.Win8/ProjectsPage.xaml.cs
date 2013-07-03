@@ -66,7 +66,7 @@ namespace BacklogMan.Client.App.Win8
         {
             foreach (var p in ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().Projects)
             {
-                if (p.Backlogs.Any(b => b.id == backlog.id))
+                if (p.Backlogs.Any(b => b.Id == backlog.Id))
                     return p;
             }
             return null;

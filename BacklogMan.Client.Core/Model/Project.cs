@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -28,7 +31,36 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "users")]
         public List<BacklogmanUser> Users { get; set; }
 
+        private ReorderableCollection<Backlog> backlogs = null;
+
         [DataMember(Name = "backlogs")]
-        public List<Backlog> Backlogs { get; set; }
+        public ReorderableCollection<Backlog> Backlogs 
+        {
+            get { return backlogs; }
+            set
+            {
+                if (backlogs != value)
+                {
+                    if (backlogs != null) backlogs.ManualReordered -= backlogs_ManualReordered;
+                    backlogs = value;
+                    if (backlogs != null) backlogs.ManualReordered += backlogs_ManualReordered;
+                }
+            }
+        }
+
+        void backlogs_ManualReordered(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            var movedBacklog = e.NewItems[0] as Backlog;
+
+            if (movedBacklog == null) return;
+
+            var operationResult = ServiceLocator.Current.GetInstance<Service.INetworkService>().OrderBacklog(this.Id, movedBacklog.Id,
+                                        backlogs.Select(b => b.Id).ToArray());
+
+            if (Debugger.IsAttached)
+            {
+                Debug.WriteLine("moved backlog '{0}' operation resut is {1}", movedBacklog.Name, operationResult);
+            }
+        }
     }
 }

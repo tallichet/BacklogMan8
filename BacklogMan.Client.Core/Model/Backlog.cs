@@ -10,7 +10,7 @@ namespace BacklogMan.Client.Core.Model
     public class Backlog
     {
         [DataMember(Name="id")]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [DataMember(Name = "url")]
         public string UrlString { get; set; }

@@ -8,10 +8,23 @@
     <converters:EmailToGravatarUriConverter x:Key="EmailToGravatarUriConverter" />
 
     <!-- Colors -->
-    <Color x:Key="BacklogManTitleBackgroudColor">#0f787e</Color>
-    <Color x:Key="BacklogManTitleForegroudColor">#fbffdb</Color>
-    <Color x:Key="BacklogManButtonBackgroudColor">#ff5900</Color>
-    <Color x:Key="BacklogManButtonForegroudColor">#fbffdb</Color>
+    <Color x:Key="BacklogManTitleBackgroudColor">#0b474d</Color>
+    <Color x:Key="BacklogManTitleForegroudColor">#999999</Color>
+    <Color x:Key="BacklogManButtonBackgroudColor">#006dcc</Color>
+    <Color x:Key="BacklogManButtonBackgroudGradientColor1">#006dcc</Color>
+    <Color x:Key="BacklogManButtonBackgroudGradientColor2">#006dcc</Color>
+    <Color x:Key="BacklogManButtonForegroudColor">#ffffff</Color>
+    <Color x:Key="BacklogManLinkForegroudColor">#0088cc</Color>
+
+
+    <LinearGradientBrush x:Key="BacklogManWebsiteButtonBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="{StaticResource BacklogManButtonBackgroudGradientColor1}" Offset="0" />
+        <GradientStop Color="{StaticResource BacklogManButtonBackgroudGradientColor2}" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="BacklogManWebsiteTitleBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#0b474d" Offset="0" />
+        <GradientStop Color="#083237" Offset="1" />
+    </LinearGradientBrush>
     <!-- Application bar -->
     <LinearGradientBrush x:Key="AppBarBackgroundThemeBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientStop Offset="0" Color="{StaticResource BacklogManTitleBackgroudColor}" />
@@ -21,10 +34,17 @@
     <SolidColorBrush x:Key="AppBarItemForegroundThemeBrush" Color="{StaticResource BacklogManTitleForegroudColor}" />
     
     <!-- Buttons -->
-    <SolidColorBrush x:Key="BackButtonForegroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
+    <LinearGradientBrush x:Key="BackButtonForegroundThemeBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="{StaticResource BacklogManButtonBackgroudGradientColor1}" Offset="0" />
+        <GradientStop Color="{StaticResource BacklogManButtonBackgroudGradientColor2}" Offset="1" />
+    </LinearGradientBrush>
     <SolidColorBrush x:Key="ButtonForegroundThemeBrush" Color="{StaticResource BacklogManButtonForegroudColor}" />
-    <SolidColorBrush x:Key="ButtonBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
-    
+    <LinearGradientBrush x:Key="ButtonBackgroundThemeBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="{StaticResource BacklogManButtonBackgroudGradientColor1}" Offset="0" />
+        <GradientStop Color="{StaticResource BacklogManButtonBackgroudGradientColor2}" Offset="1" />
+    </LinearGradientBrush>
+
+
     <DataTemplate x:Key="BacklogManStandard250x250ItemTemplate">
         <Grid HorizontalAlignment="Left" Width="250" Height="250">
             <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}">

@@ -137,16 +137,17 @@ namespace BacklogMan.Client.Core.Service
 
             var response = await Client.PostAsync(uri, content);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            {
-                throw new Exception("Unauthorized");
-            }
-            if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
-            {
-                throw new Exception("Forbidden");
-            }
+            //if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            //{
+            //    throw new Exception("Unauthorized");
+            //}
+            //if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            //{
+            //    throw new Exception("Forbidden");
+            //}
             if (response.IsSuccessStatusCode == false)
             {
+                var responseContent = await response.Content.ReadAsStringAsync();
                 throw new Exception("Unknwon error");
             }
 

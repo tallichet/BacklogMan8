@@ -105,7 +105,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         private async void refreshStories()
         {
             BacklogStories.Clear();
-            var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentProject.Id, CurrentBacklog.id);
+            var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentProject.Id, CurrentBacklog.Id);
             foreach (var s in stories)
             {
                 BacklogStories.Add(s);
