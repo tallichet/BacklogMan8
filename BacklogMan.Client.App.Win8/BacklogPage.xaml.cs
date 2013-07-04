@@ -100,7 +100,11 @@ namespace BacklogMan.Client.App.Win8
         private void createNewStory(object sender, RoutedEventArgs e)
         {
             ShowStoryEditor();
-            storyEditor.DataContext = new Core.Model.Story() { Backlog = ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog };
+            storyEditor.DataContext = new Core.Model.Story() 
+            { 
+                Backlog = ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog,
+                Status = Core.Model.StoryStatus.New
+            };
         }
 
         private void refreshStories(object sender, RoutedEventArgs e)
