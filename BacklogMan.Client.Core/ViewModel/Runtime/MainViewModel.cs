@@ -18,6 +18,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         public MainViewModel()
         {
             Projects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
+            ProjectBacklogs = new System.Collections.ObjectModel.ObservableCollection<Model.Backlog>();
             BacklogStories = new System.Collections.ObjectModel.ObservableCollection<Model.Story>();
 
             string apiKey;
@@ -69,10 +70,24 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
 
-
+        private Model.Project currentProject = null;
         public Model.Project CurrentProject
         {
-            get;set;
+            get
+            {
+                return currentProject;
+            }
+            set
+            {
+                currentProject = value;
+                refreshBacklogs();
+            }
+        }
+
+        public System.Collections.ObjectModel.ObservableCollection<Model.Backlog> ProjectBacklogs
+        {
+            get;
+            private set;
         }
 
         private Model.Backlog currentBacklog = null;
@@ -109,13 +124,27 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
 
+        private async void refreshBacklogs()
+        {
+            ProjectBacklogs.Clear();
+            var project = CurrentProject; // this allow us to be sure the project don't change during the download
+            var backlogs = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklogs(CurrentProject.Id);
+            foreach (var b in backlogs)
+            {
+                ProjectBacklogs.Add(b);
+                b.Project = project;
+            }
+        }
+
         private async void refreshStories()
         {
             BacklogStories.Clear();
+            var backlog = CurrentBacklog; // this allow us to be sure the backlog don't change during the download
             var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentProject.Id, CurrentBacklog.Id);
             foreach (var s in stories)
             {
                 BacklogStories.Add(s);
+                s.Backlog = backlog;
             }
         }
     }

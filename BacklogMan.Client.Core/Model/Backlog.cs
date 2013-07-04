@@ -25,23 +25,10 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "story_count")]
         public int StoryCount { get; set; }
 
-        [IgnoreDataMember]
-        public Project Project
-        {
-            get
-            {
-                return findProjectForBacklog();
-            }
-        }
+        [DataMember(Name = "available_themes")]
+        public List<string> Themes { get; set; }
 
-        private Core.Model.Project findProjectForBacklog()
-        {
-            foreach (var p in ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().Projects)
-            {
-                if (p.Backlogs.Any(b => b.Id == this.Id))
-                    return p;
-            }
-            return null;
-        }
+        [IgnoreDataMember]
+        public Project Project { get; set; }
     }
 }

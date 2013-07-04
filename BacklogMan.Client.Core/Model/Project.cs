@@ -28,7 +28,7 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "users")]
         public List<BacklogmanUser> Users { get; set; }
 
-        [DataMember(Name = "backlogs")]
-        public List<Backlog> Backlogs { get; set; }
+        [DataMember(Name = "available_themes")]
+        public List<string> Themes { get; set; }
     }
 }

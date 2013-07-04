@@ -77,6 +77,9 @@ namespace BacklogMan.Client.Core.Model
             }
         }
 
+        [IgnoreDataMember]
+        public Backlog Backlog { get; set; }
+
         public async Task<bool> Save(int projectId, int backlogId)
         {
             var newId = await ServiceLocator.Current.GetInstance<Service.INetworkService>().AddStory(projectId, backlogId, this);

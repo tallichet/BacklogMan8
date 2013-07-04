@@ -25,6 +25,11 @@ namespace BacklogMan.Client.Core.ViewModel
         Model.Project CurrentProject { get; set; }
 
         /// <summary>
+        /// Backlog of the current project
+        /// </summary>
+        ObservableCollection<Model.Backlog> ProjectBacklogs { get; }
+
+        /// <summary>
         /// The currently selected backlog
         /// </summary>
         Model.Backlog CurrentBacklog { get; set; }

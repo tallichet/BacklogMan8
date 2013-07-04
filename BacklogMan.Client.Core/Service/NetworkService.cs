@@ -81,7 +81,7 @@ namespace BacklogMan.Client.Core.Service
         {
             var uri = new Uri(BacklogManApiBaseUri, "./api-token-auth/");
 
-            var responseData = await PostData<Internal.GetApiTokenRequestContent, Internal.GetApiTokenResponseContent>(uri, new Internal.GetApiTokenRequestContent() { Username = username, Password = password });
+            var responseData = await PostOrPutData<Internal.GetApiTokenRequestContent, Internal.GetApiTokenResponseContent>(uri, new Internal.GetApiTokenRequestContent() { Username = username, Password = password });
 
             return responseData.ApiToken;
         }
@@ -90,13 +90,45 @@ namespace BacklogMan.Client.Core.Service
         {
             try
             {
+                if (newStory.Id > 0)
+                {
+                    return await UpdateStory(newStory);
+                }
                 var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/backlogs/" + backlogId + "/stories/");
-                var result = await PostData<Model.Story, Model.Story>(uri, newStory);
+                var result = await PostOrPutData<Model.Story, Model.Story>(uri, newStory);
                 return result.Id;
             }
             catch (Exception)
             {
                 return -1;
+            }
+        }
+
+        public async Task<int> UpdateStory(Model.Story story)
+        {
+            try
+            {
+                var uri = new Uri(BacklogManApiBaseUri, "./projects/" + story.Backlog.Project.Id + "/backlogs/" + story.Backlog.Id + "/stories/" + story.Id + "/");
+                var result = await PostOrPutData<Model.Story, Model.Story>(uri, story, false);
+                return result.Id;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
+
+        public async Task<bool> DeleteStory(Model.Story story)
+        {
+            try
+            {
+                var uri = new Uri(BacklogManApiBaseUri, "./projects/" + story.Backlog.Project.Id + "/backlogs/" + story.Backlog.Id + "/stories/" + story.Id + "/");
+                await Delete(uri);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
@@ -111,7 +143,7 @@ namespace BacklogMan.Client.Core.Service
                 StoryOrder = storyIdOrder
             };
 
-            var result = await PostData<Internal.MoveStoryRequest, Internal.Result>(uri, request);
+            var result = await PostOrPutData<Internal.MoveStoryRequest, Internal.Result>(uri, request);
 
             return result.Ok;
         }
@@ -126,7 +158,7 @@ namespace BacklogMan.Client.Core.Service
                 BacklogOrder = backlogIdOrder
             };
 
-            var result = await PostData<Internal.OrderBacklogRequest, Internal.Result>(uri, request);
+            var result = await PostOrPutData<Internal.OrderBacklogRequest, Internal.Result>(uri, request);
 
             return result.Ok;
         }
@@ -145,14 +177,23 @@ namespace BacklogMan.Client.Core.Service
             }
         }
 
-        private async Task<R> PostData<T, R>(Uri uri, T objectToSend)
+        private async Task<R> PostOrPutData<T, R>(Uri uri, T objectToSend, bool post = true)
         {
             var content = new StringContent(
                 Helper.Serialize<T>(objectToSend),
                 Encoding.UTF8,
                 "application/json");
 
-            var response = await Client.PostAsync(uri, content);
+            HttpResponseMessage response;
+
+            if (post)
+            {
+                response = await Client.PostAsync(uri, content);
+            }
+            else
+            {
+                response = await Client.PutAsync(uri, content);
+            }
 
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
@@ -177,6 +218,30 @@ namespace BacklogMan.Client.Core.Service
                 return (R)serializer.ReadObject(answerStream);
             }
         }
+
+        private async Task Delete(Uri uri)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, uri);
+
+            var response = await Client.SendAsync(request);
+            
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new Exception("Unauthorized");
+            }
+            if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            {
+                throw new Exception("Forbidden");
+            }
+            if (response.IsSuccessStatusCode == false)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine("Response (" + response.StatusCode.ToString() + ") Content: " + responseContent);
+
+                throw new Exception("Unknwon error");
+            }
+        }
+
 
         #endregion
     }

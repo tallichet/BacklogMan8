@@ -1,6 +1,6 @@
 ﻿<common:LayoutAwarePage
     x:Name="pageRoot"
-    x:Class="BacklogMan.Client.App.Win8.ProjectsPage"
+    x:Class="BacklogMan.Client.App.Win8.MainPage"
     DataContext="{Binding Main, Source={StaticResource Locator}}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -17,13 +17,11 @@
             of the complete item list because items in groups cannot be virtualized
         -->
         <CollectionViewSource
-            x:Name="groupedItemsViewSource"
-            Source="{Binding Projects}"
-            IsSourceGrouped="true"
-            ItemsPath="Backlogs"/>
+            x:Name="itemsViewSource"
+            Source="{Binding Projects}"/>
 
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Projects</x:String>
+        <x:String x:Key="AppName">Backlog Man</x:String>
     </Page.Resources>
 
     <!--
@@ -38,48 +36,43 @@
         </Grid.RowDefinitions>
 
         <!-- Horizontal scrolling grid used in most view states -->
-        <GridView
-            x:Name="itemGridView"
-            AutomationProperties.AutomationId="ItemGridView"
-            AutomationProperties.Name="Grouped Items"
-            Grid.RowSpan="2"
-            Padding="116,137,40,46"
-            ItemsSource="{Binding Source={StaticResource groupedItemsViewSource}}"
-            ItemTemplate="{StaticResource BacklogManStandard250x250ItemTemplate}"
-            SelectionMode="None"
-            IsItemClickEnabled="True" ItemClick="BacklogItemClicked"
-            IsSwipeEnabled="false">
+        <!-- Horizontal scrolling grid used in most view states -->
 
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>                        
-                    <VirtualizingStackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
-            <GridView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate>
-                            <Grid Margin="1,0,0,6">
-                                <Button
-                                    Tag="{Binding}" Click="OpenProject"
-                                    AutomationProperties.Name="Group Title"
-                                    Style="{StaticResource TextPrimaryButtonStyle}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}" Margin="3,-7,10,10" Style="{StaticResource GroupHeaderTextStyle}" />
-                                        <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource GroupHeaderTextStyle}"/>
-                                    </StackPanel>
-                                </Button>
-                            </Grid>
-                        </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
-                    <GroupStyle.Panel>
-                        <ItemsPanelTemplate>
-                            <VariableSizedWrapGrid Orientation="Vertical" Margin="0,0,80,0"/>
-                        </ItemsPanelTemplate>
-                    </GroupStyle.Panel>
-                </GroupStyle>
-            </GridView.GroupStyle>
-        </GridView>
+        <ScrollViewer VerticalScrollMode="Disabled" HorizontalScrollMode="Auto" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Grid.Row="1">
+            <Grid x:Name="hub">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Projects" Margin="0,0,18,20" Style="{StaticResource SubheaderTextStyle}" MaxHeight="60" Grid.Row="0" Grid.Column="1"/>
+
+                <ListView Grid.Column="1" Grid.Row="1"
+                              x:Name="itemGridView"
+                              AutomationProperties.AutomationId="ItemGridView"
+                              AutomationProperties.Name="Items In Group"
+                              TabIndex="1"
+                              Grid.RowSpan="2"
+                              ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
+                              ItemTemplate="{StaticResource BacklogManStandard250x250ItemTemplate}"
+                              IsItemClickEnabled="True" ItemClick="BacklogItemClicked"
+                              SelectionMode="None"
+                              IsSwipeEnabled="True"
+                              CanReorderItems="True" AllowDrop="True" >
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="FrameworkElement">
+                            <Setter Property="Margin" Value="52,0,0,10"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+
+            </Grid>
+        </ScrollViewer>
 
         <!-- Vertical scrolling list only used when snapped -->
         <ListView
@@ -90,29 +83,10 @@
             Visibility="Collapsed"
             Margin="0,-10,0,0"
             Padding="10,0,0,60"
-            ItemsSource="{Binding Source={StaticResource groupedItemsViewSource}}"
+            ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
             ItemTemplate="{StaticResource Standard80ItemTemplate}"
             SelectionMode="None"
-            IsSwipeEnabled="false">
-
-            <ListView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate>
-                            <Grid Margin="7,7,0,0">
-                                <Button
-                                    AutomationProperties.Name="Group Title"
-                                    Style="{StaticResource TextPrimaryButtonStyle}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}" Margin="3,-7,10,10" Style="{StaticResource GroupHeaderTextStyle}" />
-                                        <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource GroupHeaderTextStyle}"/>
-                                    </StackPanel>
-                                </Button>
-                            </Grid>
-                        </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
-                </GroupStyle>
-            </ListView.GroupStyle>
+            IsSwipeEnabled="false">            
         </ListView>
 
         <!-- Back button and page title -->

@@ -15,7 +15,7 @@
         <!-- Collection of items displayed by this page -->
         <CollectionViewSource
             x:Name="itemsViewSource"
-            Source="{Binding Path=CurrentProject.Backlogs}"
+            Source="{Binding Path=ProjectBacklogs}"
             />
     </Page.Resources>
 
@@ -31,6 +31,9 @@
         </Grid.RowDefinitions>
 
         <!-- Horizontal scrolling grid used in most view states -->
+        
+        
+        
         <GridView
             x:Name="itemGridView"
             AutomationProperties.AutomationId="ItemGridView"
