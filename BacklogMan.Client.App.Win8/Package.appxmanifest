@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="BacklogMan.Client.App.Win8.App">
-      <VisualElements DisplayName="BacklogMan.Client.App.Win8" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="BacklogMan.Client.App.Win8" ForegroundText="light" BackgroundColor="#006dcc">
+      <VisualElements DisplayName="BacklogMan" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="BacklogMan.Client.App.Win8" ForegroundText="light" BackgroundColor="#006dcc">
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#006dcc" />
       </VisualElements>
