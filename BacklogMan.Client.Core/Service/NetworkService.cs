@@ -206,11 +206,8 @@ namespace BacklogMan.Client.Core.Service
             if (response.IsSuccessStatusCode == false)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
-<<<<<<< HEAD
-=======
                 Debug.WriteLine("Response (" + response.StatusCode.ToString() + ") Content: " + responseContent);
 
->>>>>>> cb57972725087eb0cc2d9112c4e3b500c45c16f5
                 throw new Exception("Unknwon error");
             }
 

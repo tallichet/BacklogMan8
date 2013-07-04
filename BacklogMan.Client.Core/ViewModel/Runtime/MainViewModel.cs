@@ -18,8 +18,10 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         public MainViewModel()
         {
             Projects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
-            ProjectBacklogs = new System.Collections.ObjectModel.ObservableCollection<Model.Backlog>();
-            BacklogStories = new System.Collections.ObjectModel.ObservableCollection<Model.Story>();
+            ProjectBacklogs = new ReorderableCollection<Model.Backlog>();
+            ProjectBacklogs.ManualReordered += projectBacklogs_ManualReordered;
+            BacklogStories = new ReorderableCollection<Model.Story>();
+            BacklogStories.ManualReordered += backlogStories_ManualReordered;
 
             string apiKey;
             if (ServiceLocator.Current.GetInstance<Service.IStorageService>().TryLoadSetting<string>("ApiKey", out apiKey))
@@ -84,7 +86,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
 
-        public System.Collections.ObjectModel.ObservableCollection<Model.Backlog> ProjectBacklogs
+        public ReorderableCollection<Model.Backlog> ProjectBacklogs
         {
             get;
             private set;
@@ -104,7 +106,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
 
-        public System.Collections.ObjectModel.ObservableCollection<Model.Story> BacklogStories
+        public ReorderableCollection<Model.Story> BacklogStories
         {
             get;
             private set;
@@ -126,16 +128,11 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
         private async void refreshBacklogs()
         {
-<<<<<<< HEAD
-            BacklogStories.Clear();
-            var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentProject.Id, CurrentBacklog.Id);
-            foreach (var s in stories)
-=======
+
             ProjectBacklogs.Clear();
             var project = CurrentProject; // this allow us to be sure the project don't change during the download
             var backlogs = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklogs(CurrentProject.Id);
             foreach (var b in backlogs)
->>>>>>> cb57972725087eb0cc2d9112c4e3b500c45c16f5
             {
                 ProjectBacklogs.Add(b);
                 b.Project = project;
@@ -153,5 +150,40 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 s.Backlog = backlog;
             }
         }
+
+        #region events
+        private void projectBacklogs_ManualReordered(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            var movedBacklog = e.NewItems[0] as Model.Backlog;
+
+            if (movedBacklog == null) return;
+
+            var operationResult = ServiceLocator.Current.GetInstance<Service.INetworkService>().OrderBacklog(this.CurrentProject.Id, movedBacklog.Id,
+                                        ProjectBacklogs.Select(b => b.Id).ToArray());
+
+            if (Debugger.IsAttached)
+            {
+                Debug.WriteLine("moved backlog '{0}' operation resut is {1}", movedBacklog.Name, operationResult);
+            }
+        }
+
+        private void backlogStories_ManualReordered(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            var movedStory = e.NewItems[0] as Model.Story;
+
+            if (movedStory == null) return;
+
+            var operationResult = ServiceLocator.Current.GetInstance<Service.INetworkService>().MoveStory(
+                                    movedStory.Backlog.Project.Id, 
+                                    movedStory.Backlog.Id,
+                                    movedStory.Id,
+                                    BacklogStories.Select(s => s.Id).ToArray());
+
+            if (Debugger.IsAttached)
+            {
+                Debug.WriteLine("moved stories '{0}' operation resut is {1}", movedStory.Code, operationResult);
+            }
+        }
+        #endregion
     }
 }

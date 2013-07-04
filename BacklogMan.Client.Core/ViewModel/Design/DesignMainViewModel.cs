@@ -34,7 +34,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             });
             #endregion
             #region define backlogs
-            ProjectBacklogs = new System.Collections.ObjectModel.ObservableCollection<Model.Backlog>();
+            ProjectBacklogs = new ReorderableCollection<Model.Backlog>();
             ProjectBacklogs.Add(new Model.Backlog()
             {
                 Name = "Backlog n° 1",
@@ -53,7 +53,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             });
             #endregion
             #region define Stories
-            BacklogStories = new System.Collections.ObjectModel.ObservableCollection<Model.Story>();
+            BacklogStories = new ReorderableCollection<Model.Story>();
             BacklogStories.Add(new Model.Story()
             {
                 AsUser = "Designer",
@@ -114,7 +114,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             set { throw new NotImplementedException(); }
         }
 
-        public System.Collections.ObjectModel.ObservableCollection<Model.Backlog> ProjectBacklogs
+        public ReorderableCollection<Model.Backlog> ProjectBacklogs
         {
             get;
             set;
@@ -133,7 +133,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             }
         }
 
-        public System.Collections.ObjectModel.ObservableCollection<Model.Story> BacklogStories
+        public ReorderableCollection<Model.Story> BacklogStories
         {
             get;
             set;

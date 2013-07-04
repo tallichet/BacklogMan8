@@ -27,10 +27,10 @@ namespace BacklogMan.Client.App.Win8
         {
             this.InitializeComponent();
 
-            var vm = this.DataContext as Core.ViewModel.IMainViewModel;
-            CollectionViewSource cvs = new CollectionViewSource();
-            cvs.Source = vm.CurrentProject.Backlogs;
-            itemGridView.SetBinding(GridView.ItemsSourceProperty, new Binding() { Source = cvs.View });// 
+            //var vm = this.DataContext as Core.ViewModel.IMainViewModel;
+            //CollectionViewSource cvs = new CollectionViewSource();
+            //cvs.Source = vm.CurrentProject.Backlogs;
+            //itemGridView.SetBinding(GridView.ItemsSourceProperty, new Binding() { Source = cvs.View });// 
         }
 
         /// <summary>

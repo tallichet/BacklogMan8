@@ -31,41 +31,7 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "users")]
         public List<BacklogmanUser> Users { get; set; }
 
-<<<<<<< HEAD
-        private ReorderableCollection<Backlog> backlogs = null;
-
-        [DataMember(Name = "backlogs")]
-        public ReorderableCollection<Backlog> Backlogs 
-        {
-            get { return backlogs; }
-            set
-            {
-                if (backlogs != value)
-                {
-                    if (backlogs != null) backlogs.ManualReordered -= backlogs_ManualReordered;
-                    backlogs = value;
-                    if (backlogs != null) backlogs.ManualReordered += backlogs_ManualReordered;
-                }
-            }
-        }
-
-        void backlogs_ManualReordered(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            var movedBacklog = e.NewItems[0] as Backlog;
-
-            if (movedBacklog == null) return;
-
-            var operationResult = ServiceLocator.Current.GetInstance<Service.INetworkService>().OrderBacklog(this.Id, movedBacklog.Id,
-                                        backlogs.Select(b => b.Id).ToArray());
-
-            if (Debugger.IsAttached)
-            {
-                Debug.WriteLine("moved backlog '{0}' operation resut is {1}", movedBacklog.Name, operationResult);
-            }
-        }
-=======
         [DataMember(Name = "available_themes")]
         public List<string> Themes { get; set; }
->>>>>>> cb57972725087eb0cc2d9112c4e3b500c45c16f5
     }
 }

@@ -27,7 +27,7 @@ namespace BacklogMan.Client.Core.ViewModel
         /// <summary>
         /// Backlog of the current project
         /// </summary>
-        ObservableCollection<Model.Backlog> ProjectBacklogs { get; }
+        ReorderableCollection<Model.Backlog> ProjectBacklogs { get; }
 
         /// <summary>
         /// The currently selected backlog
@@ -37,7 +37,7 @@ namespace BacklogMan.Client.Core.ViewModel
         /// <summary>
         /// Stories of the current backlog
         /// </summary>
-        ObservableCollection<Model.Story> BacklogStories { get; }
+        ReorderableCollection<Model.Story> BacklogStories { get; }
 
         /// <summary>
         /// Try to get a new API Key

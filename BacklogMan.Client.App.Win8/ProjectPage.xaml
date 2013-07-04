@@ -39,7 +39,7 @@
             TabIndex="1"
             Grid.RowSpan="2"
             Padding="120,126,120,50"
-            
+            ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
             ItemTemplate="{StaticResource BacklogManBacklog500x130ItemTemplate}"
             IsItemClickEnabled="True" ItemClick="BacklogItemClicked"
             SelectionMode="None"
