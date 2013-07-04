@@ -88,12 +88,24 @@ namespace BacklogMan.Client.App.Win8
 
         private void editSelectedStory(object sender, RoutedEventArgs e)
         {
+            if (itemGridView == null || itemGridView.SelectedItems == null) return;
 
+            if (itemGridView.SelectedItems.Count == 1)
+            {
+                ShowStoryEditor();
+                storyEditor.DataContext = itemGridView.SelectedItems.First();
+            }
         }
 
         private void createNewStory(object sender, RoutedEventArgs e)
         {
+            ShowStoryEditor();
+            storyEditor.DataContext = new Core.Model.Story() { Backlog = ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog };
+        }
 
+        private void refreshStories(object sender, RoutedEventArgs e)
+        {
+            ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().RefreshBacklogStories();
         }
     }
 }

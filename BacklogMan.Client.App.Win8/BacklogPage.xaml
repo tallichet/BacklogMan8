@@ -29,6 +29,7 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" x:Name="backlogCommands">
                     <Button Style="{StaticResource AddAppBarButtonStyle}" Click="createNewStory" />
+                    <Button Style="{StaticResource RefreshAppBarButtonStyle}" Click="refreshStories" />
                 </StackPanel>
             </Grid>
         </AppBar>
@@ -55,8 +56,8 @@
             Padding="120,126,120,50"
             ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
             ItemTemplate="{StaticResource BacklogManStory500x130ItemTemplate}"
-            IsItemClickEnabled="True" ItemClick="showStory"
-            SelectionMode="None"
+            IsItemClickEnabled="False" ItemClick="showStory"
+            SelectionMode="Multiple"
             IsSwipeEnabled="false">
 
             <GridView.Header>
