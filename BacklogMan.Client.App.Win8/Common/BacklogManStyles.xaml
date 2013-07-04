@@ -25,13 +25,14 @@
         <GradientStop Color="#0b474d" Offset="0" />
         <GradientStop Color="#083237" Offset="1" />
     </LinearGradientBrush>
+    
     <!-- Application bar -->
     <LinearGradientBrush x:Key="AppBarBackgroundThemeBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientStop Offset="0" Color="{StaticResource BacklogManTitleBackgroudColor}" />
-        <GradientStop Offset="1" Color="#0c6267" />
+        <GradientStop Color="{StaticResource BacklogManButtonBackgroudGradientColor1}" Offset="0" />
+        <GradientStop Color="{StaticResource BacklogManButtonBackgroudGradientColor2}" Offset="1" />
     </LinearGradientBrush>
-    <SolidColorBrush x:Key="AppBarBorderThemeBrush" Color="{StaticResource BacklogManTitleBackgroudColor}" />
-    <SolidColorBrush x:Key="AppBarItemForegroundThemeBrush" Color="{StaticResource BacklogManTitleForegroudColor}" />
+    <SolidColorBrush x:Key="AppBarBorderThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
+    <SolidColorBrush x:Key="AppBarItemForegroundThemeBrush" Color="{StaticResource BacklogManButtonForegroudColor}" />
     
     <!-- Buttons -->
     <LinearGradientBrush x:Key="BackButtonForegroundThemeBrush" StartPoint="0,0" EndPoint="0,1">
@@ -43,6 +44,37 @@
         <GradientStop Color="{StaticResource BacklogManButtonBackgroudGradientColor1}" Offset="0" />
         <GradientStop Color="{StaticResource BacklogManButtonBackgroudGradientColor2}" Offset="1" />
     </LinearGradientBrush>
+    
+    <!-- Selection brush -->
+    <SolidColorBrush x:Key="ComboBoxItemSelectedBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
+    <SolidColorBrush x:Key="ComboBoxItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" Opacity=".7"/>
+
+    <SolidColorBrush x:Key="ComboBoxSelectedBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
+    <SolidColorBrush x:Key="ComboBoxSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" Opacity=".7"/>
+
+    <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
+    <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" Opacity=".7"/>
+
+    <SolidColorBrush x:Key="ListViewItemCheckHintThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
+    <SolidColorBrush x:Key="ListViewItemCheckSelectingThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}"/>
+    <SolidColorBrush x:Key="ListViewItemDragBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" Opacity=".6"/>
+    <SolidColorBrush x:Key="ListViewItemSelectedBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" Opacity="1"/>
+    <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" Opacity=".7"/>
+    <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBorderThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" Opacity=".7"/>
+
+    <!--Hyperlink-->
+    <SolidColorBrush x:Key="HyperlinkForegroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
+    <SolidColorBrush x:Key="HyperlinkPointerOverForegroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" Opacity=".8"/>
+    <SolidColorBrush x:Key="HyperlinkPressedForegroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" Opacity=".6"/>
+    
+    <!--Progress bar-->
+    <SolidColorBrush x:Key="ProgressBarForegroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
+    <SolidColorBrush x:Key="ProgressBarIndeterminateForegroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}"/>
+    
+    <!--ToggleSwitch-->
+    <SolidColorBrush x:Key="ToggleSwitchCurtainBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" />
+    <SolidColorBrush x:Key="ToggleSwitchCurtainPointerOverBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" Opacity=".8"/>
+    <SolidColorBrush x:Key="ToggleSwitchCurtainPressedBackgroundThemeBrush" Color="{StaticResource BacklogManButtonBackgroudColor}" Opacity=".7"/>
 
 
     <DataTemplate x:Key="BacklogManStandard250x250ItemTemplate">
