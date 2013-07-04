@@ -24,7 +24,7 @@ namespace BacklogMan.Client.Core.Service
 
         void ClearCache();
 
-
+        Task<int> AddStory(int projectId, int backlogId, Model.Story newStory);
         Task<bool> MoveStory(int projectId, int targetBacklogId, int movedStoryId, int[] storyIdOrder);
         Task<bool> OrderBacklog(int projectId, int movedBacklog, int[] backlogIdOrder);
     }

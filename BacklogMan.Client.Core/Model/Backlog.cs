@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -10,7 +11,7 @@ namespace BacklogMan.Client.Core.Model
     public class Backlog
     {
         [DataMember(Name="id")]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [DataMember(Name = "url")]
         public string UrlString { get; set; }
@@ -23,5 +24,24 @@ namespace BacklogMan.Client.Core.Model
 
         [DataMember(Name = "story_count")]
         public int StoryCount { get; set; }
+
+        [IgnoreDataMember]
+        public Project Project
+        {
+            get
+            {
+                return findProjectForBacklog();
+            }
+        }
+
+        private Core.Model.Project findProjectForBacklog()
+        {
+            foreach (var p in ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().Projects)
+            {
+                if (p.Backlogs.Any(b => b.Id == this.Id))
+                    return p;
+            }
+            return null;
+        }
     }
 }

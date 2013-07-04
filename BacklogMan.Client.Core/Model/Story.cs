@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -11,7 +12,7 @@ namespace BacklogMan.Client.Core.Model
     public class Story
     {
         [DataMember(Name = "id")]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [DataMember(Name = "code")]
         public string Code { get; set; }
@@ -73,6 +74,20 @@ namespace BacklogMan.Client.Core.Model
             get
             {
                 return string.Format("As {0}, I want to {1}, so I can {2}", AsUser, Goal, Result);
+            }
+        }
+
+        public async Task<bool> Save(int projectId, int backlogId)
+        {
+            var newId = await ServiceLocator.Current.GetInstance<Service.INetworkService>().AddStory(projectId, backlogId, this);
+            if (newId > 0)
+            {
+                this.Id = newId;
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

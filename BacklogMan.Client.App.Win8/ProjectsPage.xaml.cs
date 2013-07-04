@@ -53,7 +53,7 @@ namespace BacklogMan.Client.App.Win8
         private void BacklogItemClicked(object sender, ItemClickEventArgs e)
         {
             var backlog = e.ClickedItem as Core.Model.Backlog;
-            var project = findProjectForBacklog(backlog);
+            var project = backlog.Project;
 
             var vm = ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>();
             vm.CurrentProject = project;
@@ -62,14 +62,6 @@ namespace BacklogMan.Client.App.Win8
             this.Frame.Navigate(typeof(BacklogPage));
         }
 
-        private Core.Model.Project findProjectForBacklog(Core.Model.Backlog backlog)
-        {
-            foreach (var p in ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().Projects)
-            {
-                if (p.Backlogs.Any(b => b.id == backlog.id))
-                    return p;
-            }
-            return null;
-        }
+        
     }
 }
