@@ -1,0 +1,14 @@
+﻿<Application
+    x:Class="BacklogMan.Client.App.Win81.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BacklogMan.Client.App.Win81"
+    xmlns:localData="using:BacklogMan.Client.App.Win81.Data">
+
+  <Application.Resources>
+    <!-- Application-specific resources -->
+
+    <x:String x:Key="AppName">BacklogMan.Client.App.Win81</x:String>
+
+  </Application.Resources>
+</Application>
