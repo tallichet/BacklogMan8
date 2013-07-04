@@ -20,9 +20,9 @@ namespace BacklogMan.Client.App.Win8
     /// <summary>
     /// A page that displays a grouped collection of items.
     /// </summary>
-    public sealed partial class ProjectsPage : BacklogMan.Client.App.Win8.Common.LayoutAwarePage
+    public sealed partial class MainPage : BacklogMan.Client.App.Win8.Common.LayoutAwarePage
     {
-        public ProjectsPage()
+        public MainPage()
         {
             this.InitializeComponent();
         }
@@ -41,35 +41,14 @@ namespace BacklogMan.Client.App.Win8
             // TODO: Assign a collection of bindable groups to this.DefaultViewModel["Groups"]
         }
 
-        private void OpenProject(object sender, RoutedEventArgs e)
-        {
-            var project = (sender as Control).Tag as Core.Model.Project;
-
-            ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject = project;
-
-            this.Frame.Navigate(typeof(ProjectPage));
-        }
-
         private void BacklogItemClicked(object sender, ItemClickEventArgs e)
         {
-            var backlog = e.ClickedItem as Core.Model.Backlog;
-            var project = findProjectForBacklog(backlog);
+            var project = e.ClickedItem as Core.Model.Project;
 
             var vm = ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>();
             vm.CurrentProject = project;
-            vm.CurrentBacklog = backlog;
 
-            this.Frame.Navigate(typeof(BacklogPage));
-        }
-
-        private Core.Model.Project findProjectForBacklog(Core.Model.Backlog backlog)
-        {
-            foreach (var p in ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().Projects)
-            {
-                if (p.Backlogs.Any(b => b.Id == backlog.Id))
-                    return p;
-            }
-            return null;
+            this.Frame.Navigate(typeof(ProjectPage));
         }
     }
 }

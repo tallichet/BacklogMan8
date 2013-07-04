@@ -10,6 +10,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
     {
         public DesignMainViewModel()
         {
+            #region define projects
             Projects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
             Projects.Add(new Model.Project()
             {
@@ -31,6 +32,27 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                     new Model.BacklogmanUser() {FullName = "cedric", Email = "cedric@suisse.ch"},
                 }
             });
+            #endregion
+            #region define backlogs
+            ProjectBacklogs = new System.Collections.ObjectModel.ObservableCollection<Model.Backlog>();
+            ProjectBacklogs.Add(new Model.Backlog()
+            {
+                Name = "Backlog n° 1",
+                Description = "This is my first project!",
+                Project = Projects.First(),
+                StoryCount = 2,
+                Themes = new string[] {"Windows", "Windows Phone"}.ToList(),
+            });
+            ProjectBacklogs.Add(new Model.Backlog()
+            {
+                Name = "Backlog n° 2",
+                Description = "This is my second project!",
+                Project = Projects.First(),
+                StoryCount = 2,
+                Themes = new string[] { "Windows", "Windows Phone" }.ToList(),
+            });
+            #endregion
+            #region define Stories
             BacklogStories = new System.Collections.ObjectModel.ObservableCollection<Model.Story>();
             BacklogStories.Add(new Model.Story()
             {
@@ -38,6 +60,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                 Goal = "have a design view model",
                 Result = "degign more easily",
                 Points = 5,
+                Backlog = ProjectBacklogs.First(),
                 Status = Model.StoryStatus.ToDo,
                 Theme = "Design",
                 Code = "JDG1",
@@ -52,6 +75,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                 Goal = "see stories of my backlog",
                 Result = "choose what to do next",
                 Points = 8,
+                Backlog = ProjectBacklogs.First(),
                 Status = Model.StoryStatus.InProgress,
                 Theme = "Design",
                 Code = "JDG1",
@@ -61,6 +85,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
 - 4ème ligne",
                 ColorString = "#00FF33"
             });
+            #endregion
         }
 
         public System.Collections.ObjectModel.ObservableCollection<Model.Project> Projects
@@ -89,12 +114,18 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             set { throw new NotImplementedException(); }
         }
 
+        public System.Collections.ObjectModel.ObservableCollection<Model.Backlog> ProjectBacklogs
+        {
+            get;
+            set;
+        }
+
 
         public Model.Backlog CurrentBacklog
         {
             get
             {
-                return CurrentProject.Backlogs.First();
+                return ProjectBacklogs.First();
             }
             set
             {
@@ -110,6 +141,12 @@ namespace BacklogMan.Client.Core.ViewModel.Design
 
 
         public Task<bool> GetApiKey(string Username, string Password)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void RefreshBacklogStories()
         {
             throw new NotImplementedException();
         }

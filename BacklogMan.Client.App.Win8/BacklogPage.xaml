@@ -18,6 +18,22 @@
             x:Name="itemsViewSource"
             Source="{Binding BacklogStories}"/>
     </Page.Resources>
+    
+    <Page.BottomAppBar>
+        <AppBar>
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" x:Name="storyCommands">
+                    <Button Style="{StaticResource DeleteAppBarButtonStyle}" Click="deleteSelectedStories" />
+                    <Button Style="{StaticResource EditAppBarButtonStyle}" Click="editSelectedStory" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" x:Name="backlogCommands">
+                    <Button Style="{StaticResource AddAppBarButtonStyle}" Click="createNewStory" />
+                    <Button Style="{StaticResource RefreshAppBarButtonStyle}" Click="refreshStories" />
+                </StackPanel>
+            </Grid>
+        </AppBar>
+    </Page.BottomAppBar>
 
     <!--
         This grid acts as a root panel for the page that defines two rows:
@@ -40,8 +56,8 @@
             Padding="120,126,120,50"
             ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
             ItemTemplate="{StaticResource BacklogManStory500x130ItemTemplate}"
-            IsItemClickEnabled="True" ItemClick="showStory"
-            SelectionMode="None"
+            IsItemClickEnabled="False"
+            SelectionMode="Multiple"
             CanReorderItems="True" AllowDrop="True"
             IsSwipeEnabled="True">
 
@@ -93,7 +109,9 @@
         </Grid>
         
         <Grid x:Name="storyEditorLayer" Grid.RowSpan="2" Background="#80000000" Visibility="Collapsed" Tapped="StoryLayerTapped">
-            <ctrl:StoryEditor x:Name="storyEditor" HorizontalAlignment="Center" VerticalAlignment="Center" Tapped="StoryTapped" />
+            <ctrl:StoryEditor x:Name="storyEditor" HorizontalAlignment="Center" VerticalAlignment="Center" Tapped="StoryTapped"
+                              BacklogId="{Binding Path=Main.CurrentBacklog.Id, Source={StaticResource Locator}}"
+                              ProjectId="{Binding Path=Main.CurrentBacklog.Project.Id, Source={StaticResource Locator}}"/>
         </Grid>
 
         <VisualStateManager.VisualStateGroups>

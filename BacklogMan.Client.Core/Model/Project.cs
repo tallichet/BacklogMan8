@@ -31,6 +31,7 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "users")]
         public List<BacklogmanUser> Users { get; set; }
 
+<<<<<<< HEAD
         private ReorderableCollection<Backlog> backlogs = null;
 
         [DataMember(Name = "backlogs")]
@@ -62,5 +63,9 @@ namespace BacklogMan.Client.Core.Model
                 Debug.WriteLine("moved backlog '{0}' operation resut is {1}", movedBacklog.Name, operationResult);
             }
         }
+=======
+        [DataMember(Name = "available_themes")]
+        public List<string> Themes { get; set; }
+>>>>>>> cb57972725087eb0cc2d9112c4e3b500c45c16f5
     }
 }

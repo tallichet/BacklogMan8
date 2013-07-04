@@ -32,6 +32,8 @@ namespace BacklogMan.Client.App.Win8
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            Core.ViewModel.ViewModelLocator.RegisterStorageService<StorageServiceWinRT>();
         }
 
         /// <summary>
@@ -75,7 +77,7 @@ namespace BacklogMan.Client.App.Win8
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    if (!rootFrame.Navigate(typeof(ProjectsPage), args.Arguments))
+                    if (!rootFrame.Navigate(typeof(MainPage), args.Arguments))
                     {
                         throw new Exception("Failed to create initial page");
                     }

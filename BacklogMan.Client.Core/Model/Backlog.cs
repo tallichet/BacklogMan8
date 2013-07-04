@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -23,5 +24,11 @@ namespace BacklogMan.Client.Core.Model
 
         [DataMember(Name = "story_count")]
         public int StoryCount { get; set; }
+
+        [DataMember(Name = "available_themes")]
+        public List<string> Themes { get; set; }
+
+        [IgnoreDataMember]
+        public Project Project { get; set; }
     }
 }

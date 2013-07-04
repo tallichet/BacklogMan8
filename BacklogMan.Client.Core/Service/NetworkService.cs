@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -12,7 +13,7 @@ namespace BacklogMan.Client.Core.Service
         private Uri BacklogManApiBaseUri = new Uri("https://app.backlogman.com/api/");
 
         private HttpClient client;
-        private Dictionary<Type, System.Runtime.Serialization.Json.DataContractJsonSerializer> Seriliazers = new Dictionary<Type,System.Runtime.Serialization.Json.DataContractJsonSerializer>();
+        private Dictionary<Type, System.Runtime.Serialization.Json.DataContractJsonSerializer> Seriliazers = new Dictionary<Type, System.Runtime.Serialization.Json.DataContractJsonSerializer>();
 
         protected HttpClient Client
         {
@@ -34,18 +35,7 @@ namespace BacklogMan.Client.Core.Service
             client = null;
         }
 
-        public async Task<T> DownloadDocument<T>(Uri url)
-        {
-            using (var s = await Client.GetStreamAsync(url))
-            {
-                if (Seriliazers.ContainsKey(typeof(T)) == false) 
-                {
-                    Seriliazers.Add(typeof(T), new  System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(T)));
-                }
-                var serializer = Seriliazers[typeof(T)];
-                return (T)serializer.ReadObject(s);
-            }
-        }
+        
 
         public string APIKey { get; set; }
 
@@ -83,34 +73,79 @@ namespace BacklogMan.Client.Core.Service
         public Task<Model.Story> DownloadStory(int projectId, int backlogId, int storyId)
         {
             var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/backlogs/" + backlogId + "/stories/" + storyId + "/");
-            return DownloadDocument<Model.Story>(uri);        
+            return DownloadDocument<Model.Story>(uri);
         }
 
 
         public async Task<string> GetApiKey(string username, string password)
         {
             var uri = new Uri(BacklogManApiBaseUri, "./api-token-auth/");
-            
-            var responseData = await PostData<Internal.GetApiTokenRequestContent, Internal.GetApiTokenResponseContent>(uri, new Internal.GetApiTokenRequestContent() { Username = username, Password = password });
+
+            var responseData = await PostOrPutData<Internal.GetApiTokenRequestContent, Internal.GetApiTokenResponseContent>(uri, new Internal.GetApiTokenRequestContent() { Username = username, Password = password });
 
             return responseData.ApiToken;
         }
 
+        public async Task<int> AddStory(int projectId, int backlogId, Model.Story newStory)
+        {
+            try
+            {
+                if (newStory.Id > 0)
+                {
+                    return await UpdateStory(newStory);
+                }
+                var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/backlogs/" + backlogId + "/stories/");
+                var result = await PostOrPutData<Model.Story, Model.Story>(uri, newStory);
+                return result.Id;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
+
+        public async Task<int> UpdateStory(Model.Story story)
+        {
+            try
+            {
+                var uri = new Uri(BacklogManApiBaseUri, "./projects/" + story.Backlog.Project.Id + "/backlogs/" + story.Backlog.Id + "/stories/" + story.Id + "/");
+                var result = await PostOrPutData<Model.Story, Model.Story>(uri, story, false);
+                return result.Id;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
+
+        public async Task<bool> DeleteStory(Model.Story story)
+        {
+            try
+            {
+                var uri = new Uri(BacklogManApiBaseUri, "./projects/" + story.Backlog.Project.Id + "/backlogs/" + story.Backlog.Id + "/stories/" + story.Id + "/");
+                await Delete(uri);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
         public async Task<bool> MoveStory(int projectId, int targetBacklogId, int movedStoryId, int[] storyIdOrder)
         {
             var uri = new Uri(BacklogManApiBaseUri, "./project/" + projectId + "/_move_story/");
-            
-            var request = new Internal.MoveStoryRequest() 
+
+            var request = new Internal.MoveStoryRequest()
             {
                 MovedStory = movedStoryId,
                 TargetBacklog = targetBacklogId,
                 StoryOrder = storyIdOrder
             };
 
-            var result = await PostData<Internal.MoveStoryRequest, Internal.Result>(uri, request);
+            var result = await PostOrPutData<Internal.MoveStoryRequest, Internal.Result>(uri, request);
 
-            return result.Ok ;
+            return result.Ok;
         }
 
         public async Task<bool> OrderBacklog(int projectId, int movedBacklog, int[] backlogIdOrder)
@@ -123,19 +158,42 @@ namespace BacklogMan.Client.Core.Service
                 BacklogOrder = backlogIdOrder
             };
 
-            var result = await PostData<Internal.OrderBacklogRequest, Internal.Result>(uri, request);
+            var result = await PostOrPutData<Internal.OrderBacklogRequest, Internal.Result>(uri, request);
 
             return result.Ok;
         }
 
-        private async Task<R> PostData<T, R>(Uri uri, T objectToSend)
+        #region Network methods
+        private async Task<T> DownloadDocument<T>(Uri url)
+        {
+            using (var s = await Client.GetStreamAsync(url))
+            {
+                if (Seriliazers.ContainsKey(typeof(T)) == false)
+                {
+                    Seriliazers.Add(typeof(T), new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(T)));
+                }
+                var serializer = Seriliazers[typeof(T)];
+                return (T)serializer.ReadObject(s);
+            }
+        }
+
+        private async Task<R> PostOrPutData<T, R>(Uri uri, T objectToSend, bool post = true)
         {
             var content = new StringContent(
                 Helper.Serialize<T>(objectToSend),
                 Encoding.UTF8,
                 "application/json");
 
-            var response = await Client.PostAsync(uri, content);
+            HttpResponseMessage response;
+
+            if (post)
+            {
+                response = await Client.PostAsync(uri, content);
+            }
+            else
+            {
+                response = await Client.PutAsync(uri, content);
+            }
 
             //if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             //{
@@ -148,15 +206,46 @@ namespace BacklogMan.Client.Core.Service
             if (response.IsSuccessStatusCode == false)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
+<<<<<<< HEAD
+=======
+                Debug.WriteLine("Response (" + response.StatusCode.ToString() + ") Content: " + responseContent);
+
+>>>>>>> cb57972725087eb0cc2d9112c4e3b500c45c16f5
                 throw new Exception("Unknwon error");
             }
 
             using (var answerStream = await response.Content.ReadAsStreamAsync())
             {
-                var serializer= new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(R));
+                var serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(R));
 
                 return (R)serializer.ReadObject(answerStream);
             }
         }
+
+        private async Task Delete(Uri uri)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, uri);
+
+            var response = await Client.SendAsync(request);
+            
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new Exception("Unauthorized");
+            }
+            if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            {
+                throw new Exception("Forbidden");
+            }
+            if (response.IsSuccessStatusCode == false)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine("Response (" + response.StatusCode.ToString() + ") Content: " + responseContent);
+
+                throw new Exception("Unknwon error");
+            }
+        }
+
+
+        #endregion
     }
 }

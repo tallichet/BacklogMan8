@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -71,6 +72,44 @@ namespace BacklogMan.Client.App.Win8
 
             ShowStoryEditor();
             storyEditor.DataContext = story;
+        }
+
+        private void deleteSelectedStories(object sender, RoutedEventArgs e)
+        {
+            if (itemGridView == null || itemGridView.SelectedItems == null) return;
+
+            foreach (var s in itemGridView.SelectedItems.Cast<Core.Model.Story>())
+            {
+                ServiceLocator.Current.GetInstance<Core.Service.INetworkService>().DeleteStory(s);
+            }
+
+            ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().RefreshBacklogStories();
+        }
+
+        private void editSelectedStory(object sender, RoutedEventArgs e)
+        {
+            if (itemGridView == null || itemGridView.SelectedItems == null) return;
+
+            if (itemGridView.SelectedItems.Count == 1)
+            {
+                ShowStoryEditor();
+                storyEditor.DataContext = itemGridView.SelectedItems.First();
+            }
+        }
+
+        private void createNewStory(object sender, RoutedEventArgs e)
+        {
+            ShowStoryEditor();
+            storyEditor.DataContext = new Core.Model.Story() 
+            { 
+                Backlog = ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog,
+                Status = Core.Model.StoryStatus.New
+            };
+        }
+
+        private void refreshStories(object sender, RoutedEventArgs e)
+        {
+            ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().RefreshBacklogStories();
         }
     }
 }

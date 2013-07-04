@@ -18,7 +18,15 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         public MainViewModel()
         {
             Projects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
+            ProjectBacklogs = new System.Collections.ObjectModel.ObservableCollection<Model.Backlog>();
             BacklogStories = new System.Collections.ObjectModel.ObservableCollection<Model.Story>();
+
+            string apiKey;
+            if (ServiceLocator.Current.GetInstance<Service.IStorageService>().TryLoadSetting<string>("ApiKey", out apiKey))
+            {
+                // Do not use the global setter to prevent clear + init method calls
+                ServiceLocator.Current.GetInstance<Service.INetworkService>().APIKey = apiKey;
+            }
 
             Init();
         }
@@ -62,10 +70,24 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
 
-
+        private Model.Project currentProject = null;
         public Model.Project CurrentProject
         {
-            get;set;
+            get
+            {
+                return currentProject;
+            }
+            set
+            {
+                currentProject = value;
+                refreshBacklogs();
+            }
+        }
+
+        public System.Collections.ObjectModel.ObservableCollection<Model.Backlog> ProjectBacklogs
+        {
+            get;
+            private set;
         }
 
         private Model.Backlog currentBacklog = null;
@@ -78,7 +100,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             set
             {
                 currentBacklog = value;
-                refreshStories();
+                RefreshBacklogStories();
             }
         }
 
@@ -93,34 +115,43 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             try
             {
                 this.ApiKey = await ServiceLocator.Current.GetInstance<Service.INetworkService>().GetApiKey(username, password);
-                SaveApiKey(this.ApiKey);
+                ServiceLocator.Current.GetInstance<Service.IStorageService>().SaveSetting<string>("ApiKey", this.ApiKey);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
         }
 
-        private async void refreshStories()
+        private async void refreshBacklogs()
+        {
+<<<<<<< HEAD
+            BacklogStories.Clear();
+            var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentProject.Id, CurrentBacklog.Id);
+            foreach (var s in stories)
+=======
+            ProjectBacklogs.Clear();
+            var project = CurrentProject; // this allow us to be sure the project don't change during the download
+            var backlogs = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklogs(CurrentProject.Id);
+            foreach (var b in backlogs)
+>>>>>>> cb57972725087eb0cc2d9112c4e3b500c45c16f5
+            {
+                ProjectBacklogs.Add(b);
+                b.Project = project;
+            }
+        }
+
+        public async void RefreshBacklogStories()
         {
             BacklogStories.Clear();
+            var backlog = CurrentBacklog; // this allow us to be sure the backlog don't change during the download
             var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentProject.Id, CurrentBacklog.Id);
             foreach (var s in stories)
             {
                 BacklogStories.Add(s);
+                s.Backlog = backlog;
             }
-        }
-
-        private void SaveApiKey(string apiKey)
-        {
-            // TODO: save the key for both Win8 and WinPhone8
-        }
-
-        private string LoadApiKey()
-        {
-            // TODO: load the key for both Win8 and WinPhone8
-            return null;
         }
     }
 }

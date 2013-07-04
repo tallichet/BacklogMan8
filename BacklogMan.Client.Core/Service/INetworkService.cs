@@ -8,7 +8,6 @@ namespace BacklogMan.Client.Core.Service
 {
     public interface INetworkService
     {
-        Task<T> DownloadDocument<T>(Uri url);
         string APIKey { get; set; }
 
         Task<List<Model.Project>> DownloadProjects();
@@ -24,7 +23,9 @@ namespace BacklogMan.Client.Core.Service
 
         void ClearCache();
 
-
+        Task<int> AddStory(int projectId, int backlogId, Model.Story newStory);
+        Task<int> UpdateStory(Model.Story story);
+        Task<bool> DeleteStory(Model.Story Story);        
         Task<bool> MoveStory(int projectId, int targetBacklogId, int movedStoryId, int[] storyIdOrder);
         Task<bool> OrderBacklog(int projectId, int movedBacklog, int[] backlogIdOrder);
     }

@@ -100,9 +100,8 @@ namespace BacklogMan.Client.App.Win8
             }
             else
             {
-                this.Frame.Navigate(typeof(ProjectsPage));
-
-                // TODO Clear navigation history
+                this.Frame.Navigate(typeof(MainPage));
+                this.Frame.SetNavigationState("1,0");
             }
         }
 

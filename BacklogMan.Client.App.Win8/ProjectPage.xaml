@@ -13,10 +13,10 @@
     <Page.Resources>
 
         <!-- Collection of items displayed by this page -->
-        <!--<CollectionViewSource
+        <CollectionViewSource
             x:Name="itemsViewSource"
-            Source="{Binding Path=CurrentProject.Backlogs}"
-            />-->
+            Source="{Binding Path=ProjectBacklogs}"
+            />
     </Page.Resources>
 
     <!--
@@ -31,7 +31,7 @@
         </Grid.RowDefinitions>
 
         <!-- Horizontal scrolling grid used in most view states -->
-        <!--ItemsSource="{Binding Source={StaticResource itemsViewSource}}"-->
+
         <GridView
             x:Name="itemGridView"
             AutomationProperties.AutomationId="ItemGridView"

@@ -8,51 +8,60 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    
-    <Grid Background="WhiteSmoke">
+
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <Grid Background="WhiteSmoke" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Code" Grid.Row="0" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
-        <TextBox Text="{Binding Code}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" />
+            <TextBlock Text="Code" Grid.Row="0" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
+            <TextBox Text="{Binding Code, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" />
 
 
-        <TextBlock Text="As" Grid.Row="1" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
-        <TextBox Text="{Binding AsUser}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" />
+            <TextBlock Text="As" Grid.Row="1" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
+            <TextBox Text="{Binding AsUser, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" />
 
-        <TextBlock Text="I want" Grid.Row="2" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
-        <TextBox Text="{Binding Goal}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" />
+            <TextBlock Text="I want" Grid.Row="2" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
+            <TextBox Text="{Binding Goal, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" />
 
-        <TextBlock Text="So I can" Grid.Row="3" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
-        <TextBox Text="{Binding Result}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" />
+            <TextBlock Text="So I can" Grid.Row="3" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
+            <TextBox Text="{Binding Result, Mode=TwoWay}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" />
 
-        <TextBlock Text="Acceptance" Grid.Row="4" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
-        <TextBox Text="{Binding AcceptanceCriteria}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
+            <TextBlock Text="Acceptance" Grid.Row="4" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
+            <TextBox Text="{Binding AcceptanceCriteria, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
 
-        <TextBlock Text="Points" Grid.Row="5" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
-        <TextBox Text="{Binding Points}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
+            <TextBlock Text="Points" Grid.Row="5" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
+            <TextBox Text="{Binding Points, Mode=TwoWay}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
 
-        <TextBlock Text="Theme" Grid.Row="6" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
-        <TextBox Text="{Binding Theme}" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
+            <TextBlock Text="Theme" Grid.Row="6" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
+            <TextBox Text="{Binding Theme, Mode=TwoWay}" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
 
-        <TextBlock Text="Color" Grid.Row="7" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
-        <TextBox Text="{Binding ColorString}" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
+            <TextBlock Text="Color" Grid.Row="7" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
+            <TextBox Text="{Binding ColorString, Mode=TwoWay}" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
 
-        <TextBlock Text="Comments" Grid.Row="8" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
-        <TextBox Text="{Binding Comments}" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
+            <TextBlock Text="Comments" Grid.Row="8" Grid.Column="0" TextAlignment="Right" Foreground="Black" />
+            <TextBox Text="{Binding Comments, Mode=TwoWay}" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
 
+        </Grid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Click="SaveStory" Content="Save" />
+        </StackPanel>
     </Grid>
 </UserControl>

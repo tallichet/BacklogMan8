@@ -31,6 +31,11 @@ namespace BacklogMan.Client.Core.ViewModel
             }
         }
 
+        public static void RegisterStorageService<T>() where T : class, Service.IStorageService
+        {
+            SimpleIoc.Default.Register<Service.IStorageService, T>();
+        }
+
         public IMainViewModel Main
         {
             get
