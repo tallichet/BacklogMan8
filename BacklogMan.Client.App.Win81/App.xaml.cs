@@ -1,7 +1,7 @@
 ﻿using BacklogMan.Client.App.Win81.Common;
-
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
