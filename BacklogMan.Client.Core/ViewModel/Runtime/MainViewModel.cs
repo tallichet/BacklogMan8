@@ -100,7 +100,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             set
             {
                 currentBacklog = value;
-                refreshStories();
+                RefreshBacklogStories();
             }
         }
 
@@ -136,7 +136,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
 
-        private async void refreshStories()
+        public async void RefreshBacklogStories()
         {
             BacklogStories.Clear();
             var backlog = CurrentBacklog; // this allow us to be sure the backlog don't change during the download

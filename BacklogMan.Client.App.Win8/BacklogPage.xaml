@@ -18,6 +18,21 @@
             x:Name="itemsViewSource"
             Source="{Binding BacklogStories}"/>
     </Page.Resources>
+    
+    <Page.BottomAppBar>
+        <AppBar>
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" x:Name="storyCommands">
+                    <Button Style="{StaticResource DeleteAppBarButtonStyle}" Click="deleteSelectedStories" />
+                    <Button Style="{StaticResource EditAppBarButtonStyle}" Click="editSelectedStory" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" x:Name="backlogCommands">
+                    <Button Style="{StaticResource AddAppBarButtonStyle}" Click="createNewStory" />
+                </StackPanel>
+            </Grid>
+        </AppBar>
+    </Page.BottomAppBar>
 
     <!--
         This grid acts as a root panel for the page that defines two rows:

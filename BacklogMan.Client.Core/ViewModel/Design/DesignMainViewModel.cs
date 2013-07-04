@@ -144,5 +144,11 @@ namespace BacklogMan.Client.Core.ViewModel.Design
         {
             throw new NotImplementedException();
         }
+
+
+        public void RefreshBacklogStories()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

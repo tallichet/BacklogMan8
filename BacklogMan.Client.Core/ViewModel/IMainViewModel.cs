@@ -45,5 +45,7 @@ namespace BacklogMan.Client.Core.ViewModel
         /// <param name="Username"></param>
         /// <param name="Password"></param>
         Task<bool> GetApiKey(string Username, string Password);
+
+        void RefreshBacklogStories();
     }
 }
