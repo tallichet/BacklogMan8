@@ -152,13 +152,13 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         }
 
         #region events
-        private void projectBacklogs_ManualReordered(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private async void projectBacklogs_ManualReordered(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             var movedBacklog = e.NewItems[0] as Model.Backlog;
 
             if (movedBacklog == null) return;
 
-            var operationResult = ServiceLocator.Current.GetInstance<Service.INetworkService>().OrderBacklog(this.CurrentProject.Id, movedBacklog.Id,
+            var operationResult = await ServiceLocator.Current.GetInstance<Service.INetworkService>().OrderBacklog(this.CurrentProject.Id, movedBacklog.Id,
                                         ProjectBacklogs.Select(b => b.Id).ToArray());
 
             if (Debugger.IsAttached)
@@ -167,13 +167,13 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
 
-        private void backlogStories_ManualReordered(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private async void backlogStories_ManualReordered(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             var movedStory = e.NewItems[0] as Model.Story;
 
             if (movedStory == null) return;
 
-            var operationResult = ServiceLocator.Current.GetInstance<Service.INetworkService>().MoveStory(
+            var operationResult = await ServiceLocator.Current.GetInstance<Service.INetworkService>().MoveStory(
                                     movedStory.Backlog.Project.Id, 
                                     movedStory.Backlog.Id,
                                     movedStory.Id,

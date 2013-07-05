@@ -24,7 +24,7 @@
             <Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" x:Name="storyCommands">
                     <Button Style="{StaticResource DeleteAppBarButtonStyle}" Click="deleteSelectedStories" />
-                    <Button Style="{StaticResource EditAppBarButtonStyle}" Click="editSelectedStory" />
+                    <Button Style="{StaticResource EditAppBarButtonStyle}" Click="editSelectedStory" x:Name="createStoryCommand" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" x:Name="backlogCommands">
@@ -57,20 +57,27 @@
             ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
             ItemTemplate="{StaticResource BacklogManStory500x130ItemTemplate}"
             IsItemClickEnabled="False"
-            SelectionMode="Multiple"
+            SelectionMode="Multiple" SelectionChanged="selectedStories_Changed"
             CanReorderItems="True" AllowDrop="True"
             IsSwipeEnabled="True">
 
             <GridView.Header>
-                <StackPanel Width="480" Margin="0,4,14,0" DataContext="{Binding Path=Main.CurrentBacklog, Source={StaticResource Locator}}">
+                <StackPanel Width="300" Margin="0,4,14,0" DataContext="{Binding Path=Main.CurrentBacklog, Source={StaticResource Locator}}">
                     <TextBlock Text="{Binding Name}" Margin="0,0,18,20" Style="{StaticResource SubheaderTextStyle}" MaxHeight="60"/>
-                    <Image Source="{Binding Image}" Height="400" Margin="0,0,18,20" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
                     <TextBlock Text="{Binding Description}" Margin="0,0,18,0" Style="{StaticResource BodyTextStyle}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Total number of stories: " Margin="0,0,18,0" Style="{StaticResource BodyTextStyle}"/>
+                        <TextBlock Text="{Binding StoryCount}" Margin="0,0,18,0" Style="{StaticResource BodyTextStyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Themes: " Margin="0,0,18,0" Style="{StaticResource BodyTextStyle}"/>
+                        <TextBlock Text="{Binding ThemesAsListString}" Margin="0,0,18,0" Style="{StaticResource BodyTextStyle}"/>
+                    </StackPanel>
                 </StackPanel>
             </GridView.Header>
             <GridView.ItemContainerStyle>
                 <Style TargetType="FrameworkElement">
-                    <Setter Property="Margin" Value="52,0,0,10"/>
+                    <Setter Property="Margin" Value="0,0,0,0"/>
                 </Style>
             </GridView.ItemContainerStyle>
         </GridView>

@@ -39,7 +39,7 @@
     <DataTemplate x:Key="BacklogManStory500x130ItemTemplate">
         <Grid Height="110" Width="480" Margin="10">
             <Grid.Background>
-                <SolidColorBrush Color="{StaticResource BacklogManTitleForegroudColor}" />
+                <SolidColorBrush Color="{StaticResource BacklogManElementBackgroudColor}"/>
             </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -94,12 +94,12 @@
             <Grid Grid.Column="2" VerticalAlignment="Top" Margin="5">
                 <Ellipse Width="50" Height="50" >
                     <Ellipse.Fill>
-                        <SolidColorBrush Color="{StaticResource BacklogManTitleBackgroudColor}" />
+                        <SolidColorBrush Color="{StaticResource BacklogManButtonBackgroudColor}" />
                     </Ellipse.Fill>
                 </Ellipse>
                 <TextBlock Text="{Binding Points}" Style="{StaticResource TitleTextStyle}" TextWrapping="NoWrap" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock.Foreground>
-                        <SolidColorBrush Color="{StaticResource BacklogManTitleForegroudColor}"/>
+                        <SolidColorBrush Color="{StaticResource BacklogManButtonForegroudColor}"/>
                     </TextBlock.Foreground>
                     <TextBlock.RenderTransform>
                         <TranslateTransform Y="0"/>

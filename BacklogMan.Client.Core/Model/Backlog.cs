@@ -28,6 +28,16 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "available_themes")]
         public List<string> Themes { get; set; }
 
+
+        [IgnoreDataMember]
+        public string ThemesAsListString
+        {
+            get
+            {
+                return string.Join(", ", Themes);
+            }
+        }
+
         [IgnoreDataMember]
         public Project Project { get; set; }
     }
