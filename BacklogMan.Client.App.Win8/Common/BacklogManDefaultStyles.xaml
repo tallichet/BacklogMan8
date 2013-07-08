@@ -12,6 +12,7 @@
     <Color x:Key="BacklogManButtonBackgroudGradientColor2">#006dcc</Color>
     <Color x:Key="BacklogManButtonForegroudColor">#ffffff</Color>
     <Color x:Key="BacklogManLinkForegroudColor">#0088cc</Color>
+    <Color x:Key="BacklogManElementBackgroudColor">#B2DCFF</Color>
 
 
     <LinearGradientBrush x:Key="BacklogManWebsiteButtonBackgroundBrush" StartPoint="0,0" EndPoint="0,1">

@@ -41,17 +41,18 @@
         <ScrollViewer VerticalScrollMode="Disabled" HorizontalScrollMode="Auto" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Grid.Row="1">
             <Grid x:Name="hub">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="119" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="119" />
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <TextBlock Text="Projects" Margin="0,0,18,20" Style="{StaticResource SubheaderTextStyle}" MaxHeight="60" Grid.Row="0" Grid.Column="1"/>
 
-                <ListView Grid.Column="1" Grid.Row="1"
+                <GridView Grid.Column="1" Grid.Row="1"
                               x:Name="itemGridView"
                               AutomationProperties.AutomationId="ItemGridView"
                               AutomationProperties.Name="Items In Group"
@@ -64,12 +65,12 @@
                               IsSwipeEnabled="True"
                               CanReorderItems="True" AllowDrop="True" >
 
-                    <ListView.ItemContainerStyle>
+                    <!--<GridView.ItemContainerStyle>
                         <Style TargetType="FrameworkElement">
                             <Setter Property="Margin" Value="52,0,0,10"/>
                         </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
+                    </GridView.ItemContainerStyle>-->
+                </GridView>
 
             </Grid>
         </ScrollViewer>

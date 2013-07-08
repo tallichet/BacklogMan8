@@ -134,7 +134,7 @@ namespace BacklogMan.Client.Core.Service
 
         public async Task<bool> MoveStory(int projectId, int targetBacklogId, int movedStoryId, int[] storyIdOrder)
         {
-            var uri = new Uri(BacklogManApiBaseUri, "./project/" + projectId + "/_move_story/");
+            var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/_move_story/");
 
             var request = new Internal.MoveStoryRequest()
             {
@@ -150,7 +150,7 @@ namespace BacklogMan.Client.Core.Service
 
         public async Task<bool> OrderBacklog(int projectId, int movedBacklog, int[] backlogIdOrder)
         {
-            var uri = new Uri(BacklogManApiBaseUri, "./project/" + projectId + "/_order_backlog/");
+            var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/_order_backlog/");
 
             var request = new Internal.OrderBacklogRequest()
             {
@@ -195,20 +195,20 @@ namespace BacklogMan.Client.Core.Service
                 response = await Client.PutAsync(uri, content);
             }
 
-            //if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            //{
-            //    throw new Exception("Unauthorized");
-            //}
-            //if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
-            //{
-            //    throw new Exception("Forbidden");
-            //}
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new Exception("Unauthorized");
+            }
+            if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            {
+                throw new Exception("Forbidden");
+            }
             if (response.IsSuccessStatusCode == false)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 Debug.WriteLine("Response (" + response.StatusCode.ToString() + ") Content: " + responseContent);
 
-                throw new Exception("Unknwon error");
+                throw new Exception("Unknwon error " + response.StatusCode);
             }
 
             using (var answerStream = await response.Content.ReadAsStreamAsync())

@@ -107,6 +107,41 @@ namespace BacklogMan.Client.App.Win8
             };
         }
 
+        private void selectedStories_Changed(object sender, SelectionChangedEventArgs e)
+        {
+            var list = sender as ListViewBase;
+
+            if (list == null) return;
+
+            switch (list.SelectedItems.Count)
+            {
+                case 0:
+                    storyCommands.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    createStoryCommand.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    break;
+                case 1:
+                    storyCommands.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    createStoryCommand.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    break;
+                default:
+                    storyCommands.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    createStoryCommand.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    break;
+            }
+
+            if (list.SelectedItems.Count == 0)
+            {
+                this.BottomAppBar.IsOpen = false;
+                this.BottomAppBar.IsSticky = false;
+            }
+            else
+            {
+                this.BottomAppBar.IsOpen = true;
+                this.BottomAppBar.IsSticky = true;
+            }
+            
+        }
+
         private void refreshStories(object sender, RoutedEventArgs e)
         {
             ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().RefreshBacklogStories();
