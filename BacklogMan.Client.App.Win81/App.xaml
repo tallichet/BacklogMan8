@@ -9,26 +9,41 @@
   <Application.Resources>
     <!-- Application-specific resources -->
         <ResourceDictionary>
-            <Color x:Key="BacklogManMainColor">#006dcc</Color>
-            <x:String x:Key="AppName">BacklogMan</x:String>
-
             <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="Red" />
-                    <LinearGradientBrush x:Key="BackButtonForegroundThemeBrush" StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#006dcc" Offset="0" />
-                        <GradientStop Color="#006dcc" Offset="1" />
-                    </LinearGradientBrush>
-                    <SolidColorBrush x:Key="ButtonForegroundThemeBrush" Color="#006dcc" />
+                <ResourceDictionary x:Key="Default">
+                    <!--<SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="Red" />-->
                     <LinearGradientBrush x:Key="ButtonBackgroundThemeBrush" StartPoint="0,0" EndPoint="0,1">
                         <GradientStop Color="#006dcc" Offset="0" />
                         <GradientStop Color="#006dcc" Offset="1" />
                     </LinearGradientBrush>
+
+                    <SolidColorBrush x:Key="BackButtonBackgroundThemeBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="BackButtonDisabledForegroundThemeBrush" Color="#66FFFFFF" />
+                    <SolidColorBrush x:Key="BackButtonForegroundThemeBrush" Color="#FF006dcc" />
+                    <SolidColorBrush x:Key="BackButtonPointerOverBackgroundThemeBrush" Color="#21006dcc" />
+                    <SolidColorBrush x:Key="BackButtonPointerOverForegroundThemeBrush" Color="#FF006dcc" />
+                    <SolidColorBrush x:Key="BackButtonPressedForegroundThemeBrush" Color="#FF000000" />
+
+                    <SolidColorBrush x:Key="ButtonBorderThemeBrush" Color="#33006dcc" />
+                    <SolidColorBrush x:Key="ButtonDisabledBackgroundThemeBrush" Color="#66CACACA" />
+                    <SolidColorBrush x:Key="ButtonDisabledBorderThemeBrush" Color="#1A000000" />
+                    <SolidColorBrush x:Key="ButtonDisabledForegroundThemeBrush" Color="#66000000" />
+                    <SolidColorBrush x:Key="ButtonForegroundThemeBrush" Color="#FF006dcc" />
+                    <SolidColorBrush x:Key="ButtonPointerOverBackgroundThemeBrush" Color="#D1CDCDCD" />
+                    <SolidColorBrush x:Key="ButtonPointerOverForegroundThemeBrush" Color="#FF003d8c" />
+                    <SolidColorBrush x:Key="ButtonPressedBackgroundThemeBrush" Color="#FF000000" />
+                    <SolidColorBrush x:Key="ButtonPressedForegroundThemeBrush" Color="#FF006dcc" />
+
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
-           
 
-            
+            <Color x:Key="BacklogManMainColor">#006dcc</Color>
+            <x:String x:Key="AppName">BacklogMan</x:String>
+
+
+
+
+
         </ResourceDictionary>
 
     </Application.Resources>
