@@ -103,7 +103,7 @@ namespace BacklogMan.Client.App.Win8
             storyEditor.DataContext = new Core.Model.Story() 
             { 
                 Backlog = ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog,
-                Status = Core.Model.StoryStatus.New
+                Status = Core.Model.StoryStatus.ToDo
             };
         }
 

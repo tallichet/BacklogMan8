@@ -53,6 +53,8 @@ namespace BacklogMan.Client.Core.Model
                 {
                     case StoryStatus.InProgress:
                         return "in_progress";
+                    case StoryStatus.ToDo:
+                        return "to_do";
                     default:
                         return Status.ToString().ToLower();
                 }
@@ -97,11 +99,9 @@ namespace BacklogMan.Client.Core.Model
 
     public enum StoryStatus
     {
-        New,
         ToDo,
         InProgress,
         Accepted,
         Rejected,
-        Completed
     }
 }
