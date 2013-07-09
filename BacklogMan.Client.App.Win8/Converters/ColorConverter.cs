@@ -13,7 +13,7 @@ namespace BacklogMan.Client.App.Win8.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var opacity = 1.0;
-            if (opacity != null && parameter is string)
+            if (parameter is string)
             {
                 opacity = double.Parse((string)parameter, CultureInfo.InvariantCulture.NumberFormat);
             }

@@ -45,6 +45,8 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <ctrl:NotificationArea VerticalAlignment="Top" HorizontalAlignment="Right" />
 
         <!-- Horizontal scrolling grid used in most view states -->
         <GridView

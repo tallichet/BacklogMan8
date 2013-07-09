@@ -6,6 +6,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BacklogMan.Client.App.Win8"
     xmlns:common="using:BacklogMan.Client.App.Win8.Common"
+    xmlns:ctrl="using:BacklogMan.Client.App.Win8.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -29,6 +30,8 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <ctrl:NotificationArea VerticalAlignment="Top" HorizontalAlignment="Right" />
 
         <!-- Horizontal scrolling grid used in most view states -->
 

@@ -165,6 +165,15 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             {
                 Debug.WriteLine("moved backlog '{0}' operation resut is {1}", movedBacklog.Name, operationResult);
             }
+
+            if (operationResult)
+            {
+                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationText("backlog reordered");
+            }
+            else
+            {
+                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationText("error when ordering backlogs");
+            }
         }
 
         private async void backlogStories_ManualReordered(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -182,6 +191,15 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             if (Debugger.IsAttached)
             {
                 Debug.WriteLine("moved stories '{0}' operation resut is {1}", movedStory.Code, operationResult);
+            }
+
+            if (operationResult)
+            {
+                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationText("story moved");
+            }
+            else
+            {
+                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationText("error when ordering stories");
             }
         }
         #endregion

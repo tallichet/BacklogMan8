@@ -21,12 +21,14 @@ namespace BacklogMan.Client.Core.ViewModel
                 {
                     // Create design time view services and models
                     SimpleIoc.Default.Register<IMainViewModel, ViewModel.Design.DesignMainViewModel>();
+                    SimpleIoc.Default.Register<IInternalNotificationViewModel, ViewModel.Design.DesignNotificationViewModel>();
                 }
             }
             else
             {
-                // Create run time view services and models
+                // Create runtime view services and models
                 SimpleIoc.Default.Register<IMainViewModel, ViewModel.Runtime.MainViewModel>();
+                SimpleIoc.Default.Register<IInternalNotificationViewModel, ViewModel.Runtime.InternalNotificationViewModel>();
                 SimpleIoc.Default.Register<Service.INetworkService, Service.NetworkService>();
             }
         }
@@ -41,6 +43,14 @@ namespace BacklogMan.Client.Core.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<IMainViewModel>();
+            }
+        }
+
+        public IInternalNotificationViewModel Notifications
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>();
             }
         }
     }
