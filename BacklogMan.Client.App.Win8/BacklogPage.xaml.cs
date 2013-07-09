@@ -59,6 +59,9 @@ namespace BacklogMan.Client.App.Win8
         public void ShowStoryEditor()
         {
             VisualStateManager.GoToState(this, "StoryLayerVisible", true);
+
+            this.BottomAppBar.IsOpen = false;
+            this.BottomAppBar.IsSticky = false;
         }
 
         public void HideStoryEditor()
@@ -84,6 +87,9 @@ namespace BacklogMan.Client.App.Win8
             }
 
             ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().RefreshBacklogStories();
+
+            this.BottomAppBar.IsOpen = false;
+            this.BottomAppBar.IsSticky = false;
         }
 
         private void editSelectedStory(object sender, RoutedEventArgs e)
@@ -136,8 +142,8 @@ namespace BacklogMan.Client.App.Win8
             }
             else
             {
-                this.BottomAppBar.IsOpen = true;
                 this.BottomAppBar.IsSticky = true;
+                this.BottomAppBar.IsOpen = true;                
             }
             
         }
