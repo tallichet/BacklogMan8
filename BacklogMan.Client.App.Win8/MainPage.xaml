@@ -59,7 +59,7 @@
                               TabIndex="1"
                               Grid.RowSpan="2"
                               ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
-                              ItemTemplate="{StaticResource BacklogManStandard250x250ItemTemplate}"
+                              ItemTemplate="{StaticResource BacklogManProject500x130ItemTemplate}"
                               IsItemClickEnabled="True" ItemClick="BacklogItemClicked"
                               SelectionMode="None"
                               IsSwipeEnabled="True"

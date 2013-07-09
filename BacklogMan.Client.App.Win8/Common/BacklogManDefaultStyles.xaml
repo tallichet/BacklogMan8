@@ -5,6 +5,9 @@
 
 
     <!-- Colors -->
+    <Color x:Key="BacklogManMainColor">#006dcc</Color>
+
+
     <Color x:Key="BacklogManTitleBackgroudColor">#0b474d</Color>
     <Color x:Key="BacklogManTitleForegroudColor">#999999</Color>
     <Color x:Key="BacklogManButtonBackgroudColor">#006dcc</Color>
@@ -13,6 +16,9 @@
     <Color x:Key="BacklogManButtonForegroudColor">#ffffff</Color>
     <Color x:Key="BacklogManLinkForegroudColor">#0088cc</Color>
     <Color x:Key="BacklogManElementBackgroudColor">#B2DCFF</Color>
+
+
+    <SolidColorBrush x:Key="BacklogManMainBrush" Color="{StaticResource BacklogManMainColor}"></SolidColorBrush>
 
 
     <LinearGradientBrush x:Key="BacklogManWebsiteButtonBackgroundBrush" StartPoint="0,0" EndPoint="0,1">

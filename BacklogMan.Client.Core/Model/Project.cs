@@ -28,6 +28,9 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "description")]
         public string Description { get; set; }
 
+        [DataMember(Name = "story_count")]
+        public int StoryCount { get; set; }
+
         [DataMember(Name = "users")]
         public List<BacklogmanUser> Users { get; set; }
 

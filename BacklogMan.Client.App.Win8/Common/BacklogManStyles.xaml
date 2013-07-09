@@ -19,8 +19,29 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="BacklogManBacklog500x130ItemTemplate">
+    <DataTemplate x:Key="BacklogManProject500x130ItemTemplate">
         <Grid Height="110" Width="480" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
+                <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextStyle}" TextWrapping="NoWrap" Foreground="{StaticResource BacklogManMainBrush}"/>
+                <TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextStyle}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxHeight="60"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding StoryCount}" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap"/>
+                    <TextBlock Text="stories" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap" Margin="5,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=Users.Count}" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap"/>
+                    <TextBlock Text="team members" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap" Margin="5,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BacklogManBacklog500x130ItemTemplate">
+        <Grid Height="120" Width="490" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -29,7 +50,7 @@
                 <Image Source="{Binding Image}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
             </Border>
             <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
-                <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextStyle}" TextWrapping="NoWrap"/>
+                <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextStyle}" TextWrapping="NoWrap" Foreground="{StaticResource BacklogManMainBrush}"/>
                 <TextBlock Text="{Binding Subtitle}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap"/>
                 <TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextStyle}" MaxHeight="60"/>
             </StackPanel>
@@ -37,7 +58,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="BacklogManStory500x130ItemTemplate">
-        <Grid Height="110" Width="480" Margin="10">
+        <Grid Height="120" Width="490" Margin="5">
             <Grid.Background>
                 <SolidColorBrush Color="{StaticResource BacklogManElementBackgroudColor}"/>
             </Grid.Background>
