@@ -47,5 +47,7 @@ namespace BacklogMan.Client.Core.ViewModel
         Task<bool> GetApiKey(string Username, string Password);
 
         void RefreshBacklogStories();
+
+        ObservableCollection<Model.Story> NotEstimatedStories { get; }
     }
 }

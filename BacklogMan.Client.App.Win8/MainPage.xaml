@@ -44,6 +44,8 @@
                     <ColumnDefinition Width="119" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="119" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="119" />
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -61,6 +63,28 @@
                               ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
                               ItemTemplate="{StaticResource BacklogManProject500x130ItemTemplate}"
                               IsItemClickEnabled="True" ItemClick="BacklogItemClicked"
+                              SelectionMode="None"
+                              IsSwipeEnabled="True"
+                              CanReorderItems="True" AllowDrop="True" >
+
+                    <!--<GridView.ItemContainerStyle>
+                        <Style TargetType="FrameworkElement">
+                            <Setter Property="Margin" Value="52,0,0,10"/>
+                        </Style>
+                    </GridView.ItemContainerStyle>-->
+                </GridView>
+
+                <TextBlock Text="Stories to estimate" Margin="0,0,18,20" Style="{StaticResource SubheaderTextStyle}" MaxHeight="60" Grid.Row="0" Grid.Column="3"/>
+
+                <GridView Grid.Column="3" Grid.Row="1"
+                              x:Name="notEstimatedStoriesGridView"
+                              AutomationProperties.AutomationId="ItemGridView"
+                              AutomationProperties.Name="Items In Group"
+                              TabIndex="1"
+                              Grid.RowSpan="2"
+                              ItemsSource="{Binding Path=NotEstimatedStories}"
+                              ItemTemplate="{StaticResource BacklogManStory500x130ItemTemplate}"
+                              IsItemClickEnabled="True" ItemClick="OpenNotEstimatedStoriesDetail"
                               SelectionMode="None"
                               IsSwipeEnabled="True"
                               CanReorderItems="True" AllowDrop="True" >

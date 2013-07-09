@@ -50,5 +50,10 @@ namespace BacklogMan.Client.App.Win8
 
             this.Frame.Navigate(typeof(ProjectPage));
         }
+
+        private void OpenNotEstimatedStoriesDetail(object sender, ItemClickEventArgs e)
+        {
+
+        }
     }
 }

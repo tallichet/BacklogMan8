@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BacklogMan.Client.Core
 {
-    public class Helper
+    public static class Helper
     {
         public static string Serialize<T>(T obj)
         {
@@ -29,5 +29,14 @@ namespace BacklogMan.Client.Core
             }
             return obj;
         }
+
+        public static void Raise<T>(this EventHandler<T> handler, object sender, T args)
+        {
+            if (handler != null)
+            {
+                handler(sender, args);
+            }
+        }
+
     }
 }

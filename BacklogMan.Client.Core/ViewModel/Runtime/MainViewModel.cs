@@ -23,6 +23,8 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             BacklogStories = new ReorderableCollection<Model.Story>();
             BacklogStories.ManualReordered += backlogStories_ManualReordered;
 
+            NotEstimatedStories = new System.Collections.ObjectModel.ObservableCollection<Model.Story>();
+
             string apiKey;
             if (ServiceLocator.Current.GetInstance<Service.IStorageService>().TryLoadSetting<string>("ApiKey", out apiKey))
             {
@@ -38,6 +40,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             if (!string.IsNullOrEmpty(ApiKey))
             {
                 await DownloadProjects();
+                await RefreshNotEstimatedStories();
             }
         }
 
@@ -112,6 +115,12 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             private set;
         }
 
+        public System.Collections.ObjectModel.ObservableCollection<Model.Story> NotEstimatedStories
+        {
+            get;
+            private set;
+        }
+
         public async Task<bool> GetApiKey(string username, string password)
         {
             try
@@ -148,6 +157,27 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             {
                 BacklogStories.Add(s);
                 s.Backlog = backlog;
+            }
+        }
+
+        private async Task RefreshNotEstimatedStories()
+        {
+            NotEstimatedStories.Clear();
+
+            foreach (var p in Projects)
+            {
+                var backlogs = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklogs(p.Id);
+                foreach (var b in backlogs)
+                {
+                    var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(p.Id, b.Id);
+                    foreach (var s in stories)
+                    {
+                        if (s.Points < 0)
+                        {
+                            NotEstimatedStories.Add(s);
+                        }
+                    }
+                }
             }
         }
 
