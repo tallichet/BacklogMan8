@@ -195,20 +195,20 @@ namespace BacklogMan.Client.Core.Service
                 response = await Client.PutAsync(uri, content);
             }
 
-            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            {
-                throw new Exception("Unauthorized");
-            }
-            if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
-            {
-                throw new Exception("Forbidden");
-            }
+            //if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            //{
+            //    throw new Exception("Unauthorized");
+            //}
+            //if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            //{
+            //    throw new Exception("Forbidden");
+            //}
             if (response.IsSuccessStatusCode == false)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine("Response (" + response.StatusCode.ToString() + ") Content: " + responseContent);
+                //Debug.WriteLine("Response (" + response.StatusCode.ToString() + ") Content: " + responseContent);
 
-                throw new Exception("Unknwon error " + response.StatusCode);
+                throw new Exception("Unknwon error"); // + response.StatusCode);
             }
 
             using (var answerStream = await response.Content.ReadAsStreamAsync())
@@ -225,18 +225,18 @@ namespace BacklogMan.Client.Core.Service
 
             var response = await Client.SendAsync(request);
             
-            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            {
-                throw new Exception("Unauthorized");
-            }
-            if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
-            {
-                throw new Exception("Forbidden");
-            }
+            //if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            //{
+            //    throw new Exception("Unauthorized");
+            //}
+            //if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            //{
+            //    throw new Exception("Forbidden");
+            //}
             if (response.IsSuccessStatusCode == false)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine("Response (" + response.StatusCode.ToString() + ") Content: " + responseContent);
+                //Debug.WriteLine("Response (" + response.StatusCode.ToString() + ") Content: " + responseContent);
 
                 throw new Exception("Unknwon error");
             }

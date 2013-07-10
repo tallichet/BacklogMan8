@@ -29,6 +29,15 @@ namespace BacklogMan.Client.Phone8
             NavigationService.Navigate(new Uri("/BacklogPage.xaml"));
         }
 
+        private void pageLoaded(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().ApiKey))
+            {
+                NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
+                NavigationService.RemoveBackEntry();
+            }
+        }
+
         // Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()
         //{

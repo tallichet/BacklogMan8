@@ -29,6 +29,8 @@ namespace BacklogMan.Client.Phone8
             // Standard XAML initialization
             InitializeComponent();
 
+            Core.ViewModel.ViewModelLocator.RegisterStorageService<StorageService>();
+
             // Phone-specific initialization
             InitializePhoneApplication();
 
