@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using BacklogMan.Client.Phone8.Resources;
+using Microsoft.Practices.ServiceLocation;
 
 namespace BacklogMan.Client.Phone8
 {
@@ -20,6 +21,12 @@ namespace BacklogMan.Client.Phone8
 
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
+        }
+
+        private void ProjectTapped(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = (sender as Panel).Tag as Core.Model.Backlog;
+            NavigationService.Navigate(new Uri("/BacklogPage.xaml"));
         }
 
         // Sample code for building a localized ApplicationBar
