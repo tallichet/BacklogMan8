@@ -19,6 +19,9 @@ namespace BacklogMan.Client.Core.Service
         Task<List<Model.Story>> DownloadStories(int projectId, int backlogId);
         Task<Model.Story> DownloadStory(int projectId, int backlogId, int stroyId);
 
+        Task<List<Model.Organization>> DownloadOrganizations();
+        Task<Model.Organization> DownloadOrganization(string organizationId);
+
         Task<string> GetApiKey(string username, string password);
 
         void ClearCache();
@@ -27,6 +30,10 @@ namespace BacklogMan.Client.Core.Service
         Task<int> UpdateStory(Model.Story story);
         Task<bool> DeleteStory(Model.Story Story);        
         Task<bool> MoveStory(int projectId, int targetBacklogId, int movedStoryId, int[] storyIdOrder);
-        Task<bool> OrderBacklog(int projectId, int movedBacklog, int[] backlogIdOrder);
+        Task<bool> OrderBacklogInProject(int projectId, int movedBacklog, int[] backlogIdOrder);
+        Task<bool> OrderBacklogInOrganization(int organizationId, int movedBacklog, int[] backlogIdOrder);
+
+                    
+        
     }
 }

@@ -101,6 +101,7 @@ namespace BacklogMan.Client.Core.Model
     {
         ToDo,
         InProgress,
+        Completed,
         Accepted,
         Rejected,
     }

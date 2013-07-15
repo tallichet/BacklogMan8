@@ -31,6 +31,26 @@ namespace BacklogMan.Client.Core.Service.Internal
     }
 
     [DataContract]
+    public class UpdateStoriesStatusRequest
+    {
+        public UpdateStoriesStatusRequest(Model.StoryStatus status)
+        {
+            switch (status)
+            {
+                case Model.StoryStatus.InProgress:
+                    StatusString = "in_progress";
+                    break;
+                default:
+                    StatusString = status.ToString().ToLower();
+                    break;
+            }
+        }
+
+        [DataMember(Name = "status")]
+        public string StatusString { get; set; }
+    }
+
+    [DataContract]
     public class Result
     {
         

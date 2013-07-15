@@ -188,7 +188,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
             if (movedBacklog == null) return;
 
-            var operationResult = await ServiceLocator.Current.GetInstance<Service.INetworkService>().OrderBacklog(this.CurrentProject.Id, movedBacklog.Id,
+            var operationResult = await ServiceLocator.Current.GetInstance<Service.INetworkService>().OrderBacklogInProject(this.CurrentProject.Id, movedBacklog.Id,
                                         ProjectBacklogs.Select(b => b.Id).ToArray());
 
             if (Debugger.IsAttached)

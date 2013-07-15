@@ -39,6 +39,18 @@ namespace BacklogMan.Client.Core.Service
 
         public string APIKey { get; set; }
 
+        public Task<List<Model.Organization>> DownloadOrganizations()
+        {
+            var uri = new Uri(BacklogManApiBaseUri, "./organizations/");
+            return DownloadDocument<List<Model.Organization>>(uri);
+        }
+
+        public Task<Model.Organization> DownloadOrganization(string organizationId)
+        {
+            var uri = new Uri(BacklogManApiBaseUri, "./organizations/" + organizationId + "/");
+            return DownloadDocument<Model.Organization>(uri);
+        }
+
 
         public Task<List<Model.Project>> DownloadProjects()
         {
@@ -148,7 +160,7 @@ namespace BacklogMan.Client.Core.Service
             return result.Ok;
         }
 
-        public async Task<bool> OrderBacklog(int projectId, int movedBacklog, int[] backlogIdOrder)
+        public async Task<bool> OrderBacklogInProject(int projectId, int movedBacklog, int[] backlogIdOrder)
         {
             var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/_order_backlog/");
 
@@ -159,6 +171,34 @@ namespace BacklogMan.Client.Core.Service
             };
 
             var result = await PostOrPutData<Internal.OrderBacklogRequest, Internal.Result>(uri, request);
+
+            return result.Ok;
+        }
+
+
+
+        public async Task<bool> OrderBacklogInOrganization(int organizationId, int movedBacklog, int[] backlogIdOrder)
+        {
+            var uri = new Uri(BacklogManApiBaseUri, "./organizations/" + organizationId + "/_order_backlog/");
+
+            var request = new Internal.OrderBacklogRequest()
+            {
+                MovedBacklog = movedBacklog,
+                BacklogOrder = backlogIdOrder
+            };
+
+            var result = await PostOrPutData<Internal.OrderBacklogRequest, Internal.Result>(uri, request);
+
+            return result.Ok;
+        }
+
+        public async Task<bool> UpdateStoryStatus(string storyId, Model.StoryStatus newStatus)
+        {
+            var uri = new Uri(BacklogManApiBaseUri, "./stories/" + storyId + "/status/");
+
+            var request = new Internal.UpdateStoriesStatusRequest(newStatus);
+
+            var result = await PostOrPutData<Internal.UpdateStoriesStatusRequest, Internal.Result>(uri, request);
 
             return result.Ok;
         }
