@@ -1,5 +1,6 @@
 ﻿using BacklogMan.Client.App.Win81.Common;
 using BacklogMan.Client.App.Win81.Data;
+using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Security.Credentials.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -78,7 +80,11 @@ namespace BacklogMan.Client.App.Win81
         {
             HubSection section = e.Section;
             var group = section.DataContext;
-            this.Frame.Navigate(typeof(SectionPage), ((SampleDataGroup)group).UniqueId);
+            if (section == sectionProjects)
+            {
+                this.Frame.Navigate(typeof(Pages.ProjectPage), ((SampleDataGroup)group).UniqueId);
+            }
+            //
         }
 
         /// <summary>
@@ -91,8 +97,12 @@ namespace BacklogMan.Client.App.Win81
         {
             // Navigate to the appropriate destination page, configuring the new page
             // by passing required information as a navigation parameter
-            var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
-            this.Frame.Navigate(typeof(ItemPage), itemId);
+            if (e.ClickedItem is Core.Model.Project)
+            {
+                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject = e.ClickedItem as Core.Model.Project;
+                this.Frame.Navigate(typeof(Pages.ProjectPage));
+            }
+            
         }
         #region NavigationHelper registration
 
@@ -116,5 +126,26 @@ namespace BacklogMan.Client.App.Win81
         }
 
         #endregion
+
+        private async void hubpage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().ApiKey))
+            {
+                var opt = new CredentialPickerOptions()
+                {
+                    AuthenticationProtocol = AuthenticationProtocol.Basic,
+                    AlwaysDisplayDialog = true,
+                    Caption = "log to backlog man",
+                    Message = "please enter credentials for backlog man",
+                    TargetName = "https://apps.backlogman.com"
+                };
+
+                var cred = await CredentialPicker.PickAsync(opt);
+
+                var key = await ServiceLocator.Current.GetInstance<Core.Service.INetworkService>().GetApiKey(cred.CredentialUserName, cred.CredentialPassword);
+
+                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().ApiKey = key;
+            }
+        }
     }
 }

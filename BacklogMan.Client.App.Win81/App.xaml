@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BacklogMan.Client.App.Win81"
-    xmlns:localData="using:BacklogMan.Client.App.Win81.Data"
+    xmlns:localData="using:BacklogMan.Client.App.Win81.Data"    
     RequestedTheme="Light">
 
   <Application.Resources>
@@ -11,7 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
-                    <!--<SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="Red" />-->
+                    <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="#FFE0F3FF" />
                     <LinearGradientBrush x:Key="ButtonBackgroundThemeBrush" StartPoint="0,0" EndPoint="0,1">
                         <GradientStop Color="#006dcc" Offset="0" />
                         <GradientStop Color="#006dcc" Offset="1" />
@@ -37,12 +37,10 @@
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
 
+            <vm:ViewModelLocator x:Key="Locator" xmlns:vm="using:BacklogMan.Client.Core.ViewModel" />
+
             <Color x:Key="BacklogManMainColor">#006dcc</Color>
             <x:String x:Key="AppName">BacklogMan</x:String>
-
-
-
-
 
         </ResourceDictionary>
 
