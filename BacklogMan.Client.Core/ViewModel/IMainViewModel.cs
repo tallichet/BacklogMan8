@@ -10,14 +10,32 @@ namespace BacklogMan.Client.Core.ViewModel
     public interface IMainViewModel
     {
         /// <summary>
+        /// Api key used to login on backlog man
+        /// </summary>
+        string ApiKey { get; set; }
+
+        /// <summary>
+        /// List of all organizations
+        /// </summary>
+        ObservableCollection<Model.Organization> Organizations { get; }
+
+
+        /// <summary>
+        /// The currently selected Organization
+        /// </summary>
+        Model.Organization CurrentOrganization { get; set; }
+
+
+        /// <summary>
         /// List of all projects
         /// </summary>
         ObservableCollection<Model.Project> Projects { get; }
 
         /// <summary>
-        /// Api key used to login on backlog man
+        /// List of projects not in an organization
         /// </summary>
-        string ApiKey { get; set; }
+        ObservableCollection<Model.Project> ProjectsStandalone { get; }
+
 
         /// <summary>
         /// The currently selected project

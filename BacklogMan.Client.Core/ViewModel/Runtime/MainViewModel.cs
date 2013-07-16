@@ -17,7 +17,9 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
         public MainViewModel()
         {
+            Organizations = new System.Collections.ObjectModel.ObservableCollection<Model.Organization>();
             Projects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
+            ProjectsStandalone = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
             ProjectBacklogs = new ReorderableCollection<Model.Backlog>();
             ProjectBacklogs.ManualReordered += projectBacklogs_ManualReordered;
             BacklogStories = new ReorderableCollection<Model.Story>();
@@ -42,6 +44,18 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 await DownloadProjects();
                 await RefreshNotEstimatedStories();
             }
+        }
+
+        public System.Collections.ObjectModel.ObservableCollection<Model.Organization> Organizations
+        {
+            get;
+            private set;
+        }
+
+        public System.Collections.ObjectModel.ObservableCollection<Model.Project> ProjectsStandalone
+        {
+            get;
+            private set;
         }
 
         public System.Collections.ObjectModel.ObservableCollection<Model.Project> Projects
@@ -72,6 +86,20 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             foreach (var p in projects)
             {
                 this.Projects.Add(p);
+            }
+        }
+
+        private Model.Organization currentOrganization = null;
+        public Model.Organization CurrentOrganization
+        {
+            get
+            {
+                return currentOrganization;
+            }
+            set
+            {
+                currentOrganization = value;
+                // Todo: define the refresh to do here
             }
         }
 

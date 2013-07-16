@@ -10,6 +10,47 @@ namespace BacklogMan.Client.Core.ViewModel.Design
     {
         public DesignMainViewModel()
         {
+            #region define organizations
+            Organizations = new System.Collections.ObjectModel.ObservableCollection<Model.Organization>();
+            Organizations.Add(new Model.Organization()
+            {
+                Id = 1,
+                Name = "epyx product team",
+                Description = "responsable du dev exodoc et exopoint et plus généralement des mobiles",
+                Email = "dev@epyx.ch",
+                UrlString = "http://apps.backlogman.com/organizations/1",
+                WebSite = "http://www.epyx.ch",
+                Users = new List<Model.BacklogmanUser>() 
+                {
+                    new Model.BacklogmanUser() {Email = "ctt@epyx.ch", FullName="Cedric Tallichet"},
+                    new Model.BacklogmanUser() {Email = "dsi@epyx.ch", FullName="David Saradini"}
+                },
+                Projects = new List<Model.OrganizationProject>()
+                {
+                    new Model.OrganizationProject() {Id = "1", Name = "Project n° 1"},
+                    new Model.OrganizationProject() {Id = "2", Name = "Project n° 2"}
+                }
+            });
+            Organizations.Add(new Model.Organization()
+            {
+                Id = 2,
+                Name = "epyx green team",
+                Description = "l'équipe à SWF",
+                Email = "green@epyx.ch",
+                UrlString = "http://apps.backlogman.com/organizations/1",
+                WebSite = "http://www.epyx.ch",
+                Users = new List<Model.BacklogmanUser>() 
+                {
+                    new Model.BacklogmanUser() {Email = "ctt@epyx.ch", FullName="Cedric Tallichet"},
+                    new Model.BacklogmanUser() {Email = "dsi@epyx.ch", FullName="David Saradini"}
+                },
+                Projects = new List<Model.OrganizationProject>()
+                {
+                    new Model.OrganizationProject() {Id = "1", Name = "Project n° 1"},
+                    new Model.OrganizationProject() {Id = "2", Name = "Project n° 2"}
+                }
+            });
+            #endregion
             #region define projects
             Projects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
             Projects.Add(new Model.Project()
@@ -32,6 +73,29 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                     new Model.BacklogmanUser() {FullName = "cedric", Email = "cedric@suisse.ch"},
                 }
             });
+            ProjectsStandalone = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
+            ProjectsStandalone.Add(new Model.Project()
+            {
+                Name = "Project n° 3",
+                Description = "This is my first standalone project!",
+                Users = new List<Model.BacklogmanUser>()
+                {
+                    new Model.BacklogmanUser() {FullName = "cedric", Email = "cedric@suisse.ch"},
+                    new Model.BacklogmanUser() {FullName = "david", Email = "david@suisse.ch"},
+                }
+            });
+            Projects.Add(ProjectsStandalone.Last());
+            ProjectsStandalone.Add(new Model.Project()
+            {
+                Name = "Project n° 4",
+                Description = "This is my second standalone project!",
+                Users = new List<Model.BacklogmanUser>()
+                {                    
+                    new Model.BacklogmanUser() {FullName = "david", Email = "david@suisse.ch"},
+                    new Model.BacklogmanUser() {FullName = "cedric", Email = "cedric@suisse.ch"},
+                }
+            });
+            Projects.Add(ProjectsStandalone.Last());            
             #endregion
             #region define backlogs
             ProjectBacklogs = new ReorderableCollection<Model.Backlog>();
@@ -123,7 +187,28 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             #endregion
         }
 
+
+
+
+        public System.Collections.ObjectModel.ObservableCollection<Model.Organization> Organizations
+        {
+            get; 
+            set;
+        }
+
+        public Model.Organization CurrentOrganization
+        {
+            get { return Organizations.First(); }
+            set { throw new NotImplementedException(); }
+        }
+
         public System.Collections.ObjectModel.ObservableCollection<Model.Project> Projects
+        {
+            get;
+            set;
+        }
+
+        public System.Collections.ObjectModel.ObservableCollection<Model.Project> ProjectsStandalone
         {
             get;
             set;
