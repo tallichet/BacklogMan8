@@ -25,10 +25,10 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                     new Model.BacklogmanUser() {Email = "ctt@epyx.ch", FullName="Cedric Tallichet"},
                     new Model.BacklogmanUser() {Email = "dsi@epyx.ch", FullName="David Saradini"}
                 },
-                Projects = new List<Model.OrganizationProject>()
+                Projects = new List<Model.Project>()
                 {
-                    new Model.OrganizationProject() {Id = "1", Name = "Project n° 1"},
-                    new Model.OrganizationProject() {Id = "2", Name = "Project n° 2"}
+                    new Model.Project() {Id = 1, Name = "Project n° 1"},
+                    new Model.Project() {Id = 2, Name = "Project n° 2"}
                 }
             });
             Organizations.Add(new Model.Organization()
@@ -44,10 +44,10 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                     new Model.BacklogmanUser() {Email = "ctt@epyx.ch", FullName="Cedric Tallichet"},
                     new Model.BacklogmanUser() {Email = "dsi@epyx.ch", FullName="David Saradini"}
                 },
-                Projects = new List<Model.OrganizationProject>()
+                Projects = new List<Model.Project>()
                 {
-                    new Model.OrganizationProject() {Id = "1", Name = "Project n° 1"},
-                    new Model.OrganizationProject() {Id = "2", Name = "Project n° 2"}
+                    new Model.Project() {Id = 1, Name = "Project n° 1"},
+                    new Model.Project() {Id = 2, Name = "Project n° 2"}
                 }
             });
             #endregion

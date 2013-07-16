@@ -32,16 +32,6 @@ namespace BacklogMan.Client.Core.Model
         public List<BacklogmanUser> Users { get; set; }
 
         [DataMember(Name = "projects")]
-        public List<OrganizationProject> Projects { get; set; }
-    }
-
-    [DataContract]
-    public class OrganizationProject
-    {
-        [DataMember]
-        public string Name { get; set; }
-
-        [DataMember]
-        public string Id { get; set; }
+        public List<Project> Projects { get; set; }
     }
 }

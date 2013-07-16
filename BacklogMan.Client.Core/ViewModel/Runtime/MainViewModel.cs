@@ -41,6 +41,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         {
             if (!string.IsNullOrEmpty(ApiKey))
             {
+                await DownloadOrganizations();
                 await DownloadProjects();
                 await RefreshNotEstimatedStories();
             }
@@ -78,14 +79,40 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
 
+        private async Task DownloadOrganizations()
+        {
+            this.Organizations.Clear();
+
+            var organizations = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganizations();
+            foreach (var o in organizations)
+            {
+                this.Organizations.Add(o);
+            }
+        }
+
         private async Task DownloadProjects()
         {
             this.Projects.Clear();
+            this.ProjectsStandalone.Clear();
 
             var projects = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadProjects();
             foreach (var p in projects)
             {
                 this.Projects.Add(p);
+
+                // if the project is part of an org, add the project to the org.
+                // other wise add the project to the 
+                var org = this.Organizations.FirstOrDefault(o => o.Projects.Any(op => op.Id == p.Id));
+                if (org == null)
+                {
+                    ProjectsStandalone.Add(p);
+                }
+                //else
+                //{
+                //    var idx = org.Projects.IndexOf(org.Projects.First(op => op.Id == p.Id));
+                //    org.Projects.RemoveAt(idx);
+                //    org.Projects.Insert(idx, p);
+                //}
             }
         }
 
@@ -112,7 +139,15 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
             set
             {
-                currentProject = value;
+                // if it is an organization project, use the one from the project list
+                if (string.IsNullOrEmpty(value.UrlString))
+                {
+                    currentProject = Projects.First(p => p.Id == value.Id);
+                }
+                else
+                {
+                    currentProject = value;
+                }
                 refreshBacklogs();
             }
         }
