@@ -9,6 +9,15 @@ namespace BacklogMan.Client.Core
 {
     public static class Helper
     {
+        public static async Task<string> ReadAsString(this System.IO.Stream stream)
+        {
+            using (stream)
+            using (var reader = new StreamReader(stream))
+            {
+                return await reader.ReadToEndAsync();
+            }
+        }
+
         public static string Serialize<T>(T obj)
         {
             System.Runtime.Serialization.Json.DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(obj.GetType());
