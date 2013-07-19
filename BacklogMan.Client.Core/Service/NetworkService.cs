@@ -206,15 +206,14 @@ namespace BacklogMan.Client.Core.Service
         #region Network methods
         private async Task<T> DownloadDocument<T>(Uri url)
         {
-            using (var s = await Client.GetStreamAsync(url))
-            {
-                if (Seriliazers.ContainsKey(typeof(T)) == false)
-                {
-                    Seriliazers.Add(typeof(T), new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(T)));
-                }
-                var serializer = Seriliazers[typeof(T)];
-                return (T)serializer.ReadObject(s);
-            }
+            var s = await Client.GetStringAsync(url);
+            return Helper.Deserialize<T>(s);
+            //if (Seriliazers.ContainsKey(typeof(T)) == false)
+            //{
+            //    Seriliazers.Add(typeof(T), new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(T)));
+            //}
+            //var serializer = Seriliazers[typeof(T)];
+            //return (T)serializer.ReadObject(s);
         }
 
         private async Task<R> PostOrPutData<T, R>(Uri uri, T objectToSend, bool post = true)
@@ -235,28 +234,14 @@ namespace BacklogMan.Client.Core.Service
                 response = await Client.PutAsync(uri, content);
             }
 
-            //if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            //{
-            //    throw new Exception("Unauthorized");
-            //}
-            //if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
-            //{
-            //    throw new Exception("Forbidden");
-            //}
             if (response.IsSuccessStatusCode == false)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
-                //Debug.WriteLine("Response (" + response.StatusCode.ToString() + ") Content: " + responseContent);
-
-                throw new Exception("Unknwon error"); // + response.StatusCode);
+                throw new Exception("Unknwon error");
             }
 
-            using (var answerStream = await response.Content.ReadAsStreamAsync())
-            {
-                var serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(R));
-
-                return (R)serializer.ReadObject(answerStream);
-            }
+            var json = await response.Content.ReadAsStringAsync();
+            return Helper.Deserialize<R>(json);
         }
 
         private async Task Delete(Uri uri)
@@ -265,19 +250,9 @@ namespace BacklogMan.Client.Core.Service
 
             var response = await Client.SendAsync(request);
             
-            //if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            //{
-            //    throw new Exception("Unauthorized");
-            //}
-            //if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
-            //{
-            //    throw new Exception("Forbidden");
-            //}
             if (response.IsSuccessStatusCode == false)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
-                //Debug.WriteLine("Response (" + response.StatusCode.ToString() + ") Content: " + responseContent);
-
                 throw new Exception("Unknwon error");
             }
         }
