@@ -38,6 +38,11 @@ namespace BacklogMan.Client.Core.ViewModel
             SimpleIoc.Default.Register<Service.IStorageService, T>();
         }
 
+        public static void RegisterLocalizationService<T>() where T : class, Service.ILocalizationService
+        {
+            SimpleIoc.Default.Register<Service.ILocalizationService, T>();
+        }
+
         public IMainViewModel Main
         {
             get

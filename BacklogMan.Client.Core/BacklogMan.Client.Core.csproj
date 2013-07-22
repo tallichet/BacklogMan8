@@ -49,6 +49,7 @@
     <Compile Include="Service\INetworkService.cs" />
     <Compile Include="ViewModel\Design\DesignNotificationViewModel.cs" />
     <Compile Include="ViewModel\IInternalNotificationViewModel.cs" />
+    <Compile Include="Service\ILocalizationService.cs" />
     <Compile Include="ViewModel\Runtime\InternalNotificationViewModel.cs" />
     <Compile Include="Service\Internal\GetApiToken.cs" />
     <Compile Include="Service\Internal\Reorder.cs" />

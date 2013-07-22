@@ -13,6 +13,6 @@ namespace BacklogMan.Client.Core.ViewModel
 
         void ShowNotificationText(string text);
 
-        void ShowNotificationForKey(string key);
+        void ShowNotificationForKey(string key, params object[] args);
     }
 }

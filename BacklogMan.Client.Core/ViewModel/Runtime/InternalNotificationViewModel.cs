@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,12 +32,11 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             Title = "";
             base.RaisePropertyChanged<string>(() => this.Title);
         }
-
-
-        public void ShowNotificationForKey(string key)
+        
+        public void ShowNotificationForKey(string key, params object[] args)
         {
-            var text = key; // Use a service defined client side to get resources
-            ShowNotification(text, TimeSpan.FromSeconds(5));
+            var text = ServiceLocator.Current.GetInstance<Service.ILocalizationService>().GetStringForKey(key);
+            ShowNotification(string.Format(text, args), TimeSpan.FromSeconds(5));
         }
     }
 }
