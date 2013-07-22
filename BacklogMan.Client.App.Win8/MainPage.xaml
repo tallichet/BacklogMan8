@@ -18,7 +18,11 @@
         -->
         <CollectionViewSource
             x:Name="itemsViewSource"
-            Source="{Binding Projects}"/>
+            Source="{Binding StandaloneProjects}"/>
+
+        <CollectionViewSource
+            x:Name="orgViewSource"
+            Source="{Binding Organizations}"/>
 
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">Backlog Man</x:String>
@@ -46,15 +50,39 @@
                     <ColumnDefinition Width="119" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="119" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="119" />
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock Text="Projects" Margin="0,0,18,20" Style="{StaticResource SubheaderTextStyle}" MaxHeight="60" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="Organizations" Margin="0,0,18,20" Style="{StaticResource SubheaderTextStyle}" MaxHeight="60" Grid.Row="0" Grid.Column="1"/>
 
                 <GridView Grid.Column="1" Grid.Row="1"
+                              x:Name="orgItemGridView"
+                              AutomationProperties.AutomationId="ItemGridView"
+                              AutomationProperties.Name="Items In Group"
+                              TabIndex="1"
+                              Grid.RowSpan="2"
+                              ItemsSource="{Binding Source={StaticResource orgViewSource}}"
+                              ItemTemplate="{StaticResource BacklogManProject500x130ItemTemplate}"
+                              IsItemClickEnabled="True" ItemClick="OrgItemClicked"
+                              SelectionMode="None"
+                              IsSwipeEnabled="True"
+                              CanReorderItems="True" AllowDrop="True" >
+
+                    <!--<GridView.ItemContainerStyle>
+                        <Style TargetType="FrameworkElement">
+                            <Setter Property="Margin" Value="52,0,0,10"/>
+                        </Style>
+                    </GridView.ItemContainerStyle>-->
+                </GridView>
+                
+                <TextBlock Text="Projects" Margin="0,0,18,20" Style="{StaticResource SubheaderTextStyle}" MaxHeight="60" Grid.Row="0" Grid.Column="3"/>
+
+                <GridView Grid.Column="3" Grid.Row="1"
                               x:Name="itemGridView"
                               AutomationProperties.AutomationId="ItemGridView"
                               AutomationProperties.Name="Items In Group"
@@ -62,7 +90,7 @@
                               Grid.RowSpan="2"
                               ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
                               ItemTemplate="{StaticResource BacklogManProject500x130ItemTemplate}"
-                              IsItemClickEnabled="True" ItemClick="BacklogItemClicked"
+                              IsItemClickEnabled="True" ItemClick="ProjectItemClicked"
                               SelectionMode="None"
                               IsSwipeEnabled="True"
                               CanReorderItems="True" AllowDrop="True" >
@@ -74,9 +102,9 @@
                     </GridView.ItemContainerStyle>-->
                 </GridView>
 
-                <TextBlock Text="Stories to estimate" Margin="0,0,18,20" Style="{StaticResource SubheaderTextStyle}" MaxHeight="60" Grid.Row="0" Grid.Column="3"/>
+                <TextBlock Text="Stories to estimate" Margin="0,0,18,20" Style="{StaticResource SubheaderTextStyle}" MaxHeight="60" Grid.Row="0" Grid.Column="5"/>
 
-                <GridView Grid.Column="3" Grid.Row="1"
+                <GridView Grid.Column="5" Grid.Row="1"
                               x:Name="notEstimatedStoriesGridView"
                               AutomationProperties.AutomationId="ItemGridView"
                               AutomationProperties.Name="Items In Group"

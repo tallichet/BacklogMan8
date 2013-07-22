@@ -21,9 +21,9 @@ namespace BacklogMan.Client.App.Win8
     /// A page that displays an overview of a single group, including a preview of the items
     /// within the group.
     /// </summary>
-    public sealed partial class ProjectPage : BacklogMan.Client.App.Win8.Common.LayoutAwarePage
+    public sealed partial class OrganizationPage : BacklogMan.Client.App.Win8.Common.LayoutAwarePage
     {
-        public ProjectPage()
+        public OrganizationPage()
         {
             this.InitializeComponent();
 
@@ -48,14 +48,14 @@ namespace BacklogMan.Client.App.Win8
             // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
         }
 
-        private void BacklogItemClicked(object sender, ItemClickEventArgs e)
+        private void ProjectItemClicked(object sender, ItemClickEventArgs e)
         {
-            var backlog = e.ClickedItem as Core.Model.Backlog;
+            var project = e.ClickedItem as Core.Model.Project;
 
             var vm = ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>();
-            vm.CurrentBacklog = backlog;
+            vm.CurrentProject = project;
 
-            this.Frame.Navigate(typeof(BacklogPage));
+            this.Frame.Navigate(typeof(ProjectPage));
         }
     }
 }

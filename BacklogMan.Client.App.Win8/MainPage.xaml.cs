@@ -41,7 +41,7 @@ namespace BacklogMan.Client.App.Win8
             // TODO: Assign a collection of bindable groups to this.DefaultViewModel["Groups"]
         }
 
-        private void BacklogItemClicked(object sender, ItemClickEventArgs e)
+        private void ProjectItemClicked(object sender, ItemClickEventArgs e)
         {
             var project = e.ClickedItem as Core.Model.Project;
 
@@ -49,6 +49,16 @@ namespace BacklogMan.Client.App.Win8
             vm.CurrentProject = project;
 
             this.Frame.Navigate(typeof(ProjectPage));
+        }
+
+        private void OrgItemClicked(object sender, ItemClickEventArgs e)
+        {
+            var org = e.ClickedItem as Core.Model.Organization;
+
+            var vm = ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>();
+            vm.CurrentOrganization = org;
+
+            this.Frame.Navigate(typeof(OrganizationPage));
         }
 
         private void OpenNotEstimatedStoriesDetail(object sender, ItemClickEventArgs e)

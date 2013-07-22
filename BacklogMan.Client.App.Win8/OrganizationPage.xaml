@@ -44,7 +44,7 @@
             Padding="120,126,120,50"
             ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
             ItemTemplate="{StaticResource BacklogManProject500x130ItemTemplate}"
-            IsItemClickEnabled="True" ItemClick="BacklogItemClicked"
+            IsItemClickEnabled="True" ItemClick="ProjectItemClicked"
             SelectionMode="None"
             IsSwipeEnabled="True"
             CanReorderItems="True" AllowDrop="True" >
@@ -95,7 +95,7 @@
             Visibility="Collapsed"
             Padding="10,0,0,60"            
             ItemTemplate="{StaticResource Standard80ItemTemplate}"
-            IsItemClickEnabled="True" ItemClick="BacklogItemClicked"
+            IsItemClickEnabled="True" ItemClick="ProjectItemClicked"
             SelectionMode="None"
             IsSwipeEnabled="false">
 
