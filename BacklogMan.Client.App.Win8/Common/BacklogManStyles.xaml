@@ -19,6 +19,28 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="BacklogManOrganization500x130ItemTemplate">
+        <Grid Height="110" Width="480" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="{Binding Email, Converter={StaticResource EmailToGravatarUriConverter}}" Grid.RowSpan="2" Margin="0" MaxWidth="6v0" />
+            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
+                <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextStyle}" TextWrapping="NoWrap" Foreground="{StaticResource BacklogManMainBrush}"/>
+                <TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextStyle}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxHeight="60"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding StoryCount}" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap"/>
+                    <TextBlock Text="stories" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap" Margin="5,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=Users.Count}" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap"/>
+                    <TextBlock Text="team members" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap" Margin="5,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
     <DataTemplate x:Key="BacklogManProject500x130ItemTemplate">
         <Grid Height="110" Width="480" Margin="10">
             <Grid.ColumnDefinitions>

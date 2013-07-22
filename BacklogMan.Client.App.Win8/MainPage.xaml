@@ -67,7 +67,7 @@
                               TabIndex="1"
                               Grid.RowSpan="2"
                               ItemsSource="{Binding Source={StaticResource orgViewSource}}"
-                              ItemTemplate="{StaticResource BacklogManProject500x130ItemTemplate}"
+                              ItemTemplate="{StaticResource BacklogManOrganization500x130ItemTemplate}"
                               IsItemClickEnabled="True" ItemClick="OrgItemClicked"
                               SelectionMode="None"
                               IsSwipeEnabled="True"
