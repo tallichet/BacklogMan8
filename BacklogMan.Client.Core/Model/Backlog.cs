@@ -28,6 +28,9 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "available_themes")]
         public List<string> Themes { get; set; }
 
+        [DataMember(Name = "stats")]
+        public Statistics Statistics { get; set; }
+
 
         [IgnoreDataMember]
         public string ThemesAsListString
