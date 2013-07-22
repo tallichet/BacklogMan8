@@ -31,5 +31,12 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             Title = "";
             base.RaisePropertyChanged<string>(() => this.Title);
         }
+
+
+        public void ShowNotificationForKey(string key)
+        {
+            var text = key; // Use a service defined client side to get resources
+            ShowNotification(text, TimeSpan.FromSeconds(5));
+        }
     }
 }

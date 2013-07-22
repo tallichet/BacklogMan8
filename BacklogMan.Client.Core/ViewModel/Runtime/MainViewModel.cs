@@ -24,6 +24,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             ProjectBacklogs.ManualReordered += projectBacklogs_ManualReordered;
             BacklogStories = new ReorderableCollection<Model.Story>();
             BacklogStories.ManualReordered += backlogStories_ManualReordered;
+            OrganizationProjects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
 
             NotEstimatedStories = new System.Collections.ObjectModel.ObservableCollection<Model.Story>();
 
@@ -48,6 +49,12 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         }
 
         public System.Collections.ObjectModel.ObservableCollection<Model.Organization> Organizations
+        {
+            get;
+            private set;
+        }
+
+        public System.Collections.ObjectModel.ObservableCollection<Model.Project> OrganizationProjects
         {
             get;
             private set;
@@ -126,7 +133,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             set
             {
                 currentOrganization = value;
-                // Todo: define the refresh to do here
+                refreshOrganizationProjects();
             }
         }
 
@@ -200,14 +207,39 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
         private async void refreshBacklogs()
         {
-
-            ProjectBacklogs.Clear();
-            var project = CurrentProject; // this allow us to be sure the project don't change during the download
-            var backlogs = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklogs(CurrentProject.Id);
-            foreach (var b in backlogs)
+            try
             {
-                ProjectBacklogs.Add(b);
-                b.Project = project;
+                ProjectBacklogs.Clear();
+                var project = CurrentProject; // this allow us to be sure the project don't change during the download
+                var backlogs = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklogs(CurrentProject.Id);
+                foreach (var b in backlogs)
+                {
+                    ProjectBacklogs.Add(b);
+                    b.Project = project;
+                }
+            }
+            catch (Exception)
+            {
+                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+            }
+        }
+
+        private async void refreshOrganizationProjects()
+        {
+            OrganizationProjects.Clear();
+            var org = CurrentOrganization;
+            foreach (var p in org.Projects)
+            {
+                try
+                {
+                    OrganizationProjects.Add(
+                        await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadProject(p.Id));
+                }
+                catch (Exception)
+                {
+                    // Maybe we do not have access to this projects
+                    OrganizationProjects.Add(p);
+                }
             }
         }
 

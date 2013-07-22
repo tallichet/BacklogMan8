@@ -30,7 +30,7 @@ namespace BacklogMan.Client.Core.Model
         public string AcceptanceCriteria { get; set; }
 
         [DataMember(Name = "points")]
-        public int Points { get; set; }
+        public double Points { get; set; }
 
         [DataMember(Name = "theme")]
         public string Theme { get; set; }

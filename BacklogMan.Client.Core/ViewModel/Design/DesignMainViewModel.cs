@@ -53,6 +53,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             #endregion
             #region define projects
             Projects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
+            OrganizationProjects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
             Projects.Add(new Model.Project()
             {
                 Name = "Project n° 1",
@@ -63,6 +64,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                     new Model.BacklogmanUser() {FullName = "david", Email = "david@suisse.ch"},
                 }
             });
+            OrganizationProjects.Add(Projects.Last());
             Projects.Add(new Model.Project()
             {
                 Name = "Project n° 2",
@@ -73,6 +75,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                     new Model.BacklogmanUser() {FullName = "cedric", Email = "cedric@suisse.ch"},
                 }
             });
+            OrganizationProjects.Add(Projects.Last());
             ProjectsStandalone = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
             ProjectsStandalone.Add(new Model.Project()
             {
@@ -200,6 +203,12 @@ namespace BacklogMan.Client.Core.ViewModel.Design
         {
             get { return Organizations.First(); }
             set { throw new NotImplementedException(); }
+        }
+
+        public System.Collections.ObjectModel.ObservableCollection<Model.Project> OrganizationProjects
+        {
+            get;
+            set;
         }
 
         public System.Collections.ObjectModel.ObservableCollection<Model.Project> Projects

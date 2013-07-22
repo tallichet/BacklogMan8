@@ -17,5 +17,11 @@ namespace BacklogMan.Client.Core.ViewModel.Design
         {
             throw new NotImplementedException();
         }
+
+
+        public void ShowNotificationForKey(string key)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

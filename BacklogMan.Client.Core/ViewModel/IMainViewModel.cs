@@ -25,6 +25,11 @@ namespace BacklogMan.Client.Core.ViewModel
         /// </summary>
         Model.Organization CurrentOrganization { get; set; }
 
+        /// <summary>
+        /// Contains the list of projects for the current organization
+        /// </summary>
+        ObservableCollection<Model.Project> OrganizationProjects { get; }
+
 
         /// <summary>
         /// List of all projects
