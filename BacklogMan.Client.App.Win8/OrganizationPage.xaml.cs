@@ -21,9 +21,9 @@ namespace BacklogMan.Client.App.Win8
     /// A page that displays an overview of a single group, including a preview of the items
     /// within the group.
     /// </summary>
-    public sealed partial class OrganizationPage : BacklogMan.Client.App.Win8.Common.LayoutAwarePage
+    public sealed partial class ProjectPage : BacklogMan.Client.App.Win8.Common.LayoutAwarePage
     {
-        public OrganizationPage()
+        public ProjectPage()
         {
             this.InitializeComponent();
 
