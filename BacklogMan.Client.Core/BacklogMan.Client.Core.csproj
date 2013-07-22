@@ -42,6 +42,7 @@
     <Compile Include="Model\BacklogmanUser.cs" />
     <Compile Include="Model\Organization.cs" />
     <Compile Include="Model\Project.cs" />
+    <Compile Include="Model\Statistics.cs" />
     <Compile Include="Model\Story.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReorderableCollection.cs" />

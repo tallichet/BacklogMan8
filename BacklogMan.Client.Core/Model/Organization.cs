@@ -33,5 +33,8 @@ namespace BacklogMan.Client.Core.Model
 
         [DataMember(Name = "projects")]
         public List<Project> Projects { get; set; }
+
+        [DataMember(Name = "stats")]
+        public Statistics Statistics { get; set; }
     }
 }
