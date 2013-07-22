@@ -18,7 +18,7 @@
         -->
         <CollectionViewSource
             x:Name="itemsViewSource"
-            Source="{Binding StandaloneProjects}"/>
+            Source="{Binding ProjectsStandalone}"/>
 
         <CollectionViewSource
             x:Name="orgViewSource"

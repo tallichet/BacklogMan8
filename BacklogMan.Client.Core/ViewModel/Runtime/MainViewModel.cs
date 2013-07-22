@@ -114,12 +114,6 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 {
                     ProjectsStandalone.Add(p);
                 }
-                //else
-                //{
-                //    var idx = org.Projects.IndexOf(org.Projects.First(op => op.Id == p.Id));
-                //    org.Projects.RemoveAt(idx);
-                //    org.Projects.Insert(idx, p);
-                //}
             }
         }
 
