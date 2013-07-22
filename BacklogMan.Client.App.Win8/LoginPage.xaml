@@ -8,26 +8,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{StaticResource BacklogManMainBrush}">
         <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" MinWidth="400" />
                 <ColumnDefinition Width="*" MinWidth="400" />
             </Grid.ColumnDefinitions>
+            
+            <Image Source="/Assets/Logo.scale-180.png" MaxWidth="200" />
 
-            <Rectangle Fill="DarkGray" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="2" Grid.Column="0" />
+            <Rectangle Fill="White" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="2" Grid.Column="0" />
             
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Margin="10">
-                <TextBlock Text="Username (email)" Style="{StaticResource CaptionTextStyle}"/>
-                <TextBox Text="{Binding Path=Username, ElementName=self, Mode=TwoWay}" />
-                <TextBlock Text="Password" Style="{StaticResource CaptionTextStyle}"/>
-                <PasswordBox Password="{Binding Path=Password, ElementName=self, Mode=TwoWay}" />
-                <Button Command="{Binding LoginCommand, ElementName=self}" HorizontalAlignment="Right"
+                <TextBlock x:Uid="UsernameLabel" Text="[UsernameLabel]" Style="{StaticResource CaptionTextStyle}" Foreground="White"/>
+                <TextBox Text="{Binding Path=Username, ElementName=self, Mode=TwoWay}" BorderBrush="White" />
+                <TextBlock x:Uid="PasswordLabel" Text="[Password]" Style="{StaticResource CaptionTextStyle}" Foreground="White"/>
+                <PasswordBox Password="{Binding Path=Password, ElementName=self, Mode=TwoWay}"  BorderBrush="White"/>
+                <Button Command="{Binding LoginCommand, ElementName=self}" HorizontalAlignment="Right" BorderBrush="White" BorderThickness="2" 
                         Content="Login"/>
             </StackPanel>
             
-            <Rectangle Fill="DarkGray" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="2" Grid.Column="1" />
+            <Rectangle Fill="White" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="2" Grid.Column="1" />
         </Grid>
     </Grid>
 </Page>

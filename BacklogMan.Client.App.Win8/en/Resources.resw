@@ -121,4 +121,10 @@
     <value>Unable to get this project. Maybe you don't have rights to open it</value>
     <comment>Notification show when error happens while downloading a project</comment>
   </data>
+  <data name="PasswordLabel.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="UsernameLabel.Text" xml:space="preserve">
+    <value>Username (email)</value>
+  </data>
 </root>
