@@ -28,8 +28,21 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "description")]
         public string Description { get; set; }
 
-        [DataMember(Name = "story_count")]
-        public int StoryCount { get; set; }
+        [IgnoreDataMember]
+        public int StoryCount
+        {
+            get
+            {
+                if (Statistics != null)
+                {
+                    return Statistics.StoriesTotal;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
 
         [DataMember(Name = "users")]
         public List<BacklogmanUser> Users { get; set; }

@@ -43,38 +43,86 @@
 
     <DataTemplate x:Key="BacklogManProject500x130ItemTemplate">
         <Grid Height="110" Width="480" Margin="00">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="0,0,0,0">
-                <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextStyle}" TextWrapping="NoWrap" Foreground="{StaticResource BacklogManMainBrush}"/>
-                <TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextStyle}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxHeight="60"/>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding StoryCount}" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap"/>
-                    <TextBlock Text="stories" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap" Margin="5,0,0,0"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path=Users.Count}" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap"/>
-                    <TextBlock Text="team members" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap" Margin="5,0,0,0"/>
-                </StackPanel>
+            <TextBlock Text="{Binding Name}" Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource TitleTextStyle}" TextWrapping="NoWrap" Foreground="{StaticResource BacklogManMainBrush}"/>
+            <TextBlock Text="{Binding Description}" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource BodyTextStyle}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxHeight="60"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" >
+                <TextBlock Text="{Binding StoryCount}" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap"/>
+                <TextBlock Text="stories" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap" Margin="5,0,0,0"/>
+            </StackPanel>
+            <Grid Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
+                <Grid.RenderTransform>
+                    <TranslateTransform X="0" Y="4" />
+                </Grid.RenderTransform>
+                <ProgressBar Maximum="100" Value="{Binding Path=Statistics.PercentEstimated}" Height="7" Margin="0">
+                    <ProgressBar.Background>
+                        <SolidColorBrush Color="{StaticResource BacklogManElementBackgroudColor}" />
+                    </ProgressBar.Background>
+                    <ProgressBar.Foreground>
+                        <SolidColorBrush Color="#639DCC" />
+                    </ProgressBar.Foreground>
+                </ProgressBar>
+                <ProgressBar Background="Transparent" Maximum="100" Value="{Binding Path=Statistics.PercentCompleted}" Height="7" Margin="0">
+                    <ProgressBar.Foreground>
+                        <SolidColorBrush Color="{StaticResource BacklogManButtonBackgroudColor}" />
+                    </ProgressBar.Foreground>
+                </ProgressBar>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" >
+                <TextBlock Text="{Binding Path=Users.Count}" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap"/>
+                <TextBlock Text="team members" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap" Margin="5,0,0,0"/>
             </StackPanel>
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="BacklogManBacklog500x130ItemTemplate">
-        <Grid Height="120" Width="490" Margin="5">
+        <Grid Height="110" Width="480" Margin="00">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
-                <Image Source="{Binding Image}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
-            </Border>
-            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
-                <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextStyle}" TextWrapping="NoWrap" Foreground="{StaticResource BacklogManMainBrush}"/>
-                <TextBlock Text="{Binding Subtitle}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap"/>
-                <TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextStyle}" MaxHeight="60"/>
+            <TextBlock Text="{Binding Name}" Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource TitleTextStyle}" TextWrapping="NoWrap" Foreground="{StaticResource BacklogManMainBrush}"/>
+            <TextBlock Text="{Binding Description}" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource BodyTextStyle}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxHeight="60"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" >
+                <TextBlock Text="{Binding StoryCount}" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap"/>
+                <TextBlock Text="stories" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap" Margin="5,0,0,0"/>
+            </StackPanel>
+            <Grid Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
+                <Grid.RenderTransform>
+                    <TranslateTransform X="0" Y="4" />
+                </Grid.RenderTransform>
+                <ProgressBar Maximum="100" Value="{Binding Path=Statistics.PercentEstimated}" Height="7" Margin="0">
+                    <ProgressBar.Background>
+                        <SolidColorBrush Color="{StaticResource BacklogManElementBackgroudColor}" />
+                    </ProgressBar.Background>
+                    <ProgressBar.Foreground>
+                        <SolidColorBrush Color="#639DCC" />
+                    </ProgressBar.Foreground>
+                </ProgressBar>
+                <ProgressBar Background="Transparent" Maximum="100" Value="{Binding Path=Statistics.PercentCompleted}" Height="7" Margin="0">
+                    <ProgressBar.Foreground>
+                        <SolidColorBrush Color="{StaticResource BacklogManButtonBackgroudColor}" />
+                    </ProgressBar.Foreground>
+                </ProgressBar>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" >
+                <TextBlock Text="{Binding Path=Users.Count}" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap"/>
+                <TextBlock Text="team members" Style="{StaticResource BodyTextStyle}" TextWrapping="NoWrap" Margin="5,0,0,0"/>
             </StackPanel>
         </Grid>
     </DataTemplate>

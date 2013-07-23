@@ -22,8 +22,14 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "description")]
         public string Description { get; set; }
 
-        [DataMember(Name = "story_count")]
-        public int StoryCount { get; set; }
+        [IgnoreDataMember]
+        public int StoryCount
+        {
+            get
+            {
+                return Statistics != null ? Statistics.StoriesTotal : 0;
+            }
+        }
 
         [DataMember(Name = "available_themes")]
         public List<string> Themes { get; set; }

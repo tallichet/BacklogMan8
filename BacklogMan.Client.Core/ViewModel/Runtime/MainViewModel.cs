@@ -101,6 +101,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         {
             this.Projects.Clear();
             this.ProjectsStandalone.Clear();
+            var listProjectsToDownload = new List<Model.Project>();
 
             var projects = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadProjects();
             foreach (var p in projects)
@@ -111,6 +112,18 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 // other wise add the project to the 
                 var org = this.Organizations.FirstOrDefault(o => o.Projects.Any(op => op.Id == p.Id));
                 if (org == null)
+                {
+                    listProjectsToDownload.Add(p);
+                }
+            }
+
+            foreach (var p in listProjectsToDownload)
+            {
+                try
+                {
+                    ProjectsStandalone.Add(await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadProject(p.Id));
+                }
+                catch (Exception)
                 {
                     ProjectsStandalone.Add(p);
                 }

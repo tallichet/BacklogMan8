@@ -107,7 +107,6 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                 Name = "Backlog n° 1",
                 Description = "This is my first project!",
                 Project = Projects.First(),
-                StoryCount = 2,
                 Themes = new string[] {"Windows", "Windows Phone"}.ToList(),
             });
             ProjectBacklogs.Add(new Model.Backlog()
@@ -115,7 +114,6 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                 Name = "Backlog n° 2",
                 Description = "This is my second project!",
                 Project = Projects.First(),
-                StoryCount = 2,
                 Themes = new string[] { "Windows", "Windows Phone" }.ToList(),
             });
             #endregion
