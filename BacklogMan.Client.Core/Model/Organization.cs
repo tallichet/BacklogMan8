@@ -32,6 +32,13 @@ namespace BacklogMan.Client.Core.Model
         public List<BacklogmanUser> Users { get; set; }
 
         [DataMember(Name = "projects")]
-        public List<Project> Projects { get; set; }        
+        public List<Project> Projects { get; set; }
+
+
+        [IgnoreDataMember]
+        public int ProjectCount
+        {
+            get { return Projects == null ? 0 : Projects.Count; }
+        }
     }
 }
