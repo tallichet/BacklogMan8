@@ -6,6 +6,7 @@
 
     <converters:ColorConverter x:Key="ColorConverter" />
     <converters:EmailToGravatarUriConverter x:Key="EmailToGravatarUriConverter" />
+    <converters:StatusToStringConverter x:Key="StatusToStringConverter" />
 
     <DataTemplate x:Key="BacklogManStandard250x250ItemTemplate">
         <Grid HorizontalAlignment="Left" Width="250" Height="250">
@@ -137,14 +138,18 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <!-- Story color -->
-            <Rectangle Width="5" VerticalAlignment="Stretch" Grid.Column="0" Margin="5" HorizontalAlignment="Left">
+            <Rectangle Width="5" VerticalAlignment="Stretch" Grid.Column="0" Grid.RowSpan="2" Margin="5" HorizontalAlignment="Left">
                 <Rectangle.Fill>
                     <SolidColorBrush Color="{Binding ColorString, Converter={StaticResource ColorConverter}}" />
                 </Rectangle.Fill>
             </Rectangle>
             
-            <TextBlock Text="{Binding Code}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,5,5,5"
+            <TextBlock Text="{Binding Code}" HorizontalAlignment="Center" Grid.RowSpan="2" VerticalAlignment="Center" Margin="15,5,5,5"
                        FontSize="20">
                 <TextBlock.Foreground>
                     <SolidColorBrush Color="{StaticResource BacklogManTitleBackgroudColor}" />
@@ -176,10 +181,15 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="So I can" Style="{StaticResource TitleTextStyle}" FontWeight="Bold" Margin="0,0,5,0"/>
                     <TextBlock Text="{Binding Result}" Style="{StaticResource TitleTextStyle}" TextWrapping="Wrap" Grid.Column="1"/>
-                </Grid>
-                
-            <!--<TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextStyle}" MaxHeight="60"/>-->
+                </Grid>                
             </StackPanel>
+
+            <TextBlock Text="{Binding Status, Converter={StaticResource StatusToStringConverter}}" Grid.Column="1" Grid.Row="1"
+                       Style="{StaticResource TitleTextStyle}" Margin="10,0,0,0">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="{StaticResource BacklogManMainColor}" />
+                </TextBlock.Foreground>
+            </TextBlock>
             
             <!-- Points -->
             <Grid Grid.Column="2" VerticalAlignment="Top" Margin="5">
