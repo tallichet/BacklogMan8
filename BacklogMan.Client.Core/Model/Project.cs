@@ -39,6 +39,18 @@ namespace BacklogMan.Client.Core.Model
 
         [DataMember(Name= "stats")]
         public Statistics Statistics { get; set; }
+
+        /// <summary>
+        /// Return true if was extracted from the full version
+        /// </summary>
+        [IgnoreDataMember]
+        public bool IsFull
+        {
+            get
+            {
+                return Users != null;
+            }
+        }
     }
 
     
