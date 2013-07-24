@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20617.1 PREVIEW
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BacklogMan.Client.Core", "BacklogMan.Client.Core\BacklogMan.Client.Core.csproj", "{94958D36-7E9A-4889-9CB4-604BB45539A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BacklogMan.Client.App.Win8", "BacklogMan.Client.App.Win8\BacklogMan.Client.App.Win8.csproj", "{0B9DC40A-3EEA-4BD3-951E-C40561929EA8}"
@@ -8,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BacklogMan.Client.App.Win81", "BacklogMan.Client.App.Win81\BacklogMan.Client.App.Win81.csproj", "{925B74E1-4622-4EFE-A2F1-400774CE3954}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BacklogMan.Client.Phone8", "BacklogMan.Client.Phone8\BacklogMan.Client.Phone8.csproj", "{FC25F11F-22D3-44FC-9C42-DF009773A9FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Proto projects", "Proto projects", "{C5F71CAD-4468-4DF0-A651-D40E8FC45B64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocket", "ProtoProjects\WebSocket\WebSocket.csproj", "{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,8 +105,35 @@ Global
 		{FC25F11F-22D3-44FC-9C42-DF009773A9FD}.Release|x86.ActiveCfg = Release|x86
 		{FC25F11F-22D3-44FC-9C42-DF009773A9FD}.Release|x86.Build.0 = Release|x86
 		{FC25F11F-22D3-44FC-9C42-DF009773A9FD}.Release|x86.Deploy.0 = Release|x86
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Debug|ARM.ActiveCfg = Debug|ARM
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Debug|ARM.Build.0 = Debug|ARM
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Debug|ARM.Deploy.0 = Debug|ARM
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Debug|x64.ActiveCfg = Debug|x64
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Debug|x64.Build.0 = Debug|x64
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Debug|x64.Deploy.0 = Debug|x64
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Debug|x86.ActiveCfg = Debug|x86
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Debug|x86.Build.0 = Debug|x86
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Debug|x86.Deploy.0 = Debug|x86
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Release|ARM.ActiveCfg = Release|ARM
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Release|ARM.Build.0 = Release|ARM
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Release|ARM.Deploy.0 = Release|ARM
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Release|x64.ActiveCfg = Release|x64
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Release|x64.Build.0 = Release|x64
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Release|x64.Deploy.0 = Release|x64
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Release|x86.ActiveCfg = Release|x86
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Release|x86.Build.0 = Release|x86
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA} = {C5F71CAD-4468-4DF0-A651-D40E8FC45B64}
 	EndGlobalSection
 EndGlobal
