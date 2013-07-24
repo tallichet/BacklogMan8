@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Md5.WP7</id>
+    <version>1.0.1</version>
+    <title>Md5.WP7</title>
+    <authors>Anton</authors>
+    <owners>Anton</owners>
+    <licenseUrl>http://opensource.org/licenses/MS-PL</licenseUrl>
+    <projectUrl>https://github.com/zayass/Md5.WP7</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Unofficial package of Reid Borsuk and Jenny Zheng md5 raw implementation.</description>
+    <releaseNotes />
+    <copyright>Copyright 2013</copyright>
+    <language />
+    <tags>cryptography md5 winphone</tags>
+  </metadata>
+</package>

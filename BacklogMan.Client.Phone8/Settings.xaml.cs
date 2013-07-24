@@ -46,11 +46,16 @@ namespace BacklogMan.Client.Phone8
         {
             try
             {
-                var token = await ServiceLocator.Current.GetInstance<Core.Service.INetworkService>().GetApiKey(Username, Password);
-                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().ApiKey = token;
-
-                this.NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
-                this.NavigationService.RemoveBackEntry();
+                if (await ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().GetApiKey(Username, Password))
+                {
+                    this.NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                    this.NavigationService.RemoveBackEntry();
+                }
+                else
+                {
+                    MessageBox.Show("unable to connect. please retry");
+                    Password = "";
+                }
             }
             catch (Exception ex)
             {

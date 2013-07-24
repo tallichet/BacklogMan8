@@ -4,12 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:vm="clr-namespace:BacklogMan.Client.Core.ViewModel;assembly=BacklogMan.Client.Core">
+    xmlns:vm="clr-namespace:BacklogMan.Client.Core.ViewModel;assembly=BacklogMan.Client.Core"
+    xmlns:converter="clr-namespace:BacklogMan.Client.Phone8.Converter">
 
     <!--Application Resources-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:BacklogMan.Client.Phone8" x:Key="LocalizedStrings"/>
         <vm:ViewModelLocator x:Key="Locator" />
+        <converter:EmailToGravatarUriConverter x:Key="EmailToGravatarUriConverter" />
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

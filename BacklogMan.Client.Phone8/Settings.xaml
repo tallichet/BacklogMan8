@@ -24,9 +24,17 @@
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
                             <TextBlock Text="username" />
-                            <TextBox Text="{Binding Username, Mode=TwoWay, ElementName=self}" />
+                            <TextBox Text="{Binding Username, Mode=TwoWay, ElementName=self}">
+                                <TextBox.InputScope>
+                                    <InputScope>
+                                        <InputScope.Names>
+                                            <InputScopeName NameValue="EmailNameOrAddress" />
+                                        </InputScope.Names>
+                                    </InputScope>
+                                </TextBox.InputScope>
+                            </TextBox>
                             <TextBlock Text="password" />
-                            <TextBox Text="{Binding Password, Mode=TwoWay, ElementName=self}" />
+                            <PasswordBox Password="{Binding Password, Mode=TwoWay, ElementName=self}" />
                             <Button HorizontalAlignment="Right" Content="connect" Click="Connect" />
                         </StackPanel>
                     </ScrollViewer>
