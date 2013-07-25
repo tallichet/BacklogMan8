@@ -284,5 +284,11 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             get;
             private set;
         }
+
+
+        public void DeleteStories(Model.Story[] storiesToDelete)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -81,12 +81,7 @@ namespace BacklogMan.Client.App.Win8
         {
             if (itemGridView == null || itemGridView.SelectedItems == null) return;
 
-            foreach (var s in itemGridView.SelectedItems.Cast<Core.Model.Story>())
-            {
-                ServiceLocator.Current.GetInstance<Core.Service.INetworkService>().DeleteStory(s);
-            }
-
-            ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().RefreshBacklogStories();
+            ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().DeleteStories(itemGridView.SelectedItems.Cast<Core.Model.Story>().ToArray());
 
             this.BottomAppBar.IsOpen = false;
             this.BottomAppBar.IsSticky = false;

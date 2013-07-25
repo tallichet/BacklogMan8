@@ -142,9 +142,7 @@ namespace BacklogMan.Client.App.Win81
 
                 var cred = await CredentialPicker.PickAsync(opt);
 
-                var key = await ServiceLocator.Current.GetInstance<Core.Service.INetworkService>().GetApiKey(cred.CredentialUserName, cred.CredentialPassword);
-
-                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().ApiKey = key;
+                var key = await ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().GetApiKey(cred.CredentialUserName, cred.CredentialPassword);
             }
         }
     }

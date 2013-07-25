@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BacklogMan.Client.Core.Service
 {
-    public class NetworkService : INetworkService
+    internal class NetworkService : INetworkService
     {
         private Uri BacklogManApiBaseUri = new Uri("https://app.backlogman.com/api/");
 

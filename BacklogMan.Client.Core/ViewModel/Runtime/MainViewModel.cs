@@ -335,5 +335,16 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
         #endregion
+
+
+        public void DeleteStories(Model.Story[] storiesToDelete)
+        {
+            foreach (var s in storiesToDelete)
+            {
+                ServiceLocator.Current.GetInstance<Core.Service.INetworkService>().DeleteStory(s);
+            }
+
+            this.RefreshBacklogStories();
+        }
     }
 }

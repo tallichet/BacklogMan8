@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BacklogMan.Client.Core.Service
 {
-    public interface INetworkService
+    internal interface INetworkService
     {
         string APIKey { get; set; }
 

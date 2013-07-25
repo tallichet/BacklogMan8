@@ -71,6 +71,15 @@ namespace BacklogMan.Client.Core.ViewModel
 
         void RefreshBacklogStories();
 
+        /// <summary>
+        /// Contains all stories that are not estimated
+        /// </summary>
         ObservableCollection<Model.Story> NotEstimatedStories { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="storiesToDelete"></param>
+        void DeleteStories(Model.Story[] storiesToDelete);
     }
 }
