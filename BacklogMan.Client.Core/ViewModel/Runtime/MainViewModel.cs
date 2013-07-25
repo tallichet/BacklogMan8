@@ -23,6 +23,13 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             ProjectBacklogs = new ReorderableCollection<Model.Backlog>();
             ProjectBacklogs.ManualReordered += projectBacklogs_ManualReordered;
             BacklogStories = new ReorderableCollection<Model.Story>();
+
+            BacklogStoriesAccepted = new ReorderableCollection<Model.Story>();
+            BacklogStoriesCompleted = new ReorderableCollection<Model.Story>();
+            BacklogStoriesInProgress = new ReorderableCollection<Model.Story>();
+            BacklogStoriesRejected = new ReorderableCollection<Model.Story>();
+            BacklogStoriesToDo = new ReorderableCollection<Model.Story>();
+
             BacklogStories.ManualReordered += backlogStories_ManualReordered;
             OrganizationProjects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
 
@@ -254,12 +261,37 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         {
             BacklogStories.Clear();
 
+            BacklogStoriesAccepted.Clear();
+            BacklogStoriesCompleted.Clear();
+            BacklogStoriesInProgress.Clear();
+            BacklogStoriesRejected.Clear();
+            BacklogStoriesToDo.Clear();
+
             var backlog = CurrentBacklog; // this allow us to be sure the backlog don't change during the download
             var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentProject.Id, CurrentBacklog.Id);
             foreach (var s in stories)
             {
                 BacklogStories.Add(s);
                 s.Backlog = backlog;
+
+                switch (s.Status)
+                {
+                    case Model.StoryStatus.Accepted:
+                        BacklogStoriesAccepted.Add(s);
+                        break;
+                    case Model.StoryStatus.Completed:
+                        BacklogStoriesCompleted.Add(s);
+                        break;
+                    case Model.StoryStatus.InProgress:
+                        BacklogStoriesInProgress.Add(s);
+                        break;
+                    case Model.StoryStatus.Rejected:
+                        BacklogStoriesRejected.Add(s);
+                        break;
+                    case Model.StoryStatus.ToDo:
+                        BacklogStoriesToDo.Add(s);
+                        break;
+                }
             }
         }
 

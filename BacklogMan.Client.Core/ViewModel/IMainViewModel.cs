@@ -81,5 +81,7 @@ namespace BacklogMan.Client.Core.ViewModel
         /// </summary>
         /// <param name="storiesToDelete"></param>
         void DeleteStories(Model.Story[] storiesToDelete);
+
+        ReorderableCollection<Model.Story> BacklogStoriesInProgress { get; }
     }
 }

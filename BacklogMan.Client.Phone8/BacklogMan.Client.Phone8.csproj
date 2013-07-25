@@ -96,6 +96,7 @@
     <Compile Include="BacklogPage.xaml.cs">
       <DependentUpon>BacklogPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\ColorConverter.cs" />
     <Compile Include="Converter\EmailToGravatarUriConverter.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">

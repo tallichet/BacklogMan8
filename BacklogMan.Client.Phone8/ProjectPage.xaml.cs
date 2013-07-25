@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.Practices.ServiceLocation;
 
 namespace BacklogMan.Client.Phone8
 {
@@ -15,6 +16,13 @@ namespace BacklogMan.Client.Phone8
         public ProjectPage()
         {
             InitializeComponent();
+        }
+
+        private void BacklogTapped(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var b = (sender as Panel).Tag as Core.Model.Backlog;
+            ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = b;
+            NavigationService.Navigate(new Uri("/BacklogPage.xaml", UriKind.Relative));
         }
     }
 }

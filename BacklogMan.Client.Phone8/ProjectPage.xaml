@@ -28,7 +28,7 @@
                     <phone:LongListSelector ItemsSource="{Binding Path=ProjectBacklogs}">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
+                                <Grid Tap="BacklogTapped" Tag="{Binding}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />

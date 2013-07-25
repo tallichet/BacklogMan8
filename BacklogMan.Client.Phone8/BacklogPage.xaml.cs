@@ -16,5 +16,10 @@ namespace BacklogMan.Client.Phone8
         {
             InitializeComponent();
         }
+
+        private void Story_Tapped(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+
+        }
     }
 }

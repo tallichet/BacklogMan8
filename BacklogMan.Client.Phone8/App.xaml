@@ -12,6 +12,7 @@
         <local:LocalizedStrings xmlns:local="clr-namespace:BacklogMan.Client.Phone8" x:Key="LocalizedStrings"/>
         <vm:ViewModelLocator x:Key="Locator" />
         <converter:EmailToGravatarUriConverter x:Key="EmailToGravatarUriConverter" />
+        <converter:ColorConverter x:Key="ColorConverter" />
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

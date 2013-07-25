@@ -134,6 +134,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
 - voilà quoi",
                 ColorString = "#FF0011"
             });
+            BacklogStoriesInProgress.Add(BacklogStories.Last());
             BacklogStories.Add(new Model.Story()
             {
                 AsUser = "Developer",
@@ -150,6 +151,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
 - 4ème ligne",
                 ColorString = "#00FF33"
             });
+            BacklogStoriesInProgress.Add(BacklogStories.Last());
             #endregion
 
             #region define not estimared Stories
@@ -265,7 +267,11 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             get;
             set;
         }
-
+        public ReorderableCollection<Model.Story> BacklogStoriesInProgress
+        {
+            get;
+            set;
+        }
 
         public Task<bool> GetApiKey(string Username, string Password)
         {
