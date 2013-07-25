@@ -253,6 +253,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         public async void RefreshBacklogStories()
         {
             BacklogStories.Clear();
+
             var backlog = CurrentBacklog; // this allow us to be sure the backlog don't change during the download
             var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentProject.Id, CurrentBacklog.Id);
             foreach (var s in stories)
@@ -345,6 +346,35 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
 
             this.RefreshBacklogStories();
+        }
+
+        public ReorderableCollection<Model.Story> BacklogStoriesToDo
+        {
+            get;
+            private set;
+        }
+        public ReorderableCollection<Model.Story> BacklogStoriesInProgress
+        {
+            get;
+            private set;
+        }
+
+        public ReorderableCollection<Model.Story> BacklogStoriesCompleted
+        {
+            get;
+            private set;
+        }
+
+        public ReorderableCollection<Model.Story> BacklogStoriesAccepted
+        {
+            get;
+            private set;
+        }
+
+        public ReorderableCollection<Model.Story> BacklogStoriesRejected
+        {
+            get;
+            private set;
         }
     }
 }
