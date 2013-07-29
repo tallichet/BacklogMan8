@@ -13,6 +13,7 @@
         <vm:ViewModelLocator x:Key="Locator" />
         <converter:EmailToGravatarUriConverter x:Key="EmailToGravatarUriConverter" />
         <converter:ColorConverter x:Key="ColorConverter" />
+        <converter:ListToVisibilityConverter x:Key="ListToVisibilityConverter" />
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
