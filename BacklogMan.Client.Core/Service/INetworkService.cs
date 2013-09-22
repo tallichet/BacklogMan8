@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BacklogMan.Client.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +14,11 @@ namespace BacklogMan.Client.Core.Service
         Task<List<Model.Project>> DownloadProjects();
         Task<Model.Project> DownloadProject(int projectId);
 
-        Task<List<Model.Backlog>> DownloadBacklogs(int projectId);
-        Task<Model.Backlog> DownloadBacklog(int projectId, int backlogId);
+        //Task<List<Model.Backlog>> DownloadBacklogs(int projectId);
+        Task<Model.Backlog> DownloadBacklog(int backlogId);
 
-        Task<List<Model.Story>> DownloadStories(int projectId, int backlogId);
-        Task<Model.Story> DownloadStory(int projectId, int backlogId, int stroyId);
+        Task<List<Model.Story>> DownloadStories(int backlogId);
+        Task<Model.Story> DownloadStory(int backlogId, int stroyId);
 
         Task<List<Model.Organization>> DownloadOrganizations();
         Task<Model.Organization> DownloadOrganization(string organizationId);
@@ -32,8 +33,5 @@ namespace BacklogMan.Client.Core.Service
         Task<bool> MoveStory(int projectId, int targetBacklogId, int movedStoryId, int[] storyIdOrder);
         Task<bool> OrderBacklogInProject(int projectId, int movedBacklog, int[] backlogIdOrder);
         Task<bool> OrderBacklogInOrganization(int organizationId, int movedBacklog, int[] backlogIdOrder);
-
-                    
-        
     }
 }

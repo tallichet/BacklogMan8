@@ -117,7 +117,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
                 // if the project is part of an org, add the project to the org.
                 // other wise add the project to the 
-                var org = this.Organizations.FirstOrDefault(o => o.Projects.Any(op => op.Id == p.Id));
+                var org = this.Organizations.FirstOrDefault(o => o.Projects != null && o.Projects.Any(op => op.Id == p.Id));
                 if (org == null)
                 {
                     listProjectsToDownload.Add(p);
@@ -225,10 +225,11 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             {
                 ProjectBacklogs.Clear();
                 var project = CurrentProject; // this allow us to be sure the project don't change during the download
-                var backlogs = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklogs(CurrentProject.Id);
-                foreach (var b in backlogs)
+                
+                foreach (var b in project.Backlogs)
                 {
-                    ProjectBacklogs.Add(b);
+                    ProjectBacklogs.Add(
+                        await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(b.Id));
                     b.Project = project;
                 }
             }
@@ -268,7 +269,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             BacklogStoriesToDo.Clear();
 
             var backlog = CurrentBacklog; // this allow us to be sure the backlog don't change during the download
-            var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentProject.Id, CurrentBacklog.Id);
+            var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentBacklog.Id);
             foreach (var s in stories)
             {
                 BacklogStories.Add(s);
@@ -301,15 +302,17 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
             foreach (var p in Projects)
             {
-                var backlogs = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklogs(p.Id);
-                foreach (var b in backlogs)
+                if (p.Backlogs != null)
                 {
-                    var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(p.Id, b.Id);
-                    foreach (var s in stories)
+                    foreach (var b in p.Backlogs)
                     {
-                        if (s.Points < 0)
+                        var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(b.Id);
+                        foreach (var s in stories)
                         {
-                            NotEstimatedStories.Add(s);
+                            if (s.Points < 0)
+                            {
+                                NotEstimatedStories.Add(s);
+                            }
                         }
                     }
                 }

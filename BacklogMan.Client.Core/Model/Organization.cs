@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BacklogMan.Client.Core.Model
 {
     [DataContract]
-    public class Organization
+    public class Organization : IItemWithId
     {
         [DataMember(Name = "id")]
         public int Id { get; set; }
@@ -33,6 +33,9 @@ namespace BacklogMan.Client.Core.Model
 
         [DataMember(Name = "projects")]
         public List<Project> Projects { get; set; }
+
+        [DataMember(Name = "backlogs")]
+        public List<Backlog> Backlogs { get; set; }
 
 
         [IgnoreDataMember]

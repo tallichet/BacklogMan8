@@ -64,27 +64,27 @@ namespace BacklogMan.Client.Core.Service
             return DownloadDocument<Model.Project>(uri);
         }
 
-        public Task<List<Model.Backlog>> DownloadBacklogs(int projectId)
-        {
-            var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/backlogs/");
-            return DownloadDocument<List<Model.Backlog>>(uri);
-        }
+        //public Task<List<Model.Backlog>> DownloadBacklogs(int projectId)
+        //{
+        //    var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/backlogs/");
+        //    return DownloadDocument<List<Model.Backlog>>(uri);
+        //}
 
-        public Task<Model.Backlog> DownloadBacklog(int projectId, int backlogId)
+        public Task<Model.Backlog> DownloadBacklog(int backlogId)
         {
-            var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/backlogs/" + backlogId + "/");
+            var uri = new Uri(BacklogManApiBaseUri, "./backlogs/" + backlogId + "/");
             return DownloadDocument<Model.Backlog>(uri);
         }
 
-        public Task<List<Model.Story>> DownloadStories(int projectId, int backlogId)
+        public Task<List<Model.Story>> DownloadStories(int backlogId)
         {
-            var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/backlogs/" + backlogId + "/stories/");
+            var uri = new Uri(BacklogManApiBaseUri, "./backlogs/" + backlogId + "/stories/");
             return DownloadDocument<List<Model.Story>>(uri);
         }
 
-        public Task<Model.Story> DownloadStory(int projectId, int backlogId, int storyId)
+        public Task<Model.Story> DownloadStory(int backlogId, int storyId)
         {
-            var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/backlogs/" + backlogId + "/stories/" + storyId + "/");
+            var uri = new Uri(BacklogManApiBaseUri, "./backlogs/" + backlogId + "/stories/" + storyId + "/");
             return DownloadDocument<Model.Story>(uri);
         }
 

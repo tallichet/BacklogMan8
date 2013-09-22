@@ -9,10 +9,13 @@ using System.Threading.Tasks;
 namespace BacklogMan.Client.Core.Model
 {
     [DataContract]
-    public class Story
+    public class Story : IItemWithId
     {
         [DataMember(Name = "id")]
         public int Id { get; set; }
+
+        [DataMember(Name = "url")]
+        public string Url { get; set; }
 
         [DataMember(Name = "code")]
         public string Code { get; set; }

@@ -47,5 +47,23 @@ namespace BacklogMan.Client.Core
             }
         }
 
+        public static void ReplaceItemById<T>(this IList<T> list, T newItem) where T : Model.IItemWithId
+        {
+            if (list != null && newItem != null)
+            {
+                var itemToReplace = list.FirstOrDefault(i => i.Id == newItem.Id);
+                if (itemToReplace != null)
+                {
+                    var idx = list.IndexOf(itemToReplace);
+                    list.Remove(itemToReplace);
+                    list.Insert(idx, newItem);
+                }
+                else
+                {
+                    list.Add(newItem);
+                }
+            }
+        }
+
     }
 }

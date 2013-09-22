@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace BacklogMan.Client.Core.Model
 {
     [DataContract]
-    public class Project
+    public class Project : IItemWithId
     {
         [DataMember(Name = "id")]
         public int Id { get; set; }
@@ -28,20 +28,23 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "description")]
         public string Description { get; set; }
 
-        [IgnoreDataMember]
+        [DataMember(Name = "organization")]
+        public int OrganizationId { get; set; }
+
+        [DataMember(Name = "story_count")]
         public int StoryCount
         {
-            get
-            {
-                if (Statistics != null)
-                {
-                    return Statistics.StoriesTotal;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
+            get; set;
+            //{
+            //    if (Statistics != null)
+            //    {
+            //        return Statistics.StoriesTotal;
+            //    }
+            //    else
+            //    {
+            //        return 0;
+            //    }
+            //}
         }
 
         [DataMember(Name = "users")]
@@ -52,6 +55,9 @@ namespace BacklogMan.Client.Core.Model
 
         [DataMember(Name= "stats")]
         public Statistics Statistics { get; set; }
+
+        [DataMember(Name = "backlogs")]
+        public List<Backlog> Backlogs { get; set; }
 
         /// <summary>
         /// Return true if was extracted from the full version

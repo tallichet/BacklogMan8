@@ -8,7 +8,7 @@ using System.Text;
 namespace BacklogMan.Client.Core.Model
 {
     [DataContract]
-    public class Backlog
+    public class Backlog : IItemWithId
     {
         [DataMember(Name="id")]
         public int Id { get; set; }
@@ -19,6 +19,9 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "name")]
         public string Name { get; set; }
 
+        [DataMember(Name = "is_main")]
+        public bool IsMain { get; set; }
+        
         [DataMember(Name = "description")]
         public string Description { get; set; }
 
