@@ -51,7 +51,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             {
                 await DownloadOrganizations();
                 await DownloadProjects();
-                await RefreshNotEstimatedStories();
+                //await RefreshNotEstimatedStories();
             }
         }
 
@@ -100,7 +100,8 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             var organizations = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganizations();
             foreach (var o in organizations)
             {
-                this.Organizations.Add(o);
+                var o2 = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganization(o.Id.ToString());
+                this.Organizations.Add(o2);
             }
         }
 
