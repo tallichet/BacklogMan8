@@ -22,6 +22,8 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             ProjectsStandalone = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
             ProjectBacklogs = new ReorderableCollection<Model.Backlog>();
             ProjectBacklogs.ManualReordered += projectBacklogs_ManualReordered;
+            OrganizationBacklogs = new ReorderableCollection<Model.Backlog>();
+            OrganizationBacklogs.ManualReordered += organizationBacklogs_ManualReordered;
             BacklogStories = new ReorderableCollection<Model.Story>();
 
             BacklogStoriesAccepted = new ReorderableCollection<Model.Story>();
@@ -148,6 +150,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             set
             {
                 currentOrganization = value;
+                refreshOrganizationBacklogs();
                 refreshOrganizationProjects();
             }
         }
@@ -175,6 +178,12 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         }
 
         public ReorderableCollection<Model.Backlog> ProjectBacklogs
+        {
+            get;
+            private set;
+        }
+
+        public ReorderableCollection<Model.Backlog> OrganizationBacklogs
         {
             get;
             private set;
@@ -237,6 +246,24 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             catch (Exception)
             {
                 ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+            }
+        }
+        private async void refreshOrganizationBacklogs()
+        {
+            OrganizationBacklogs.Clear();
+            var org = CurrentOrganization;
+            foreach (var b in org.Backlogs)
+            {
+                try
+                {
+                    OrganizationBacklogs.Add(
+                        await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(b.Id));
+                }
+                catch (Exception)
+                {
+                    // Maybe we do not have access to this projects
+                    OrganizationBacklogs.Add(b);
+                }
             }
         }
 
@@ -329,6 +356,30 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
             var operationResult = await ServiceLocator.Current.GetInstance<Service.INetworkService>().OrderBacklogInProject(this.CurrentProject.Id, movedBacklog.Id,
                                         ProjectBacklogs.Select(b => b.Id).ToArray());
+
+            if (Debugger.IsAttached)
+            {
+                Debug.WriteLine("moved backlog '{0}' operation resut is {1}", movedBacklog.Name, operationResult);
+            }
+
+            if (operationResult)
+            {
+                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationText("backlog reordered");
+            }
+            else
+            {
+                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationText("error when ordering backlogs");
+            }
+        }
+
+        private async void organizationBacklogs_ManualReordered(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            var movedBacklog = e.NewItems[0] as Model.Backlog;
+
+            if (movedBacklog == null) return;
+
+            var operationResult = await ServiceLocator.Current.GetInstance<Service.INetworkService>().OrderBacklogInOrganization(this.CurrentOrganization.Id, movedBacklog.Id,
+                                        OrganizationBacklogs.Select(b => b.Id).ToArray());
 
             if (Debugger.IsAttached)
             {
