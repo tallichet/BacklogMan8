@@ -11,94 +11,132 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <common:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <!-- Collection of items displayed by this page -->
-        <CollectionViewSource
-            x:Name="itemsViewSource"
-            Source="{Binding ProjectBacklogs}"/>
+        <x:String x:Key="ChevronGlyph">&#xE26B;</x:String>
     </Page.Resources>
 
     <!--
-        This grid acts as a root panel for the page that defines two rows:
-        * Row 0 contains the back button and page title
-        * Row 1 contains the rest of the page layout
+        This grid acts as a root panel for the page.
     -->
-    <Grid DataContext="{Binding Group}" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <!-- Horizontal scrolling grid -->
-        <GridView
-            x:Name="itemGridView"
-            AutomationProperties.AutomationId="ItemGridView"
-            AutomationProperties.Name="Items In Group"
-            TabIndex="1"
-            Grid.RowSpan="2"
-            Padding="120,126,120,50"
-            ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
-            SelectionMode="None"
-            IsSwipeEnabled="false">
-            <GridView.ItemTemplate>
+        <Hub>
+            <Hub.Header>
+                <!-- Back button and page title -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button  x:Name="backButton" Margin="0,0,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
+                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        VerticalAlignment="Top"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button"/>
+                    <TextBlock x:Name="pageTitle" Text="{Binding Path=CurrentProject.Name}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Top"/>
+                </Grid>
+            </Hub.Header>
+
+            <HubSection Header="Backlogs">
                 <DataTemplate>
-                    <Grid Height="110" Width="480" Margin="10" DataContext="{Binding Path=Main.CurrentProject, Source={StaticResource Locator}}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
-                            <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
-                        </Border>
-                        <ScrollViewer>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
-                                <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap"/>
-                                <TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextBlockStyle}" MaxHeight="60"/>
-                                <ItemsControl ItemsSource="{Binding Users}">
-                                    <DataTemplate>
-                                        <Grid>
-                                            <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ItemsControl>
-                            </StackPanel>
-                        </ScrollViewer>
+                    <GridView ItemsSource="{Binding Path=ProjectBacklogs}" CanReorderItems="True">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="420" Height="130" Margin="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Text="{Binding Name}" Grid.Row="0" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" />
+                                    <TextBlock Text="{Binding Description}" Grid.Row="1" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="NoWrap" />
+                                    <StackPanel Orientation="Horizontal" Grid.Row="2" >
+                                        <TextBlock Text="{Binding StoryCount}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,5,0" />
+                                        <TextBlock Text="stories" Style="{StaticResource BodyTextBlockStyle}" Margin="0" />
+                                    </StackPanel>
+                                    <Grid Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">
+                                        <Grid.RenderTransform>
+                                            <TranslateTransform X="0" Y="4" />
+                                        </Grid.RenderTransform>
+                                        <ProgressBar Maximum="100" Value="{Binding Path=Statistics.PercentEstimated}" Height="7" Margin="0">
+                                            <ProgressBar.Background>
+                                                <SolidColorBrush Color="{StaticResource BacklogManMainColor}" />
+                                            </ProgressBar.Background>
+                                            <ProgressBar.Foreground>
+                                                <SolidColorBrush Color="#639DCC" />
+                                            </ProgressBar.Foreground>
+                                        </ProgressBar>
+                                        <ProgressBar Background="Transparent" Maximum="100" Value="{Binding Path=Statistics.PercentCompleted}" Height="7" Margin="0">
+                                            <ProgressBar.Foreground>
+                                                <SolidColorBrush Color="{StaticResource BacklogManMainColor}" />
+                                            </ProgressBar.Foreground>
+                                        </ProgressBar>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </DataTemplate>
+            </HubSection>
+            <HubSection Width="520" Header="Section 2">
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,10"
+                                   Text="Item Title" />
+                        <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Grid.Row="1" 
+                                   Text="Quisque in porta lorem dolor amet sed consectetuer ising elit, sed diam non my nibh uis mod wisi quip."/>
+                        <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Grid.Row="2" Margin="0,20,0,0"
+                                   Text="Item Sub Title"/>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="3" 
+                                   Text="Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper."/>
                     </Grid>
                 </DataTemplate>
-            </GridView.ItemTemplate>
-            <GridView.Header>
-                <StackPanel Width="480" Margin="0,4,14,0">
-                    <TextBlock Text="{Binding Subtitle}" Margin="0,0,0,20" Style="{StaticResource SubheaderTextBlockStyle}" MaxHeight="60"/>
-                    <Image Source="{Binding ImagePath}" Height="400" Margin="0,0,0,20" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
-                    <TextBlock Text="{Binding Description}" Margin="0,0,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
-                </StackPanel>
-            </GridView.Header>
-            <GridView.ItemContainerStyle>
-                <Style TargetType="FrameworkElement">
-                    <Setter Property="Margin" Value="52,0,0,2"/>
-                </Style>
-            </GridView.ItemContainerStyle>
-        </GridView>
+            </HubSection>
 
-        <!-- Back button and page title -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <AppBarButton x:Name="backButton" Icon="Back" Height="95" Margin="10,46,10,0"
-                          Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}" 
-                          Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource Mode=Self}}"
-                          AutomationProperties.Name="Back"
-                          AutomationProperties.AutomationId="BackButton"
-                          AutomationProperties.ItemType="Navigation Button"/>
-            <TextBlock x:Name="pageTitle" Text="{Binding Title}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                       IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-        </Grid>
+            <HubSection Header="Section 3">
+                <DataTemplate>
+                    <!-- width of 400 -->
+                    <StackPanel Orientation="Vertical">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="130"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="270"/>
+                                <RowDefinition Height="95"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Image Grid.ColumnSpan="5" Stretch="Fill" Margin="0,0,0,10"/>
+                            <Image Grid.Row="1" Stretch="Fill"/>
+                            <Image Grid.Row="1" Grid.Column="2" Stretch="Fill"/>
+                            <Image Grid.Row="1" Grid.Column="4" Stretch="Fill"/>
+                            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Grid.Row="2" Grid.ColumnSpan="5" Margin="0,15,0,0"
+                                       Text="Description Text:"/>
+                            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="3" Grid.ColumnSpan="5" 
+                                       Text="Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper."/>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
     </Grid>
 </Page>

@@ -31,20 +31,13 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "organization")]
         public int OrganizationId { get; set; }
 
-        [DataMember(Name = "story_count")]
+        [IgnoreDataMember]
         public int StoryCount
         {
-            get; set;
-            //{
-            //    if (Statistics != null)
-            //    {
-            //        return Statistics.StoriesTotal;
-            //    }
-            //    else
-            //    {
-            //        return 0;
-            //    }
-            //}
+            get
+            {
+                return Statistics != null ? Statistics.StoriesTotal : 0;
+            }
         }
 
         [DataMember(Name = "users")]

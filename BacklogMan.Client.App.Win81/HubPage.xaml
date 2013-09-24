@@ -162,14 +162,34 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     
                                     <TextBlock Text="{Binding Name}" Grid.Row="0" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" />
                                     <TextBlock Text="{Binding Code}" Grid.Row="1" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="NoWrap" />
                                     <StackPanel Orientation="Horizontal" Grid.Row="2" >
-                                        <TextBlock Text="{Binding StoryCount}" Style="{StaticResource BodyTextBlockStyle}" />
-                                        <TextBlock Text="stories" Style="{StaticResource BodyTextBlockStyle}" />
+                                        <TextBlock Text="{Binding StoryCount}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,5,0" />
+                                        <TextBlock Text="stories" Style="{StaticResource BodyTextBlockStyle}" Margin="0" />
                                     </StackPanel>
+
+                                    <Grid Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">
+                                        <Grid.RenderTransform>
+                                            <TranslateTransform X="0" Y="4" />
+                                        </Grid.RenderTransform>
+                                        <ProgressBar Maximum="100" Value="{Binding Path=Statistics.PercentEstimated}" Height="7" Margin="0">
+                                            <ProgressBar.Background>
+                                                <SolidColorBrush Color="{StaticResource BacklogManMainColor}" />
+                                            </ProgressBar.Background>
+                                            <ProgressBar.Foreground>
+                                                <SolidColorBrush Color="#639DCC" />
+                                            </ProgressBar.Foreground>
+                                        </ProgressBar>
+                                        <ProgressBar Background="Transparent" Maximum="100" Value="{Binding Path=Statistics.PercentCompleted}" Height="7" Margin="0">
+                                            <ProgressBar.Foreground>
+                                                <SolidColorBrush Color="{StaticResource BacklogManMainColor}" />
+                                            </ProgressBar.Foreground>
+                                        </ProgressBar>
+                                    </Grid>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
