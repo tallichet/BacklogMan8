@@ -93,7 +93,9 @@
             </HubSection>
             <HubSection Header="Projects">
                 <DataTemplate>
-                    <GridView ItemsSource="{Binding Path=OrganizationProjects}">
+                    <GridView ItemsSource="{Binding Path=OrganizationProjects}"
+                              SelectionMode="None" IsItemClickEnabled="True"
+                              ItemClick="GridView_ItemClick">
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Width="420" Height="130" Margin="10">

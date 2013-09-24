@@ -1,4 +1,5 @@
 ﻿using BacklogMan.Client.App.Win81.Common;
+using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -88,5 +89,14 @@ namespace BacklogMan.Client.App.Win81.Pages
         }
 
         #endregion
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is Core.Model.Project)
+            {
+                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject = e.ClickedItem as Core.Model.Project;
+                Frame.Navigate(typeof(Pages.ProjectPage));
+            }
+        }
     }
 }
