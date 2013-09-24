@@ -102,7 +102,11 @@ namespace BacklogMan.Client.App.Win81
                 ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject = e.ClickedItem as Core.Model.Project;
                 this.Frame.Navigate(typeof(Pages.ProjectPage));
             }
-            
+            else if (e.ClickedItem is Core.Model.Organization)
+            {
+                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentOrganization = e.ClickedItem as Core.Model.Organization;
+                this.Frame.Navigate(typeof(Pages.OrganisationPage));
+            }
         }
         #region NavigationHelper registration
 

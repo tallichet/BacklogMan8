@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BacklogMan.Client.App.Win81"
     xmlns:localData="using:BacklogMan.Client.App.Win81.Data"    
+    xmlns:converter="using:BacklogMan.Client.App.Win81.Converters"
     RequestedTheme="Light">
 
   <Application.Resources>
@@ -41,6 +42,8 @@
 
             <Color x:Key="BacklogManMainColor">#006dcc</Color>
             <x:String x:Key="AppName">BacklogMan</x:String>
+            <converter:EmailToGravatarUriConverter x:Key="EmailToGravatarUriConverter" />
+            
 
         </ResourceDictionary>
 

@@ -112,9 +112,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ColorConverter.cs" />
+    <Compile Include="Converters\EmailToGravatarUriConverter.cs" />
+    <Compile Include="Converters\StatusToStringConverter.cs" />
+    <Compile Include="Converters\StringColorToSolidColorBrushConverter.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="HubPage.xaml.cs">
       <DependentUpon>HubPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OrganisationPage.xaml.cs">
+      <DependentUpon>OrganisationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ProjectPage.xaml.cs">
       <DependentUpon>ProjectPage.xaml</DependentUpon>
@@ -188,6 +195,10 @@
     <Page Include="HubPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\OrganisationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ProjectPage.xaml">
       <SubType>Designer</SubType>

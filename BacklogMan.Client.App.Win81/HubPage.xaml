@@ -123,19 +123,18 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     
-                                    <TextBlock Text="{Binding Name}" Grid.Row="0" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" />
-                                    <TextBlock Text="{Binding Code}" Grid.Row="1" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="NoWrap" />
-                                    <StackPanel Orientation="Horizontal" Grid.Row="2" >
-                                        <TextBlock Text="{Binding StoryCount}" Style="{StaticResource BodyTextBlockStyle}" />
-                                        <TextBlock Text="stories" Style="{StaticResource BodyTextBlockStyle}" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding Email, Converter={StaticResource EmailToGravatarUriConverter}}" Width="40" Margin="0,0,10,0" />
+                                        <TextBlock Text="{Binding Name}" Grid.Row="0" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" VerticalAlignment="Center" />
                                     </StackPanel>
+                                    <TextBlock Text="{Binding Description}" Grid.Row="1" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="NoWrap" />                                    
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </DataTemplate>
             </HubSection>
-            <HubSection Padding="40,30,40,44" IsHeaderInteractive="True"  Name="sectionProjects" Width="440" >
+            <HubSection Padding="40,30,40,44" IsHeaderInteractive="False"  Name="sectionProjects" Width="440" >
                 <HubSection.Header>
                     <TextBlock x:Uid="Section2Header" TextLineBounds="TrimToBaseline" OpticalMarginAlignment="TrimSideBearings" Text="Current Sprint Stories"/>
                 </HubSection.Header>
@@ -177,12 +176,12 @@
                     </ListView>
                 </DataTemplate>
             </HubSection>
-            <HubSection Padding="7,30,40,44">
+            <!--<HubSection Padding="7,30,40,44">
                 <HubSection.Header>
                     <TextBlock x:Uid="Section3Header" TextLineBounds="TrimToBaseline" OpticalMarginAlignment="TrimSideBearings" Text="Section 3"/>
                 </HubSection.Header>
                 <DataTemplate>
-                    <!-- width of 400 -->
+                    --><!-- width of 400 --><!--
                     <StackPanel Orientation="Vertical" Margin="2,10,0,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -245,7 +244,7 @@
                         ItemClick="ItemView_ItemClick">
                     </GridView>
                 </DataTemplate>
-            </HubSection>
+            </HubSection>-->
         </Hub>
     </Grid>
 </Page>
