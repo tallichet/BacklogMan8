@@ -21,6 +21,9 @@ namespace BacklogMan.Client.Core.Model
 
         [DataMember(Name = "is_main")]
         public bool IsMain { get; set; }
+
+        [DataMember(Name = "is_archive")]
+        public bool IsArchive { get; set; }
         
         [DataMember(Name = "description")]
         public string Description { get; set; }

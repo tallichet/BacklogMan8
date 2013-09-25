@@ -28,6 +28,9 @@ namespace BacklogMan.Client.Core.Model
         [DataMember(Name = "description")]
         public string Description { get; set; }
 
+        [DataMember(Name = "lang")]
+        public string Language { get; set; }
+
         [DataMember(Name = "organization")]
         public int OrganizationId { get; set; }
 

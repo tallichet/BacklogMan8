@@ -82,6 +82,9 @@ namespace BacklogMan.Client.Core.Model
             }
         }
 
+        [DataMember(Name = "lang")]
+        public string Language { get; set; }
+
         [IgnoreDataMember]
         public Backlog Backlog { get; set; }
 
