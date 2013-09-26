@@ -43,7 +43,7 @@
                 </Grid>
             </Hub.Header>
 
-            <HubSection Header="Backlogs">
+            <HubSection Header="Backlogs" x:Uid="BacklogSection">
                 <DataTemplate>
                     <GridView ItemsSource="{Binding Path=ProjectBacklogs}" CanReorderItems="True">
                         <GridView.ItemTemplate>
