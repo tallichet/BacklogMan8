@@ -115,6 +115,9 @@
     <Compile Include="Controls\UserStoryDefinition.xaml.cs">
       <DependentUpon>UserStoryDefinition.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserStoryStatus.xaml.cs">
+      <DependentUpon>UserStoryStatus.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Converters\EmailToGravatarUriConverter.cs" />
     <Compile Include="Converters\StatusToStringConverter.cs" />
@@ -199,6 +202,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Controls\UserStoryDefinition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserStoryStatus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

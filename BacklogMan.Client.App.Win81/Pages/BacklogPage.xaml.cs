@@ -47,6 +47,8 @@ namespace BacklogMan.Client.App.Win81.Pages
 
         public BacklogPage()
         {
+            this.SizeChanged += PageSizeChanged;
+
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
@@ -79,6 +81,63 @@ namespace BacklogMan.Client.App.Win81.Pages
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
         }
+        
+        private void PageSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width > 120)
+            {
+                BacklogItemWidth = e.NewSize.Width - 120;
+            }
+
+            if (e.NewSize.Width > e.NewSize.Height)
+            {
+                LandscapeVisibility = Visibility.Visible;
+                ProtraitVisibility = Visibility.Collapsed;
+            }
+            else
+            {
+                LandscapeVisibility = Visibility.Collapsed;
+                ProtraitVisibility = Visibility.Visible;
+            }
+        }
+
+        public double BacklogItemWidth
+        {
+            get { return (double)GetValue(BacklogItemWidthProperty); }
+            private set { SetValue(BacklogItemWidthProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for BacklogItemWidth.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BacklogItemWidthProperty =
+            DependencyProperty.Register("BacklogItemWidth", typeof(double), typeof(BacklogPage), new PropertyMetadata(300));
+
+
+        /// <summary>
+        /// return visible if landscape, false if not
+        /// </summary>
+        public Visibility LandscapeVisibility
+        {
+            get { return (Visibility)GetValue(LandscapeVisibilityProperty); }
+            private set { SetValue(LandscapeVisibilityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LandscapeVisibility.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LandscapeVisibilityProperty =
+            DependencyProperty.Register("LandscapeVisibility", typeof(Visibility), typeof(BacklogPage), new PropertyMetadata(Visibility.Visible));
+
+
+        public Visibility ProtraitVisibility
+        {
+            get { return (Visibility)GetValue(ProtraitVisibilityProperty); }
+            set { SetValue(ProtraitVisibilityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ProtraitVisibility.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ProtraitVisibilityProperty =
+            DependencyProperty.Register("ProtraitVisibility", typeof(Visibility), typeof(BacklogPage), new PropertyMetadata(Visibility.Collapsed));
+
+        
+
 
         #region NavigationHelper registration
 

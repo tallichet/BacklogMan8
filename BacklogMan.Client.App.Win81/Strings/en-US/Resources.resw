@@ -126,13 +126,13 @@
   <data name="ProjectsSection.Header" xml:space="preserve">
     <value>Projects</value>
   </data>
-  <data name="StoryAdA" xml:space="preserve">
+  <data name="StoryAsA" xml:space="preserve">
     <value>As a </value>
   </data>
   <data name="StoryIWantTo" xml:space="preserve">
-    <value>I want to</value>
+    <value> I want to </value>
   </data>
   <data name="StorySoICan" xml:space="preserve">
-    <value>So I can</value>
+    <value> So I can</value>
   </data>
 </root>

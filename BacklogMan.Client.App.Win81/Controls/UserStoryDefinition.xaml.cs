@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -46,12 +47,18 @@ namespace BacklogMan.Client.App.Win81.Controls
             {
                 if (story == null)
                 {
-                    ctrl.textbox.Text = "";
+                    ctrl.textbox.Inlines.Clear();
                 }
                 else
                 {
                     var res = ResourceLoader.GetForCurrentView();
-                    
+
+                    ctrl.textbox.Inlines.Add(new Windows.UI.Xaml.Documents.Run() { Text = res.GetString("StoryAsA") });
+                    ctrl.textbox.Inlines.Add(new Windows.UI.Xaml.Documents.Run() { Text = story.AsUser });
+                    ctrl.textbox.Inlines.Add(new Windows.UI.Xaml.Documents.Run() { Text = res.GetString("StoryIWantTo")});
+                    ctrl.textbox.Inlines.Add(new Windows.UI.Xaml.Documents.Run() { Text = story.Goal, FontWeight = FontWeights.Bold });
+                    ctrl.textbox.Inlines.Add(new Windows.UI.Xaml.Documents.Run() { Text = res.GetString("StorySoICan") });
+                    ctrl.textbox.Inlines.Add(new Windows.UI.Xaml.Documents.Run() { Text = story.Result });
                 }
             }
         }
