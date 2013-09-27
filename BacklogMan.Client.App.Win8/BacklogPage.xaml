@@ -119,8 +119,7 @@
         
         <Grid x:Name="storyEditorLayer" Grid.RowSpan="2" Background="#80000000" Visibility="Collapsed" Tapped="StoryLayerTapped">
             <ctrl:StoryEditor x:Name="storyEditor" HorizontalAlignment="Center" VerticalAlignment="Center" Tapped="StoryTapped"
-                              BacklogId="{Binding Path=Main.CurrentBacklog.Id, Source={StaticResource Locator}}"
-                              ProjectId="{Binding Path=Main.CurrentBacklog.Project.Id, Source={StaticResource Locator}}"/>
+                              BacklogId="{Binding Path=Main.CurrentBacklog.Id, Source={StaticResource Locator}}"/>
         </Grid>
 
         <VisualStateManager.VisualStateGroups>

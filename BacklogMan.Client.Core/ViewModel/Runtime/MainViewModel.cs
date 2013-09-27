@@ -402,11 +402,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
             if (movedStory == null) return;
 
-            var operationResult = await ServiceLocator.Current.GetInstance<Service.INetworkService>().MoveStory(
-                                    movedStory.Backlog.Project.Id, 
-                                    movedStory.Backlog.Id,
-                                    movedStory.Id,
-                                    BacklogStories.Select(s => s.Id).ToArray());
+            var operationResult = await ServiceLocator.Current.GetInstance<Service.INetworkService>().MoveStory(movedStory.Backlog.Id, movedStory.Id, BacklogStories.Select(s => s.Id).ToArray());
 
             if (Debugger.IsAttached)
             {

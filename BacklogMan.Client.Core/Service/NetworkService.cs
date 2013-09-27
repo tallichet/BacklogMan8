@@ -98,7 +98,7 @@ namespace BacklogMan.Client.Core.Service
             return responseData.ApiToken;
         }
 
-        public async Task<int> AddStory(int projectId, int backlogId, Model.Story newStory)
+        public async Task<int> AddStory(int backlogId, Model.Story newStory)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace BacklogMan.Client.Core.Service
                 {
                     return await UpdateStory(newStory);
                 }
-                var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/backlogs/" + backlogId + "/stories/");
+                var uri = new Uri(BacklogManApiBaseUri, "./backlogs/" + backlogId + "/stories/");
                 var result = await PostOrPutData<Model.Story, Model.Story>(uri, newStory);
                 return result.Id;
             }
@@ -120,7 +120,7 @@ namespace BacklogMan.Client.Core.Service
         {
             try
             {
-                var uri = new Uri(BacklogManApiBaseUri, "./projects/" + story.Backlog.Project.Id + "/backlogs/" + story.Backlog.Id + "/stories/" + story.Id + "/");
+                var uri = new Uri(BacklogManApiBaseUri, "./backlogs/" + story.Backlog.Id + "/stories/" + story.Id + "/");
                 var result = await PostOrPutData<Model.Story, Model.Story>(uri, story, false);
                 return result.Id;
             }
@@ -134,7 +134,7 @@ namespace BacklogMan.Client.Core.Service
         {
             try
             {
-                var uri = new Uri(BacklogManApiBaseUri, "./projects/" + story.Backlog.Project.Id + "/backlogs/" + story.Backlog.Id + "/stories/" + story.Id + "/");
+                var uri = new Uri(BacklogManApiBaseUri, "./backlogs/" + story.Backlog.Id + "/stories/" + story.Id + "/");
                 await Delete(uri);
                 return true;
             }
@@ -144,9 +144,9 @@ namespace BacklogMan.Client.Core.Service
             }
         }
 
-        public async Task<bool> MoveStory(int projectId, int targetBacklogId, int movedStoryId, int[] storyIdOrder)
+        public async Task<bool> MoveStory(int targetBacklogId, int movedStoryId, int[] storyIdOrder)
         {
-            var uri = new Uri(BacklogManApiBaseUri, "./projects/" + projectId + "/_move_story/");
+            var uri = new Uri(BacklogManApiBaseUri, "./_move_story/");
 
             var request = new Internal.MoveStoryRequest()
             {
