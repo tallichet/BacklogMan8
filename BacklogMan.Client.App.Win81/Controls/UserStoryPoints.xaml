@@ -20,7 +20,8 @@
         </Ellipse>
         
         <TextBlock x:Name="pointsDisplay" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" 
-                   LineHeight="0" TextLineBounds="Full" />
+                   LineHeight="0" TextLineBounds="Full">
+        </TextBlock>
                  
     </Grid>
 </UserControl>
