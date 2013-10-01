@@ -10,6 +10,6 @@
     d:DesignWidth="400">
     
     <Grid>
-        <TextBlock x:Name="status" />
+        <TextBlock x:Name="status" HorizontalAlignment="Right" />
     </Grid>
 </UserControl>

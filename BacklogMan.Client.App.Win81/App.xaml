@@ -70,6 +70,7 @@
             <SolidColorBrush x:Key="BacklogManElementBackgroudColor" Color="{StaticResource BacklogManMainColor}" />
             <x:String x:Key="AppName">BacklogMan</x:String>
             <converter:EmailToGravatarUriConverter x:Key="EmailToGravatarUriConverter" />
+            <converter:ColorConverter x:Key="ColorConverter" />
             
 
         </ResourceDictionary>

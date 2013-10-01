@@ -115,6 +115,9 @@
     <Compile Include="Controls\UserStoryDefinition.xaml.cs">
       <DependentUpon>UserStoryDefinition.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserStoryPoints.xaml.cs">
+      <DependentUpon>UserStoryPoints.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserStoryStatus.xaml.cs">
       <DependentUpon>UserStoryStatus.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Controls\UserStoryDefinition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserStoryPoints.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
