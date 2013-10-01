@@ -25,6 +25,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             OrganizationBacklogs = new ReorderableCollection<Model.Backlog>();
             OrganizationBacklogs.ManualReordered += organizationBacklogs_ManualReordered;
             BacklogStories = new ReorderableCollection<Model.Story>();
+            BacklogStories.ManualReordered += backlogStories_ManualReordered;
 
             BacklogStoriesAccepted = new ReorderableCollection<Model.Story>();
             BacklogStoriesCompleted = new ReorderableCollection<Model.Story>();
@@ -32,7 +33,6 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             BacklogStoriesRejected = new ReorderableCollection<Model.Story>();
             BacklogStoriesToDo = new ReorderableCollection<Model.Story>();
 
-            BacklogStories.ManualReordered += backlogStories_ManualReordered;
             OrganizationProjects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
 
             NotEstimatedStories = new System.Collections.ObjectModel.ObservableCollection<Model.Story>();
@@ -402,11 +402,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
             if (movedStory == null) return;
 
-            var operationResult = await ServiceLocator.Current.GetInstance<Service.INetworkService>().MoveStory(
-                                    movedStory.Backlog.Project.Id, 
-                                    movedStory.Backlog.Id,
-                                    movedStory.Id,
-                                    BacklogStories.Select(s => s.Id).ToArray());
+            var operationResult = await ServiceLocator.Current.GetInstance<Service.INetworkService>().MoveStory(movedStory.Backlog.Id, movedStory.Id, BacklogStories.Select(s => s.Id).ToArray());
 
             if (Debugger.IsAttached)
             {

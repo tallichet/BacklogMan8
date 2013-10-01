@@ -97,6 +97,11 @@ namespace BacklogMan.Client.App.Win81.Pages
                 ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject = e.ClickedItem as Core.Model.Project;
                 Frame.Navigate(typeof(Pages.ProjectPage));
             }
+            else if (e.ClickedItem is Core.Model.Backlog)
+            {
+                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = e.ClickedItem as Core.Model.Backlog;
+                Frame.Navigate(typeof(Pages.BacklogPage));
+            }
         }
     }
 }

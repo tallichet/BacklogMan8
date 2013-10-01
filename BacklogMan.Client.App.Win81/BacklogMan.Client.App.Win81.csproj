@@ -112,6 +112,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserStoryDefinition.xaml.cs">
+      <DependentUpon>UserStoryDefinition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserStoryPoints.xaml.cs">
+      <DependentUpon>UserStoryPoints.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserStoryStatus.xaml.cs">
+      <DependentUpon>UserStoryStatus.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Converters\EmailToGravatarUriConverter.cs" />
     <Compile Include="Converters\StatusToStringConverter.cs" />
@@ -119,6 +128,9 @@
     <Compile Include="Helper.cs" />
     <Compile Include="HubPage.xaml.cs">
       <DependentUpon>HubPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BacklogPage.xaml.cs">
+      <DependentUpon>BacklogPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\OrganisationPage.xaml.cs">
       <DependentUpon>OrganisationPage.xaml</DependentUpon>
@@ -192,9 +204,25 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Controls\UserStoryDefinition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserStoryPoints.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserStoryStatus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HubPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\BacklogPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\OrganisationPage.xaml">
       <SubType>Designer</SubType>

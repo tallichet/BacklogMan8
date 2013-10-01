@@ -48,9 +48,11 @@
                     <ImageBrush Stretch="UniformToFill" />
                 </HubSection.Background>
             </HubSection>-->
-            <HubSection Header="Backlogs">
+            <HubSection Header="Backlogs" Margin="80,0,0,0" x:Uid="BacklogSection">
                 <DataTemplate>
-                    <GridView ItemsSource="{Binding Path=OrganizationBacklogs}" CanReorderItems="True">
+                    <GridView ItemsSource="{Binding Path=OrganizationBacklogs}" CanReorderItems="True"
+                              IsItemClickEnabled="True" SelectionMode="None"
+                              ItemClick="GridView_ItemClick">
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Width="420" Height="130" Margin="10">
@@ -91,7 +93,7 @@
                     </GridView>
                 </DataTemplate>
             </HubSection>
-            <HubSection Header="Projects">
+            <HubSection Header="Projects" x:Uid="ProjectsSection">
                 <DataTemplate>
                     <GridView ItemsSource="{Binding Path=OrganizationProjects}"
                               SelectionMode="None" IsItemClickEnabled="True"
