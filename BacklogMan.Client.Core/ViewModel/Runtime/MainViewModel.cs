@@ -27,12 +27,6 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             BacklogStories = new ReorderableCollection<Model.Story>();
             BacklogStories.ManualReordered += backlogStories_ManualReordered;
 
-            BacklogStoriesAccepted = new ReorderableCollection<Model.Story>();
-            BacklogStoriesCompleted = new ReorderableCollection<Model.Story>();
-            BacklogStoriesInProgress = new ReorderableCollection<Model.Story>();
-            BacklogStoriesRejected = new ReorderableCollection<Model.Story>();
-            BacklogStoriesToDo = new ReorderableCollection<Model.Story>();
-
             OrganizationProjects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
 
             NotEstimatedStories = new System.Collections.ObjectModel.ObservableCollection<Model.Story>();
@@ -238,9 +232,19 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 
                 foreach (var b in project.Backlogs)
                 {
-                    ProjectBacklogs.Add(
-                        await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(b.Id));
-                    b.Project = project;
+                    if (b.IsArchive) continue;
+
+                    var backlog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(b.Id);
+                                        
+                    if (b.IsMain)
+                    {
+                        ProjectBacklogs.Insert(0, backlog);
+                    }
+                    else
+                    {
+                        ProjectBacklogs.Add(backlog);
+                    }
+                    backlog.Project = project;
                 }
             }
             catch (Exception)
@@ -256,8 +260,18 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             {
                 try
                 {
-                    OrganizationBacklogs.Add(
-                        await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(b.Id));
+                    if (b.IsArchive) continue;
+
+                    var backlog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(b.Id);
+
+                    if (b.IsMain)
+                    {
+                        OrganizationBacklogs.Insert(0, backlog);
+                    }
+                    else
+                    {
+                        OrganizationBacklogs.Add(backlog);
+                    }
                 }
                 catch (Exception)
                 {
@@ -290,62 +304,15 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         {
             BacklogStories.Clear();
 
-            BacklogStoriesAccepted.Clear();
-            BacklogStoriesCompleted.Clear();
-            BacklogStoriesInProgress.Clear();
-            BacklogStoriesRejected.Clear();
-            BacklogStoriesToDo.Clear();
-
             var backlog = CurrentBacklog; // this allow us to be sure the backlog don't change during the download
             var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentBacklog.Id);
             foreach (var s in stories)
             {
                 BacklogStories.Add(s);
                 s.Backlog = backlog;
-
-                switch (s.Status)
-                {
-                    case Model.StoryStatus.Accepted:
-                        BacklogStoriesAccepted.Add(s);
-                        break;
-                    case Model.StoryStatus.Completed:
-                        BacklogStoriesCompleted.Add(s);
-                        break;
-                    case Model.StoryStatus.InProgress:
-                        BacklogStoriesInProgress.Add(s);
-                        break;
-                    case Model.StoryStatus.Rejected:
-                        BacklogStoriesRejected.Add(s);
-                        break;
-                    case Model.StoryStatus.ToDo:
-                        BacklogStoriesToDo.Add(s);
-                        break;
-                }
             }
         }
 
-        private async Task RefreshNotEstimatedStories()
-        {
-            NotEstimatedStories.Clear();
-
-            foreach (var p in Projects)
-            {
-                if (p.Backlogs != null)
-                {
-                    foreach (var b in p.Backlogs)
-                    {
-                        var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(b.Id);
-                        foreach (var s in stories)
-                        {
-                            if (s.Points < 0)
-                            {
-                                NotEstimatedStories.Add(s);
-                            }
-                        }
-                    }
-                }
-            }
-        }
 
         #region events
         private async void projectBacklogs_ManualReordered(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -429,35 +396,6 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
 
             this.RefreshBacklogStories();
-        }
-
-        public ReorderableCollection<Model.Story> BacklogStoriesToDo
-        {
-            get;
-            private set;
-        }
-        public ReorderableCollection<Model.Story> BacklogStoriesInProgress
-        {
-            get;
-            private set;
-        }
-
-        public ReorderableCollection<Model.Story> BacklogStoriesCompleted
-        {
-            get;
-            private set;
-        }
-
-        public ReorderableCollection<Model.Story> BacklogStoriesAccepted
-        {
-            get;
-            private set;
-        }
-
-        public ReorderableCollection<Model.Story> BacklogStoriesRejected
-        {
-            get;
-            private set;
         }
     }
 }
