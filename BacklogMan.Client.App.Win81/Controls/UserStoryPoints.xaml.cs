@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -49,6 +50,31 @@ namespace BacklogMan.Client.App.Win81.Controls
                 {
                     ctrl.pointsDisplay.Text = "";
                 }
+            }
+        }
+
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs arg)
+        {
+            var flyout = new Flyout();
+            var picker = new PointsPicker();
+            picker.PointsChoosed += (_, e) =>
+            {
+                flyout.Hide();
+                setStoryPoints(e.Points);
+            };
+
+            arg.Handled = true;
+
+            flyout.Content = picker;
+            flyout.ShowAt(this);
+        }
+
+        private async void setStoryPoints(int newPoints)
+        {
+            var result = await ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().SetStoryPoints(this.Story, newPoints);
+            if (result)
+            {
+                this.pointsDisplay.Text = newPoints.ToString();
             }
         }
 

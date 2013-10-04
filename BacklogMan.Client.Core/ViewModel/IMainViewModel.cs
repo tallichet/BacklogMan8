@@ -88,5 +88,13 @@ namespace BacklogMan.Client.Core.ViewModel
         /// <param name="story"></param>
         /// <param name="newStatus"></param>
         Task<bool> SetStoriesStatus(Model.Story story, Model.StoryStatus newStatus);
+
+        /// <summary>
+        /// Update number of points of a story
+        /// </summary>
+        /// <param name="story"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        Task<bool> SetStoryPoints(Model.Story story, int points);
     }
 }

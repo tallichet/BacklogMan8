@@ -160,6 +160,7 @@
     <Content Include="Images\Backgrounds\imagination04.jpg" />
     <Content Include="Images\Backgrounds\imagination05.jpg" />
     <Content Include="Images\Backgrounds\imagination06.jpg" />
+    <Content Include="Images\Backgrounds\humour_038.jpg" />
     <None Include="Common\ReadMe.txt" />
     <None Include="BacklogMan.Client.App.Win81_TemporaryKey.pfx" />
     <Content Include="Fonts\fontawesome-webfont.ttf" />

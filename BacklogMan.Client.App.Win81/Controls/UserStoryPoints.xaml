@@ -9,7 +9,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
     
-    <Grid Width="30" Height="30">
+    <Grid Width="30" Height="30" Tapped="Grid_Tapped">
         <Ellipse Margin="0">
             <Ellipse.Fill>
                 <SolidColorBrush Color="{StaticResource BacklogManMainColor}" Opacity=".2" />

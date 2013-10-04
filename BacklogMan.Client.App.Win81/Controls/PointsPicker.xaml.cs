@@ -28,7 +28,7 @@ namespace BacklogMan.Client.App.Win81.Controls
         {
             if (this.PointsChoosed != null)
             {
-                PointsChoosed(this, new PointsChoosedEventArgs((int)(e.OriginalSource as Grid).Tag));
+                PointsChoosed(this, new PointsChoosedEventArgs(int.Parse((sender as Grid).Tag.ToString())));
             }
         }
 

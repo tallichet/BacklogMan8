@@ -45,17 +45,21 @@ namespace BacklogMan.Client.App.Win81.Controls
                 var story = e.NewValue as Core.Model.Story;
                 if (story != null && story.Points >= 0)
                 {
-                    ctrl.status.Text =  story.Status.ToString();
+                    ctrl.status.Text = getLabelForStatus(story.Status);
                 }
                 else
                 {
-                    ctrl.status.Text = "";
+                    ctrl.status.Text = "-";
                 }
             }
         }
 
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            if (!this.IsEnabled) return;
+
+            e.Handled = true;
+
             var menu = new MenuFlyout();
 
             menu.Items.Add(new MenuFlyoutItem() 
@@ -84,8 +88,8 @@ namespace BacklogMan.Client.App.Win81.Controls
                 Command = new Common.RelayCommand(() => setStatus(Core.Model.StoryStatus.Rejected)),
             });
 
-            menu.Placement = FlyoutPlacementMode.Full;
-            menu.ShowAt(sender as FrameworkElement);
+            menu.Placement = FlyoutPlacementMode.Left;
+            menu.ShowAt(this);
         }
 
         private static string getLabelForStatus(Core.Model.StoryStatus newStatus)

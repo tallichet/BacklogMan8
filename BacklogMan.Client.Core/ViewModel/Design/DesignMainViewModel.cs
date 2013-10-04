@@ -292,5 +292,11 @@ namespace BacklogMan.Client.Core.ViewModel.Design
         {
             throw new NotImplementedException();
         }
+
+
+        public Task<bool> SetStoryPoints(Model.Story story, int p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

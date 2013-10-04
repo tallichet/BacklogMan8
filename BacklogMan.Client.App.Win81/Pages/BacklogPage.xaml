@@ -48,7 +48,8 @@
         </Grid>
 
         <ListView ItemsSource="{Binding Path=BacklogStories}" Margin="40,0" Grid.Row="1"
-                  CanReorderItems="True" AllowDrop="True">
+                  CanReorderItems="True" AllowDrop="True" SelectionMode="Multiple"
+                  IsItemClickEnabled="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="DarkBlue" BorderThickness="0.5" Margin="5" HorizontalAlignment="Stretch" Background="{StaticResource ApplicationPageBackgroundThemeBrush}"

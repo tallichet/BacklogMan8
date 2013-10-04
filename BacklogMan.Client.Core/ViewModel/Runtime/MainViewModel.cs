@@ -312,7 +312,42 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 s.Backlog = backlog;
             }
         }
+        public void DeleteStories(Model.Story[] storiesToDelete)
+        {
+            foreach (var s in storiesToDelete)
+            {
+                ServiceLocator.Current.GetInstance<Core.Service.INetworkService>().DeleteStory(s);
+            }
 
+            this.RefreshBacklogStories();
+        }
+        
+        public async Task<bool> SetStoriesStatus(Model.Story story, Model.StoryStatus newStatus)
+        {
+            var result = await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStoryStatus(story.Id, newStatus);
+            if (result)
+            {
+                story.Status = newStatus;
+            }
+            return result;
+        }
+        
+        public async Task<bool> SetStoryPoints(Model.Story story, int points)
+        {
+            var prevPoints = story.Points;
+            story.Points = points;
+            var storyId = await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStory(story);
+            if (storyId < 0)
+            {
+                story.Points = prevPoints;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
 
         #region events
         private async void projectBacklogs_ManualReordered(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -388,25 +423,6 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         #endregion
 
 
-        public void DeleteStories(Model.Story[] storiesToDelete)
-        {
-            foreach (var s in storiesToDelete)
-            {
-                ServiceLocator.Current.GetInstance<Core.Service.INetworkService>().DeleteStory(s);
-            }
 
-            this.RefreshBacklogStories();
-        }
-
-
-        public async Task<bool> SetStoriesStatus(Model.Story story, Model.StoryStatus newStatus)
-        {
-            var result= await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStoryStatus(story.Id, newStatus);
-            if (result)
-            {
-                story.Status = newStatus;
-            }
-            return result;
-        }
     }
 }

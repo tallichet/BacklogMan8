@@ -53,7 +53,7 @@
             </Hub.Header>
             <HubSection Width="780" d:IsHidden="True" Name="sectionTitle">
                 <HubSection.Background>
-                    <ImageBrush ImageSource="Assets/postit.jpeg" Stretch="Uniform" />
+                    <ImageBrush ImageSource="Images/Backgrounds/humour_038.jpg" Stretch="Uniform" />
                 </HubSection.Background>
             </HubSection>
             <HubSection Padding="120,30,40,44"  VerticalAlignment="Top" Name="sectionOrganization" x:Uid="OrganizationsSection" >

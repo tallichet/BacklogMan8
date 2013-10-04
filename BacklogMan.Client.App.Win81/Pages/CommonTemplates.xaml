@@ -73,7 +73,7 @@
                 <TextBlock Text="{Binding Name}" Grid.Row="0" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" />
             </StackPanel>
             
-            <TextBlock Text="{Binding Description}" Grid.Row="1" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="NoWrap" />
+            <TextBlock Text="{Binding Description}" Grid.Row="1" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
             
             <StackPanel Orientation="Horizontal" Grid.Row="2" >
                 <TextBlock Text="{Binding StoryCount}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,5,0" />
