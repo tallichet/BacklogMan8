@@ -156,6 +156,7 @@
     </AppxManifest>
     <None Include="Common\ReadMe.txt" />
     <None Include="BacklogMan.Client.App.Win81_TemporaryKey.pfx" />
+    <Content Include="Fonts\fontawesome-webfont.ttf" />
     <None Include="packages.config" />
     <PRIResource Include="Strings\en-US\Resources.resw">
       <SubType>Designer</SubType>
