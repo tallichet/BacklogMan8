@@ -60,40 +60,30 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <phone:Pivot Title="{Binding Path=CurrentBacklog.Name}">
-            <!--Pivot item one-->
-            <phone:PivotItem Header="in progress">
+            <phone:PivotItem Header="info">
+                <StackPanel>
+                    <TextBlock Text="{Binding Path=CurrentBacklog.Description}" TextWrapping="Wrap" TextTrimming="WordEllipsis" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=CurrentBacklog.Statistics.StoriesTotal}" />
+                        <TextBlock Text="Stories" />
+                        <TextBlock Text="{Binding Path=CurrentBacklog.Statistics.StoriesCompleted}" />
+                        <TextBlock Text="completed" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=CurrentBacklog.Statistics.PointsTotal}" />
+                        <TextBlock Text="Points" />
+                        <TextBlock Text="{Binding Path=CurrentBacklog.Statistics.PointsCompleted}" />
+                        <TextBlock Text="completed" />
+                    </StackPanel>
+                </StackPanel>
+            </phone:PivotItem>
+            
+            <phone:PivotItem Header="stories">
                 <Grid>
-                    <phone:LongListSelector ItemsSource="{Binding BacklogStoriesInProgress}" ItemTemplate="{StaticResource StoryTemplate}" />
+                    <phone:LongListSelector ItemsSource="{Binding BacklogStories}" ItemTemplate="{StaticResource StoryTemplate}" />
                 </Grid>
             </phone:PivotItem>
 
-            <!--Pivot item two-->
-            <phone:PivotItem Header="completed">
-                <Grid>
-                    <phone:LongListSelector ItemsSource="{Binding BacklogStoriesCompleted}" ItemTemplate="{StaticResource StoryTemplate}" />
-                </Grid>
-            </phone:PivotItem>
-            
-            <!--Pivot item two-->
-            <phone:PivotItem Header="accepted">
-                <Grid>
-                    <phone:LongListSelector ItemsSource="{Binding BacklogStoriesAccepted}" ItemTemplate="{StaticResource StoryTemplate}" />
-                </Grid>
-            </phone:PivotItem>
-            
-            <!--Pivot item two-->
-            <phone:PivotItem Header="rejected">
-                <Grid>
-                    <phone:LongListSelector ItemsSource="{Binding BacklogStoriesRejected}" ItemTemplate="{StaticResource StoryTemplate}" />
-                </Grid>
-            </phone:PivotItem>
-
-            <!--Pivot item two-->
-            <phone:PivotItem Header="to do">
-                <Grid>
-                    <phone:LongListSelector ItemsSource="{Binding BacklogStoriesToDo}" ItemTemplate="{StaticResource StoryTemplate}" />
-                </Grid>
-            </phone:PivotItem>
         </phone:Pivot>
     </Grid>
     
