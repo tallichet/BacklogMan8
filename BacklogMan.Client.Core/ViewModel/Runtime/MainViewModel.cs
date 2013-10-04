@@ -397,5 +397,16 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
             this.RefreshBacklogStories();
         }
+
+
+        public async Task<bool> SetStoriesStatus(Model.Story story, Model.StoryStatus newStatus)
+        {
+            var result= await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStoryStatus(story.Id, newStatus);
+            if (result)
+            {
+                story.Status = newStatus;
+            }
+            return result;
+        }
     }
 }

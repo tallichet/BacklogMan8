@@ -29,7 +29,9 @@ namespace BacklogMan.Client.Core.Service
 
         Task<int> AddStory(int backlogId, Model.Story newStory);
         Task<int> UpdateStory(Model.Story story);
+        Task<bool> UpdateStoryStatus(int storyId, Model.StoryStatus newStatus);
         Task<bool> DeleteStory(Model.Story Story);
+
         Task<bool> MoveStory(int targetBacklogId, int movedStoryId, int[] storyIdOrder);
         Task<bool> OrderBacklogInProject(int projectId, int movedBacklog, int[] backlogIdOrder);
         Task<bool> OrderBacklogInOrganization(int organizationId, int movedBacklog, int[] backlogIdOrder);

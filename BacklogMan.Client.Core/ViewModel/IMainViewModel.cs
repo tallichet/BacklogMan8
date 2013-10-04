@@ -81,5 +81,12 @@ namespace BacklogMan.Client.Core.ViewModel
         /// </summary>
         /// <param name="storiesToDelete"></param>
         void DeleteStories(Model.Story[] storiesToDelete);
+
+        /// <summary>
+        /// Update story status
+        /// </summary>
+        /// <param name="story"></param>
+        /// <param name="newStatus"></param>
+        Task<bool> SetStoriesStatus(Model.Story story, Model.StoryStatus newStatus);
     }
 }

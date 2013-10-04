@@ -188,9 +188,6 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             #endregion
         }
 
-
-
-
         public System.Collections.ObjectModel.ObservableCollection<Model.Organization> Organizations
         {
             get; 
@@ -286,6 +283,12 @@ namespace BacklogMan.Client.Core.ViewModel.Design
 
 
         public void DeleteStories(Model.Story[] storiesToDelete)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Task<bool> SetStoriesStatus(Model.Story story, Model.StoryStatus newStatus)
         {
             throw new NotImplementedException();
         }

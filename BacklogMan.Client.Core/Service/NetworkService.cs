@@ -192,7 +192,7 @@ namespace BacklogMan.Client.Core.Service
             return result.Ok;
         }
 
-        public async Task<bool> UpdateStoryStatus(string storyId, Model.StoryStatus newStatus)
+        public async Task<bool> UpdateStoryStatus(int storyId, Model.StoryStatus newStatus)
         {
             var uri = new Uri(BacklogManApiBaseUri, "./stories/" + storyId + "/status/");
 
@@ -259,5 +259,8 @@ namespace BacklogMan.Client.Core.Service
 
 
         #endregion
+
+
+        
     }
 }

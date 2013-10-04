@@ -9,7 +9,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
     
-    <Grid>
+    <Grid Tapped="Grid_Tapped">
         <TextBlock x:Name="status" HorizontalAlignment="Right" />
     </Grid>
 </UserControl>

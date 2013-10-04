@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -43,12 +45,74 @@ namespace BacklogMan.Client.App.Win81.Controls
                 var story = e.NewValue as Core.Model.Story;
                 if (story != null && story.Points >= 0)
                 {
-                    ctrl.status.Text = story.Status.ToString();
+                    ctrl.status.Text =  story.Status.ToString();
                 }
                 else
                 {
                     ctrl.status.Text = "";
                 }
+            }
+        }
+
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var menu = new MenuFlyout();
+
+            menu.Items.Add(new MenuFlyoutItem() 
+            {
+                Text = getLabelForStatus(Core.Model.StoryStatus.ToDo),
+                Command = new Common.RelayCommand(() => setStatus(Core.Model.StoryStatus.ToDo)),
+            });
+            menu.Items.Add(new MenuFlyoutItem()
+            {
+                Text = getLabelForStatus(Core.Model.StoryStatus.InProgress),
+                Command = new Common.RelayCommand(() => setStatus(Core.Model.StoryStatus.InProgress)),
+            });
+            menu.Items.Add(new MenuFlyoutItem()
+            {
+                Text = getLabelForStatus(Core.Model.StoryStatus.Completed),
+                Command = new Common.RelayCommand(() => setStatus(Core.Model.StoryStatus.Completed)),
+            });
+            menu.Items.Add(new MenuFlyoutItem()
+            {
+                Text = getLabelForStatus(Core.Model.StoryStatus.Accepted),
+                Command = new Common.RelayCommand(() => setStatus(Core.Model.StoryStatus.Accepted)),
+            });
+            menu.Items.Add(new MenuFlyoutItem()
+            {
+                Text = getLabelForStatus(Core.Model.StoryStatus.Rejected),
+                Command = new Common.RelayCommand(() => setStatus(Core.Model.StoryStatus.Rejected)),
+            });
+
+            menu.Placement = FlyoutPlacementMode.Full;
+            menu.ShowAt(sender as FrameworkElement);
+        }
+
+        private static string getLabelForStatus(Core.Model.StoryStatus newStatus)
+        {
+            switch(newStatus)
+            {
+                case Core.Model.StoryStatus.ToDo:
+                    return "to do";
+                case Core.Model.StoryStatus.InProgress:
+                    return "in progress";
+                case Core.Model.StoryStatus.Completed:
+                    return "completed";
+                case Core.Model.StoryStatus.Accepted:
+                    return "accepted";
+                case Core.Model.StoryStatus.Rejected:
+                    return "rejected";
+                default:
+                    return "[" + newStatus.ToString() + "]";
+            }
+        }
+
+        private async void setStatus(Core.Model.StoryStatus newStatus)
+        {
+            var result = await ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().SetStoriesStatus(this.Story, newStatus);
+            if (result)
+            {
+                this.status.Text = getLabelForStatus(newStatus);
             }
         }
 
