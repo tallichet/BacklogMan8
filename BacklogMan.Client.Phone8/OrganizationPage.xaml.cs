@@ -24,5 +24,12 @@ namespace BacklogMan.Client.Phone8
             ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject = p;
             NavigationService.Navigate(new Uri("/ProjectPage.xaml", UriKind.Relative));
         }
+
+        private void Backlog_Tapped(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var b = (sender as Panel).Tag as Core.Model.Backlog;
+            ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = b;
+            NavigationService.Navigate(new Uri("/BacklogPage.xaml", UriKind.Relative));
+        }
     }
 }

@@ -20,38 +20,59 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="BACKLOG MAN" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding Path=CurrentOrganization.Name}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+        <phone:Pivot x:Name="pivotMain" Title="{Binding Path=CurrentOrganization.Name}">
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector ItemsSource="{Binding Path=OrganizationProjects}">
-                <phone:LongListSelector.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Height="120" Margin="6" Tap="Project_Tapped" Tag="{Binding}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
+            <phone:PivotItem Header="backlogs">
+                <phone:LongListSelector ItemsSource="{Binding Path=OrganizationBacklogs}">
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="120" Margin="6" Tap="Backlog_Tapped" Tag="{Binding}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                            <Image Width="60" Height="60" Source="{Binding Email, Converter={StaticResource EmailToGravatarUriConverter}}" 
-                                           Grid.RowSpan="2"/>
-                            <TextBlock Text="{Binding Path=Name}" Style="{StaticResource PhoneTextTitle2Style}" 
-                                               Grid.Column="1"/>
-                            <TextBlock Text="{Binding Path=Description}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" 
-                                               Grid.Column="1" Grid.Row="1"/>
-                        </Grid>
-                    </DataTemplate>
-                </phone:LongListSelector.ItemTemplate>
-            </phone:LongListSelector>
-        </Grid>
+                                <Image Width="60" Height="60" Source="{Binding Email, Converter={StaticResource EmailToGravatarUriConverter}}" 
+                                            Grid.RowSpan="2"/>
+                                <TextBlock Text="{Binding Path=Name}" Style="{StaticResource PhoneTextTitle2Style}" 
+                                                Grid.Column="1"/>
+                                <TextBlock Text="{Binding Path=Description}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" 
+                                                Grid.Column="1" Grid.Row="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                </phone:LongListSelector>
+            </phone:PivotItem>
+
+            <phone:PivotItem Header="projects">
+                <phone:LongListSelector ItemsSource="{Binding Path=OrganizationProjects}">
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="120" Margin="6" Tap="Project_Tapped" Tag="{Binding}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Width="60" Height="60" Source="{Binding Email, Converter={StaticResource EmailToGravatarUriConverter}}" 
+                                            Grid.RowSpan="2"/>
+                                <TextBlock Text="{Binding Path=Name}" Style="{StaticResource PhoneTextTitle2Style}" 
+                                                Grid.Column="1"/>
+                                <TextBlock Text="{Binding Path=Description}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" 
+                                                Grid.Column="1" Grid.Row="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                </phone:LongListSelector>
+            </phone:PivotItem>
+        </phone:Pivot>
     </Grid>
-
 </phone:PhoneApplicationPage>
