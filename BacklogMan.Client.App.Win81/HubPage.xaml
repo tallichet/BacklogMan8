@@ -48,10 +48,11 @@
                               AutomationProperties.ItemType="Navigation Button"/>
                     </StackPanel>
                     <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                               Foreground="{StaticResource BacklogManMainBrush}"
                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Top"/>
                 </Grid>
             </Hub.Header>
-            <HubSection Width="780" d:IsHidden="True" Name="sectionTitle">
+            <HubSection Width="{Binding Path=ImageSectionWidth, ElementName=pageRoot}" d:IsHidden="True" Name="sectionTitle">
                 <HubSection.Background>
                     <ImageBrush ImageSource="Images/Backgrounds/humour_038.jpg" Stretch="Uniform" />
                 </HubSection.Background>

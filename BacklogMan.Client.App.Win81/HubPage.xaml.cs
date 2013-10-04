@@ -51,6 +51,7 @@ namespace BacklogMan.Client.App.Win81
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
+            this.SizeChanged += HubPage_SizeChanged;
         }
 
         /// <summary>
@@ -149,5 +150,35 @@ namespace BacklogMan.Client.App.Win81
                 var key = await ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().GetApiKey(cred.CredentialUserName, cred.CredentialPassword);
             }
         }
+
+
+
+
+        void HubPage_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width < e.NewSize.Height)
+            {
+                // portrait
+                this.ImageSectionWidth = 0;
+            }
+            else
+            {
+                ImageSectionWidth = e.NewSize.Height * 1.622;
+            }
+        }
+
+        public double ImageSectionWidth
+        {
+            get { return (double)GetValue(ImageSectionWidthProperty); }
+            set { SetValue(ImageSectionWidthProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ImageSectionWidth.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ImageSectionWidthProperty =
+            DependencyProperty.Register("ImageSectionWidth", typeof(double), typeof(HubPage), new PropertyMetadata(0));
+
+
+
+
     }
 }

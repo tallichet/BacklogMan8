@@ -67,6 +67,7 @@
             <vm:ViewModelLocator x:Key="Locator" xmlns:vm="using:BacklogMan.Client.Core.ViewModel" />
 
             <Color x:Key="BacklogManMainColor">#006dcc</Color>
+            <SolidColorBrush x:Key="BacklogManMainBrush" Color="{StaticResource BacklogManMainColor}" />
             <SolidColorBrush x:Key="BacklogManElementBackgroudColor" Color="{StaticResource BacklogManMainColor}" />
             <x:String x:Key="AppName">BacklogMan</x:String>
             <converter:EmailToGravatarUriConverter x:Key="EmailToGravatarUriConverter" />

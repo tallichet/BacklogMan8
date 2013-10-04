@@ -7,7 +7,7 @@
         <Grid Width="220" Height="120" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
@@ -63,7 +63,7 @@
         <Grid Width="220" Height="120" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -98,6 +98,22 @@
                     </ProgressBar.Foreground>
                 </ProgressBar>
             </Grid>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="UserDataTemplate">
+        <Grid Width="220" Height="120" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding Email, Converter={StaticResource EmailToGravatarUriConverter}}" Width="40" Margin="0,0,10,0" />
+                <TextBlock Text="{Binding Name}" Grid.Row="0" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" VerticalAlignment="Center" />
+            </StackPanel>
+            <TextBlock Text="{Binding Description}" Grid.Row="1" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap" TextTrimming="WordEllipsis" />
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

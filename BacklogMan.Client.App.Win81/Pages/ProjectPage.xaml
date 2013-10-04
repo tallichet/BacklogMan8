@@ -48,7 +48,7 @@
                 </Grid>
             </Hub.Header>
 
-            <HubSection Header="Backlogs" x:Uid="BacklogSection">
+            <HubSection Header="Backlogs" Margin="80,0,0,0" x:Uid="BacklogSection">
                 <DataTemplate>
                     <GridView ItemsSource="{Binding Path=ProjectBacklogs}" CanReorderItems="True"
                               IsItemClickEnabled="True" SelectionMode="None"
