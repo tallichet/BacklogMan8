@@ -40,6 +40,9 @@ namespace BacklogMan.Client.Phone8
             NavigationService.Navigate(new Uri("/ProjectPage.xaml", UriKind.Relative));
         }
 
-
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            backgroundImage.Visibility = pivotMain.SelectedIndex == 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
     }
 }

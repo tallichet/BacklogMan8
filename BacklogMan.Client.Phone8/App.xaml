@@ -9,6 +9,8 @@
 
     <!--Application Resources-->
     <Application.Resources>
+        <Color x:Key="BacklogManMainColor">#006dcc</Color>
+
         <local:LocalizedStrings xmlns:local="clr-namespace:BacklogMan.Client.Phone8" x:Key="LocalizedStrings"/>
         <vm:ViewModelLocator x:Key="Locator" />
         <converter:EmailToGravatarUriConverter x:Key="EmailToGravatarUriConverter" />

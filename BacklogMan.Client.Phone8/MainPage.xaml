@@ -12,12 +12,19 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="{StaticResource BacklogManMainColor}"
+    shell:SystemTray.ForegroundColor="White"
     Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Image x:Name="backgroundImage" Source="/Assets/FullScreen.png" Margin="0,0,0,0" />
+
         <!--Pivot Control-->
-        <phone:Pivot Title="MY APPLICATION">
+        <phone:Pivot x:Name="pivotMain" Title="BACKLOG MAN" SelectionChanged="Pivot_SelectionChanged">
+            <phone:PivotItem Header="Home">
+            </phone:PivotItem>
+            
             <!--Pivot item one-->
             <phone:PivotItem Header="Organizations">
                 <Grid>
