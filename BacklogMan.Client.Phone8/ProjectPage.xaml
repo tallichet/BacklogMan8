@@ -11,7 +11,10 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="{StaticResource BacklogManMainColor}"
+    shell:SystemTray.ForegroundColor="White"
+    Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -19,7 +22,24 @@
         <phone:Pivot Title="{Binding Path=CurrentProject.Name}">
             <!--Pivot item one-->
             <phone:PivotItem Header="Info">
-                <Grid/>
+                <StackPanel>
+                    <TextBlock Text="{Binding CurrentProject.Code}" Style="{StaticResource PhoneTextTitle2Style}" />
+
+                    <TextBlock Text="{Binding CurrentProject.Description}" Style="{StaticResource PhoneTextNormalStyle}" />
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding CurrentProject.Statistics.StoriesTotal}" Style="{StaticResource PhoneTextNormalStyle}" />
+                        <TextBlock Text="stories" Style="{StaticResource PhoneTextNormalStyle}" />
+                        <TextBlock Text="{Binding CurrentProject.Statistics.StoriesCompleted}" Style="{StaticResource PhoneTextNormalStyle}" />
+                        <TextBlock Text="completed" Style="{StaticResource PhoneTextNormalStyle}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding CurrentProject.Statistics.PointsTotal}" Style="{StaticResource PhoneTextNormalStyle}" />
+                        <TextBlock Text="points" Style="{StaticResource PhoneTextNormalStyle}" />
+                        <TextBlock Text="{Binding CurrentProject.Statistics.PointsCompleted}" Style="{StaticResource PhoneTextNormalStyle}" />
+                        <TextBlock Text="completed" Style="{StaticResource PhoneTextNormalStyle}" />
+                    </StackPanel>
+                </StackPanel>
             </phone:PivotItem>
 
             <!--Pivot item two-->
@@ -48,6 +68,12 @@
                 </Grid>
             </phone:PivotItem>
         </phone:Pivot>
+
+        <ProgressBar VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ProgressBar.Foreground>
+                <SolidColorBrush Color="{StaticResource BacklogManMainColor}" />
+            </ProgressBar.Foreground>
+        </ProgressBar>
     </Grid>
     
 </phone:PhoneApplicationPage>

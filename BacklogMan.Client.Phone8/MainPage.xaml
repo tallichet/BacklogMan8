@@ -109,6 +109,12 @@
                 </Grid>
             </phone:PivotItem>
         </phone:Pivot>
+
+        <ProgressBar VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ProgressBar.Foreground>
+                <SolidColorBrush Color="{StaticResource BacklogManMainColor}" />
+            </ProgressBar.Foreground>
+        </ProgressBar>
     </Grid>
     
 </phone:PhoneApplicationPage>

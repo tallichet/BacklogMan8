@@ -20,6 +20,12 @@ namespace BacklogMan.Client.Phone8
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            SystemTray.ProgressIndicator = new ProgressIndicator()
+            {
+                Text = "Backlogman",
+                IsVisible = true,
+            };
+
             if (string.IsNullOrWhiteSpace(ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().ApiKey))
             {
                 NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));

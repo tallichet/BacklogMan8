@@ -10,20 +10,26 @@
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
+    Foreground="White"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="{StaticResource BacklogManMainColor}"
+    shell:SystemTray.ForegroundColor="White"
+    Loaded="self_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <SolidColorBrush Color="{StaticResource BacklogManMainColor}" />
+        </Grid.Background>
         <!--Pivot Control-->
-        <phone:Pivot Title="MY APPLICATION">
+        <phone:Pivot Title="SETTINGS" Foreground="White">
             <!--Pivot item one-->
             <phone:PivotItem Header="login">
                 <Grid>
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
-                            <TextBlock Text="username" />
+                            <TextBlock Text="username" Style="{StaticResource PhoneTextNormalStyle}" Foreground="White" />
                             <TextBox Text="{Binding Username, Mode=TwoWay, ElementName=self}">
                                 <TextBox.InputScope>
                                     <InputScope>
@@ -33,9 +39,10 @@
                                     </InputScope>
                                 </TextBox.InputScope>
                             </TextBox>
-                            <TextBlock Text="password" />
+                            <TextBlock Text="password" Style="{StaticResource PhoneTextNormalStyle}" Foreground="White"/>
                             <PasswordBox Password="{Binding Password, Mode=TwoWay, ElementName=self}" />
-                            <Button HorizontalAlignment="Right" Content="connect" Click="Connect" />
+                            <Button HorizontalAlignment="Right" Content="connect" Click="Connect" 
+                                    Foreground="White" BorderBrush="White"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

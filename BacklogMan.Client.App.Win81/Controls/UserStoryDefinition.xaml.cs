@@ -57,8 +57,11 @@ namespace BacklogMan.Client.App.Win81.Controls
                     ctrl.textbox.Inlines.Add(new Windows.UI.Xaml.Documents.Run() { Text = story.AsUser });
                     ctrl.textbox.Inlines.Add(new Windows.UI.Xaml.Documents.Run() { Text = res.GetString("StoryIWantTo")});
                     ctrl.textbox.Inlines.Add(new Windows.UI.Xaml.Documents.Run() { Text = story.Goal, FontWeight = FontWeights.Bold });
-                    ctrl.textbox.Inlines.Add(new Windows.UI.Xaml.Documents.Run() { Text = res.GetString("StorySoICan") });
-                    ctrl.textbox.Inlines.Add(new Windows.UI.Xaml.Documents.Run() { Text = story.Result });
+                    if (string.IsNullOrWhiteSpace(story.Result) == false)
+                    {
+                        ctrl.textbox.Inlines.Add(new Windows.UI.Xaml.Documents.Run() { Text = res.GetString("StorySoICan") });
+                        ctrl.textbox.Inlines.Add(new Windows.UI.Xaml.Documents.Run() { Text = story.Result });
+                    }
                 }
             }
         }

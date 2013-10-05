@@ -21,5 +21,14 @@ namespace BacklogMan.Client.Phone8
         {
 
         }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            SystemTray.ProgressIndicator = new ProgressIndicator()
+            {
+                Text = "Backlogman",
+                IsVisible = true,
+            };
+        }
     }
 }

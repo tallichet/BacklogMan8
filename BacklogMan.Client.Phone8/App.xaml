@@ -16,6 +16,7 @@
         <converter:EmailToGravatarUriConverter x:Key="EmailToGravatarUriConverter" />
         <converter:ColorConverter x:Key="ColorConverter" />
         <converter:ListToVisibilityConverter x:Key="ListToVisibilityConverter" />
+        <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

@@ -31,5 +31,14 @@ namespace BacklogMan.Client.Phone8
             ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = b;
             NavigationService.Navigate(new Uri("/BacklogPage.xaml", UriKind.Relative));
         }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            SystemTray.ProgressIndicator = new ProgressIndicator()
+            {
+                Text = "Backlogman",
+                IsVisible = true,
+            };
+        }
     }
 }

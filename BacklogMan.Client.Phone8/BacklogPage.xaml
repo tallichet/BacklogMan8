@@ -11,7 +11,10 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="{StaticResource BacklogManMainColor}"
+    shell:SystemTray.ForegroundColor="White"
+    Loaded="PhoneApplicationPage_Loaded">
     
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="StoryTemplate">
@@ -85,6 +88,12 @@
             </phone:PivotItem>
 
         </phone:Pivot>
+
+        <ProgressBar VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ProgressBar.Foreground>
+                <SolidColorBrush Color="{StaticResource BacklogManMainColor}" />
+            </ProgressBar.Foreground>
+        </ProgressBar>
     </Grid>
     
 </phone:PhoneApplicationPage>
