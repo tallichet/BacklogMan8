@@ -26,6 +26,8 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             OrganizationBacklogs.ManualReordered += organizationBacklogs_ManualReordered;
             BacklogStories = new ReorderableCollection<Model.Story>();
             BacklogStories.ManualReordered += backlogStories_ManualReordered;
+            
+            MainBacklogs = new System.Collections.ObjectModel.ObservableCollection<Model.Backlog>();
 
             OrganizationProjects = new System.Collections.ObjectModel.ObservableCollection<Model.Project>();
 
@@ -45,7 +47,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         {
             if (!string.IsNullOrEmpty(ApiKey))
             {
-                await DownloadOrganizations();
+                await downloadOrganizations();
                 await DownloadProjects();
                 //await RefreshNotEstimatedStories();
             }
@@ -89,7 +91,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
 
-        private async Task DownloadOrganizations()
+        private async Task downloadOrganizations()
         {
             this.Organizations.Clear();
 
@@ -99,6 +101,8 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 var o2 = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganization(o.Id.ToString());
                 this.Organizations.Add(o2);
             }
+
+            await refreshMainBacklogs();
         }
 
         private async Task DownloadProjects()
@@ -183,6 +187,12 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             private set;
         }
 
+        public System.Collections.ObjectModel.ObservableCollection<Model.Backlog> MainBacklogs
+        {
+            get;
+            private set;
+        }
+
         private Model.Backlog currentBacklog = null;
         public Model.Backlog CurrentBacklog
         {
@@ -252,6 +262,34 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
             }
         }
+
+        /// <summary>
+        /// Refresh the main backlogs. Get the organzations data to get all the main backlogs
+        /// </summary>
+        private async Task refreshMainBacklogs()
+        {
+            var backlogs = (from o in Organizations
+                           from b in o.Backlogs
+                           where b.IsMain
+                           select b).ToList();
+
+            MainBacklogs.Clear();
+            foreach (var b in backlogs)
+            {
+                try
+                {
+                    var backlog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(b.Id);
+                    MainBacklogs.Add(backlog);
+                }
+                catch (Exception)
+                {
+                    MainBacklogs.Add(b);
+                }
+            }
+
+
+        }
+
         private async void refreshOrganizationBacklogs()
         {
             OrganizationBacklogs.Clear();
@@ -421,6 +459,8 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
         #endregion
+
+
 
 
 

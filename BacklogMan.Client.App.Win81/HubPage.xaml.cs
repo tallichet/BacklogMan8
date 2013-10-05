@@ -108,6 +108,11 @@ namespace BacklogMan.Client.App.Win81
                 ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentOrganization = e.ClickedItem as Core.Model.Organization;
                 this.Frame.Navigate(typeof(Pages.OrganisationPage));
             }
+            else if (e.ClickedItem is Core.Model.Backlog)
+            {
+                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = e.ClickedItem as Core.Model.Backlog;
+                this.Frame.Navigate(typeof(Pages.BacklogPage));
+            }
         }
         #region NavigationHelper registration
 
@@ -153,6 +158,20 @@ namespace BacklogMan.Client.App.Win81
 
 
 
+        public double HubSectionHeight
+        {
+            get { return (double)GetValue(HubSectionHeightProperty); }
+            set { SetValue(HubSectionHeightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for HubSectionHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HubSectionHeightProperty =
+            DependencyProperty.Register("HubSectionHeight", typeof(double), typeof(HubPage), new PropertyMetadata(0.0));
+
+        
+
+
+
 
         void HubPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -165,6 +184,8 @@ namespace BacklogMan.Client.App.Win81
             {
                 ImageSectionWidth = e.NewSize.Height * 1.622;
             }
+
+            HubSectionHeight = e.NewSize.Height - 120.0;
         }
 
         public double ImageSectionWidth

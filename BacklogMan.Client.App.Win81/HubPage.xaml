@@ -52,10 +52,33 @@
                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Top"/>
                 </Grid>
             </Hub.Header>
-            <HubSection Width="{Binding Path=ImageSectionWidth, ElementName=pageRoot}" d:IsHidden="True" Name="sectionTitle">
+            <HubSection Width="{Binding Path=ImageSectionWidth, ElementName=pageRoot}" d:IsHidden="True" Name="sectionTitle" HorizontalContentAlignment="Stretch">
                 <HubSection.Background>
                     <ImageBrush ImageSource="Images/Backgrounds/humour_038.jpg" Stretch="Uniform" />
                 </HubSection.Background>
+                <DataTemplate>
+                    <Grid Height="{Binding Path=HubSectionHeight, ElementName=pageRoot}">
+                        <ListView
+                            x:Name="itemListView"
+                            AutomationProperties.AutomationId="ItemListView"
+                            AutomationProperties.Name="Grouped Items"
+                            VerticalAlignment="Bottom" Height="250"
+                            ItemsSource="{Binding MainBacklogs}"
+                            IsSwipeEnabled="False"
+                            IsItemClickEnabled="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Hidden"                        
+                            SelectionMode="None"
+                            ItemTemplate="{StaticResource BacklogDataTemplate}"                        
+                            ItemClick="ItemView_ItemClick">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+                    </Grid>
+                </DataTemplate>
+                
             </HubSection>
             <HubSection Padding="120,30,40,44"  VerticalAlignment="Top" Name="sectionOrganization" x:Uid="OrganizationsSection" >
                 <DataTemplate>

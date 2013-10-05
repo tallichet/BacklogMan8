@@ -102,6 +102,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             #endregion
             #region define backlogs
             ProjectBacklogs = new ReorderableCollection<Model.Backlog>();
+            
             ProjectBacklogs.Add(new Model.Backlog()
             {
                 Name = "Backlog n° 1",
@@ -110,6 +111,22 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                 Themes = new string[] {"Windows", "Windows Phone"}.ToList(),
             });
             ProjectBacklogs.Add(new Model.Backlog()
+            {
+                Name = "Backlog n° 2",
+                Description = "This is my second project!",
+                Project = Projects.First(),
+                Themes = new string[] { "Windows", "Windows Phone" }.ToList(),
+            });
+
+            MainBacklogs = new System.Collections.ObjectModel.ObservableCollection<Model.Backlog>();
+            MainBacklogs.Add(new Model.Backlog()
+            {
+                Name = "Pinnged backlog n° 1",
+                Description = "This is my first project!",
+                Project = Projects.First(),
+                Themes = new string[] { "Windows", "Windows Phone" }.ToList(),
+            });
+            MainBacklogs.Add(new Model.Backlog()
             {
                 Name = "Backlog n° 2",
                 Description = "This is my second project!",
@@ -298,5 +315,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
         {
             throw new NotImplementedException();
         }
+
+        public System.Collections.ObjectModel.ObservableCollection<Model.Backlog> MainBacklogs { get; set; }
     }
 }

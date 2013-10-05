@@ -96,5 +96,10 @@ namespace BacklogMan.Client.Core.ViewModel
         /// <param name="p"></param>
         /// <returns></returns>
         Task<bool> SetStoryPoints(Model.Story story, int points);
+
+        /// <summary>
+        /// Contains all main backlogs from all organizations
+        /// </summary>
+        ObservableCollection<Model.Backlog> MainBacklogs { get; }
     }
 }

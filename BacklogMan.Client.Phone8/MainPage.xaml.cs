@@ -44,5 +44,12 @@ namespace BacklogMan.Client.Phone8
         {
             backgroundImage.Visibility = pivotMain.SelectedIndex == 0 ? Visibility.Visible : Visibility.Collapsed;
         }
+
+        private void Backlog_Tapped(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var b = (sender as Panel).Tag as Core.Model.Backlog;
+            ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = b;
+            NavigationService.Navigate(new Uri("/BacklogPage.xaml", UriKind.Relative));
+        }
     }
 }
