@@ -101,5 +101,7 @@ namespace BacklogMan.Client.Core.ViewModel
         /// Contains all main backlogs from all organizations
         /// </summary>
         ObservableCollection<Model.Backlog> MainBacklogs { get; }
+
+        bool IsInProgress { get; }
     }
 }

@@ -74,5 +74,8 @@
                 </DataTemplate>
             </HubSection>
         </Hub>
+
+        <ProgressBar VerticalAlignment="Top" HorizontalAlignment="Stretch" IsIndeterminate="True" Height="10"
+                     Visibility="{Binding IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </Grid>
 </Page>

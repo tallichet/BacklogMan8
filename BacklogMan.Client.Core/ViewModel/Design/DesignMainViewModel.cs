@@ -317,5 +317,11 @@ namespace BacklogMan.Client.Core.ViewModel.Design
         }
 
         public System.Collections.ObjectModel.ObservableCollection<Model.Backlog> MainBacklogs { get; set; }
+
+
+        public bool IsInProgress
+        {
+            get { return true; }
+        }
     }
 }

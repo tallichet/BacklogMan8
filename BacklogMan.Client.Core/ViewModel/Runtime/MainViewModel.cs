@@ -47,9 +47,11 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         {
             if (!string.IsNullOrEmpty(ApiKey))
             {
+                IsInProgress = true;
                 await downloadOrganizations();
                 await DownloadProjects();
                 //await RefreshNotEstimatedStories();
+                IsInProgress = false;
             }
         }
 
@@ -138,6 +140,23 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
 
+        private bool isInProgress;
+        public bool IsInProgress
+        {
+            get
+            {
+                return isInProgress;
+            }
+            private set
+            {
+                if (value != isInProgress)
+                {
+                    isInProgress = value;
+                    this.RaisePropertyChanged(() => this.IsInProgress);
+                }
+            }
+        }
+
         private Model.Organization currentOrganization = null;
         public Model.Organization CurrentOrganization
         {
@@ -148,8 +167,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             set
             {
                 currentOrganization = value;
-                refreshOrganizationBacklogs();
-                refreshOrganizationProjects();
+                refreshOrganization();
             }
         }
 
@@ -237,6 +255,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         {
             try
             {
+                IsInProgress = true;
                 ProjectBacklogs.Clear();
                 var project = CurrentProject; // this allow us to be sure the project don't change during the download
                 
@@ -260,6 +279,10 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             catch (Exception)
             {
                 ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+            }
+            finally
+            {
+                IsInProgress = false;
             }
         }
 
@@ -290,7 +313,15 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
         }
 
-        private async void refreshOrganizationBacklogs()
+        private async void refreshOrganization()
+        {
+            IsInProgress = true;
+            await refreshOrganizationBacklogs();
+            await refreshOrganizationProjects();
+            IsInProgress = false;
+        }
+
+        private async Task refreshOrganizationBacklogs()
         {
             OrganizationBacklogs.Clear();
             var org = CurrentOrganization;
@@ -319,7 +350,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
 
-        private async void refreshOrganizationProjects()
+        private async Task refreshOrganizationProjects()
         {
             OrganizationProjects.Clear();
             var org = CurrentOrganization;
@@ -459,6 +490,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
         #endregion
+
 
 
 

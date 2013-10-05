@@ -185,7 +185,7 @@ namespace BacklogMan.Client.App.Win81
                 ImageSectionWidth = e.NewSize.Height * 1.622;
             }
 
-            HubSectionHeight = e.NewSize.Height - 120.0;
+            HubSectionHeight = e.NewSize.Height - 120;
         }
 
         public double ImageSectionWidth
