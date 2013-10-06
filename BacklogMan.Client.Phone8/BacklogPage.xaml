@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ctrl="clr-namespace:BacklogMan.Client.Phone8.Controls"
     DataContext="{Binding Path=Main, Source={StaticResource Locator}}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -24,37 +25,32 @@
                 </Grid.Background>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />                    
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80" />
-                    <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="80" />
                 </Grid.ColumnDefinitions>
 
-                <Rectangle Margin="0,5" Width="3" HorizontalAlignment="Left" Grid.RowSpan="3">
+                <Rectangle Margin="0,5" Width="3" HorizontalAlignment="Left" Grid.RowSpan="2">
                     <Rectangle.Fill>
                         <SolidColorBrush Color="{Binding ColorString, Converter={StaticResource ColorConverter}}" />
                     </Rectangle.Fill>
                 </Rectangle>
 
-                <Ellipse Fill="Black" Stroke="White" Grid.RowSpan="3" Grid.Column="0" 
-                         Margin="0,25" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                         Width="30" Height="30" />
-                
-                <TextBlock Text="{Binding Code}" Grid.RowSpan="3" Grid.Column="0" Margin="0,30" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource PhoneTextNormalStyle}" FontSize="15" />
-                <TextBlock Text="{Binding Points}" Grid.RowSpan="3" Grid.Column="0" Margin="0,30" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}" FontSize="15" />
+                <Grid Width="30" Height="30" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="6">
+                    <Ellipse Fill="Black" Stroke="White" Grid.RowSpan="2" Grid.Column="0" 
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    <TextBlock Text="{Binding Points}" Grid.RowSpan="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                               Style="{StaticResource PhoneTextNormalStyle}" FontSize="15" Margin="0" />
+                </Grid>
 
+                <TextBlock Text="{Binding Code}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                           Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" FontStretch="ExtraExpanded" />
+                <ctrl:UserStoryDefinition Story="{Binding}" Grid.Row="1" Grid.Column="0" />
 
-                <TextBlock Text="As a" Grid.Row="0" Style="{StaticResource PhoneTextNormalStyle}" Grid.Column="1" />
-                <TextBlock Text="I want to" Grid.Row="1" Style="{StaticResource PhoneTextNormalStyle}" Grid.Column="1" />
-                <TextBlock Text="So I can" Grid.Row="2" Style="{StaticResource PhoneTextNormalStyle}" Grid.Column="1" />
-
-                <TextBlock Text="{Binding Path=AsUser}" Grid.Row="0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" TextWrapping="Wrap" />
-                <TextBlock Text="{Binding Path=Goal}" Grid.Row="1" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" TextWrapping="Wrap" />
-                <TextBlock Text="{Binding Path=Result}" Grid.Row="2" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" TextWrapping="Wrap" />
+                <ctrl:UserStoryStatus Story="{Binding}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
@@ -65,18 +61,18 @@
         <phone:Pivot Title="{Binding Path=CurrentBacklog.Name}">
             <phone:PivotItem Header="info">
                 <StackPanel>
-                    <TextBlock Text="{Binding Path=CurrentBacklog.Description}" TextWrapping="Wrap" TextTrimming="WordEllipsis" />
+                    <TextBlock Text="{Binding Path=CurrentBacklog.Description}" TextWrapping="Wrap" TextTrimming="WordEllipsis" Style="{StaticResource PhoneTextNormalStyle}" />
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=CurrentBacklog.Statistics.StoriesTotal}" />
-                        <TextBlock Text="Stories" />
-                        <TextBlock Text="{Binding Path=CurrentBacklog.Statistics.StoriesCompleted}" />
-                        <TextBlock Text="completed" />
+                        <TextBlock Text="{Binding Path=CurrentBacklog.Statistics.StoriesTotal}" Style="{StaticResource PhoneTextNormalStyle}" />
+                        <TextBlock Text="Stories" Style="{StaticResource PhoneTextNormalStyle}" />
+                        <TextBlock Text="{Binding Path=CurrentBacklog.Statistics.StoriesCompleted}" Style="{StaticResource PhoneTextNormalStyle}" />
+                        <TextBlock Text="completed" Style="{StaticResource PhoneTextNormalStyle}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=CurrentBacklog.Statistics.PointsTotal}" />
-                        <TextBlock Text="Points" />
-                        <TextBlock Text="{Binding Path=CurrentBacklog.Statistics.PointsCompleted}" />
-                        <TextBlock Text="completed" />
+                        <TextBlock Text="{Binding Path=CurrentBacklog.Statistics.PointsTotal}" Style="{StaticResource PhoneTextNormalStyle}" />
+                        <TextBlock Text="Points" Style="{StaticResource PhoneTextNormalStyle}" />
+                        <TextBlock Text="{Binding Path=CurrentBacklog.Statistics.PointsCompleted}" Style="{StaticResource PhoneTextNormalStyle}" />
+                        <TextBlock Text="completed" Style="{StaticResource PhoneTextNormalStyle}" />
                     </StackPanel>
                 </StackPanel>
             </phone:PivotItem>

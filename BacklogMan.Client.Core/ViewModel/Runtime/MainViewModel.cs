@@ -393,19 +393,23 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         
         public async Task<bool> SetStoriesStatus(Model.Story story, Model.StoryStatus newStatus)
         {
+            IsInProgress = true;
             var result = await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStoryStatus(story.Id, newStatus);
             if (result)
             {
                 story.Status = newStatus;
             }
+            IsInProgress = false;
             return result;
         }
         
         public async Task<bool> SetStoryPoints(Model.Story story, int points)
         {
+            IsInProgress = true;
             var prevPoints = story.Points;
             story.Points = points;
             var storyId = await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStory(story);
+            IsInProgress = false;
             if (storyId < 0)
             {
                 story.Points = prevPoints;

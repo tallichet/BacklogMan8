@@ -26,8 +26,6 @@ namespace BacklogMan.Client.App.Win81.Controls
             this.InitializeComponent();
         }
 
-
-
         public Core.Model.Story Story
         {
             get { return (Core.Model.Story)GetValue(StoryProperty); }
@@ -65,8 +63,6 @@ namespace BacklogMan.Client.App.Win81.Controls
                 }
             }
         }
-
-
 
     }
 }
