@@ -392,6 +392,19 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
             this.RefreshBacklogStories();
         }
+
+        public async Task<bool> UpdateStory(Model.Story updateStory)
+        {
+            IsInProgress = true;
+            var result = await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStory(updateStory);
+            if (result >= 0)
+            {
+                var story = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStory(updateStory.Backlog.Id, updateStory.Id);
+                BacklogStories.ReplaceItemById(story);
+            }
+            IsInProgress = false;
+            return result > -1;
+        }
         
         public async Task<bool> SetStoriesStatus(Model.Story story, Model.StoryStatus newStatus)
         {
@@ -496,6 +509,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
         #endregion
+
 
 
 

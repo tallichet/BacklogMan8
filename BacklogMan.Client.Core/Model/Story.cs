@@ -11,6 +11,27 @@ namespace BacklogMan.Client.Core.Model
     [DataContract]
     public class Story : IItemWithId
     {
+        public Story() { }
+        
+
+        public Story(Story story)
+        {
+            this.Id = story.Id;
+            this.Url = story.Url;
+            this.Code = story.Code;
+            this.AsUser = story.AsUser;
+            this.Goal = story.Goal;
+            this.Result = story.Result;
+            this.AcceptanceCriteria = story.AcceptanceCriteria;
+            this.Points = story.Points;
+            this.Theme = story.Theme;
+            this.ColorString = story.ColorString;
+            this.Comments = story.Comments;
+            this.DateTimeString = story.DateTimeString;
+            this.Status = story.Status;
+            this.Language = story.Language;
+            this.Backlog = story.Backlog;
+        }
         [DataMember(Name = "id")]
         public int Id { get; set; }
 

@@ -103,5 +103,7 @@ namespace BacklogMan.Client.Core.ViewModel
         ObservableCollection<Model.Backlog> MainBacklogs { get; }
 
         bool IsInProgress { get; }
+
+        Task<bool> UpdateStory(Model.Story editStory);
     }
 }

@@ -118,6 +118,9 @@
     <Compile Include="Controls\UserStoryDefinition.xaml.cs">
       <DependentUpon>UserStoryDefinition.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserStoryEditor.xaml.cs">
+      <DependentUpon>UserStoryEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserStoryPoints.xaml.cs">
       <DependentUpon>UserStoryPoints.xaml</DependentUpon>
     </Compile>
@@ -221,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\UserStoryDefinition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserStoryEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

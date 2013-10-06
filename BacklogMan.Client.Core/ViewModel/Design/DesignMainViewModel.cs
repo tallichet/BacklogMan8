@@ -325,5 +325,11 @@ namespace BacklogMan.Client.Core.ViewModel.Design
         {
             get { return true; }
         }
+
+
+        public Task<bool> UpdateStory(Model.Story editStory)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

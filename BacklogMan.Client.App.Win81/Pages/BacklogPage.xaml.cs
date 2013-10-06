@@ -1,4 +1,5 @@
 ﻿using BacklogMan.Client.App.Win81.Common;
+using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -161,5 +162,23 @@ namespace BacklogMan.Client.App.Win81.Pages
         }
 
         #endregion
+
+        private void Story_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var story = e.ClickedItem as Core.Model.Story;
+
+            var editStory = new Core.Model.Story(story);
+
+            var flyout = new Flyout();
+            var editor = new Controls.UserStoryEditor() { DataContext = story };
+            editor.StoryUpdate += async (s,a) => 
+            {
+                await ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().UpdateStory(editStory);
+                flyout.Hide();
+            };
+            flyout.Placement = FlyoutPlacementMode.Full;
+            flyout.Content = editor;
+            flyout.ShowAt(this);
+        }
     }
 }
