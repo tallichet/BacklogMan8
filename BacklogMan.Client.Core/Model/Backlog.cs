@@ -54,6 +54,9 @@ namespace BacklogMan.Client.Core.Model
         }
 
         [IgnoreDataMember]
-        public Project Project { get; set; }
+        public Project Project { get; internal set; }
+
+        [IgnoreDataMember]
+        public Organization Organization { get;  internal set; }
     }
 }

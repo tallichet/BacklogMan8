@@ -35,11 +35,8 @@ namespace BacklogMan.Client.Phone8.Controls
 
             if (ctrl != null)
             {
-                if (story == null)
-                {
-                    ctrl.textbox.Inlines.Clear();
-                }
-                else
+                ctrl.textbox.Inlines.Clear();
+                if (story != null)
                 {
                     ctrl.textbox.Inlines.Add(new System.Windows.Documents.Run() { Text = AppResources.StoryAsA + " " });
                     ctrl.textbox.Inlines.Add(new System.Windows.Documents.Run() { Text = story.AsUser });

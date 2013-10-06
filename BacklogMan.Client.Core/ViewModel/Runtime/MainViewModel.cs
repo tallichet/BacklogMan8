@@ -291,22 +291,23 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         /// </summary>
         private async Task refreshMainBacklogs()
         {
-            var backlogs = (from o in Organizations
+            var backlogTuples = (from o in Organizations
                            from b in o.Backlogs
                            where b.IsMain
-                           select b).ToList();
+                           select new Tuple<Model.Organization, Model.Backlog> (o, b)).ToList();
 
             MainBacklogs.Clear();
-            foreach (var b in backlogs)
+            foreach (var tuple in backlogTuples)
             {
                 try
                 {
-                    var backlog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(b.Id);
+                    var backlog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(tuple.Item2.Id);
+                    backlog.Organization = tuple.Item1;
                     MainBacklogs.Add(backlog);
                 }
                 catch (Exception)
                 {
-                    MainBacklogs.Add(b);
+                    MainBacklogs.Add(tuple.Item2);
                 }
             }
 
@@ -332,6 +333,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                     if (b.IsArchive) continue;
 
                     var backlog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(b.Id);
+                    backlog.Organization = org;
 
                     if (b.IsMain)
                     {

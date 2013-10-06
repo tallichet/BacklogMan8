@@ -121,10 +121,11 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             MainBacklogs = new System.Collections.ObjectModel.ObservableCollection<Model.Backlog>();
             MainBacklogs.Add(new Model.Backlog()
             {
-                Name = "Pinnged backlog n° 1",
+                Name = "Pinned backlog n° 1",
                 Description = "This is my first project!",
                 Project = Projects.First(),
                 Themes = new string[] { "Windows", "Windows Phone" }.ToList(),
+                Organization = Organizations.First(),
             });
             MainBacklogs.Add(new Model.Backlog()
             {
@@ -132,6 +133,7 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                 Description = "This is my second project!",
                 Project = Projects.First(),
                 Themes = new string[] { "Windows", "Windows Phone" }.ToList(),
+                Organization = Organizations.First(),
             });
             #endregion
             #region define Stories
