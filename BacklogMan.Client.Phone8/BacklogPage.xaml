@@ -59,7 +59,13 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <phone:Pivot Title="{Binding Path=CurrentBacklog.Name}">
-            <phone:PivotItem Header="info">
+            <phone:PivotItem Header="stories">
+                <Grid>
+                    <phone:LongListSelector ItemsSource="{Binding BacklogStories}" ItemTemplate="{StaticResource StoryTemplate}" />
+                </Grid>
+            </phone:PivotItem>
+            
+            <phone:PivotItem Header="info">                
                 <StackPanel>
                     <TextBlock Text="{Binding Path=CurrentBacklog.Description}" TextWrapping="Wrap" TextTrimming="WordEllipsis" Style="{StaticResource PhoneTextNormalStyle}" />
                     <StackPanel Orientation="Horizontal">
@@ -75,12 +81,6 @@
                         <TextBlock Text="completed" Style="{StaticResource PhoneTextNormalStyle}" />
                     </StackPanel>
                 </StackPanel>
-            </phone:PivotItem>
-            
-            <phone:PivotItem Header="stories">
-                <Grid>
-                    <phone:LongListSelector ItemsSource="{Binding BacklogStories}" ItemTemplate="{StaticResource StoryTemplate}" />
-                </Grid>
             </phone:PivotItem>
 
         </phone:Pivot>

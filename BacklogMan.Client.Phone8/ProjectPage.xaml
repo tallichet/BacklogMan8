@@ -20,7 +20,41 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <phone:Pivot Title="{Binding Path=CurrentProject.Name}">
-            <!--Pivot item one-->
+            <phone:PivotItem Header="Backlogs">
+                <Grid>
+                    <ListBox ItemsSource="{Binding Path=ProjectBacklogs}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Tap="BacklogTapped" Tag="{Binding}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    
+                                    <TextBlock Text="&#xF00B;" Grid.Column="0" Grid.RowSpan="3" 
+                                               FontFamily="/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                               Style="{StaticResource PhoneTextTitle2Style}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                                    <TextBlock Text="{Binding Name}" Grid.Column="1" Style="{StaticResource PhoneTextTitle2Style}" />
+                                    <TextBlock Text="{Binding Description}" Grid.Column="1" Style="{StaticResource PhoneTextNormalStyle}" Grid.Row="1" TextWrapping="Wrap"/>
+                                    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding StoryCount}" Style="{StaticResource PhoneTextNormalStyle}" Grid.Row="1" TextWrapping="Wrap"/>
+                                        <TextBlock Text="Stories" Style="{StaticResource PhoneTextNormalStyle}" Grid.Row="1" TextWrapping="Wrap" Margin="0"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </phone:PivotItem>
+            
             <phone:PivotItem Header="Info">
                 <StackPanel>
                     <TextBlock Text="{Binding CurrentProject.Code}" Style="{StaticResource PhoneTextTitle2Style}" />
@@ -42,31 +76,6 @@
                 </StackPanel>
             </phone:PivotItem>
 
-            <!--Pivot item two-->
-            <phone:PivotItem Header="Backlogs">
-                <Grid>
-                    <phone:LongListSelector ItemsSource="{Binding Path=ProjectBacklogs}">
-                        <phone:LongListSelector.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Tap="BacklogTapped" Tag="{Binding}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>    
-                                    
-                                    <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextTitle2Style}" />
-                                    <TextBlock Text="{Binding Description}" Style="{StaticResource PhoneTextNormalStyle}" Grid.Row="1" TextWrapping="Wrap"/>
-                                    <StackPanel Grid.Row="2" Orientation="Horizontal">
-                                        <TextBlock Text="{Binding StoryCount}" Style="{StaticResource PhoneTextNormalStyle}" Grid.Row="1" TextWrapping="Wrap"/>
-                                        <TextBlock Text="Stories" Style="{StaticResource PhoneTextNormalStyle}" Grid.Row="1" TextWrapping="Wrap" Margin="0"/>
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </phone:LongListSelector.ItemTemplate>
-                    </phone:LongListSelector>
-                </Grid>
-            </phone:PivotItem>
         </phone:Pivot>
 
         <ProgressBar VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}">

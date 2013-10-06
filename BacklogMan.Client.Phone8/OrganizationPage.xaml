@@ -37,11 +37,15 @@
                                     </Grid.RowDefinitions>
 
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
-                                    <Image Width="60" Height="60" Source="{Binding Email, Converter={StaticResource EmailToGravatarUriConverter}}" 
-                                                Grid.RowSpan="2"/>
+                                    <TextBlock Text="&#xF00B;" Grid.Column="0" Grid.RowSpan="3" 
+                                               FontFamily="/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                               Style="{StaticResource PhoneTextTitle2Style}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
                                     <TextBlock Text="{Binding Path=Name}" Style="{StaticResource PhoneTextTitle2Style}" 
                                                     Grid.Column="1"/>
                                     <TextBlock Text="{Binding Path=Description}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" 
@@ -55,31 +59,47 @@
 
             <phone:PivotItem Header="projects">
                 <Grid>
-                    <phone:LongListSelector ItemsSource="{Binding Path=OrganizationProjects}">
-                        <phone:LongListSelector.ItemTemplate>
+                    <ListBox ItemsSource="{Binding Path=OrganizationProjects}">
+                        <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Height="120" Margin="6" Tap="Project_Tapped" Tag="{Binding}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="&#xF02D;" Grid.Column="0" Grid.RowSpan="3" 
+                                               FontFamily="/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                               Style="{StaticResource PhoneTextTitle2Style}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                                    <Image Width="60" Height="60" Source="{Binding Email, Converter={StaticResource EmailToGravatarUriConverter}}" 
-                                                Grid.RowSpan="2"/>
                                     <TextBlock Text="{Binding Path=Name}" Style="{StaticResource PhoneTextTitle2Style}" 
                                                     Grid.Column="1"/>
-                                    <TextBlock Text="{Binding Path=Description}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" 
+                                    <TextBlock Text="{Binding Path=Description}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" TextTrimming="WordEllipsis"
                                                     Grid.Column="1" Grid.Row="1"/>
                                 </Grid>
                             </DataTemplate>
-                        </phone:LongListSelector.ItemTemplate>
-                    </phone:LongListSelector>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
-            </phone:PivotItem>                
+            </phone:PivotItem>
+
+            <phone:PivotItem Header="info">
+                <Grid>
+                    <StackPanel>
+                        <Image Source="{Binding CurrentOrganization.Email, Converter={StaticResource EmailToGravatarUriConverter}}" />
+                        <TextBlock Text="{Binding CurrentOrganization.Description}" Style="{StaticResource PhoneTextNormalStyle}" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding CurrentOrganization.ProjectCount}" Style="{StaticResource PhoneTextNormalStyle}" />
+                            <TextBlock Text="projects" Style="{StaticResource PhoneTextNormalStyle}" />
+                        </StackPanel>                        
+                    </StackPanel>                    
+                </Grid>
+            </phone:PivotItem>
         </phone:Pivot>
 
         <ProgressBar VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}">
