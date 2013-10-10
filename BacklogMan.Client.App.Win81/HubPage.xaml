@@ -68,7 +68,7 @@
                             IsItemClickEnabled="True"
                             ScrollViewer.VerticalScrollBarVisibility="Hidden"                        
                             SelectionMode="None"
-                            ItemTemplate="{StaticResource BacklogDataTemplate}"                        
+                            ItemTemplate="{StaticResource BacklogHomeDataTemplate}"                        
                             ItemClick="ItemView_ItemClick">
                             <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>

@@ -7,11 +7,14 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using BacklogMan.Client.Phone8.Resources;
+using System.Reflection;
 
 namespace BacklogMan.Client.Phone8
 {
     public partial class App : Application
     {
+        public const string FlurryApiKey = "2VQQJVWSZTQZVFQYYNCF";
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -63,24 +66,28 @@ namespace BacklogMan.Client.Phone8
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            FlurryWP8SDK.Api.StartSession(App.FlurryApiKey);
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            StartFlurrySession();
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            StartFlurrySession();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+            FlurryWP8SDK.Api.EndSession();
         }
 
         // Code to execute if a navigation fails
@@ -101,6 +108,14 @@ namespace BacklogMan.Client.Phone8
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
+
+            FlurryWP8SDK.Api.LogError("unhandled exception caused crash", e.ExceptionObject);
+        }
+
+        private void StartFlurrySession()
+        {
+            FlurryWP8SDK.Api.StartSession(App.FlurryApiKey);
+            //FlurryWP8SDK.Api.SetVersion(Windows.ApplicationModel.PackageId.Version)
         }
 
         #region Phone application initialization

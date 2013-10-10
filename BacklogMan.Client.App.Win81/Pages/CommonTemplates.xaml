@@ -101,6 +101,66 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="BacklogHomeDataTemplate">
+        <Grid Width="300" Height="150" Margin="0">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#B0FFFFFF" />
+                    <GradientStop Offset="1" Color="#E0FFFFFF" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.RowSpan="3" Grid.Column="0">
+                <Image Source="{Binding Path=Organization.Email, Converter={StaticResource EmailToGravatarUriConverter}}" VerticalAlignment="Top" Margin="10" />
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <TextBlock Text="&#xF0CA;" FontFamily="/Fonts/fontawesome-webfont.ttf#FontAwesome" Style="{StaticResource BaseTextBlockStyle}" Margin="0,0,5,0" />
+                <TextBlock Text="{Binding Name}" Grid.Row="0" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" />
+            </StackPanel>
+
+            <TextBlock Text="{Binding Description}" Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="2" Margin="5">
+                <TextBlock Text="{Binding Path=Statistics.StoriesTotal}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,5,0" />
+                <TextBlock Text="stories" Style="{StaticResource BodyTextBlockStyle}"/>
+                <TextBlock Text="{Binding Path=Statistics.StoriesCompleted}" Style="{StaticResource BodyTextBlockStyle}" Margin="5,0"/>
+                <TextBlock Text="completed" Style="{StaticResource BodyTextBlockStyle}" />
+            </StackPanel>
+
+            <Grid Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                <Grid.RenderTransform>
+                    <TranslateTransform X="0" Y="4" />
+                </Grid.RenderTransform>
+                <ProgressBar Maximum="100" Value="{Binding Path=Statistics.PercentEstimated}" Height="7" Margin="0">
+                    <ProgressBar.Background>
+                        <SolidColorBrush Color="{StaticResource BacklogManMainColor}" />
+                    </ProgressBar.Background>
+                    <ProgressBar.Foreground>
+                        <SolidColorBrush Color="#639DCC" />
+                    </ProgressBar.Foreground>
+                </ProgressBar>
+                <ProgressBar Background="Transparent" Maximum="100" Value="{Binding Path=Statistics.PercentCompleted}" Height="7" Margin="0">
+                    <ProgressBar.Foreground>
+                        <SolidColorBrush Color="{StaticResource BacklogManMainColor}" />
+                    </ProgressBar.Foreground>
+                </ProgressBar>
+            </Grid>
+        </Grid>
+    </DataTemplate>
+
+
     <DataTemplate x:Key="UserDataTemplate">
         <Grid Width="220" Height="120" Margin="10">
             <Grid.RowDefinitions>
