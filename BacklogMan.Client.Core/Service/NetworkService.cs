@@ -45,9 +45,9 @@ namespace BacklogMan.Client.Core.Service
             return DownloadDocument<List<Model.Organization>>(uri);
         }
 
-        public Task<Model.Organization> DownloadOrganization(string organizationId)
+        public Task<Model.Organization> DownloadOrganization(int organizationId)
         {
-            var uri = new Uri(BacklogManApiBaseUri, "./organizations/" + organizationId + "/");
+            var uri = new Uri(BacklogManApiBaseUri, "./organizations/" + organizationId.ToString() + "/");
             return DownloadDocument<Model.Organization>(uri);
         }
 

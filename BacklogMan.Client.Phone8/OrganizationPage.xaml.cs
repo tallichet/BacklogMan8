@@ -40,5 +40,10 @@ namespace BacklogMan.Client.Phone8
                 IsVisible = true,
             };
         }
+
+        private void refreshClick(object sender, EventArgs e)
+        {
+            ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().RefreshOrganzationCommand.Execute(null);
+        }
     }
 }

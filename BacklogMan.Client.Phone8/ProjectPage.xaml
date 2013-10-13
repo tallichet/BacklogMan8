@@ -16,7 +16,12 @@
     shell:SystemTray.ForegroundColor="White"
     Loaded="PhoneApplicationPage_Loaded">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar BackgroundColor="{StaticResource BacklogManMainColor}" ForegroundColor="White" Mode="Minimized" >
+            <shell:ApplicationBarIconButton IconUri="/Images/Appbar/sync.png" Text="refresh" Click="refreshClick" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+    
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <phone:Pivot Title="{Binding Path=CurrentProject.Name}">

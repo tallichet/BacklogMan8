@@ -35,6 +35,28 @@
                     <SolidColorBrush x:Key="ButtonPressedBackgroundThemeBrush" Color="#FF000000" />
                     <SolidColorBrush x:Key="ButtonPressedForegroundThemeBrush" Color="#FF006dcc" />
 
+                    <SolidColorBrush x:Key="AppBarBackgroundThemeBrush" Color="{StaticResource BacklogManMainColor}" />
+                    <SolidColorBrush x:Key="AppBarBorderThemeBrush" Color="{StaticResource BacklogManMainColor}" />
+                    <SolidColorBrush x:Key="AppBarItemBackgroundThemeBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="AppBarItemDisabledForegroundThemeBrush" Color="#66FFFFFF" />
+                    <SolidColorBrush x:Key="AppBarItemForegroundThemeBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="AppBarItemPointerOverBackgroundThemeBrush" Color="#21FFFFFF" />
+                    <SolidColorBrush x:Key="AppBarItemPointerOverForegroundThemeBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="AppBarItemPressedForegroundThemeBrush" Color="#FF000000" />
+                    <SolidColorBrush x:Key="AppBarSeparatorForegroundThemeBrush" Color="#FF7B7B7B" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedBackgroundThemeBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedBorderThemeBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedDisabledBackgroundThemeBrush" Color="#66FFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedDisabledBorderThemeBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedDisabledForegroundThemeBrush" Color="#FF000000" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedForegroundThemeBrush" Color="#FF000000" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedPointerOverBackgroundThemeBrush" Color="#99FFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedPointerOverBorderThemeBrush" Color="#99FFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedPressedBackgroundThemeBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedPressedBorderThemeBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedPressedForegroundThemeBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonPointerOverBackgroundThemeBrush" Color="#21FFFFFF" />
+
                 </ResourceDictionary>
                 
                 <ResourceDictionary x:Key="Light">
@@ -61,6 +83,28 @@
                     <SolidColorBrush x:Key="ButtonPressedBackgroundThemeBrush" Color="#FF000000" />
                     <SolidColorBrush x:Key="ButtonPressedForegroundThemeBrush" Color="#FF006dcc" />
 
+                    <SolidColorBrush x:Key="AppBarBackgroundThemeBrush" Color="{StaticResource BacklogManMainColor}" />
+                    <SolidColorBrush x:Key="AppBarBorderThemeBrush" Color="{StaticResource BacklogManMainColor}" />
+                    <SolidColorBrush x:Key="AppBarItemBackgroundThemeBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="AppBarItemDisabledForegroundThemeBrush" Color="#66FFFFFF" />
+                    <SolidColorBrush x:Key="AppBarItemForegroundThemeBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="AppBarItemPointerOverBackgroundThemeBrush" Color="#21FFFFFF" />
+                    <SolidColorBrush x:Key="AppBarItemPointerOverForegroundThemeBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="AppBarItemPressedForegroundThemeBrush" Color="#FF000000" />
+                    <SolidColorBrush x:Key="AppBarSeparatorForegroundThemeBrush" Color="#FF7B7B7B" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedBackgroundThemeBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedBorderThemeBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedDisabledBackgroundThemeBrush" Color="#66FFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedDisabledBorderThemeBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedDisabledForegroundThemeBrush" Color="#FF000000" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedForegroundThemeBrush" Color="#FF000000" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedPointerOverBackgroundThemeBrush" Color="#99FFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedPointerOverBorderThemeBrush" Color="#99FFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedPressedBackgroundThemeBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedPressedBorderThemeBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonCheckedPressedForegroundThemeBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="AppBarToggleButtonPointerOverBackgroundThemeBrush" Color="#21FFFFFF" />
+                    
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
 

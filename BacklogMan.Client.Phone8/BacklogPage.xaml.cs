@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.Practices.ServiceLocation;
 
 namespace BacklogMan.Client.Phone8
 {
@@ -29,6 +30,11 @@ namespace BacklogMan.Client.Phone8
                 Text = "Backlogman",
                 IsVisible = true,
             };
+        }
+
+        private void refreshClick(object sender, EventArgs e)
+        {
+            ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().RefreshBacklogCommand.Execute(null);
         }
     }
 }

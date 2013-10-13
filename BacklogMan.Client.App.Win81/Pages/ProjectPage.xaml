@@ -19,6 +19,12 @@
         </ResourceDictionary>
     </Page.Resources>
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Command="{Binding RefreshProjectCommand}" Icon="Refresh" x:Uid="RefreshAppbarButton" />
+        </CommandBar>
+    </Page.BottomAppBar>
+
     <!--
         This grid acts as a root panel for the page.
     -->

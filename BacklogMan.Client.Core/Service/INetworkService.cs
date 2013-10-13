@@ -21,7 +21,7 @@ namespace BacklogMan.Client.Core.Service
         Task<Model.Story> DownloadStory(int backlogId, int stroyId);
 
         Task<List<Model.Organization>> DownloadOrganizations();
-        Task<Model.Organization> DownloadOrganization(string organizationId);
+        Task<Model.Organization> DownloadOrganization(int organizationId);
 
         Task<string> GetApiKey(string username, string password);
 

@@ -331,5 +331,26 @@ namespace BacklogMan.Client.Core.ViewModel.Design
         {
             throw new NotImplementedException();
         }
+
+
+        public System.Windows.Input.ICommand RefreshBacklogCommand
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public System.Windows.Input.ICommand RefreshHomeCommand
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public System.Windows.Input.ICommand RefreshProjectCommand
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public System.Windows.Input.ICommand RefreshOrganzationCommand
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

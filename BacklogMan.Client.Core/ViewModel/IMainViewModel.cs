@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace BacklogMan.Client.Core.ViewModel
 {
@@ -105,5 +106,13 @@ namespace BacklogMan.Client.Core.ViewModel
         bool IsInProgress { get; }
 
         Task<bool> UpdateStory(Model.Story editStory);
+
+        #region Commands
+        ICommand RefreshBacklogCommand { get; }
+        ICommand RefreshHomeCommand { get; }
+        ICommand RefreshProjectCommand { get; }
+        ICommand RefreshOrganzationCommand { get; }
+
+        #endregion
     }
 }

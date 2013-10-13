@@ -57,5 +57,10 @@ namespace BacklogMan.Client.Phone8
             ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = b;
             NavigationService.Navigate(new Uri("/BacklogPage.xaml", UriKind.Relative));
         }
+
+        private void refreshClick(object sender, EventArgs e)
+        {
+            ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().RefreshHomeCommand.Execute(null);
+        }
     }
 }

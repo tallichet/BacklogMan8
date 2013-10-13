@@ -49,7 +49,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             {
                 IsInProgress = true;
                 await downloadOrganizations();
-                await DownloadProjects();
+                await downloadProjects();
                 //await RefreshNotEstimatedStories();
                 IsInProgress = false;
             }
@@ -100,14 +100,14 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             var organizations = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganizations();
             foreach (var o in organizations)
             {
-                var o2 = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganization(o.Id.ToString());
+                var o2 = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganization(o.Id);
                 this.Organizations.Add(o2);
             }
 
             await refreshMainBacklogs();
         }
 
-        private async Task DownloadProjects()
+        private async Task downloadProjects()
         {
             this.Projects.Clear();
             this.ProjectsStandalone.Clear();
@@ -510,11 +510,78 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         }
         #endregion
 
+        #region Commands
+        private RelayCommand refreshBacklogCommand;
+        private RelayCommand refreshHomeCommand;
+        private RelayCommand refreshProjectCommand;
+        private RelayCommand refreshOrganizationCommand;
 
+        public System.Windows.Input.ICommand RefreshBacklogCommand
+        {
+            get
+            {
+                if (refreshBacklogCommand == null)
+                {
+                    refreshBacklogCommand = new RelayCommand(async () =>
+                    {
+                        IsInProgress = true;
+                        CurrentBacklog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(CurrentBacklog.Id);
+                        IsInProgress = false;
+                    });
+                }
+                return refreshBacklogCommand;
+            }
+        }
 
+        public System.Windows.Input.ICommand RefreshHomeCommand
+        {
+            get
+            {
+                if (refreshHomeCommand == null)
+                {
+                    refreshHomeCommand = new RelayCommand(() =>
+                    {
+                        Init();
+                    });
+                }
+                return refreshHomeCommand;
+            }
+        }
 
+        public System.Windows.Input.ICommand RefreshProjectCommand
+        {
+            get
+            {
+                if (refreshProjectCommand == null)
+                {
+                    refreshProjectCommand = new RelayCommand(async () =>
+                    {
+                        IsInProgress = true;
+                        CurrentProject = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadProject(CurrentProject.Id);
+                        IsInProgress = false;
+                    });
+                }
+                return refreshProjectCommand;
+            }
+        }
 
+        public System.Windows.Input.ICommand RefreshOrganzationCommand
+        {
+            get 
+            {
+                if (refreshOrganizationCommand == null)
+                {
+                    refreshOrganizationCommand = new RelayCommand(async () =>
+                    {
+                        IsInProgress = true;
+                        CurrentOrganization = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganization(CurrentOrganization.Id);
+                        IsInProgress = false;
+                    });
+                }
+                return refreshOrganizationCommand;
+            }
+        }
 
-
+        #endregion
     }
 }

@@ -153,6 +153,9 @@
   <data name="ProjectsSection.Header" xml:space="preserve">
     <value>Projects</value>
   </data>
+  <data name="RefreshAppbarButton.Label" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
   <data name="StoryAsA" xml:space="preserve">
     <value>As a </value>
   </data>
