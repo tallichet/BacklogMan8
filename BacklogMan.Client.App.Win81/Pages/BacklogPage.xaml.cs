@@ -85,9 +85,9 @@ namespace BacklogMan.Client.App.Win81.Pages
         
         private void PageSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (e.NewSize.Width > 120)
+            if (e.NewSize.Width > 260)
             {
-                BacklogItemWidth = e.NewSize.Width - 120;
+                BacklogItemWidth = e.NewSize.Width - 260;
             }
 
             if (e.NewSize.Width > e.NewSize.Height)
@@ -159,6 +159,7 @@ namespace BacklogMan.Client.App.Win81.Pages
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             navigationHelper.OnNavigatedFrom(e);
+            storyEditor.Hide();
         }
 
         #endregion
@@ -169,16 +170,9 @@ namespace BacklogMan.Client.App.Win81.Pages
 
             var editStory = new Core.Model.Story(story);
 
-            var flyout = new Flyout();
-            var editor = new Controls.UserStoryEditor() { DataContext = story };
-            editor.StoryUpdate += async (s,a) => 
-            {
-                await ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().UpdateStory(editStory);
-                flyout.Hide();
-            };
-            flyout.Placement = FlyoutPlacementMode.Full;
-            flyout.Content = editor;
-            flyout.ShowAt(this);
+            storyEditor.DataContext = editStory;
+
+            storyEditor.Show();
         }
     }
 }

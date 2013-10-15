@@ -10,51 +10,71 @@
     d:DesignHeight="1000"
     d:DesignWidth="400">
 
-    <Grid MaxWidth="600">
-        <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Auto">
-            <StackPanel>
-                <TextBlock x:Uid="LabelStoryEditAsUser" Text="[As a]" Style="{StaticResource CaptionTextBlockStyle}" />
-                <TextBox Text="{Binding AsUser, Mode=TwoWay}" />
-                <TextBlock x:Uid="LabelStoryEditGoal" Text="[I want to]" Style="{StaticResource CaptionTextBlockStyle}" />
-                <TextBox Text="{Binding Goal, Mode=TwoWay}" AcceptsReturn="True" />
-                <TextBlock x:Uid="LabelStoryEditResult" Text="[so I can]" Style="{StaticResource CaptionTextBlockStyle}" />
-                <TextBox Text="{Binding Result, Mode=TwoWay}" AcceptsReturn="True" />
+    <Grid x:Name="backgroundContainer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tapped="backgroundGridTapped" Opacity="0" Visibility="Collapsed">
+        <Grid.Background>
+            <SolidColorBrush Color="Black" Opacity=".6" />
+        </Grid.Background>
+        <Grid Margin="200, 50">
+            <Grid.Background>
+                <SolidColorBrush Color="White" />
+            </Grid.Background>
 
-                <TextBlock x:Uid="LabelStoryEditAcceptances" Text="[acceptances]" Style="{StaticResource CaptionTextBlockStyle}" />
-                <TextBox Text="{Binding AcceptanceCriteria, Mode=TwoWay}" AcceptsReturn="True" />
+            <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Tapped="scrollviewerTapped">
+                <StackPanel Margin="30">
+                    <TextBox x:Uid="StoryEditAsUser" Text="{Binding AsUser, Mode=TwoWay}" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
+                    <TextBox x:Uid="StoryEditGoal" Text="{Binding Goal, Mode=TwoWay}" AcceptsReturn="True" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
+                    <TextBox x:Uid="StoryEditResult" Text="{Binding Result, Mode=TwoWay}" AcceptsReturn="True" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
 
-                <TextBlock x:Uid="LabelStoryEditPoints" Text="[points]" Style="{StaticResource CaptionTextBlockStyle}" />
-                <ComboBox SelectedValue="{Binding Points, Mode=TwoWay}" Width="100" HorizontalAlignment="Left">
-                    <ComboBox.Items>
-                        <ListBoxItem>-1</ListBoxItem>
-                        <ListBoxItem>0</ListBoxItem>
-                        <ListBoxItem>1</ListBoxItem>
-                        <ListBoxItem>2</ListBoxItem>
-                        <ListBoxItem>3</ListBoxItem>
-                        <ListBoxItem>5</ListBoxItem>
-                        <ListBoxItem>8</ListBoxItem>
-                        <ListBoxItem>13</ListBoxItem>
-                        <ListBoxItem>20</ListBoxItem>
-                        <ListBoxItem>40</ListBoxItem>
-                        <ListBoxItem>100</ListBoxItem>
-                    </ComboBox.Items>
-                </ComboBox>
+                    <TextBox x:Uid="StoryEditAcceptances" Text="{Binding AcceptanceCriteria, Mode=TwoWay}" AcceptsReturn="True" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
+                    <ComboBox x:Uid="StoryEditPoints" x:Name="storyEditPoints"
+                              SelectedValue="{Binding Points, Mode=TwoWay}" Width="100" HorizontalAlignment="Left" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
 
-                <TextBlock x:Uid="LabelStoryEditStatus" Text="[status]" Style="{StaticResource CaptionTextBlockStyle}" />
-                <ComboBox SelectedValue="{Binding Status, Mode=TwoWay}" Width="100" HorizontalAlignment="Left" />
 
-                <TextBlock x:Uid="LabelStoryEditTheme" Text="[theme]" Style="{StaticResource CaptionTextBlockStyle}" />
-                <TextBox Text="{Binding Theme, Mode=TwoWay}" Width="200" HorizontalAlignment="Left" />
+                    <ComboBox x:Uid="StoryEditStatus" x:Name="storyEditStatus"
+                              SelectedValue="{Binding Status, Mode=TwoWay}" Width="100" HorizontalAlignment="Left" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
 
-                <TextBlock x:Uid="LabelStoryEditColor" Text="[color]" Style="{StaticResource CaptionTextBlockStyle}" />
-                <TextBox Text="{Binding ColorString, Mode=TwoWay}" Width="200" HorizontalAlignment="Left" />
+                    <TextBox x:Uid="StoryEditTheme" Text="{Binding Theme, Mode=TwoWay}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
 
-                <TextBlock x:Uid="LabelStoryEditComment" Text="[comments]" Style="{StaticResource CaptionTextBlockStyle}" />
-                <TextBox Text="{Binding Comments, Mode=TwoWay}" HorizontalAlignment="Left" AcceptsReturn="True" />
+                    <TextBox x:Uid="StoryEditColor" Text="{Binding ColorString, Mode=TwoWay}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}"/>
+
+                    <TextBox x:Uid="StoryEditComment" Text="{Binding Comments, Mode=TwoWay}" HorizontalAlignment="Left" AcceptsReturn="True" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}"/>
                 
-                <Button Content="Save" Foreground="White" HorizontalAlignment="Right"
-                        Command="{Binding SaveCommand, ElementName=layoutRoot}"/>
-            </StackPanel>
-        </ScrollViewer>
+                    <Button Content="Save" Foreground="White" HorizontalAlignment="Right"
+                            Command="{Binding SaveCommand, ElementName=layoutRoot}"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisiblityStates">
+                <VisualState x:Name="Collapsed">
+                    <Storyboard BeginTime="0" Duration="0:0:0.5">
+                        <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.5" Duration="0:0:0" Storyboard.TargetName="backgroundContainer" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <DoubleAnimation BeginTime="0" Duration="0:0:0.5" Storyboard.TargetName="backgroundContainer" Storyboard.TargetProperty="Opacity"
+                                         To="0">
+                            <DoubleAnimation.EasingFunction>
+                                <ExponentialEase EasingMode="EaseIn" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </VisualState>
+                
+                <VisualState x:Name="Visible">
+                    <Storyboard BeginTime="0" Duration="0:0:0.5">
+                        <ObjectAnimationUsingKeyFrames BeginTime="0" Duration="0:0:0" Storyboard.TargetName="backgroundContainer" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <DoubleAnimation BeginTime="0" Duration="0:0:0.5" Storyboard.TargetName="backgroundContainer" Storyboard.TargetProperty="Opacity"
+                                         To="1">
+                            <DoubleAnimation.EasingFunction>
+                                <ExponentialEase EasingMode="EaseOut" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </UserControl>

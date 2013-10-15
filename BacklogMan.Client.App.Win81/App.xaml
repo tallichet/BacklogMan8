@@ -13,18 +13,15 @@
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
                     <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="#FFE0F3FF" />
-                    <LinearGradientBrush x:Key="ButtonBackgroundThemeBrush" StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#006dcc" Offset="0" />
-                        <GradientStop Color="#006dcc" Offset="1" />
-                    </LinearGradientBrush>
-
+                    
                     <SolidColorBrush x:Key="BackButtonBackgroundThemeBrush" Color="Transparent" />
                     <SolidColorBrush x:Key="BackButtonDisabledForegroundThemeBrush" Color="#66FFFFFF" />
-                    <SolidColorBrush x:Key="BackButtonForegroundThemeBrush" Color="#FF006dcc" />
+                    <SolidColorBrush x:Key="BackButtonForegroundThemeBrush" Color="{StaticResource BacklogManMainColor}" />
                     <SolidColorBrush x:Key="BackButtonPointerOverBackgroundThemeBrush" Color="#21006dcc" />
                     <SolidColorBrush x:Key="BackButtonPointerOverForegroundThemeBrush" Color="#FF006dcc" />
-                    <SolidColorBrush x:Key="BackButtonPressedForegroundThemeBrush" Color="#FF000000" />
+                    <SolidColorBrush x:Key="BackButtonPressedForegroundThemeBrush" Color="White" />
 
+                    <SolidColorBrush x:Key="ButtonBackgroundThemeBrush" Color="#006dcc" />
                     <SolidColorBrush x:Key="ButtonBorderThemeBrush" Color="#33006dcc" />
                     <SolidColorBrush x:Key="ButtonDisabledBackgroundThemeBrush" Color="#66CACACA" />
                     <SolidColorBrush x:Key="ButtonDisabledBorderThemeBrush" Color="#1A000000" />
@@ -61,18 +58,15 @@
                 
                 <ResourceDictionary x:Key="Light">
                     <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="#FFE0F3FF" />
-                    <LinearGradientBrush x:Key="ButtonBackgroundThemeBrush" StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#006dcc" Offset="0" />
-                        <GradientStop Color="#006dcc" Offset="1" />
-                    </LinearGradientBrush>
 
                     <SolidColorBrush x:Key="BackButtonBackgroundThemeBrush" Color="Transparent" />
                     <SolidColorBrush x:Key="BackButtonDisabledForegroundThemeBrush" Color="#66FFFFFF" />
-                    <SolidColorBrush x:Key="BackButtonForegroundThemeBrush" Color="#FF006dcc" />
+                    <SolidColorBrush x:Key="BackButtonForegroundThemeBrush" Color="{StaticResource BacklogManMainColor}" />
                     <SolidColorBrush x:Key="BackButtonPointerOverBackgroundThemeBrush" Color="#21006dcc" />
                     <SolidColorBrush x:Key="BackButtonPointerOverForegroundThemeBrush" Color="#FF006dcc" />
-                    <SolidColorBrush x:Key="BackButtonPressedForegroundThemeBrush" Color="#FF000000" />
+                    <SolidColorBrush x:Key="BackButtonPressedForegroundThemeBrush" Color="White" />
 
+                    <SolidColorBrush x:Key="ButtonBackgroundThemeBrush" Color="#006dcc" />
                     <SolidColorBrush x:Key="ButtonBorderThemeBrush" Color="#33006dcc" />
                     <SolidColorBrush x:Key="ButtonDisabledBackgroundThemeBrush" Color="#66CACACA" />
                     <SolidColorBrush x:Key="ButtonDisabledBorderThemeBrush" Color="#1A000000" />
@@ -107,6 +101,10 @@
                     
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/BacklogmanStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
             <vm:ViewModelLocator x:Key="Locator" xmlns:vm="using:BacklogMan.Client.Core.ViewModel" />
 
