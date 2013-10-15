@@ -107,7 +107,7 @@ namespace BacklogMan.Client.Core.Service
                     return await UpdateStory(newStory);
                 }
                 var uri = new Uri(BacklogManApiBaseUri, "./backlogs/" + backlogId + "/stories/");
-                var result = await PostOrPutData<Model.Story, Model.Story>(uri, newStory);
+                var result = await PostOrPutData<Model.Story, Model.Story>(uri, newStory, post: true);
                 return result.Id;
             }
             catch (Exception)

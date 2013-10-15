@@ -32,6 +32,11 @@
                     <SolidColorBrush x:Key="ButtonPressedBackgroundThemeBrush" Color="#FF000000" />
                     <SolidColorBrush x:Key="ButtonPressedForegroundThemeBrush" Color="#FF006dcc" />
 
+                    <SolidColorBrush x:Key="ListViewItemSelectedBackgroundThemeBrush" Color="{StaticResource BacklogManMainColor}" />
+                    <SolidColorBrush x:Key="ListViewItemSelectedForegroundThemeBrush" Color="Black" />
+                    <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource BacklogManMainColor}" />
+                    <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBorderThemeBrush" Color="{StaticResource BacklogManMainColor}" />
+
                     <SolidColorBrush x:Key="AppBarBackgroundThemeBrush" Color="{StaticResource BacklogManMainColor}" />
                     <SolidColorBrush x:Key="AppBarBorderThemeBrush" Color="{StaticResource BacklogManMainColor}" />
                     <SolidColorBrush x:Key="AppBarItemBackgroundThemeBrush" Color="Transparent" />
@@ -76,6 +81,11 @@
                     <SolidColorBrush x:Key="ButtonPointerOverForegroundThemeBrush" Color="#FF003d8c" />
                     <SolidColorBrush x:Key="ButtonPressedBackgroundThemeBrush" Color="#FF000000" />
                     <SolidColorBrush x:Key="ButtonPressedForegroundThemeBrush" Color="#FF006dcc" />
+
+                    <SolidColorBrush x:Key="ListViewItemSelectedBackgroundThemeBrush" Color="{StaticResource BacklogManMainColor}" />
+                    <SolidColorBrush x:Key="ListViewItemSelectedForegroundThemeBrush" Color="Black" />
+                    <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource BacklogManMainColor}" />
+                    <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBorderThemeBrush" Color="{StaticResource BacklogManMainColor}" />
 
                     <SolidColorBrush x:Key="AppBarBackgroundThemeBrush" Color="{StaticResource BacklogManMainColor}" />
                     <SolidColorBrush x:Key="AppBarBorderThemeBrush" Color="{StaticResource BacklogManMainColor}" />

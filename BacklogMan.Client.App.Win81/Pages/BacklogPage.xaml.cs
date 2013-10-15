@@ -164,13 +164,23 @@ namespace BacklogMan.Client.App.Win81.Pages
 
         #endregion
 
-        private void Story_ItemClick(object sender, ItemClickEventArgs e)
+
+        private void story_tapped(object sender, TappedRoutedEventArgs e)
         {
-            var story = e.ClickedItem as Core.Model.Story;
+            var story = (sender as FrameworkElement).Tag as Core.Model.Story;
 
             var editStory = new Core.Model.Story(story);
 
             storyEditor.DataContext = editStory;
+
+            storyEditor.Show();
+        }
+
+        private void addStory_Click(object sender, RoutedEventArgs e)
+        {
+            var story = new Core.Model.Story();
+
+            storyEditor.DataContext = story;
 
             storyEditor.Show();
         }

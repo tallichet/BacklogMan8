@@ -17,6 +17,7 @@
 
     <Page.BottomAppBar>
         <CommandBar>
+            <AppBarButton Click="addStory_Click" Icon="Add" x:Uid="NewStoryAppbarButton" />
             <AppBarButton Command="{Binding RefreshBacklogCommand}" Icon="Refresh" x:Uid="RefreshAppbarButton" />
         </CommandBar>
     </Page.BottomAppBar>
@@ -54,12 +55,11 @@
         </Grid>
 
         <ListView ItemsSource="{Binding Path=BacklogStories}" Margin="110,0" Grid.Row="1"
-                  CanReorderItems="True" AllowDrop="True" SelectionMode="Multiple"
-                  IsItemClickEnabled="True" ItemClick="Story_ItemClick">
+                  CanReorderItems="True" AllowDrop="True" SelectionMode="Extended">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="DarkBlue" BorderThickness="0.5" Margin="5" HorizontalAlignment="Stretch" Background="{StaticResource ApplicationPageBackgroundThemeBrush}"
-                            Width="{Binding BacklogItemWidth, ElementName=pageRoot}">
+                            Width="{Binding BacklogItemWidth, ElementName=pageRoot}" Tapped="story_tapped" Tag="{Binding}">
                         <Grid>
                             <Grid Margin="10,0" Visibility="{Binding LandscapeVisibility, ElementName=pageRoot}">
                                 <Grid.RowDefinitions>

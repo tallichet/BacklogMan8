@@ -396,12 +396,29 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         public async Task<bool> UpdateStory(Model.Story updateStory)
         {
             IsInProgress = true;
-            var result = await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStory(updateStory);
-            if (result >= 0)
+            int result;
+            checkNotNullFields(updateStory);
+
+            if (updateStory.Id <= 0)
             {
-                var story = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStory(updateStory.Backlog.Id, updateStory.Id);
-                BacklogStories.ReplaceItemById(story);
+                result = await ServiceLocator.Current.GetInstance<Service.INetworkService>().AddStory(CurrentBacklog.Id, updateStory);
+                if (result >= 0)
+                {
+                    var story = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStory(CurrentBacklog.Id, result);
+                    BacklogStories.Add (story);
+                }
             }
+            else
+            {
+                result = await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStory(updateStory);
+                if (result >= 0)
+                {
+                    var story = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStory(updateStory.Backlog.Id, updateStory.Id);
+                    BacklogStories.ReplaceItemById(story);
+                }
+            }
+            
+            
             IsInProgress = false;
             return result > -1;
         }
@@ -582,6 +599,19 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
 
+        #endregion
+
+        #region helpers
+        private void checkNotNullFields(Model.Story story)
+        {
+            if (story.AcceptanceCriteria == null) story.AcceptanceCriteria = "";
+            if (story.Comments == null) story.Comments = "";
+            if (story.Theme == null) story.Theme = "";
+            if (story.ColorString == null) story.ColorString = "";
+            if (story.AsUser == null) story.AsUser = "";
+            if (story.Goal == null) story.Goal = "";
+            if (story.Result == null) story.Result = "";
+        }
         #endregion
     }
 }

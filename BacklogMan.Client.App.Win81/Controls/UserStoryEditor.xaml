@@ -19,13 +19,14 @@
                 <SolidColorBrush Color="White" />
             </Grid.Background>
 
-            <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Tapped="scrollviewerTapped">
-                <StackPanel Margin="30">
+            <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Tapped="scrollviewerTapped" HorizontalAlignment="Stretch">
+                <StackPanel Margin="30" MaxWidth="800">
                     <TextBox x:Uid="StoryEditAsUser" Text="{Binding AsUser, Mode=TwoWay}" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
                     <TextBox x:Uid="StoryEditGoal" Text="{Binding Goal, Mode=TwoWay}" AcceptsReturn="True" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
                     <TextBox x:Uid="StoryEditResult" Text="{Binding Result, Mode=TwoWay}" AcceptsReturn="True" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
 
-                    <TextBox x:Uid="StoryEditAcceptances" Text="{Binding AcceptanceCriteria, Mode=TwoWay}" AcceptsReturn="True" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
+                    <TextBox x:Uid="StoryEditAcceptances" Text="{Binding AcceptanceCriteria, Mode=TwoWay}" AcceptsReturn="True" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" 
+                             Height="200"/>
                     <ComboBox x:Uid="StoryEditPoints" x:Name="storyEditPoints"
                               SelectedValue="{Binding Points, Mode=TwoWay}" Width="100" HorizontalAlignment="Left" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
 
@@ -37,9 +38,10 @@
 
                     <TextBox x:Uid="StoryEditColor" Text="{Binding ColorString, Mode=TwoWay}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}"/>
 
-                    <TextBox x:Uid="StoryEditComment" Text="{Binding Comments, Mode=TwoWay}" HorizontalAlignment="Left" AcceptsReturn="True" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}"/>
+                    <TextBox x:Uid="StoryEditComment" Text="{Binding Comments, Mode=TwoWay}" AcceptsReturn="True" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}"
+                             Height="200"/>
                 
-                    <Button Content="Save" Foreground="White" HorizontalAlignment="Right"
+                    <Button Content="Save" Foreground="White" HorizontalAlignment="Right" Padding="20,10" Margin="5,10"
                             Command="{Binding SaveCommand, ElementName=layoutRoot}"/>
                 </StackPanel>
             </ScrollViewer>
