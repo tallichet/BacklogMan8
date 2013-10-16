@@ -125,8 +125,6 @@
             <converter:EmailToGravatarUriConverter x:Key="EmailToGravatarUriConverter" />
             <converter:ColorConverter x:Key="ColorConverter" />
             <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-            
-
         </ResourceDictionary>
 
     </Application.Resources>

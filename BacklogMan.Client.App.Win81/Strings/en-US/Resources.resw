@@ -120,6 +120,9 @@
   <data name="BacklogsSection.Header" xml:space="preserve">
     <value>Backlogs</value>
   </data>
+  <data name="DeleteStoryAppbarButton.Label" xml:space="preserve">
+    <value>Delete stories</value>
+  </data>
   <data name="NewStoryAppbarButton.Label" xml:space="preserve">
     <value>New story</value>
   </data>

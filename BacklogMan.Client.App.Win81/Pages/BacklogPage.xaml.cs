@@ -184,5 +184,35 @@ namespace BacklogMan.Client.App.Win81.Pages
 
             storyEditor.Show();
         }
+
+        private void deleteStory_Click(object sender, RoutedEventArgs e)
+        {
+            if (storiesList.SelectedItems != null && storiesList.SelectedItems.Count > 0)
+            {
+                var storiesToDelete = storiesList.SelectedItems.Cast<Core.Model.Story>().ToArray();
+
+                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().DeleteStories(storiesToDelete);
+            }
+        }
+
+        private void storiesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedItems = (sender as ListViewBase).SelectedItems;
+
+            if (selectedItems != null && selectedItems.Count > 0)
+            {
+                commandBar.IsSticky = true;
+                commandBar.IsOpen = true;
+
+                deleteStoryAppbarButton.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            }
+            else
+            {
+                commandBar.IsOpen = false;
+                commandBar.IsSticky = false;
+                
+                deleteStoryAppbarButton.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            }
+        }
     }
 }

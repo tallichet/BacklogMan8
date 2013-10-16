@@ -16,9 +16,13 @@
     </Page.Resources>
 
     <Page.BottomAppBar>
-        <CommandBar>
+        <CommandBar x:Name="commandBar">
             <AppBarButton Click="addStory_Click" Icon="Add" x:Uid="NewStoryAppbarButton" />
             <AppBarButton Command="{Binding RefreshBacklogCommand}" Icon="Refresh" x:Uid="RefreshAppbarButton" />
+            
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="deleteStoryAppbarButton" Click="deleteStory_Click" Icon="Delete" x:Uid="DeleteStoryAppbarButton" Visibility="Collapsed" />
+            </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -54,8 +58,10 @@
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
 
-        <ListView ItemsSource="{Binding Path=BacklogStories}" Margin="110,0" Grid.Row="1"
-                  CanReorderItems="True" AllowDrop="True" SelectionMode="Extended">
+        <ListView x:Name="storiesList" ItemsSource="{Binding Path=BacklogStories}" Margin="110,0" Grid.Row="1"
+                  SelectionChanged="storiesList_SelectionChanged"
+                  CanReorderItems="True" AllowDrop="True" 
+                  SelectionMode="Extended" IsItemClickEnabled="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="DarkBlue" BorderThickness="0.5" Margin="5" HorizontalAlignment="Stretch" Background="{StaticResource ApplicationPageBackgroundThemeBrush}"
