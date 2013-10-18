@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -185,13 +186,22 @@ namespace BacklogMan.Client.App.Win81.Pages
             storyEditor.Show();
         }
 
-        private void deleteStory_Click(object sender, RoutedEventArgs e)
+        private async void deleteStory_Click(object sender, RoutedEventArgs e)
         {
             if (storiesList.SelectedItems != null && storiesList.SelectedItems.Count > 0)
             {
-                var storiesToDelete = storiesList.SelectedItems.Cast<Core.Model.Story>().ToArray();
+                var deleteConfirmationMessage = string.Format(
+                        new ResourceLoader().GetString("DeleteStoryMessage"),
+                        storiesList.SelectedItems.Count
+                    );
 
-                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().DeleteStories(storiesToDelete);
+                var deleteConfirmed = await new Controls.DeletionConfirmation(deleteConfirmationMessage).ShowDeleteConfirmationAsync(sender as FrameworkElement);
+
+                if (deleteConfirmed)
+                {
+                    var storiesToDelete = storiesList.SelectedItems.Cast<Core.Model.Story>().ToArray();
+                    ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().DeleteStories(storiesToDelete);
+                }
             }
         }
 

@@ -114,6 +114,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DeletionConfirmation.xaml.cs">
+      <DependentUpon>DeletionConfirmation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PointsPicker.xaml.cs">
       <DependentUpon>PointsPicker.xaml</DependentUpon>
     </Compile>
@@ -225,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Controls\DeletionConfirmation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\PointsPicker.xaml">
       <SubType>Designer</SubType>
