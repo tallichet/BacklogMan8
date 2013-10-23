@@ -19,7 +19,7 @@
         </TextBlock>
 
         <toolkit:ContextMenuService.ContextMenu>
-            <toolkit:ContextMenu IsZoomEnabled="True">
+            <toolkit:ContextMenu IsZoomEnabled="True" x:Name="statusContextMenu">
                 <toolkit:ContextMenu.Items>
                     <toolkit:MenuItem Header="To do" Tag="ToDo" Click="SetStatus_Click" />
                     <toolkit:MenuItem Header="In progress" Tag="InProgress" Click="SetStatus_Click" />

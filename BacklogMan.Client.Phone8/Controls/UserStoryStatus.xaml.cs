@@ -42,7 +42,7 @@ namespace BacklogMan.Client.Phone8.Controls
 
         private void LayoutRoot_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            
+            statusContextMenu.IsOpen = true;            
         }
 
         private void SetStatus_Click(object sender, RoutedEventArgs e)
