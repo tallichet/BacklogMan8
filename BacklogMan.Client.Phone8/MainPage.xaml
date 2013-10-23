@@ -75,7 +75,7 @@
                     <phone:LongListSelector ItemsSource="{Binding Path=Organizations}">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <Grid Height="120" Margin="6" Tap="Organization_Tapped" Tag="{Binding}">
+                                <Grid MinHeight="120" Margin="6" Tap="Organization_Tapped" Tag="{Binding}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
@@ -87,7 +87,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Image Width="60" Height="60" Source="{Binding Email, Converter={StaticResource EmailToGravatarUriConverter}}" 
-                                           Grid.RowSpan="2"/>
+                                           Grid.RowSpan="2" VerticalAlignment="Top" Margin="0,30"/>
                                     <TextBlock Text="{Binding Path=Name}" Style="{StaticResource PhoneTextTitle2Style}" 
                                                Grid.Column="1"/>
                                     <TextBlock Text="{Binding Path=Description}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" 

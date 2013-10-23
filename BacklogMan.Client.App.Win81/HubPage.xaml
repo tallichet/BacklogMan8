@@ -68,7 +68,7 @@
                             x:Name="itemListView"
                             AutomationProperties.AutomationId="ItemListView"
                             AutomationProperties.Name="Grouped Items"
-                            VerticalAlignment="Bottom" Height="250"
+                            VerticalAlignment="Bottom" Height="250" Margin="80,0,0,0"
                             ItemsSource="{Binding MainBacklogs}"
                             IsSwipeEnabled="False"
                             IsItemClickEnabled="True"

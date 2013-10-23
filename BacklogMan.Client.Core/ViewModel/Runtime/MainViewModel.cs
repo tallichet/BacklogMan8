@@ -258,7 +258,9 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 IsInProgress = true;
                 ProjectBacklogs.Clear();
                 var project = CurrentProject; // this allow us to be sure the project don't change during the download
-                
+
+                if (project == null) return;
+
                 foreach (var b in project.Backlogs)
                 {
                     if (b.IsArchive) continue;
@@ -316,16 +318,22 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
         private async void refreshOrganization()
         {
+            var wasInProgress = IsInProgress;
             IsInProgress = true;
             await refreshOrganizationBacklogs();
             await refreshOrganizationProjects();
-            IsInProgress = false;
+            
+            if (!wasInProgress)
+                IsInProgress = false;
         }
 
         private async Task refreshOrganizationBacklogs()
         {
             OrganizationBacklogs.Clear();
             var org = CurrentOrganization;
+
+            if (org == null) return;
+
             foreach (var b in org.Backlogs)
             {
                 try
@@ -356,6 +364,9 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         {
             OrganizationProjects.Clear();
             var org = CurrentOrganization;
+
+            if (org == null) return;
+
             foreach (var p in org.Projects)
             {
                 try
@@ -376,6 +387,8 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             BacklogStories.Clear();
 
             var backlog = CurrentBacklog; // this allow us to be sure the backlog don't change during the download
+
+            if (backlog == null) return;
             var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentBacklog.Id);
             foreach (var s in stories)
             {
@@ -542,6 +555,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                     refreshBacklogCommand = new RelayCommand(async () =>
                     {
                         IsInProgress = true;
+                        CurrentBacklog = null;
                         CurrentBacklog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(CurrentBacklog.Id);
                         IsInProgress = false;
                     });
@@ -558,6 +572,11 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 {
                     refreshHomeCommand = new RelayCommand(() =>
                     {
+                        this.Organizations.Clear();
+                        this.Projects.Clear();
+                        this.ProjectsStandalone.Clear();
+                        this.MainBacklogs.Clear();
+
                         Init();
                     });
                 }
@@ -574,6 +593,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                     refreshProjectCommand = new RelayCommand(async () =>
                     {
                         IsInProgress = true;
+                        CurrentProject = null;
                         CurrentProject = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadProject(CurrentProject.Id);
                         IsInProgress = false;
                     });
@@ -591,6 +611,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                     refreshOrganizationCommand = new RelayCommand(async () =>
                     {
                         IsInProgress = true;
+                        CurrentOrganization = null;
                         CurrentOrganization = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganization(CurrentOrganization.Id);
                         IsInProgress = false;
                     });

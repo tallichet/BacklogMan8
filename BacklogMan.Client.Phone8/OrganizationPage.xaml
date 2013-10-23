@@ -24,17 +24,12 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
         <phone:Pivot x:Name="pivotMain" Title="{Binding Path=CurrentOrganization.Name}">
 
             <phone:PivotItem Header="backlogs">
                 <Grid>
-                    <phone:LongListSelector ItemsSource="{Binding Path=OrganizationBacklogs}">
-                        <phone:LongListSelector.ItemTemplate>
+                    <ListBox ItemsSource="{Binding Path=OrganizationBacklogs}">
+                        <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Height="120" Margin="6" Tap="Backlog_Tapped" Tag="{Binding}">
                                     <Grid.RowDefinitions>
@@ -58,40 +53,38 @@
                                                     Grid.Column="1" Grid.Row="1"/>
                                 </Grid>
                             </DataTemplate>
-                        </phone:LongListSelector.ItemTemplate>
-                    </phone:LongListSelector>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
             </phone:PivotItem>
 
             <phone:PivotItem Header="projects">
-                <Grid>
-                    <ListBox ItemsSource="{Binding Path=OrganizationProjects}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Height="120" Margin="6" Tap="Project_Tapped" Tag="{Binding}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
+                <ListBox ItemsSource="{Binding Path=OrganizationProjects}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="120" Margin="6" Tap="Project_Tapped" Tag="{Binding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
 
-                                    <TextBlock Text="&#xF02D;" Grid.Column="0" Grid.RowSpan="3" 
-                                               FontFamily="/Fonts/fontawesome-webfont.ttf#FontAwesome"
-                                               Style="{StaticResource PhoneTextTitle2Style}"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#xF02D;" Grid.Column="0" Grid.RowSpan="3" 
+                                            FontFamily="/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                            Style="{StaticResource PhoneTextTitle2Style}"
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                                    <TextBlock Text="{Binding Path=Name}" Style="{StaticResource PhoneTextTitle2Style}" 
-                                                    Grid.Column="1"/>
-                                    <TextBlock Text="{Binding Path=Description}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" TextTrimming="WordEllipsis"
-                                                    Grid.Column="1" Grid.Row="1"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Grid>
+                                <TextBlock Text="{Binding Path=Name}" Style="{StaticResource PhoneTextTitle2Style}" 
+                                                Grid.Column="1"/>
+                                <TextBlock Text="{Binding Path=Description}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" TextTrimming="WordEllipsis"
+                                                Grid.Column="1" Grid.Row="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </phone:PivotItem>
 
             <phone:PivotItem Header="info">
