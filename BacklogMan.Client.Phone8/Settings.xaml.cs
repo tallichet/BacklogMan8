@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Practices.ServiceLocation;
+using BacklogMan.Client.Core.ViewModel;
 
 namespace BacklogMan.Client.Phone8
 {
@@ -16,6 +17,14 @@ namespace BacklogMan.Client.Phone8
         public Settings()
         {
             InitializeComponent();
+            if (string.IsNullOrWhiteSpace(ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().ApiKey))
+            {
+                sectionLogout.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                sectionLogin.Visibility = Visibility.Collapsed;
+            }
         }
 
 
@@ -70,6 +79,15 @@ namespace BacklogMan.Client.Phone8
                 Text = "Backlogman",
                 IsVisible = true,
             };
+        }
+
+        private void Disconnect(object sender, RoutedEventArgs e)
+        {
+            sectionLogout.Visibility = System.Windows.Visibility.Collapsed;
+            ServiceLocator.Current.GetInstance<IMainViewModel>().ClearApiKey();
+            sectionLogin.Visibility = System.Windows.Visibility.Visible;
+            
+            
         }
 
 

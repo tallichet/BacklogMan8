@@ -70,6 +70,12 @@ namespace BacklogMan.Client.Core.ViewModel
         /// <param name="Password"></param>
         Task<bool> GetApiKey(string Username, string Password);
 
+        /// <summary>
+        /// Formerly, this is a log out from the Core view
+        /// </summary>
+        /// <returns></returns>
+        void ClearApiKey();
+
         void RefreshBacklogStories();
 
         /// <summary>

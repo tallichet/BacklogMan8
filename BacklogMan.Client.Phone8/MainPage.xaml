@@ -141,7 +141,10 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar BackgroundColor="{StaticResource BacklogManMainColor}" ForegroundColor="White" Mode="Minimized" >
-            <shell:ApplicationBarIconButton IconUri="/Images/Appbar/sync.png" Text="refresh" Click="refreshClick" />
+            <shell:ApplicationBarIconButton x:Name="appbarButtonSync" IconUri="/Images/Appbar/sync.png" Text="refresh" Click="refreshClick" />
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem x:Name="appbarMenuSettings" Click="menuSettingsClick" Text="[settings]"></shell:ApplicationBarMenuItem>
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

@@ -16,6 +16,7 @@ namespace BacklogMan.Client.Phone8
         public ProjectPage()
         {
             InitializeComponent();
+            appbarButtonSync.Text = BacklogMan.Client.Phone8.Resources.AppResources.MenuBarSettingsMenu;
         }
 
         private void BacklogTapped(object sender, System.Windows.Input.GestureEventArgs e)

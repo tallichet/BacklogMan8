@@ -143,4 +143,12 @@
   <data name="StorySoICan" xml:space="preserve">
     <value> So I can</value>
   </data>
+  <data name="MenuBarRefreshButtonLabel" xml:space="preserve">
+    <value>refresh</value>
+    <comment>Refresh button label from the app bar</comment>
+  </data>
+  <data name="MenuBarSettingsMenu" xml:space="preserve">
+    <value>settings</value>
+    <comment>Open the settings from the menu app bar</comment>
+  </data>
 </root>

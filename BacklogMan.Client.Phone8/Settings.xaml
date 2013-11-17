@@ -27,7 +27,11 @@
             <!--Pivot item one-->
             <phone:PivotItem Header="login">
                 <Grid>
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="sectionLogout">
+                        <Button HorizontalAlignment="Right" Content="disconnect" Click="Disconnect" 
+                                    Foreground="White" BorderBrush="White"/>
+                    </StackPanel>
+                    <ScrollViewer x:Name="sectionLogin" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
                             <TextBlock Text="username" Style="{StaticResource PhoneTextNormalStyle}" Foreground="White" />
                             <TextBox Text="{Binding Username, Mode=TwoWay, ElementName=self}">

@@ -11,6 +11,7 @@ namespace BacklogMan.Client.Core.Service
     {
         string APIKey { get; set; }
 
+        
         Task<List<Model.Project>> DownloadProjects();
         Task<Model.Project> DownloadProject(int projectId);
 
@@ -35,5 +36,6 @@ namespace BacklogMan.Client.Core.Service
         Task<bool> MoveStory(int targetBacklogId, int movedStoryId, int[] storyIdOrder);
         Task<bool> OrderBacklogInProject(int projectId, int movedBacklog, int[] backlogIdOrder);
         Task<bool> OrderBacklogInOrganization(int organizationId, int movedBacklog, int[] backlogIdOrder);
+
     }
 }

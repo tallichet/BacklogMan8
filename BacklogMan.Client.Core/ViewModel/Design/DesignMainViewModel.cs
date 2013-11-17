@@ -352,5 +352,11 @@ namespace BacklogMan.Client.Core.ViewModel.Design
         {
             get { throw new NotImplementedException(); }
         }
+
+
+        public void ClearApiKey()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

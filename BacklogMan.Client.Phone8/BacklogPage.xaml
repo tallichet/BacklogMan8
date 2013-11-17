@@ -57,7 +57,7 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar BackgroundColor="{StaticResource BacklogManMainColor}" ForegroundColor="White" Mode="Minimized" >
-            <shell:ApplicationBarIconButton IconUri="/Images/Appbar/sync.png" Text="refresh" Click="refreshClick" />
+            <shell:ApplicationBarIconButton x:Name="appbarButtonSync" IconUri="/Images/Appbar/sync.png" Text="refresh" Click="refreshClick" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
     

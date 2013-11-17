@@ -251,6 +251,24 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
         }
 
+        public void ClearApiKey()
+        {
+            // Todo : Cancel any current network operation
+            ServiceLocator.Current.GetInstance<Service.INetworkService>().APIKey = null;
+            ServiceLocator.Current.GetInstance<Service.INetworkService>().ClearCache();
+            CurrentBacklog = null;
+            CurrentOrganization = null;
+            CurrentProject = null;
+
+            MainBacklogs.Clear();
+            ProjectsStandalone.Clear();
+            Projects.Clear();
+            BacklogStories.Clear();
+            OrganizationBacklogs.Clear();
+            OrganizationProjects.Clear();
+            Organizations.Clear();
+        }
+
         private async void refreshBacklogs()
         {
             try
@@ -634,5 +652,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             if (story.Result == null) story.Result = "";
         }
         #endregion
+
+
     }
 }

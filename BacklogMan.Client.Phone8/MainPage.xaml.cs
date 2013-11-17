@@ -16,6 +16,8 @@ namespace BacklogMan.Client.Phone8
         public MainPage()
         {
             InitializeComponent();
+            appbarMenuSettings.Text = BacklogMan.Client.Phone8.Resources.AppResources.MenuBarSettingsMenu;
+            appbarButtonSync.Text = BacklogMan.Client.Phone8.Resources.AppResources.MenuBarSettingsMenu;
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -61,6 +63,11 @@ namespace BacklogMan.Client.Phone8
         private void refreshClick(object sender, EventArgs e)
         {
             ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().RefreshHomeCommand.Execute(null);
+        }
+
+        private void menuSettingsClick(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
         }
     }
 }
