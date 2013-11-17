@@ -88,6 +88,78 @@ namespace BacklogMan.Client.Phone8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to backlogs.
+        /// </summary>
+        public static string BacklogsTitle {
+            get {
+                return ResourceManager.GetString("BacklogsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to connect.
+        /// </summary>
+        public static string ButtonConnectLabel {
+            get {
+                return ResourceManager.GetString("ButtonConnectLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to disconnect.
+        /// </summary>
+        public static string ButtonDisconnectLabel {
+            get {
+                return ResourceManager.GetString("ButtonDisconnectLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to completed.
+        /// </summary>
+        public static string CompletedPointsLabel {
+            get {
+                return ResourceManager.GetString("CompletedPointsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to completed.
+        /// </summary>
+        public static string CompletedStoriesLabel {
+            get {
+                return ResourceManager.GetString("CompletedStoriesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to information.
+        /// </summary>
+        public static string InformationTitle {
+            get {
+                return ResourceManager.GetString("InformationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to login.
+        /// </summary>
+        public static string LoginHeader {
+            get {
+                return ResourceManager.GetString("LoginHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to main backlogs.
+        /// </summary>
+        public static string MainBacklogsTitle {
+            get {
+                return ResourceManager.GetString("MainBacklogsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to refresh.
         /// </summary>
         public static string MenuBarRefreshButtonLabel {
@@ -106,6 +178,51 @@ namespace BacklogMan.Client.Phone8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to organizations.
+        /// </summary>
+        public static string OrganizationsTitle {
+            get {
+                return ResourceManager.GetString("OrganizationsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to password.
+        /// </summary>
+        public static string PasswordLabel {
+            get {
+                return ResourceManager.GetString("PasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to points.
+        /// </summary>
+        public static string PointsLabel {
+            get {
+                return ResourceManager.GetString("PointsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to projects.
+        /// </summary>
+        public static string ProjectsLabel {
+            get {
+                return ResourceManager.GetString("ProjectsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to projects.
+        /// </summary>
+        public static string ProjectsTitle {
+            get {
+                return ResourceManager.GetString("ProjectsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {
@@ -120,6 +237,33 @@ namespace BacklogMan.Client.Phone8.Resources {
         public static string ResourceLanguage {
             get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SETTINGS.
+        /// </summary>
+        public static string SettingsTitle {
+            get {
+                return ResourceManager.GetString("SettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to stories.
+        /// </summary>
+        public static string StoriesLabel {
+            get {
+                return ResourceManager.GetString("StoriesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to stories.
+        /// </summary>
+        public static string StoriesTitle {
+            get {
+                return ResourceManager.GetString("StoriesTitle", resourceCulture);
             }
         }
         
@@ -147,6 +291,15 @@ namespace BacklogMan.Client.Phone8.Resources {
         public static string StorySoICan {
             get {
                 return ResourceManager.GetString("StorySoICan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to username.
+        /// </summary>
+        public static string UsernameLabel {
+            get {
+                return ResourceManager.GetString("UsernameLabel", resourceCulture);
             }
         }
     }

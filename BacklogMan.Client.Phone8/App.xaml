@@ -5,7 +5,8 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:vm="clr-namespace:BacklogMan.Client.Core.ViewModel;assembly=BacklogMan.Client.Core"
-    xmlns:converter="clr-namespace:BacklogMan.Client.Phone8.Converter">
+    xmlns:converter="clr-namespace:BacklogMan.Client.Phone8.Converter"
+    xmlns:res="clr-namespace:BacklogMan.Client.Phone8.Resources">
 
     <!--Application Resources-->
     <Application.Resources>
@@ -17,6 +18,8 @@
         <converter:ColorConverter x:Key="ColorConverter" />
         <converter:ListToVisibilityConverter x:Key="ListToVisibilityConverter" />
         <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        
+        <res:ResourceLocator x:Key="ResourceLocator" />
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

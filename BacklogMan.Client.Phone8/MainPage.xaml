@@ -22,7 +22,7 @@
 
         <!--Pivot Control-->
         <phone:Pivot x:Name="pivotMain" SelectionChanged="Pivot_SelectionChanged" Margin="0,-20,0,0">
-            <phone:PivotItem Header="Main backlogs">
+            <phone:PivotItem Header="{Binding Path=MainBacklogsTitle, Source={StaticResource ResourceLocator}}">
                 <Grid>
                     <ListBox ItemsSource="{Binding Path=MainBacklogs}" VerticalAlignment="Bottom" MaxHeight="500"
                              ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -51,15 +51,15 @@
                                         <TextBlock Text="{Binding Path=Name}" Style="{StaticResource PhoneTextTitle2Style}" />
                                         <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                                             <TextBlock Text="{Binding Path=Statistics.StoriesTotal}" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,0,5,0" />
-                                            <TextBlock Text="Stories"  Style="{StaticResource PhoneTextNormalStyle}" Margin="0,0,5,0" />
+                                            <TextBlock Text="{Binding StoriesLabel, Source={StaticResource ResourceLocator}}"  Style="{StaticResource PhoneTextNormalStyle}" Margin="0,0,5,0" />
                                             <TextBlock Text="{Binding Path=Statistics.StoriesCompleted}"  Style="{StaticResource PhoneTextNormalStyle}" Margin="0,0,5,0" />
-                                            <TextBlock Text="completed"  Style="{StaticResource PhoneTextNormalStyle}" />
+                                            <TextBlock Text="{Binding CompletedStoriesLabel, Source={StaticResource ResourceLocator}}"  Style="{StaticResource PhoneTextNormalStyle}" />
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                                             <TextBlock Text="{Binding Path=Statistics.PointsTotal}" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,0,5,0" />
-                                            <TextBlock Text="Points" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,0,5,0" />
+                                            <TextBlock Text="{Binding PointsLabel, Source={StaticResource ResourceLocator}}" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,0,5,0" />
                                             <TextBlock Text="{Binding Path=Statistics.PointsCompleted}" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,0,5,0" />
-                                            <TextBlock Text="completed" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,0,5,0" />
+                                            <TextBlock Text="{Binding CompletedPointsLabel, Source={StaticResource ResourceLocator}}" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,0,5,0" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
@@ -70,7 +70,7 @@
             </phone:PivotItem>
 
             <!--Pivot item one-->
-            <phone:PivotItem Header="Organizations">
+            <phone:PivotItem Header="{Binding Path=OrganizationsTitle, Source={StaticResource ResourceLocator}}">
                 <Grid>
                     <phone:LongListSelector ItemsSource="{Binding Path=Organizations}">
                         <phone:LongListSelector.ItemTemplate>
@@ -100,7 +100,7 @@
             </phone:PivotItem>
 
             <!--Pivot item two-->
-            <phone:PivotItem Header="Projects">
+            <phone:PivotItem Header="{Binding Path=ProjectsTitle, Source={StaticResource ResourceLocator}}">
                 <Grid>
                     <phone:LongListSelector ItemsSource="{Binding Path=ProjectsStandalone}">
                         <phone:LongListSelector.ItemTemplate>

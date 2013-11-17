@@ -151,4 +151,72 @@
     <value>settings</value>
     <comment>Open the settings from the menu app bar</comment>
   </data>
+  <data name="ButtonConnectLabel" xml:space="preserve">
+    <value>connect</value>
+    <comment>Label of the connect button in the settings</comment>
+  </data>
+  <data name="ButtonDisconnectLabel" xml:space="preserve">
+    <value>disconnect</value>
+    <comment>Label of the disconnect button in the settings</comment>
+  </data>
+  <data name="LoginHeader" xml:space="preserve">
+    <value>login</value>
+    <comment>login header in the settings page</comment>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>password</value>
+    <comment>Password of the settings login</comment>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>SETTINGS</value>
+    <comment>settings page title</comment>
+  </data>
+  <data name="UsernameLabel" xml:space="preserve">
+    <value>username</value>
+    <comment>Username of the settings login</comment>
+  </data>
+  <data name="BacklogsTitle" xml:space="preserve">
+    <value>backlogs</value>
+    <comment>Backlogs title on the main screen</comment>
+  </data>
+  <data name="CompletedPointsLabel" xml:space="preserve">
+    <value>completed</value>
+    <comment>Points completed text</comment>
+  </data>
+  <data name="CompletedStoriesLabel" xml:space="preserve">
+    <value>completed</value>
+    <comment>Stories completed text</comment>
+  </data>
+  <data name="InformationTitle" xml:space="preserve">
+    <value>information</value>
+    <comment>Information title on the main screen</comment>
+  </data>
+  <data name="MainBacklogsTitle" xml:space="preserve">
+    <value>main backlogs</value>
+    <comment>main backlogs title on the main screen</comment>
+  </data>
+  <data name="OrganizationsTitle" xml:space="preserve">
+    <value>organizations</value>
+    <comment>Organizations title on the main screen</comment>
+  </data>
+  <data name="PointsLabel" xml:space="preserve">
+    <value>points</value>
+    <comment>Points text</comment>
+  </data>
+  <data name="ProjectsLabel" xml:space="preserve">
+    <value>projects</value>
+    <comment>Projects text</comment>
+  </data>
+  <data name="ProjectsTitle" xml:space="preserve">
+    <value>projects</value>
+    <comment>Projects title on the main screen</comment>
+  </data>
+  <data name="StoriesLabel" xml:space="preserve">
+    <value>stories</value>
+    <comment>Stories text</comment>
+  </data>
+  <data name="StoriesTitle" xml:space="preserve">
+    <value>stories</value>
+    <comment>Stories title on the main screen</comment>
+  </data>
 </root>

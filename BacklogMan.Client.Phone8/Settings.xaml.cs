@@ -55,6 +55,8 @@ namespace BacklogMan.Client.Phone8
         {
             try
             {
+                buttonConnect.IsEnabled = false;
+                connectProgressBar.IsIndeterminate = true;
                 if (await ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().GetApiKey(Username, Password))
                 {
                     this.NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
@@ -69,6 +71,11 @@ namespace BacklogMan.Client.Phone8
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connectProgressBar.IsIndeterminate = false;
+                buttonConnect.IsEnabled = true;
             }
         }
 
@@ -86,8 +93,6 @@ namespace BacklogMan.Client.Phone8
             sectionLogout.Visibility = System.Windows.Visibility.Collapsed;
             ServiceLocator.Current.GetInstance<IMainViewModel>().ClearApiKey();
             sectionLogin.Visibility = System.Windows.Visibility.Visible;
-            
-            
         }
 
 

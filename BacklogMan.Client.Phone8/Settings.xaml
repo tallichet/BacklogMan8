@@ -23,17 +23,17 @@
             <SolidColorBrush Color="{StaticResource BacklogManMainColor}" />
         </Grid.Background>
         <!--Pivot Control-->
-        <phone:Pivot Title="SETTINGS" Foreground="White">
+        <phone:Pivot Title="{Binding Path=SettingsTitle, Source={StaticResource ResourceLocator}}" Foreground="White">
             <!--Pivot item one-->
-            <phone:PivotItem Header="login">
+            <phone:PivotItem Header="{Binding Path=LoginHeader, Source={StaticResource ResourceLocator}}">
                 <Grid>
                     <StackPanel x:Name="sectionLogout">
-                        <Button HorizontalAlignment="Right" Content="disconnect" Click="Disconnect" 
+                        <Button HorizontalAlignment="Right" Content="{Binding Path=ButtonDisconnectLabel, Source={StaticResource ResourceLocator}}" Click="Disconnect" x:Name="buttonDisconnect"
                                     Foreground="White" BorderBrush="White"/>
                     </StackPanel>
                     <ScrollViewer x:Name="sectionLogin" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
-                            <TextBlock Text="username" Style="{StaticResource PhoneTextNormalStyle}" Foreground="White" />
+                            <TextBlock Text="{Binding Path=UsernameLabel, Source={StaticResource ResourceLocator}}" Style="{StaticResource PhoneTextNormalStyle}" Foreground="White" />
                             <TextBox Text="{Binding Username, Mode=TwoWay, ElementName=self}">
                                 <TextBox.InputScope>
                                     <InputScope>
@@ -43,9 +43,12 @@
                                     </InputScope>
                                 </TextBox.InputScope>
                             </TextBox>
-                            <TextBlock Text="password" Style="{StaticResource PhoneTextNormalStyle}" Foreground="White"/>
+                            <TextBlock Text="{Binding Path=PasswordLabel, Source={StaticResource ResourceLocator}}" Style="{StaticResource PhoneTextNormalStyle}" Foreground="White"/>
                             <PasswordBox Password="{Binding Password, Mode=TwoWay, ElementName=self}" />
-                            <Button HorizontalAlignment="Right" Content="connect" Click="Connect" 
+                            <ProgressBar x:Name="connectProgressBar"
+                                         IsIndeterminate="False" HorizontalAlignment="Stretch" 
+                                         Foreground="White" Background="Transparent" />
+                            <Button HorizontalAlignment="Right" Content="{Binding Path=ButtonConnectLabel, Source={StaticResource ResourceLocator}}" Click="Connect" x:Name="buttonConnect"
                                     Foreground="White" BorderBrush="White"/>
                         </StackPanel>
                     </ScrollViewer>

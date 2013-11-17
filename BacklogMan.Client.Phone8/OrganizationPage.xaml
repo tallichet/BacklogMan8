@@ -26,7 +26,7 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <phone:Pivot x:Name="pivotMain" Title="{Binding Path=CurrentOrganization.Name}">
 
-            <phone:PivotItem Header="backlogs">
+            <phone:PivotItem Header="{Binding Path=BacklogsTitle, Source={StaticResource ResourceLocator}}">
                 <Grid>
                     <ListBox ItemsSource="{Binding Path=OrganizationBacklogs}">
                         <ListBox.ItemTemplate>
@@ -58,7 +58,7 @@
                 </Grid>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="projects">
+            <phone:PivotItem Header="{Binding Path=ProjectsTitle, Source={StaticResource ResourceLocator}}">
                 <ListBox ItemsSource="{Binding Path=OrganizationProjects}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -87,14 +87,15 @@
                 </ListBox>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="info">
+            <phone:PivotItem Header="{Binding Path=InformationTitle, Source={StaticResource ResourceLocator}}">
                 <Grid>
                     <StackPanel>
-                        <Image Source="{Binding CurrentOrganization.Email, Converter={StaticResource EmailToGravatarUriConverter}}" />
+                        <Image Source="{Binding CurrentOrganization.Email, Converter={StaticResource EmailToGravatarUriConverter}}" HorizontalAlignment="Center"
+                               Margin="20" MaxWidth="250"/>
                         <TextBlock Text="{Binding CurrentOrganization.Description}" Style="{StaticResource PhoneTextNormalStyle}" />
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding CurrentOrganization.ProjectCount}" Style="{StaticResource PhoneTextNormalStyle}" />
-                            <TextBlock Text="projects" Style="{StaticResource PhoneTextNormalStyle}" />
+                            <TextBlock Text="{Binding Path=ProjectsLabel, Source={StaticResource ResourceLocator}}" Style="{StaticResource PhoneTextNormalStyle}" />
                         </StackPanel>                        
                     </StackPanel>                    
                 </Grid>
