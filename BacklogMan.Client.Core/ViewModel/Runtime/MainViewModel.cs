@@ -166,8 +166,17 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
             set
             {
-                currentOrganization = value;
-                refreshOrganization();
+                if (value == null)
+                {
+                    currentOrganization = null;
+                    OrganizationBacklogs.Clear();
+                    OrganizationProjects.Clear();
+                }
+                else
+                {
+                    currentOrganization = value;
+                    refreshOrganization();
+                }
             }
         }
 
@@ -181,15 +190,23 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             set
             {
                 // if it is an organization project, use the one from the project list
-                if (string.IsNullOrEmpty(value.UrlString))
+                if (value == null)
                 {
-                    currentProject = Projects.First(p => p.Id == value.Id);
+                    currentProject = null;
+                    ProjectBacklogs.Clear();
                 }
                 else
                 {
-                    currentProject = value;
+                    if (string.IsNullOrEmpty(value.UrlString))
+                    {
+                        currentProject = Projects.First(p => p.Id == value.Id);
+                    }
+                    else
+                    {
+                        currentProject = value;
+                    }
+                    refreshBacklogs();
                 }
-                refreshBacklogs();
             }
         }
 
@@ -220,8 +237,16 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
             set
             {
-                currentBacklog = value;
-                RefreshBacklogStories();
+                if (value == null)
+                {
+                    currentBacklog = null;
+                    BacklogStories.Clear();
+                }
+                else
+                {
+                    currentBacklog = value;
+                    RefreshBacklogStories();
+                }
             }
         }
 

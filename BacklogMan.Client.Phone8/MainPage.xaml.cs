@@ -16,8 +16,8 @@ namespace BacklogMan.Client.Phone8
         public MainPage()
         {
             InitializeComponent();
-            appbarMenuSettings.Text = BacklogMan.Client.Phone8.Resources.AppResources.MenuBarSettingsMenu;
-            appbarButtonSync.Text = BacklogMan.Client.Phone8.Resources.AppResources.MenuBarSettingsMenu;
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = BacklogMan.Client.Phone8.Resources.AppResources.MenuBarSettingsMenu;
+            (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = BacklogMan.Client.Phone8.Resources.AppResources.MenuBarSettingsMenu;
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
