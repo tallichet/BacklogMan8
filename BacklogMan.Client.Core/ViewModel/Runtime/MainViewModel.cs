@@ -462,6 +462,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 {
                     var story = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStory(CurrentBacklog.Id, result);
                     BacklogStories.Add (story);
+                    story.Backlog = CurrentBacklog;
                 }
             }
             else
@@ -471,6 +472,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 {
                     var story = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStory(updateStory.Backlog.Id, updateStory.Id);
                     BacklogStories.ReplaceItemById(story);
+                    story.Backlog = updateStory.Backlog;
                 }
             }
             
@@ -598,8 +600,12 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                     refreshBacklogCommand = new RelayCommand(async () =>
                     {
                         IsInProgress = true;
-                        CurrentBacklog = null;
-                        CurrentBacklog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(CurrentBacklog.Id);
+                        if (CurrentBacklog != null)
+                        {
+                            var id = CurrentBacklog.Id;
+                            CurrentBacklog = null;
+                            CurrentBacklog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(id);
+                        }
                         IsInProgress = false;
                     });
                 }
