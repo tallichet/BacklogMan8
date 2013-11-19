@@ -27,9 +27,9 @@ namespace BacklogMan.Client.App.Win81.Converters
 
         public static Color ConvertStringToColor(string value, double opacity)
         {
-            if (value == null)
+            if (string.IsNullOrWhiteSpace(value))
             {
-                return Color.FromArgb(255, 247, 194, 17);
+                return Color.FromArgb(255, 0, 0x6d, 0xcc); //006dcc
             }
             else
             {
@@ -56,7 +56,7 @@ namespace BacklogMan.Client.App.Win81.Converters
                 catch
                 {
                     // pick a fugly color, but don't cause the system to barf.
-                    return Color.FromArgb(255, 247, 194, 17);
+                    return Color.FromArgb(255, 0, 0x6d, 0xcc);
                 }
             }
         }

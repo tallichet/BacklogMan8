@@ -179,7 +179,7 @@ namespace BacklogMan.Client.App.Win81.Pages
 
         private void addStory_Click(object sender, RoutedEventArgs e)
         {
-            var story = new Core.Model.Story();
+            var story = Core.Model.Story.CreateDefault();
 
             storyEditor.DataContext = story;
 

@@ -12,7 +12,7 @@ namespace BacklogMan.Client.Core.Model
     public class Story : IItemWithId
     {
         public Story() { }
-        
+
 
         public Story(Story story)
         {
@@ -121,6 +121,16 @@ namespace BacklogMan.Client.Core.Model
             {
                 return false;
             }
+        }
+
+        public static Story CreateDefault()
+        {
+            var newStory = new Story();
+
+            newStory.Status = StoryStatus.ToDo;
+            newStory.Points = -1;
+
+            return newStory;
         }
     }
 
