@@ -58,7 +58,7 @@
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
 
-        <ListView x:Name="storiesList" ItemsSource="{Binding Path=BacklogStories}" Margin="110,0" Grid.Row="1"
+        <ListView x:Name="storiesList" ItemsSource="{Binding Path=BacklogStories}" Margin="0,0" Grid.Row="1"
                   SelectionChanged="storiesList_SelectionChanged"
                   CanReorderItems="True" AllowDrop="True" 
                   SelectionMode="Extended" IsItemClickEnabled="True">
@@ -128,6 +128,12 @@
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <!-- This allow to have a scrollable margin -->
+                    <Setter Property="Margin" Value="110,0" />
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
 
         <ctrl:UserStoryEditor Grid.RowSpan="2" x:Name="storyEditor" />
