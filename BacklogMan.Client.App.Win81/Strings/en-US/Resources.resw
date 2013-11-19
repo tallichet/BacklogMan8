@@ -141,6 +141,9 @@
   <data name="RefreshAppbarButton.Label" xml:space="preserve">
     <value>Refresh</value>
   </data>
+  <data name="SettingsLogoff" xml:space="preserve">
+    <value>Change user</value>
+  </data>
   <data name="StoryAsA" xml:space="preserve">
     <value>As </value>
   </data>

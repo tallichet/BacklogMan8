@@ -150,9 +150,11 @@ namespace BacklogMan.Client.App.Win81
                     TargetName = "https://apps.backlogman.com"
                 };
 
-                var cred = await CredentialPicker.PickAsync(opt);
-
-                var key = await ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().GetApiKey(cred.CredentialUserName, cred.CredentialPassword);
+                CredentialPickerResults cred;
+                do
+                {
+                    cred = await CredentialPicker.PickAsync(opt);
+                } while (! await ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().GetApiKey(cred.CredentialUserName, cred.CredentialPassword));
             }
         }
 

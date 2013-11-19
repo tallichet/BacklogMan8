@@ -1,4 +1,5 @@
 ﻿using BacklogMan.Client.App.Win81.Common;
+using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,8 +8,11 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Security.Credentials.UI;
+using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -51,6 +55,8 @@ namespace BacklogMan.Client.App.Win81
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+
+            InitSettings();
 
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -107,6 +113,40 @@ namespace BacklogMan.Client.App.Win81
             var deferral = e.SuspendingOperation.GetDeferral();
             await SuspensionManager.SaveAsync();
             deferral.Complete();
+        }
+
+        private bool settingsInitialized = false;
+
+        private void InitSettings()
+        {
+            if (settingsInitialized) return;
+
+
+            var res = ResourceLoader.GetForCurrentView();
+            SettingsPane.GetForCurrentView().CommandsRequested += (s, e) =>
+                {
+                    e.Request.ApplicationCommands.Add(new SettingsCommand("logoff", res.GetString("SettingsLogoff"), async (c) =>
+                    {
+                        ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().ClearApiKey();
+                        
+                        var opt = new CredentialPickerOptions()
+                        {
+                            AuthenticationProtocol = AuthenticationProtocol.Basic,
+                            AlwaysDisplayDialog = true,
+                            Caption = "log to backlog man",
+                            Message = "please enter credentials for backlog man",
+                            TargetName = "https://apps.backlogman.com"
+                        };
+
+                        CredentialPickerResults cred;
+                        do 
+                        {
+                            cred = await CredentialPicker.PickAsync(opt);
+                        } while (! await ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().GetApiKey(cred.CredentialUserName, cred.CredentialPassword));
+                    }));
+                };
+
+            settingsInitialized = true;
         }
     }
 }
