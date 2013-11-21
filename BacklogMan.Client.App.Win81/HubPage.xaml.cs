@@ -180,11 +180,13 @@ namespace BacklogMan.Client.App.Win81
             if (e.NewSize.Width < e.NewSize.Height)
             {
                 // portrait
-                this.ImageSectionWidth = 0;
+                ImageSectionWidth = 0;
+                HomeBacklogsListWidth = 0;
             }
             else
             {
                 ImageSectionWidth = e.NewSize.Height * 1.622;
+                HomeBacklogsListWidth = ImageSectionWidth - 200; 
             }
 
             HubSectionHeight = e.NewSize.Height - 120;
@@ -201,7 +203,15 @@ namespace BacklogMan.Client.App.Win81
             DependencyProperty.Register("ImageSectionWidth", typeof(double), typeof(HubPage), new PropertyMetadata(0));
 
 
+        public double HomeBacklogsListWidth
+        {
+            get { return (double)GetValue(HomeBacklogsListWidthProperty); }
+            set { SetValue(HomeBacklogsListWidthProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for HomeBacklogsListWidth.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HomeBacklogsListWidthProperty =
+            DependencyProperty.Register("HomeBacklogsListWidth", typeof(double), typeof(HubPage), new PropertyMetadata(0));
 
     }
 }
