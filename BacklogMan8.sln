@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.20827.3
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BacklogMan.Client.Core", "BacklogMan.Client.Core\BacklogMan.Client.Core.csproj", "{94958D36-7E9A-4889-9CB4-604BB45539A9}"
 EndProject
@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Demandes.md = Demandes.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deprecated", "Deprecated", "{06DEF086-7868-4B4D-B1FC-75E52FA471D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -140,5 +142,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{18D05A7E-BCE8-4024-8C02-73FF2C924DEA} = {C5F71CAD-4468-4DF0-A651-D40E8FC45B64}
+		{0B9DC40A-3EEA-4BD3-951E-C40561929EA8} = {06DEF086-7868-4B4D-B1FC-75E52FA471D7}
 	EndGlobalSection
 EndGlobal
