@@ -37,7 +37,7 @@
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
-        <Hub SectionHeaderClick="Hub_SectionHeaderClick" Padding="40,40,0,0">
+        <Hub SectionHeaderClick="Hub_SectionHeaderClick" Padding="40,40,0,0" x:Name="hub">
             <Hub.Header>
                 <!-- Back button and page title -->
                 <Grid Margin="0,20,0,0">
@@ -136,5 +136,39 @@
         
         <ProgressBar VerticalAlignment="Top" HorizontalAlignment="Stretch" IsIndeterminate="True" Height="10"
                      Visibility="{Binding IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <Grid Margin="50" HorizontalAlignment="Right" VerticalAlignment="Top" Width="280">        
+            <Button x:Name="searchButton" Click="searchButton_Click"
+                    HorizontalAlignment="Right" VerticalAlignment="Stretch"
+                    Padding="1" Margin="-2" Width="37" Height="37" BorderBrush="Black" BorderThickness="2"> 
+                <TextBlock x:Name="SearchGlyph"                            
+                            FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                            Foreground="White"
+                            HorizontalAlignment="Center"
+                            FontStyle="Normal"
+                            FontWeight="Thin"
+                            FontSize="20"
+                            Text="&#xE094;"
+                            VerticalAlignment="Center" Margin="0" />
+            </Button>
+
+            <SearchBox x:Name="searchbox" FocusOnKeyboardInput="True" HorizontalAlignment="Stretch" Opacity="1"
+                       Visibility="Collapsed" LostFocus="searchbox_LostFocus" Foreground="{StaticResource SearchBoxBorderThemeBrush}"
+                       PrepareForFocusOnKeyboardInput="searchbox_PrepareForFocusOnKeyboardInput">
+            </SearchBox>
+        </Grid>
+
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="SearchBoxSize">
+                <VisualState x:Name="SearchBoxClosed" />
+                <VisualState x:Name="SearchBoxExtended">
+                    <Storyboard BeginTime="0" Duration="0">
+                        <DoubleAnimation Storyboard.TargetName="searchbox" Storyboard.TargetProperty="Width"
+                                         To="800" BeginTime="0" />
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

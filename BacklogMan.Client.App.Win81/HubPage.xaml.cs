@@ -213,5 +213,27 @@ namespace BacklogMan.Client.App.Win81
         public static readonly DependencyProperty HomeBacklogsListWidthProperty =
             DependencyProperty.Register("HomeBacklogsListWidth", typeof(double), typeof(HubPage), new PropertyMetadata(0));
 
+        private void searchbox_PrepareForFocusOnKeyboardInput(SearchBox sender, RoutedEventArgs args)
+        {
+            searchButton.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            searchbox.Visibility = Windows.UI.Xaml.Visibility.Visible;
+        }
+        private void searchButton_Click(object sender, RoutedEventArgs e)
+        {
+            searchButton.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            searchbox.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            searchbox.Focus(FocusState.Programmatic);
+        }
+
+        private void searchbox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var searchbox = sender as SearchBox;
+            if (string.IsNullOrWhiteSpace(searchbox.QueryText))
+            {
+                searchbox.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                searchButton.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            }
+        }
+
     }
 }

@@ -59,6 +59,31 @@
                     <SolidColorBrush x:Key="AppBarToggleButtonCheckedPressedForegroundThemeBrush" Color="#FFFFFFFF" />
                     <SolidColorBrush x:Key="AppBarToggleButtonPointerOverBackgroundThemeBrush" Color="#21FFFFFF" />
 
+                    <!-- Search button background when when the control is focused, but the mouse is 
+                         out of the button.
+                         It is also the background of search suggestions when the mouse is over 
+                         them -->
+                    <SolidColorBrush x:Key="SearchBoxButtonBackgroundThemeBrush" Color="{StaticResource BacklogManMainColor}" />
+
+                    <!-- Search button background when the mouse is over the button
+                        (when the control is focused or not) -->
+                    <SolidColorBrush x:Key="SearchBoxButtonPointerOverBackgroundThemeBrush"
+                         Color="{StaticResource BacklogManMainColor}" Opacity=".6" />
+
+                    <!-- Search button color when the control is focused. 
+                         It is also the search suggestions color when the mouse is over them -->
+                    <SolidColorBrush x:Key="SearchBoxButtonForegroundThemeBrush" Color="White" />
+
+                    <!-- Search suggestions color seprator -->
+                    <SolidColorBrush x:Key="SearchBoxSeparatorSuggestionForegroundThemeBrush"
+                         Color="{StaticResource BacklogManMainColor}" />
+
+                    <!-- Color of highlighted characters in the result suggestions when the mouse is 
+                         over the element -->
+                    <SolidColorBrush x:Key="SearchBoxHitHighlightSelectedForegroundThemeBrush"
+                         Color="White" />
+
+
                 </ResourceDictionary>
                 
                 <ResourceDictionary x:Key="Light">
@@ -108,6 +133,30 @@
                     <SolidColorBrush x:Key="AppBarToggleButtonCheckedPressedBorderThemeBrush" Color="#FFFFFFFF" />
                     <SolidColorBrush x:Key="AppBarToggleButtonCheckedPressedForegroundThemeBrush" Color="#FFFFFFFF" />
                     <SolidColorBrush x:Key="AppBarToggleButtonPointerOverBackgroundThemeBrush" Color="#21FFFFFF" />
+
+                    <!-- Search button background when when the control is focused, but the mouse is 
+                         out of the button.
+                         It is also the background of search suggestions when the mouse is over 
+                         them -->
+                    <SolidColorBrush x:Key="SearchBoxButtonBackgroundThemeBrush" Color="{StaticResource BacklogManMainColor}" />
+
+                    <!-- Search button background when the mouse is over the button
+                        (when the control is focused or not) -->
+                    <SolidColorBrush x:Key="SearchBoxButtonPointerOverBackgroundThemeBrush"
+                         Color="{StaticResource BacklogManMainColor}" Opacity=".6" />
+
+                    <!-- Search button color when the control is focused. 
+                         It is also the search suggestions color when the mouse is over them -->
+                    <SolidColorBrush x:Key="SearchBoxButtonForegroundThemeBrush" Color="White" />
+
+                    <!-- Search suggestions color seprator -->
+                    <SolidColorBrush x:Key="SearchBoxSeparatorSuggestionForegroundThemeBrush"
+                         Color="{StaticResource BacklogManMainColor}" />
+
+                    <!-- Color of highlighted characters in the result suggestions when the mouse is 
+                         over the element -->
+                    <SolidColorBrush x:Key="SearchBoxHitHighlightSelectedForegroundThemeBrush"
+                         Color="White" />
                     
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
