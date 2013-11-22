@@ -2,6 +2,7 @@
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,39 +31,50 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
         public async Task SearchAll(string criteria)
         {
-            Criteria = criteria;
-            this.RaisePropertyChanged(() => Criteria);
-
-            ClearResults();
-
-            allOrganizations = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganizations();
-            foreach (var org in allOrganizations)
+            try
             {
-                if (org.Name.IndexOf(criteria, StringComparison.OrdinalIgnoreCase) > -1)
+                Criteria = criteria;
+                this.RaisePropertyChanged(() => Criteria);
+
+                ClearResults();
+
+                allOrganizations = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganizations();
+                foreach (var org in allOrganizations)
                 {
-                    MatchingOrganizations.Add(org);
-                    RaisePropertyChanged("ResultCount");
+                    if (org.Name.IndexOf(criteria, StringComparison.OrdinalIgnoreCase) > -1)
+                    {
+                        MatchingOrganizations.Add(org);
+                        RaisePropertyChanged("ResultCount");
+                    }
+                }
+
+                allProjects = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadProjects();
+                foreach (var prj in allProjects)
+                {
+                    if (prj.Name.IndexOf(criteria, StringComparison.OrdinalIgnoreCase) > -1
+                     || prj.Code.IndexOf(criteria, StringComparison.OrdinalIgnoreCase) > -1)
+                    {
+                        MatchingProjects.Add(prj);
+                        RaisePropertyChanged("ResultCount");
+                    }
+                }
+
+                allBacklogs = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklogs();
+                foreach (var backlog in allBacklogs)
+                {
+                    if (backlog.Name.IndexOf(criteria, StringComparison.OrdinalIgnoreCase) > -1)
+                    {
+                        MatchingBacklogs.Add(backlog);
+                        RaisePropertyChanged("ResultCount");
+                    }
                 }
             }
-
-            allProjects = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadProjects();
-            foreach (var prj in allProjects)
+            catch (Exception ex)
             {
-                if (prj.Name.IndexOf(criteria, StringComparison.OrdinalIgnoreCase) > -1 
-                 || prj.Code.IndexOf(criteria, StringComparison.OrdinalIgnoreCase) > -1)
+                if (Debugger.IsAttached)
                 {
-                    MatchingProjects.Add(prj);
-                    RaisePropertyChanged("ResultCount");
-                }
-            }
-
-            allBacklogs = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklogs();
-            foreach (var backlog in allBacklogs)
-            {
-                if (backlog.Name.IndexOf(criteria, StringComparison.OrdinalIgnoreCase) > -1)
-                {
-                    MatchingBacklogs.Add(backlog);
-                    RaisePropertyChanged("ResultCount");
+                    Debug.WriteLine("exception on search: " + ex.Message);
+                    Debugger.Break();
                 }
             }
         }
