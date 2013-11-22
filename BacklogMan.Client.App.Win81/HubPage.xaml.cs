@@ -111,7 +111,7 @@ namespace BacklogMan.Client.App.Win81
             else if (e.ClickedItem is Core.Model.Backlog)
             {
                 ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = e.ClickedItem as Core.Model.Backlog;
-                this.Frame.Navigate(typeof(Pages.BacklogPage));
+                this.Frame.Navigate(typeof(Pages.BacklogPage2));
             }
         }
         #region NavigationHelper registration

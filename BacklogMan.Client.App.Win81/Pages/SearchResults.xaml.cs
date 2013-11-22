@@ -112,7 +112,7 @@ namespace BacklogMan.Client.App.Win81.Pages
             else if (item is Backlog)
             {
                 ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = item as Backlog;
-                this.Frame.Navigate(typeof(Pages.BacklogPage));
+                this.Frame.Navigate(typeof(Pages.BacklogPage2));
             }
         }
     }

@@ -135,12 +135,16 @@
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Converters\EmailToGravatarUriConverter.cs" />
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\StatusToStringConverter.cs" />
     <Compile Include="Converters\StringColorToSolidColorBrushConverter.cs" />
     <Compile Include="Converters\ToStringConverter.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="HubPage.xaml.cs">
       <DependentUpon>HubPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BacklogPage2.xaml.cs">
+      <DependentUpon>BacklogPage2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BacklogPage.xaml.cs">
       <DependentUpon>BacklogPage.xaml</DependentUpon>
@@ -258,6 +262,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HubPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\BacklogPage2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

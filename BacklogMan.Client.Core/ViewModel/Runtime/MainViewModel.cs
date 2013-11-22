@@ -169,12 +169,18 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 if (value == null)
                 {
                     currentOrganization = null;
+                    RaisePropertyChanged(() => this.CurrentOrganization);
                     OrganizationBacklogs.Clear();
                     OrganizationProjects.Clear();
                 }
                 else
                 {
-                    currentOrganization = value;
+                    currentOrganization = value;                    
+                    RaisePropertyChanged(() => this.CurrentOrganization);
+                    if (CurrentProject != null && CurrentProject.OrganizationId != value.Id)
+                    {
+                        CurrentProject = null;
+                    }
                     refreshOrganization();
                 }
             }
@@ -193,6 +199,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 if (value == null)
                 {
                     currentProject = null;
+                    RaisePropertyChanged(() => this.CurrentProject);
                     ProjectBacklogs.Clear();
                 }
                 else
@@ -205,7 +212,8 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                     {
                         currentProject = value;
                     }
-                    refreshBacklogs();
+                    RaisePropertyChanged(() => this.CurrentProject);
+                    refreshProjectBacklogs();
                 }
             }
         }
@@ -240,11 +248,13 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 if (value == null)
                 {
                     currentBacklog = null;
+                    this.RaisePropertyChanged(() => this.CurrentBacklog);
                     BacklogStories.Clear();
                 }
                 else
                 {
                     currentBacklog = value;
+                    this.RaisePropertyChanged(() => this.CurrentBacklog);
                     RefreshBacklogStories();
                 }
             }
@@ -294,7 +304,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             Organizations.Clear();
         }
 
-        private async void refreshBacklogs()
+        private async void refreshProjectBacklogs()
         {
             try
             {
@@ -443,6 +453,32 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             {
                 BacklogStories.Add(s);
                 s.Backlog = backlog;
+            }
+
+            if (currentBacklog.Organization != null &&
+                (CurrentOrganization == null || currentBacklog.Organization.Id != CurrentOrganization.Id))
+            {
+                if (currentBacklog.Organization.Projects == null)
+                {
+                    CurrentOrganization = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganization(currentBacklog.Organization.Id);
+                }
+                else
+                {
+                    CurrentOrganization = currentBacklog.Organization;
+                }
+            }
+
+            if (currentBacklog.Project != null && 
+                (CurrentProject == null || currentBacklog.Project.Id != CurrentProject.Id))
+            {
+                if (currentBacklog.Project.Backlogs == null)
+                {
+                    CurrentProject = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadProject(currentBacklog.Project.Id);
+                }
+                else
+                {
+                    CurrentProject = currentBacklog.Project;
+                }
             }
         }
         public void DeleteStories(Model.Story[] storiesToDelete)
@@ -691,5 +727,18 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         #endregion
 
 
+        public void MoveStoriesToBacklog(Model.Backlog backlogTarget, List<Model.Story> stories)
+        {
+            if (stories == null || stories.Count == 0) return;
+
+            var sourceBacklog = stories.First().Backlog;
+            
+            foreach (var story in stories)
+	        {
+                ServiceLocator.Current.GetInstance<Service.INetworkService>().MoveStory(backlogTarget.Id, story.Id, null);
+	        }
+
+            RefreshBacklogStories();
+        }
     }
 }

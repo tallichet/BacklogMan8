@@ -31,6 +31,11 @@ namespace BacklogMan.Client.Core.ViewModel
         /// </summary>
         ObservableCollection<Model.Project> OrganizationProjects { get; }
 
+        /// <summary>
+        /// Contains the list of backlogs for the current organization
+        /// </summary>
+        ReorderableCollection<Model.Backlog> OrganizationBacklogs { get; }
+
 
         /// <summary>
         /// List of all projects
@@ -120,5 +125,7 @@ namespace BacklogMan.Client.Core.ViewModel
         ICommand RefreshOrganzationCommand { get; }
 
         #endregion
+
+        void MoveStoriesToBacklog(Model.Backlog backlogTarget, List<Model.Story> draggedStories);
     }
 }

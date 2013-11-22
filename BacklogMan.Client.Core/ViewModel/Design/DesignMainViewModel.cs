@@ -105,14 +105,14 @@ namespace BacklogMan.Client.Core.ViewModel.Design
             
             ProjectBacklogs.Add(new Model.Backlog()
             {
-                Name = "Backlog n° 1",
+                Name = "Prj Backlog n° 1",
                 Description = "This is my first project!",
                 Project = Projects.First(),
                 Themes = new string[] {"Windows", "Windows Phone"}.ToList(),
             });
             ProjectBacklogs.Add(new Model.Backlog()
             {
-                Name = "Backlog n° 2",
+                Name = "Prj Backlog n° 2",
                 Description = "This is my second project!",
                 Project = Projects.First(),
                 Themes = new string[] { "Windows", "Windows Phone" }.ToList(),
@@ -134,6 +134,22 @@ namespace BacklogMan.Client.Core.ViewModel.Design
                 Project = Projects.First(),
                 Themes = new string[] { "Windows", "Windows Phone" }.ToList(),
                 Organization = Organizations.First(),
+            });
+
+            OrganizationBacklogs = new ReorderableCollection<Model.Backlog>();
+            OrganizationBacklogs.Add(new Model.Backlog()
+            {
+                Name = "Org Backlog n° 1",
+                Description = "This is my first project!",
+                Project = Projects.First(),
+                Themes = new string[] { "Windows", "Windows Phone" }.ToList(),
+            });
+            OrganizationBacklogs.Add(new Model.Backlog()
+            {
+                Name = "Org Backlog n° 2",
+                Description = "This is my second project!",
+                Project = Projects.First(),
+                Themes = new string[] { "Windows", "Windows Phone" }.ToList(),
             });
             #endregion
             #region define Stories
@@ -355,6 +371,19 @@ namespace BacklogMan.Client.Core.ViewModel.Design
 
 
         public void ClearApiKey()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public ReorderableCollection<Model.Backlog> OrganizationBacklogs
+        {
+            get;
+            private set;
+        }
+
+
+        public void MoveStoriesToBacklog(Model.Backlog backlogTarget, List<Model.Story> draggedStories)
         {
             throw new NotImplementedException();
         }
