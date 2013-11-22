@@ -141,6 +141,12 @@
   <data name="RefreshAppbarButton.Label" xml:space="preserve">
     <value>Refresh</value>
   </data>
+  <data name="SearchPageTitle.Text" xml:space="preserve">
+    <value>Organizations, Projects and Backlogs</value>
+  </data>
+  <data name="SearchPageTitleResultFor.Text" xml:space="preserve">
+    <value>results for</value>
+  </data>
   <data name="SettingsLogoff" xml:space="preserve">
     <value>Change user</value>
   </data>

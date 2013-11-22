@@ -49,6 +49,8 @@
     <Compile Include="ReorderableCollection.cs" />
     <Compile Include="Service\INetworkService.cs" />
     <Compile Include="ViewModel\Design\DesignNotificationViewModel.cs" />
+    <Compile Include="ViewModel\Design\DesignSearchViewModel.cs" />
+    <Compile Include="ViewModel\ISearchViewModel.cs" />
     <Compile Include="ViewModel\Runtime\RelayCommand.cs" />
     <Compile Include="ViewModel\IInternalNotificationViewModel.cs" />
     <Compile Include="Service\ILocalizationService.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="ViewModel\Design\DesignMainViewModel.cs" />
     <Compile Include="ViewModel\IMainViewModel.cs" />
     <Compile Include="ViewModel\Runtime\MainViewModel.cs" />
+    <Compile Include="ViewModel\Runtime\SearchViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>

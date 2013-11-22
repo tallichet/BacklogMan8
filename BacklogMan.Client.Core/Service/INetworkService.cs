@@ -15,7 +15,7 @@ namespace BacklogMan.Client.Core.Service
         Task<List<Model.Project>> DownloadProjects();
         Task<Model.Project> DownloadProject(int projectId);
 
-        //Task<List<Model.Backlog>> DownloadBacklogs(int projectId);
+        Task<List<Model.Backlog>> DownloadBacklogs();
         Task<Model.Backlog> DownloadBacklog(int backlogId);
 
         Task<List<Model.Story>> DownloadStories(int backlogId);

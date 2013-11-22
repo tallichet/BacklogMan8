@@ -235,5 +235,11 @@ namespace BacklogMan.Client.App.Win81
             }
         }
 
+        private void searchbox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
+        {
+            ServiceLocator.Current.GetInstance<Core.ViewModel.ISearchViewModel>().SearchAll(args.QueryText);
+            this.Frame.Navigate(typeof(Pages.SearchResults));
+        }
+
     }
 }

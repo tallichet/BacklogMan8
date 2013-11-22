@@ -154,7 +154,8 @@
 
             <SearchBox x:Name="searchbox" FocusOnKeyboardInput="True" HorizontalAlignment="Stretch" Opacity="1"
                        Visibility="Collapsed" LostFocus="searchbox_LostFocus" Foreground="{StaticResource SearchBoxBorderThemeBrush}"
-                       PrepareForFocusOnKeyboardInput="searchbox_PrepareForFocusOnKeyboardInput">
+                       PrepareForFocusOnKeyboardInput="searchbox_PrepareForFocusOnKeyboardInput"
+                       QuerySubmitted="searchbox_QuerySubmitted">
             </SearchBox>
         </Grid>
 

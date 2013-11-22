@@ -304,6 +304,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
                 if (project == null) return;
 
+                
                 foreach (var b in project.Backlogs)
                 {
                     if (b.IsArchive) continue;
@@ -363,6 +364,11 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         {
             var wasInProgress = IsInProgress;
             IsInProgress = true;
+            if (CurrentOrganization != null && CurrentOrganization.Backlogs == null) // we have a basic element
+            {
+                CurrentOrganization = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganization(CurrentOrganization.Id);
+            }
+
             await refreshOrganizationBacklogs();
             await refreshOrganizationProjects();
             
