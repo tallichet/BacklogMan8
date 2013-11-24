@@ -133,6 +133,24 @@ namespace BacklogMan.Client.Phone8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backlogman only works while connected to internet..
+        /// </summary>
+        public static string ErrorNoNetwork_Content {
+            get {
+                return ResourceManager.GetString("ErrorNoNetwork_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to access network..
+        /// </summary>
+        public static string ErrorNoNetwork_Title {
+            get {
+                return ResourceManager.GetString("ErrorNoNetwork_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to information.
         /// </summary>
         public static string InformationTitle {

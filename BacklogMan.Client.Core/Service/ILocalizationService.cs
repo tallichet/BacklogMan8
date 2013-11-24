@@ -9,5 +9,6 @@ namespace BacklogMan.Client.Core.Service
     public interface ILocalizationService
     {
         string GetStringForKey(string key);
+        void DisplayMessageInMessageBox(string key);
     }
 }

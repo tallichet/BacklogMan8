@@ -33,6 +33,7 @@ namespace BacklogMan.Client.Phone8
             InitializeComponent();
 
             Core.ViewModel.ViewModelLocator.RegisterStorageService<StorageService>();
+            Core.ViewModel.ViewModelLocator.RegisterLocalizationService<LocalizationService>();
 
             // Phone-specific initialization
             InitializePhoneApplication();
@@ -108,6 +109,10 @@ namespace BacklogMan.Client.Phone8
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
+
+#if DEBUG
+            MessageBox.Show("UnhandledException: " + e.ExceptionObject.Message + "\r\n" + e.ExceptionObject.StackTrace);
+#endif
 
             FlurryWP8SDK.Api.LogError("unhandled exception caused crash", e.ExceptionObject);
         }
