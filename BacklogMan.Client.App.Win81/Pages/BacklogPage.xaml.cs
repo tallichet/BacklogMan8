@@ -224,5 +224,58 @@ namespace BacklogMan.Client.App.Win81.Pages
                 deleteStoryAppbarButton.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             }
         }
+
+        private void backlogTitle_Tapped(object sender, TappedRoutedEventArgs arg)
+        {
+            var menu = new MenuFlyout();
+
+            var mainViewmodel = this.DataContext as Core.ViewModel.IMainViewModel;
+
+            if (mainViewmodel.CurrentOrganization != null && mainViewmodel.CurrentOrganization.Backlogs != null)
+            {
+                foreach (var backlog in mainViewmodel.CurrentOrganization.Backlogs)
+                {
+                    if (backlog == mainViewmodel.CurrentBacklog) continue;
+                    if (backlog.IsArchive) continue;
+
+                    var menuItem = new MenuFlyoutItem();
+                    menuItem.Text = backlog.Name;
+                    if (backlog.IsMain)
+                        menuItem.FontWeight = Windows.UI.Text.FontWeights.Bold;
+                    menuItem.Click += (s,e) => ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = backlog;
+
+                    menu.Items.Add(menuItem);
+                }
+            }
+            if (mainViewmodel.CurrentProject != null && mainViewmodel.CurrentProject.Backlogs != null)
+            {
+                if (menu.Items.Count > 0)
+                {
+                    menu.Items.Add(new MenuFlyoutSeparator());
+                }
+
+                foreach (var backlog in mainViewmodel.CurrentProject.Backlogs)
+                {
+                    if (backlog == mainViewmodel.CurrentBacklog) continue;
+                    if (backlog.IsArchive) continue;
+
+                    var menuItem = new MenuFlyoutItem();
+                    menuItem.Text = backlog.Name;
+                    if (backlog.IsMain)
+                        menuItem.FontWeight = Windows.UI.Text.FontWeights.Bold;
+                    menuItem.Click += (s, e) => ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = backlog;
+
+                    menu.Items.Add(menuItem);
+                }
+            }
+
+            menu.Placement = FlyoutPlacementMode.Bottom;
+            menu.ShowAt(sender as FrameworkElement);
+        }
+
+        private void backlogTitle_Click(object sender, RoutedEventArgs e)
+        {
+            backlogTitle_Tapped(sender, null);
+        }
     }
 }

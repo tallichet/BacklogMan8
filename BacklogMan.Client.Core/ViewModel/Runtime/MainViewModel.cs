@@ -47,10 +47,22 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         {
             if (!string.IsNullOrEmpty(ApiKey))
             {
+                
                 IsInProgress = true;
-                await downloadOrganizations();
-                await downloadProjects();
-                //await RefreshNotEstimatedStories();
+                try
+                {
+                    await downloadOrganizations();
+                    await downloadProjects();
+                }
+                catch (Exception ex)
+                {
+                    ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                    if (Debugger.IsAttached)
+                    {
+                        Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
+                        Debugger.Break();
+                    }
+                }                
                 IsInProgress = false;
             }
         }
@@ -108,7 +120,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         }
 
         private async Task downloadProjects()
-        {
+        {            
             this.Projects.Clear();
             this.ProjectsStandalone.Clear();
             var listProjectsToDownload = new List<Model.Project>();
@@ -322,9 +334,14 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                     backlog.Project = project;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                if (Debugger.IsAttached)
+                {
+                    Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
+                    Debugger.Break();
+                }
             }
             finally
             {
@@ -433,16 +450,28 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
         public async void RefreshBacklogStories()
         {
-            BacklogStories.Clear();
-
-            var backlog = CurrentBacklog; // this allow us to be sure the backlog don't change during the download
-
-            if (backlog == null) return;
-            var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentBacklog.Id);
-            foreach (var s in stories)
+            try
             {
-                BacklogStories.Add(s);
-                s.Backlog = backlog;
+                BacklogStories.Clear();
+
+                var backlog = CurrentBacklog; // this allow us to be sure the backlog don't change during the download
+
+                if (backlog == null) return;
+                var stories = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(CurrentBacklog.Id);
+                foreach (var s in stories)
+                {
+                    BacklogStories.Add(s);
+                    s.Backlog = backlog;
+                }
+            }
+            catch (Exception ex)
+            {
+                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                if (Debugger.IsAttached)
+                {
+                    Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
+                    Debugger.Break();
+                }
             }
         }
         public void DeleteStories(Model.Story[] storiesToDelete)
@@ -457,63 +486,103 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
         public async Task<bool> UpdateStory(Model.Story updateStory)
         {
-            IsInProgress = true;
-            int result;
-            checkNotNullFields(updateStory);
+            try
+            {
+                IsInProgress = true;
+                int result;
+                checkNotNullFields(updateStory);
 
-            if (updateStory.Id <= 0)
-            {
-                result = await ServiceLocator.Current.GetInstance<Service.INetworkService>().AddStory(CurrentBacklog.Id, updateStory);
-                if (result >= 0)
+                if (updateStory.Id <= 0)
                 {
-                    var story = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStory(CurrentBacklog.Id, result);
-                    BacklogStories.Add (story);
-                    story.Backlog = CurrentBacklog;
+                    result = await ServiceLocator.Current.GetInstance<Service.INetworkService>().AddStory(CurrentBacklog.Id, updateStory);
+                    if (result >= 0)
+                    {
+                        var story = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStory(CurrentBacklog.Id, result);
+                        BacklogStories.Add (story);
+                        story.Backlog = CurrentBacklog;
+                    }
                 }
-            }
-            else
-            {
-                result = await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStory(updateStory);
-                if (result >= 0)
+                else
                 {
-                    var story = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStory(updateStory.Backlog.Id, updateStory.Id);
-                    BacklogStories.ReplaceItemById(story);
-                    story.Backlog = updateStory.Backlog;
+                    result = await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStory(updateStory);
+                    if (result >= 0)
+                    {
+                        var story = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStory(updateStory.Backlog.Id, updateStory.Id);
+                        BacklogStories.ReplaceItemById(story);
+                        story.Backlog = updateStory.Backlog;
+                    }
                 }
-            }
             
             
-            IsInProgress = false;
-            return result > -1;
+                IsInProgress = false;
+                return result > -1;
+            }
+            catch (Exception ex)
+            {
+                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                if (Debugger.IsAttached)
+                {
+                    Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
+                    Debugger.Break();
+                }
+                return false;
+            }
         }
         
         public async Task<bool> SetStoriesStatus(Model.Story story, Model.StoryStatus newStatus)
         {
-            IsInProgress = true;
-            var result = await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStoryStatus(story.Id, newStatus);
-            if (result)
+            try
             {
-                story.Status = newStatus;
+                IsInProgress = true;
+                var result = await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStoryStatus(story.Id, newStatus);
+                if (result)
+                {
+                    story.Status = newStatus;
+                }
+                IsInProgress = false;
+                return result;
             }
-            IsInProgress = false;
-            return result;
+            catch (Exception ex)
+            {
+                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                if (Debugger.IsAttached)
+                {
+                    Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
+                    Debugger.Break();
+                }
+                return false;
+            }
+            
         }
         
         public async Task<bool> SetStoryPoints(Model.Story story, int points)
         {
-            IsInProgress = true;
-            var prevPoints = story.Points;
-            story.Points = points;
-            var storyId = await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStory(story);
-            IsInProgress = false;
-            if (storyId < 0)
+            try
             {
-                story.Points = prevPoints;
-                return false;
+                IsInProgress = true;
+                var prevPoints = story.Points;
+                story.Points = points;
+                var storyId = await ServiceLocator.Current.GetInstance<Service.INetworkService>().UpdateStory(story);
+                IsInProgress = false;
+                if (storyId < 0)
+                {
+                    story.Points = prevPoints;
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return true;
+                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                if (Debugger.IsAttached)
+                {
+                    Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
+                    Debugger.Break();
+                }
+                return false;
             }
 
         }
@@ -605,14 +674,26 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 {
                     refreshBacklogCommand = new RelayCommand(async () =>
                     {
-                        IsInProgress = true;
-                        if (CurrentBacklog != null)
+                        try
                         {
-                            var id = CurrentBacklog.Id;
-                            CurrentBacklog = null;
-                            CurrentBacklog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(id);
+                            IsInProgress = true;
+                            if (CurrentBacklog != null)
+                            {
+                                var id = CurrentBacklog.Id;
+                                CurrentBacklog = null;
+                                CurrentBacklog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(id);
+                            }
+                            IsInProgress = false;
                         }
-                        IsInProgress = false;
+                        catch (Exception ex)
+                        {
+                            ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                            if (Debugger.IsAttached)
+                            {
+                                Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
+                                Debugger.Break();
+                            }
+                        }
                     });
                 }
                 return refreshBacklogCommand;

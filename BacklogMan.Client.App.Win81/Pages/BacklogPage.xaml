@@ -54,8 +54,9 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-            <TextBlock x:Name="pageTitle" Text="{Binding Path=CurrentBacklog.Name}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+            <TextBlock x:Name="pageTitle" Text="{Binding Path=CurrentBacklog.Name}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1"                        
+                        IsHitTestVisible="true" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"
+                       Tapped="backlogTitle_Tapped" />
         </Grid>
 
         <ListView x:Name="storiesList" ItemsSource="{Binding Path=BacklogStories}" Margin="0,0" Grid.Row="1"

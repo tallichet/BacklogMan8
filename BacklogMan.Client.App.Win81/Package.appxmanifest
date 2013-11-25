@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="fefc0f2a-44b3-488b-bc6f-6f1dbc1aa768" Publisher="CN=Cedric" Version="1.0.0.1" />
+  <Identity Name="fefc0f2a-44b3-488b-bc6f-6f1dbc1aa768" Publisher="CN=Cedric" Version="1.0.0.2" />
   <Properties>
     <DisplayName>BacklogMan.Client.App.Win81</DisplayName>
     <PublisherDisplayName>Cedric</PublisherDisplayName>
