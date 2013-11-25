@@ -808,18 +808,35 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         #endregion
 
 
-        public void MoveStoriesToBacklog(Model.Backlog backlogTarget, List<Model.Story> stories)
+        public async void MoveStoriesToBacklog(Model.Backlog backlogTarget, List<Model.Story> stories)
         {
-            if (stories == null || stories.Count == 0) return;
+            try
+            {
+                if (stories == null || stories.Count == 0) return;
 
-            var sourceBacklog = stories.First().Backlog;
+                var sourceBacklog = stories.First().Backlog;
+
+                var backlogTargetStoriesId = (from s in await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadStories(backlogTarget.Id)
+                                             select s.Id).ToList();
             
-            foreach (var story in stories)
-	        {
-                ServiceLocator.Current.GetInstance<Service.INetworkService>().MoveStory(backlogTarget.Id, story.Id, null);
-	        }
+                foreach (var story in stories)
+	            {
+                    backlogTargetStoriesId.Add(story.Id);
+                    await ServiceLocator.Current.GetInstance<Service.INetworkService>().MoveStory(backlogTarget.Id, story.Id, backlogTargetStoriesId.ToArray());
+	            }
 
-            RefreshBacklogStories();
+                RefreshBacklogStories();
+            }
+            catch (Exception ex)
+            {
+           
+                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                if (Debugger.IsAttached)
+                {
+                    Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
+                    Debugger.Break();
+                }
+            }
         }
     }
 }

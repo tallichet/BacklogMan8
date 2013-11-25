@@ -156,8 +156,10 @@
                           SelectionMode="None" IsItemClickEnabled="True" ItemClick="backlogsList_Click">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}" Foreground="White" Style="{StaticResource SubheaderTextBlockStyle}" 
-                                       FontSize="22" Margin="30,0,5,0"/>
+                            <Grid AllowDrop="True" Drop="backlogsList_Drop" Tag="{Binding}">
+                                <TextBlock Text="{Binding Name}" Foreground="White" Style="{StaticResource SubheaderTextBlockStyle}" 
+                                           FontSize="22" Margin="30,0,5,0"/>
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
