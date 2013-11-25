@@ -51,7 +51,6 @@
     <Compile Include="ViewModel\Design\DesignNotificationViewModel.cs" />
     <Compile Include="ViewModel\Design\DesignSearchViewModel.cs" />
     <Compile Include="ViewModel\ISearchViewModel.cs" />
-    <Compile Include="ViewModel\Runtime\INotificationService.cs" />
     <Compile Include="ViewModel\Runtime\RelayCommand.cs" />
     <Compile Include="ViewModel\IInternalNotificationViewModel.cs" />
     <Compile Include="Service\ILocalizationService.cs" />
