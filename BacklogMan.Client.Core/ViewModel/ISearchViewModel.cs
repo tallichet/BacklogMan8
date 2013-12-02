@@ -19,5 +19,9 @@ namespace BacklogMan.Client.Core.ViewModel
 
         int ResultCount { get; }
 
+        bool InProgress { get; }
+
+        void CancelSearch();
+
     }
 }

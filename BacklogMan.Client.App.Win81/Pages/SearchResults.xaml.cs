@@ -73,6 +73,12 @@ namespace BacklogMan.Client.App.Win81.Pages
         {
         }
 
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            ServiceLocator.Current.GetInstance<Core.ViewModel.ISearchViewModel>().CancelSearch();
+            base.OnNavigatingFrom(e);
+        }
+
         #region NavigationHelper registration
 
         /// The methods provided in this section are simply used to allow

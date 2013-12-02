@@ -64,12 +64,6 @@ namespace BacklogMan.Client.Core.Service
             return DownloadDocument<Model.Project>(uri);
         }
 
-        public Task<List<Model.Backlog>> DownloadBacklogs()
-        {
-            var uri = new Uri(BacklogManApiBaseUri, "./backlogs/");
-            return DownloadDocument<List<Model.Backlog>>(uri);
-        }
-
         public Task<Model.Backlog> DownloadBacklog(int backlogId)
         {
             var uri = new Uri(BacklogManApiBaseUri, "./backlogs/" + backlogId + "/");

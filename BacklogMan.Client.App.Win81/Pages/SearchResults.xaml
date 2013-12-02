@@ -34,6 +34,9 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <ProgressBar Visibility="{Binding Path=InProgress, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="2" 
+                     Foreground="{StaticResource BacklogManMainBrush}" IsIndeterminate="True" Margin="10" Background="Transparent" />
 
         <!-- Back button and page title -->
         <Grid>
@@ -42,7 +45,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="backButton" Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
-                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        Style="{StaticResource BackButtonNormalStyle}"
                         VerticalAlignment="Top"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
@@ -64,29 +67,33 @@
             </StackPanel>
         </Grid>
         
-        <ScrollViewer Grid.Row="1" Padding="114,0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                
-                <GridView Grid.Column="0" ItemsSource="{Binding MatchingOrganizations}"
+        <Hub Grid.Row="1" Padding="114,0">
+            <HubSection Name="Organization" Header="Organizations">
+                <DataTemplate>
+                    <GridView Grid.Column="0" ItemsSource="{Binding MatchingOrganizations}"
                           ItemTemplate="{StaticResource OrganizationDataTemplate}" 
                           Margin="0,0,50,0"
                           IsItemClickEnabled="True" ItemClick="GridView_ItemClick"/>
+                </DataTemplate>
+            </HubSection>
 
-                <GridView Grid.Column="1" ItemsSource="{Binding MatchingProjects}"
+            <HubSection Name="Projects" Header="Projects">
+                <DataTemplate>
+                    <GridView Grid.Column="1" ItemsSource="{Binding MatchingProjects}"
                           ItemTemplate="{StaticResource ProjectDataTemplate}" 
                           Margin="0,0,50,0"
                           IsItemClickEnabled="True" ItemClick="GridView_ItemClick"/>
+                </DataTemplate>
+            </HubSection>
 
-                <GridView Grid.Column="2" ItemsSource="{Binding MatchingBacklogs}"
+            <HubSection Name="Backlogs" Header="Backlogs">
+                <DataTemplate>
+                    <GridView Grid.Column="2" ItemsSource="{Binding MatchingBacklogs}"
                           ItemTemplate="{StaticResource BacklogDataTemplate}" 
                           Margin="0,0,50,0"
                           IsItemClickEnabled="True" ItemClick="GridView_ItemClick"/>
-            </Grid>
-        </ScrollViewer>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
     </Grid>
 </Page>

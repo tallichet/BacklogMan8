@@ -17,7 +17,7 @@
     </Page.Resources>
 
     <Page.BottomAppBar>
-        <CommandBar x:Name="commandBar">
+        <CommandBar x:Name="commandBar" BorderBrush="White">
             <AppBarButton Click="addStory_Click" Icon="Add" x:Uid="NewStoryAppbarButton" />
             <AppBarButton Command="{Binding RefreshBacklogCommand}" Icon="Refresh" x:Uid="RefreshAppbarButton" />
             
@@ -145,7 +145,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{StaticResource BacklogManMainBrush}"
                             IsHitTestVisible="True" Tapped="organizationBacklogsHeader_Tapped"
                             Visibility="{Binding CurrentOrganization, Converter={StaticResource NullToVisibilityConverter}}">
-                    <Grid Width="40" Margin="10,0,10,0">
+                    <Grid Width="30" Margin="10,0,10,0">
                         <Rectangle Fill="White"/>
                         <Image Source="{Binding CurrentOrganization.Email, Converter={StaticResource EmailToGravatarUriConverter}}"  />
                     </Grid>
@@ -156,10 +156,12 @@
                           SelectionMode="None" IsItemClickEnabled="True" ItemClick="backlogsList_Click">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid AllowDrop="True" Drop="backlogsList_Drop" Tag="{Binding}">
-                                <TextBlock Text="{Binding Name}" Foreground="White" Style="{StaticResource SubheaderTextBlockStyle}" 
-                                           FontSize="22" Margin="30,0,5,0"/>
-                            </Grid>
+                            <ListViewItem>
+                                <Grid AllowDrop="True" Drop="backlogsList_Drop" Tag="{Binding}">
+                                    <TextBlock Text="{Binding Name}" Foreground="White" Style="{StaticResource SubheaderTextBlockStyle}" 
+                                               FontSize="22" Margin="30,0,5,0"/>
+                                </Grid>
+                            </ListViewItem>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -167,10 +169,10 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{StaticResource BacklogManMainBrush}"
                             IsHitTestVisible="True" Tapped="projectBacklogsHeader_Tapped"
                             Visibility="{Binding CurrentProject, Converter={StaticResource NullToVisibilityConverter}}">
-                    <Grid Width="40" Height="40" Margin="10,0,10,0">
+                    <Grid Width="30" Height="30" Margin="10,0,10,0">
                         <StackPanel Orientation="Horizontal" Grid.Row="0" >
                             <TextBlock Text="&#xF02D;" FontFamily="/Fonts/fontawesome-webfont.ttf#FontAwesome"
-                               Foreground="White" FontSize="40"/>                            
+                               Foreground="White" FontSize="30"/>                            
                         </StackPanel>
                     </Grid>
                     <TextBlock Foreground="White" Text="{Binding CurrentProject.Name}" Grid.Row="0" Style="{StaticResource SubheaderTextBlockStyle}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
@@ -180,10 +182,12 @@
                           SelectionMode="None" IsItemClickEnabled="True" ItemClick="backlogsList_Click">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid AllowDrop="True" Drop="backlogsList_Drop" Tag="{Binding}">
-                                <TextBlock Text="{Binding Name}" Foreground="White" Style="{StaticResource SubheaderTextBlockStyle}"
-                                           FontSize="22" Margin="30,0,5,0" />
-                            </Grid>
+                            <ListViewItem>
+                                <Grid AllowDrop="True" Drop="backlogsList_Drop" Tag="{Binding}">
+                                    <TextBlock Text="{Binding Name}" Foreground="White" Style="{StaticResource SubheaderTextBlockStyle}"
+                                               FontSize="22" Margin="30,0,5,0" />
+                                </Grid>
+                            </ListViewItem>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -191,7 +195,7 @@
             </StackPanel>
         </ScrollViewer>
 
-        <ctrl:UserStoryEditor Grid.RowSpan="2" Grid.ColumnSpan="2" x:Name="storyEditor" Visibility="Collapsed" />
+        <ctrl:UserStoryEditor Grid.RowSpan="2" Grid.ColumnSpan="2" x:Name="storyEditor" />
         
         <ProgressBar VerticalAlignment="Top" HorizontalAlignment="Stretch" IsIndeterminate="True" Height="10"
                      Visibility="{Binding IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />

@@ -137,5 +137,17 @@ namespace BacklogMan.Client.Core.ViewModel.Design
         {
             get { return 12; }
         }
+
+
+        public bool InProgress
+        {
+            get { return true; }
+        }
+
+
+        public void CancelSearch()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
