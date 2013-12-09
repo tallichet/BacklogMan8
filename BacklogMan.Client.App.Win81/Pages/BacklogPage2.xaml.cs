@@ -292,5 +292,33 @@ namespace BacklogMan.Client.App.Win81.Pages
         {
             draggedStories = e.Items.Cast<Core.Model.Story>().ToList();
         }
+
+        private void backlogsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0 && e.AddedItems.First() is Core.Model.Backlog)
+            {
+                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = e.AddedItems.First() as Core.Model.Backlog;
+
+                if (sender == orgsBacklogsList)
+                    prjsBacklogsList.SelectedItem = null;
+                else
+                    orgsBacklogsList.SelectedItem = null;
+
+            }
+        }
+
+        private void page_loaded(object sender, RoutedEventArgs e)
+        {
+            var currentBacklog = ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog;
+
+            if (orgsBacklogsList.Items.Contains(currentBacklog))
+            {
+                orgsBacklogsList.SelectedItem = currentBacklog;
+            }
+            else if (prjsBacklogsList.Items.Contains(currentBacklog))
+            {
+                prjsBacklogsList.SelectedItem = currentBacklog;
+            }
+        }
     }
 }
