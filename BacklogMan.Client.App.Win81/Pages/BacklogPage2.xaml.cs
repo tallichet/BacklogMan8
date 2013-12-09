@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -250,16 +251,42 @@ namespace BacklogMan.Client.App.Win81.Pages
 
         }
 
-        private void projectBacklogsHeader_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void projectBacklogsHeader_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (prjsBacklogsList.Visibility == Windows.UI.Xaml.Visibility.Visible)
+            var mainViewModel = ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>();
+
+            IEnumerable<Core.Model.Project> projects;
+            if (mainViewModel.OrganizationProjects != null)
             {
-                prjsBacklogsList.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                projects = mainViewModel.OrganizationProjects;
             }
             else
             {
-                prjsBacklogsList.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                projects = mainViewModel.ProjectsStandalone;
             }
+
+            if (projects != null)
+            {
+                var popupMenu = new PopupMenu();
+
+                foreach (var p in projects)
+                {
+                    var cmd = new UICommand(p.Name, (_) => { mainViewModel.CurrentProject = p; }, "set-project-" + p.Id);
+                    popupMenu.Commands.Add(cmd);
+                }
+
+                await popupMenu.ShowAsync(e.GetPosition(layoutRoot));
+            }
+            
+
+            //if (prjsBacklogsList.Visibility == Windows.UI.Xaml.Visibility.Visible)
+            //{
+            //    prjsBacklogsList.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            //}
+            //else
+            //{
+            //    prjsBacklogsList.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            //}
         }
 
         private void backlogsList_Click(object sender, ItemClickEventArgs e)
