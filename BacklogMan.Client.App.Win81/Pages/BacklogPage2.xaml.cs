@@ -251,42 +251,20 @@ namespace BacklogMan.Client.App.Win81.Pages
 
         }
 
-        private async void projectBacklogsHeader_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            var mainViewModel = ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>();
+        private bool projectsListVisible = false;
 
-            IEnumerable<Core.Model.Project> projects;
-            if (mainViewModel.OrganizationProjects != null)
+        private void projectBacklogsHeader_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (projectsListVisible)
             {
-                projects = mainViewModel.OrganizationProjects;
+                VisualStateManager.GoToState(this, "ProjectsListCollapsed", true);
+                projectsListVisible = false;
             }
             else
             {
-                projects = mainViewModel.ProjectsStandalone;
+                VisualStateManager.GoToState(this, "ProjectsListVisible", true);
+                projectsListVisible = true;
             }
-
-            if (projects != null)
-            {
-                var popupMenu = new PopupMenu();
-
-                foreach (var p in projects)
-                {
-                    var cmd = new UICommand(p.Name, (_) => { mainViewModel.CurrentProject = p; }, "set-project-" + p.Id);
-                    popupMenu.Commands.Add(cmd);
-                }
-
-                await popupMenu.ShowAsync(e.GetPosition(layoutRoot));
-            }
-            
-
-            //if (prjsBacklogsList.Visibility == Windows.UI.Xaml.Visibility.Visible)
-            //{
-            //    prjsBacklogsList.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            //}
-            //else
-            //{
-            //    prjsBacklogsList.Visibility = Windows.UI.Xaml.Visibility.Visible;
-            //}
         }
 
         private void backlogsList_Click(object sender, ItemClickEventArgs e)
@@ -346,6 +324,16 @@ namespace BacklogMan.Client.App.Win81.Pages
             {
                 prjsBacklogsList.SelectedItem = currentBacklog;
             }
+        }
+
+        private void selectProject(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is Core.Model.Project)
+            {
+                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject = e.ClickedItem as Core.Model.Project;
+            }
+            VisualStateManager.GoToState(this, "ProjectsListCollapsed", true);
+            projectsListVisible = false;
         }
     }
 }

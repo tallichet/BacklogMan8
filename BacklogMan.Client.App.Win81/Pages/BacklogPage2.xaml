@@ -82,19 +82,7 @@
         
         <Rectangle Fill="#333333" Grid.Column="0" Grid.RowSpan="2"/>
 
-        <!-- Back button and page title -->
-        <Button x:Name="backButtonWhite" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
-                Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
-                Style="{StaticResource BackButtonWhiteStyle}"
-                VerticalAlignment="Top"
-                AutomationProperties.Name="Back"
-                AutomationProperties.AutomationId="BackButton"
-                AutomationProperties.ItemType="Navigation Button"
-                Visibility="{Binding ElementName=pageRoot, Path=LandscapeVisibility}"/>
-        <TextBlock x:Uid="BacklogPageTitle" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
-                   Text="[backlog]" Style="{StaticResource SubheaderTextBlockStyle}"
-                   IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Center" Margin="100,0,5,0" Foreground="White"/>
-
+        
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
             <Button x:Name="backButton" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
                     Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
@@ -172,7 +160,22 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
+
+        <ListView x:Name="projectsList" ItemsSource="{Binding OrganizationProjects}" Background="#333333" Width="300" Height="800" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                  IsItemClickEnabled="True" ItemClick="selectProject"
+                  Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" Foreground="White" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.RenderTransform>
+                <TranslateTransform X="0" Y="0" x:Name="projectsListTranslation" />
+            </ListView.RenderTransform>
+        </ListView>
         
+        <Rectangle Fill="#333333" Grid.RowSpan="2"  Grid.Column="0" />
+
         <ScrollViewer HorizontalScrollMode="Auto" VerticalScrollMode="Auto" Grid.Row="1">
             <StackPanel>
                 <Grid HorizontalAlignment="Stretch" Height="50"
@@ -239,9 +242,44 @@
             </StackPanel>
         </ScrollViewer>
 
+        <!-- Back button and page title -->
+        <Button x:Name="backButtonWhite" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
+                Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
+                Style="{StaticResource BackButtonWhiteStyle}"
+                VerticalAlignment="Top"
+                AutomationProperties.Name="Back"
+                AutomationProperties.AutomationId="BackButton"
+                AutomationProperties.ItemType="Navigation Button"
+                Visibility="{Binding ElementName=pageRoot, Path=LandscapeVisibility}"/>
+        <TextBlock x:Uid="BacklogPageTitle" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
+                   Text="[backlog]" Style="{StaticResource SubheaderTextBlockStyle}"
+                   IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Center" Margin="100,0,5,0" Foreground="White"/>
+
+
+
+
         <ctrl:UserStoryEditor Grid.RowSpan="2" Grid.ColumnSpan="2" x:Name="storyEditor" />
         
         <ProgressBar VerticalAlignment="Top" HorizontalAlignment="Stretch" IsIndeterminate="True" Height="10"
                      Visibility="{Binding IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ProjectsListVisibility">
+                <VisualState x:Name="ProjectsListCollapsed" />
+                <VisualState x:Name="ProjectsListVisible">
+                    <Storyboard BeginTime="0:0:0" Duration="0:0:0.5">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="projectsList" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <DoubleAnimation Storyboard.TargetName="projectsListTranslation" Storyboard.TargetProperty="X"
+                                         To="600">
+                            <DoubleAnimation.EasingFunction>
+                                <PowerEase EasingMode="EaseInOut" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
+    
 </Page>
