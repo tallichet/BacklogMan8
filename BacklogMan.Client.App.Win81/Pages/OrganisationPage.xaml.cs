@@ -100,6 +100,8 @@ namespace BacklogMan.Client.App.Win81.Pages
             else if (e.ClickedItem is Core.Model.Backlog)
             {
                 ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = e.ClickedItem as Core.Model.Backlog;
+                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject =
+                    ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentOrganization.Projects.FirstOrDefault();
                 Frame.Navigate(typeof(Pages.BacklogPage2));
             }
         }

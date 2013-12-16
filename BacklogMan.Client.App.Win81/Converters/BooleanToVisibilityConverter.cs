@@ -16,7 +16,18 @@ namespace BacklogMan.Client.App.Win81.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return (value is bool && (bool)value) ? Visibility.Visible : Visibility.Collapsed;
+            if (parameter == null)
+            {
+                return (value is bool && (bool)value) ? Visibility.Visible : Visibility.Collapsed;
+            }
+            else if (parameter.ToString() == "!")
+            {
+                return (value is bool && (bool)value) ? Visibility.Collapsed : Visibility.Visible;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

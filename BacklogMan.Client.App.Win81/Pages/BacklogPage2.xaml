@@ -201,7 +201,11 @@
                         <DataTemplate>
                             <Grid AllowDrop="True" Drop="backlogsList_Drop" Tag="{Binding}">
                                 <TextBlock Text="{Binding Name}" Foreground="White" Style="{StaticResource SubheaderTextBlockStyle}" 
-                                            FontSize="22" Margin="30,0,5,0"/>
+                                            FontSize="22" Margin="30,0,5,0"
+                                           Visibility="{Binding IsMain, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=!}"/>
+                                <TextBlock Text="{Binding Name}" Foreground="White" Style="{StaticResource SubheaderTextBlockStyle}" 
+                                           FontWeight="Bold" FontSize="22" Margin="30,0,5,0"
+                                           Visibility="{Binding IsMain, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -232,8 +236,22 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid AllowDrop="True" Drop="backlogsList_Drop" Tag="{Binding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
                                 <TextBlock Text="{Binding Name}" Foreground="White" Style="{StaticResource SubheaderTextBlockStyle}"
-                                            FontSize="22" Margin="30,0,5,0" />
+                                            FontSize="22" Margin="30,0,5,0" TextTrimming="CharacterEllipsis"
+                                           Visibility="{Binding IsMain, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=!}" />
+                                <TextBlock Text="{Binding Name}" Foreground="White" Style="{StaticResource SubheaderTextBlockStyle}"
+                                           FontWeight="Bold" FontSize="22" Margin="30,0,5,0" TextTrimming="CharacterEllipsis"
+                                           Visibility="{Binding IsMain, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                
+                                <TextBlock Text="{Binding Statistics.StoriesTotal}" Grid.Column="1"
+                                           Style="{StaticResource CaptionTextBlockStyle}"  Foreground="White"
+                                           VerticalAlignment="Bottom" Margin="30,0,5,0"
+                                           FontSize="22" />
+
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>

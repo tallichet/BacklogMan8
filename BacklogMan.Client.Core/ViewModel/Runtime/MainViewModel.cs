@@ -326,22 +326,28 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
 
                 if (project == null) return;
 
-                
-                foreach (var b in project.Backlogs)
+                if (project.Backlogs == null)
                 {
-                    if (b.IsArchive) continue;
+                    CurrentProject = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadProject(project.Id);
+                }
+                else
+                {
+                    foreach (var b in project.Backlogs)
+                    {
+                        if (b.IsArchive) continue;
 
-                    var backlog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(b.Id);
-                                        
-                    if (b.IsMain)
-                    {
-                        ProjectBacklogs.Insert(0, backlog);
+                        var backlog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(b.Id);
+
+                        if (b.IsMain)
+                        {
+                            ProjectBacklogs.Insert(0, backlog);
+                        }
+                        else
+                        {
+                            ProjectBacklogs.Add(backlog);
+                        }
+                        backlog.Project = project;
                     }
-                    else
-                    {
-                        ProjectBacklogs.Add(backlog);
-                    }
-                    backlog.Project = project;
                 }
             }
             catch (Exception ex)
