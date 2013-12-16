@@ -27,6 +27,18 @@ namespace BacklogMan.Client.Phone8
             }
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().ApiKey))
+            {
+                // login, let's clear the naviagation back stack
+                while (NavigationService.CanGoBack)
+                {
+                    NavigationService.RemoveBackEntry();
+                }
+            }
+        }
+
 
 
         public string Username
@@ -92,6 +104,13 @@ namespace BacklogMan.Client.Phone8
         {
             sectionLogout.Visibility = System.Windows.Visibility.Collapsed;
             ServiceLocator.Current.GetInstance<IMainViewModel>().ClearApiKey();
+            
+            // login, let's clear the naviagation back stack
+            while (NavigationService.CanGoBack)
+            {
+                NavigationService.RemoveBackEntry();
+            }
+
             sectionLogin.Visibility = System.Windows.Visibility.Visible;
         }
 

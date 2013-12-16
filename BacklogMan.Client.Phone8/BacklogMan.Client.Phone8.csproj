@@ -106,6 +106,7 @@
     <Compile Include="Converter\ColorConverter.cs" />
     <Compile Include="Converter\EmailToGravatarUriConverter.cs" />
     <Compile Include="Converter\ListToVisibilityConverter.cs" />
+    <Compile Include="LocalizationService.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

@@ -56,7 +56,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 }
                 catch (Exception ex)
                 {
-                    ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                    ServiceLocator.Current.GetInstance<Service.ILocalizationService>().DisplayMessageInMessageBox("ErrorNoNetwork");                
                     if (Debugger.IsAttached)
                     {
                         Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
@@ -346,7 +346,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
             catch (Exception ex)
             {
-                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                ServiceLocator.Current.GetInstance<Service.ILocalizationService>().DisplayMessageInMessageBox("ErrorNoNetwork");
                 if (Debugger.IsAttached)
                 {
                     Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
@@ -476,7 +476,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
             catch (Exception ex)
             {
-                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                ServiceLocator.Current.GetInstance<Service.ILocalizationService>().DisplayMessageInMessageBox("ErrorNoNetwork");
                 if (Debugger.IsAttached)
                 {
                     Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
@@ -555,7 +555,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
             catch (Exception ex)
             {
-                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                ServiceLocator.Current.GetInstance<Service.ILocalizationService>().DisplayMessageInMessageBox("ErrorNoNetwork");                
                 if (Debugger.IsAttached)
                 {
                     Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
@@ -580,7 +580,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
             catch (Exception ex)
             {
-                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                ServiceLocator.Current.GetInstance<Service.ILocalizationService>().DisplayMessageInMessageBox("ErrorNoNetwork");
                 if (Debugger.IsAttached)
                 {
                     Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
@@ -612,7 +612,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
             }
             catch (Exception ex)
             {
-                ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                ServiceLocator.Current.GetInstance<Service.ILocalizationService>().DisplayMessageInMessageBox("ErrorNoNetwork");
                 if (Debugger.IsAttached)
                 {
                     Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);
@@ -723,7 +723,7 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                         }
                         catch (Exception ex)
                         {
-                            ServiceLocator.Current.GetInstance<IInternalNotificationViewModel>().ShowNotificationForKey("ErrorNotificationTitleDownloadProject");
+                            ServiceLocator.Current.GetInstance<Service.ILocalizationService>().DisplayMessageInMessageBox("ErrorNoNetwork");
                             if (Debugger.IsAttached)
                             {
                                 Debug.WriteLine("Error on Main.ViewModeldownloadOrganizations(): " + ex.Message);

@@ -132,6 +132,12 @@
   <data name="DeleteStoryMessage" xml:space="preserve">
     <value>Are you sure you want to delete {0} stories ?</value>
   </data>
+  <data name="ErrorNoNetwork_Content" xml:space="preserve">
+    <value>Backlogman only works while connected to internet.</value>
+  </data>
+  <data name="ErrorNoNetwork_Title" xml:space="preserve">
+    <value>Unable to access network.</value>
+  </data>
   <data name="NewStoryAppbarButton.Label" xml:space="preserve">
     <value>New story</value>
   </data>
