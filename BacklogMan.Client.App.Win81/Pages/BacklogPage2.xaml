@@ -53,9 +53,10 @@
         <CommandBar x:Name="commandBar" BorderBrush="White">
             <AppBarButton Click="addStory_Click" Icon="Add" x:Uid="NewStoryAppbarButton" />
             <AppBarButton Command="{Binding RefreshBacklogCommand}" Icon="Refresh" x:Uid="RefreshAppbarButton" />
+            <AppBarButton x:Name="projectBacklogAppbarButton" Click="projectBacklog_Click" Icon="NewWindow" x:Uid="ProjectBacklogAppbarButton" />
             
             <CommandBar.SecondaryCommands>
-                <AppBarButton x:Name="deleteStoryAppbarButton" Click="deleteStory_Click" Icon="Delete" x:Uid="DeleteStoryAppbarButton" Visibility="Collapsed" />
+                <AppBarButton x:Name="deleteStoryAppbarButton" Click="deleteStory_Click" Icon="Delete" x:Uid="DeleteStoryAppbarButton" Visibility="Collapsed" />                
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

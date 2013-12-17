@@ -144,6 +144,9 @@
   <data name="OrganizationsSection.Header" xml:space="preserve">
     <value>Organizations</value>
   </data>
+  <data name="ProjectBacklogAppbarButton.Label" xml:space="preserve">
+    <value>Project</value>
+  </data>
   <data name="ProjectsSection.Header" xml:space="preserve">
     <value>Projects</value>
   </data>

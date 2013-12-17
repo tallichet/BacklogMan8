@@ -27,11 +27,14 @@ namespace BacklogMan.Client.Core.ViewModel
             }
             else
             {
-                // Create runtime view services and models
-                SimpleIoc.Default.Register<IMainViewModel, ViewModel.Runtime.MainViewModel>();
-                SimpleIoc.Default.Register<ISearchViewModel, ViewModel.Runtime.SearchViewModel>();
-                SimpleIoc.Default.Register<IInternalNotificationViewModel, ViewModel.Runtime.InternalNotificationViewModel>();
-                SimpleIoc.Default.Register<Service.INetworkService, Service.NetworkService>();
+                if (SimpleIoc.Default.IsRegistered<IMainViewModel>() == false)
+                {
+                    // Create runtime view services and models
+                    SimpleIoc.Default.Register<IMainViewModel, ViewModel.Runtime.MainViewModel>();
+                    SimpleIoc.Default.Register<ISearchViewModel, ViewModel.Runtime.SearchViewModel>();
+                    SimpleIoc.Default.Register<IInternalNotificationViewModel, ViewModel.Runtime.InternalNotificationViewModel>();
+                    SimpleIoc.Default.Register<Service.INetworkService, Service.NetworkService>();
+                }
             }
         }
 

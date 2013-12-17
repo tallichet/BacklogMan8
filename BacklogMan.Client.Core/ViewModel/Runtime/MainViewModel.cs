@@ -260,13 +260,13 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 if (value == null)
                 {
                     currentBacklog = null;
-                    this.RaisePropertyChanged(() => this.CurrentBacklog);
+                    this.RaisePropertyChanged("CurrentBacklog");
                     BacklogStories.Clear();
                 }
                 else
                 {
                     currentBacklog = value;
-                    this.RaisePropertyChanged(() => this.CurrentBacklog);
+                    this.RaisePropertyChanged("CurrentBacklog");
                     RefreshBacklogStories();
                 }
             }

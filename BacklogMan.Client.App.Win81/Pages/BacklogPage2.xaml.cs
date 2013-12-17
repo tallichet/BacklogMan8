@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -334,6 +336,21 @@ namespace BacklogMan.Client.App.Win81.Pages
             }
             VisualStateManager.GoToState(this, "ProjectsListCollapsed", true);
             projectsListVisible = false;
+        }  
+
+        private async void projectBacklog_Click(object sender, RoutedEventArgs e)
+        {
+            var appView = ApplicationView.GetForCurrentView();
+            await CoreApplication.CreateNewView().Dispatcher.RunAsync(
+                Windows.UI.Core.CoreDispatcherPriority.Normal,
+                async () => {
+                    ApplicationView newAppView = ApplicationView.GetForCurrentView();
+                    var frame = new Frame();
+                    frame.Navigate(typeof(Pages.BacklogPage));
+                    Window.Current.Content = frame; 
+                    await ProjectionManager.StartProjectingAsync(newAppView.Id, appView.Id);
+                }
+            );
         }
     }
 }
