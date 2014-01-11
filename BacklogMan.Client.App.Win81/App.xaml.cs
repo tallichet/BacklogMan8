@@ -36,6 +36,8 @@ namespace BacklogMan.Client.App.Win81
         /// </summary>
         public App()
         {
+            BugSense.BugSenseHandler.Instance.InitAndStartSession(new BugSense.Model.ExceptionManager(Current), "w8c350cf");
+
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 

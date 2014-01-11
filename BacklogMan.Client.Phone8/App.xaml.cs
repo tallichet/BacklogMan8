@@ -27,7 +27,8 @@ namespace BacklogMan.Client.Phone8
         public App()
         {
             // Global handler for uncaught exceptions.
-            UnhandledException += Application_UnhandledException;
+            //UnhandledException += Application_UnhandledException;
+            BugSense.BugSenseHandler.Instance.InitAndStartSession(new BugSense.Core.Model.ExceptionManager(Current), "98a5a573");
 
             // Standard XAML initialization
             InitializeComponent();
