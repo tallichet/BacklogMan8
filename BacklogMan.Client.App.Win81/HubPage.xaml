@@ -31,13 +31,21 @@
     <!--
     This grid acts as a root panel for the page.
   -->
-    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="White">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
-        <Hub SectionHeaderClick="Hub_SectionHeaderClick" Padding="40,40,0,0" x:Name="hub">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Hub SectionHeaderClick="Hub_SectionHeaderClick" Padding="40,40,0,0" x:Name="hub" Grid.RowSpan="2">
+            <Hub.Background>
+                <ImageBrush ImageSource="Images/Backgrounds/humour_038.jpg" Stretch="UniformToFill" Opacity=".3" />
+            </Hub.Background>
             <Hub.Header>
                 <!-- Back button and page title -->
                 <Grid Margin="0,20,0,0">
@@ -58,36 +66,6 @@
                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Top"/>
                 </Grid>
             </Hub.Header>
-            <HubSection Width="{Binding Path=ImageSectionWidth, ElementName=pageRoot}" d:IsHidden="True" Name="sectionTitle" HorizontalContentAlignment="Stretch">
-                <HubSection.Background>
-                    <ImageBrush ImageSource="Images/Backgrounds/humour_038.jpg" Stretch="Uniform" />
-                </HubSection.Background>
-                <DataTemplate>
-                    <Grid Height="{Binding Path=HubSectionHeight, ElementName=pageRoot}">
-                        <ListView
-                            x:Name="itemListView"
-                            AutomationProperties.AutomationId="ItemListView"
-                            AutomationProperties.Name="Grouped Items"
-                            VerticalAlignment="Bottom" Height="250" Width="{Binding Path=HomeBacklogsListWidth, ElementName=pageRoot}" Margin="80,0,0,0"
-                            ItemsSource="{Binding MainBacklogs}"
-                            IsSwipeEnabled="False"
-                            IsItemClickEnabled="True"
-                            ScrollViewer.VerticalScrollBarVisibility="Hidden"      
-                            ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                            ScrollViewer.HorizontalScrollMode="Auto"
-                            SelectionMode="None"
-                            ItemTemplate="{StaticResource BacklogHomeDataTemplate}"                        
-                            ItemClick="ItemView_ItemClick">
-                            <ListView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ListView.ItemsPanel>
-                        </ListView>
-                    </Grid>
-                </DataTemplate>
-                
-            </HubSection>
             <HubSection Padding="120,30,40,44"  VerticalAlignment="Top" Name="sectionOrganization" x:Uid="OrganizationsSection" >
                 <DataTemplate>
                     <ListView
@@ -95,12 +73,12 @@
                         Margin="-14,-4,0,0"
                         AutomationProperties.AutomationId="ItemListView"
                         AutomationProperties.Name="Grouped Items"
-                        ItemsSource="{Binding Organizations}"
+                        ItemsSource="{Binding MainBacklogs}"
                         IsSwipeEnabled="False"
                         IsItemClickEnabled="True"
                         ScrollViewer.VerticalScrollBarVisibility="Hidden"
                         SelectionMode="None"
-                        ItemTemplate="{StaticResource OrganizationDataTemplate}"                        
+                        ItemTemplate="{StaticResource BacklogHomeDataTemplate}"                        
                         ItemClick="ItemView_ItemClick">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>

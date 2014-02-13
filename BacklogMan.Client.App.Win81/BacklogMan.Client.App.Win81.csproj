@@ -146,15 +146,6 @@
     <Compile Include="Pages\BacklogPage2.xaml.cs">
       <DependentUpon>BacklogPage2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BacklogPage.xaml.cs">
-      <DependentUpon>BacklogPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\OrganisationPage.xaml.cs">
-      <DependentUpon>OrganisationPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ProjectPage.xaml.cs">
-      <DependentUpon>ProjectPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\SearchResults.xaml.cs">
       <DependentUpon>SearchResults.xaml</DependentUpon>
     </Compile>
@@ -273,18 +264,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Pages\BacklogPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\OrganisationPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\ProjectPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SearchResults.xaml">
       <SubType>Designer</SubType>

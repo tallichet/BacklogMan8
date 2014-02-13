@@ -79,12 +79,12 @@ namespace BacklogMan.Client.App.Win81
         /// <param name="e">Event data that describes how the click was initiated.</param>
         void Hub_SectionHeaderClick(object sender, HubSectionHeaderClickEventArgs e)
         {
-            HubSection section = e.Section;
-            var group = section.DataContext;
-            if (section == sectionProjects)
-            {
-                this.Frame.Navigate(typeof(Pages.ProjectPage), ((SampleDataGroup)group).UniqueId);
-            }
+            //HubSection section = e.Section;
+            //var group = section.DataContext;
+            //if (section == sectionProjects)
+            //{
+            //    this.Frame.Navigate(typeof(Pages.ProjectPage), ((SampleDataGroup)group).UniqueId);
+            //}
             //
         }
 
@@ -98,7 +98,7 @@ namespace BacklogMan.Client.App.Win81
         {
             // Navigate to the appropriate destination page, configuring the new page
             // by passing required information as a navigation parameter
-            if (e.ClickedItem is Core.Model.Project)
+            /*if (e.ClickedItem is Core.Model.Project)
             {
                 ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject = e.ClickedItem as Core.Model.Project;
                 this.Frame.Navigate(typeof(Pages.ProjectPage));
@@ -108,13 +108,22 @@ namespace BacklogMan.Client.App.Win81
                 ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentOrganization = e.ClickedItem as Core.Model.Organization;
                 this.Frame.Navigate(typeof(Pages.OrganisationPage));
             }
-            else if (e.ClickedItem is Core.Model.Backlog)
+            else */
+            if (e.ClickedItem is Core.Model.Backlog)
             {
                 ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = e.ClickedItem as Core.Model.Backlog;
                 this.Frame.Navigate(typeof(Pages.BacklogPage2));
                 var org = (e.ClickedItem as Core.Model.Backlog).Organization;
-                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentOrganization = org;
-                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject = org.Projects.FirstOrDefault();
+                if (org != null)
+                {
+                    ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentOrganization = org;
+                    ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject = org.Projects.FirstOrDefault();
+                }
+                else
+                {
+                    ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject = (e.ClickedItem as Core.Model.Backlog).Project;
+                    ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentOrganization = null;
+                }
             }
         }
         #region NavigationHelper registration

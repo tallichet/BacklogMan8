@@ -53,6 +53,8 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 {
                     await downloadOrganizations();
                     await downloadProjects();
+
+                    await refreshMainBacklogs();
                 }
                 catch (Exception ex)
                 {
@@ -115,8 +117,6 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 var o2 = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadOrganization(o.Id);
                 this.Organizations.Add(o2);
             }
-
-            await refreshMainBacklogs();
         }
 
         private async Task downloadProjects()
@@ -370,13 +370,18 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
         /// </summary>
         private async Task refreshMainBacklogs()
         {
-            var backlogTuples = (from o in Organizations
+            var orgBacklogTuples = (from o in Organizations
                            from b in o.Backlogs
                            where b.IsMain
                            select new Tuple<Model.Organization, Model.Backlog> (o, b)).ToList();
 
+            var prjBacklogTuples = (from p in ProjectsStandalone
+                                   from b in p.Backlogs
+                                   where b.IsMain
+                                   select new Tuple<Model.Project, Model.Backlog>(p, b)).ToList();
+
             MainBacklogs.Clear();
-            foreach (var tuple in backlogTuples)
+            foreach (var tuple in orgBacklogTuples)
             {
                 try
                 {
@@ -390,6 +395,19 @@ namespace BacklogMan.Client.Core.ViewModel.Runtime
                 }
             }
 
+            foreach (var tuple in prjBacklogTuples)
+            {
+                try
+                {
+                    var backlog = await ServiceLocator.Current.GetInstance<Service.INetworkService>().DownloadBacklog(tuple.Item2.Id);
+                    backlog.Project = tuple.Item1;
+                    MainBacklogs.Add(backlog);
+                }
+                catch (Exception)
+                {
+                    MainBacklogs.Add(tuple.Item2);
+                }
+            }
 
         }
 

@@ -105,7 +105,7 @@ namespace BacklogMan.Client.App.Win81.Pages
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = e.ClickedItem;
-            if (item is Organization)
+            /*if (item is Organization)
             {
                 ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentOrganization = item as Organization;
                 this.Frame.Navigate(typeof(Pages.OrganisationPage));
@@ -115,7 +115,8 @@ namespace BacklogMan.Client.App.Win81.Pages
                 ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject = item as Project;
                 this.Frame.Navigate(typeof(Pages.ProjectPage));
             }
-            else if (item is Backlog)
+            else */
+            if (item is Backlog)
             {
                 ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentBacklog = item as Backlog;
                 this.Frame.Navigate(typeof(Pages.BacklogPage2));
