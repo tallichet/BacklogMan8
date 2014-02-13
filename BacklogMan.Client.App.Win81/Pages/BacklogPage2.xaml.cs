@@ -1,10 +1,12 @@
 ﻿using BacklogMan.Client.App.Win81.Common;
+using BacklogMan.Client.Core.ViewModel;
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -28,14 +30,13 @@ namespace BacklogMan.Client.App.Win81.Pages
     {
 
         private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
         /// <summary>
         /// This can be changed to a strongly typed view model.
         /// </summary>
-        public ObservableDictionary DefaultViewModel
+        public IMainViewModel ViewModel
         {
-            get { return this.defaultViewModel; }
+            get { return ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>(); }
         }
 
         /// <summary>
@@ -262,6 +263,7 @@ namespace BacklogMan.Client.App.Win81.Pages
             }
             else
             {
+                if (ViewModel.CurrentOrganization != null && ViewModel.CurrentOrganization.ProjectCount > 1)
                 VisualStateManager.GoToState(this, "ProjectsListVisible", true);
                 projectsListVisible = true;
             }
@@ -326,14 +328,26 @@ namespace BacklogMan.Client.App.Win81.Pages
             }
         }
 
-        private void selectProject(object sender, ItemClickEventArgs e)
+        private async void selectProject(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is Core.Model.Project)
             {
-                ServiceLocator.Current.GetInstance<Core.ViewModel.IMainViewModel>().CurrentProject = e.ClickedItem as Core.Model.Project;
+                ViewModel.CurrentProject = e.ClickedItem as Core.Model.Project;
             }
             VisualStateManager.GoToState(this, "ProjectsListCollapsed", true);
             projectsListVisible = false;
+            if (ViewModel.CurrentBacklog.Project != null && ViewModel.CurrentBacklog.Project.Id != ViewModel.CurrentProject.Id)
+            {
+                // Viewing another project backlog
+                //ViewModel.CurrentBacklog = ViewModel.CurrentProject.Backlogs.FirstOrDefault(b => b.IsMain);
+
+                await Task.Delay(200);
+
+                if (prjsBacklogsList.Items.Count > 0)
+                {
+                    prjsBacklogsList.SelectedIndex = 0;
+                }
+            }
         }
     }
 }

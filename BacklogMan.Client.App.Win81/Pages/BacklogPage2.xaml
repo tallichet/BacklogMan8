@@ -66,11 +66,11 @@
         * Row 1 contains the rest of the page layout
     -->
     <Grid x:Name="layoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ChildrenTransitions>
+        <!--<Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
             </TransitionCollection>
-        </Grid.ChildrenTransitions>
+        </Grid.ChildrenTransitions>-->
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
@@ -79,9 +79,6 @@
             <ColumnDefinition Width="300" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
-        <Rectangle Fill="#333333" Grid.Column="0" Grid.RowSpan="2"/>
-
         
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
             <Button x:Name="backButton" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
@@ -161,22 +158,24 @@
             </ListView.ItemContainerStyle>
         </ListView>
 
-        <ListView x:Name="projectsList" ItemsSource="{Binding OrganizationProjects}" Background="#333333" Width="300" Height="800" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                  IsItemClickEnabled="True" ItemClick="selectProject"
-                  Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="Collapsed">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" Foreground="White" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.RenderTransform>
+        <Grid x:Name="projectsList"  Width="300" Height="780" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="Transparent" Visibility="Collapsed"
+              Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <ListView ItemsSource="{Binding OrganizationProjects}" Background="#444444" Width="300" MaxHeight="600"  HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                      IsItemClickEnabled="True" ItemClick="selectProject" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" Foreground="White" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid.RenderTransform>
                 <TranslateTransform X="0" Y="0" x:Name="projectsListTranslation" />
-            </ListView.RenderTransform>
-        </ListView>
-        
+            </Grid.RenderTransform>
+        </Grid>
+
         <Rectangle Fill="#333333" Grid.RowSpan="2"  Grid.Column="0" />
 
-        <ScrollViewer HorizontalScrollMode="Auto" VerticalScrollMode="Auto" Grid.Row="1">
+        <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <Grid HorizontalAlignment="Stretch" Height="50"
                       IsHitTestVisible="True" Tapped="organizationBacklogsHeader_Tapped"
