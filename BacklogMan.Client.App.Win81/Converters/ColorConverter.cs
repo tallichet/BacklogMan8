@@ -4,6 +4,7 @@ using System.Windows;
 using System.Globalization;
 using Windows.UI.Xaml.Data;
 using Windows.UI;
+using Windows.UI.Xaml.Media;
 
 namespace BacklogMan.Client.App.Win81.Converters
 {
@@ -22,7 +23,19 @@ namespace BacklogMan.Client.App.Win81.Converters
                 opacity = (double)opacity;
             }
 
-            return ConvertStringToColor(value as string, opacity);
+            var color = ConvertStringToColor(value as string, opacity);
+            if (targetType == typeof(Color))
+            {
+                return color;
+            }
+            else if (targetType == typeof(Brush))
+            {
+                return new SolidColorBrush(color);
+            }
+            else
+            {
+                return color.ToString();
+            }
         }
 
         public static Color ConvertStringToColor(string value, double opacity)

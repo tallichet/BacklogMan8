@@ -36,8 +36,85 @@
 
                     <TextBox x:Uid="StoryEditTheme" Text="{Binding Theme, Mode=TwoWay}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
 
-                    <TextBox x:Uid="StoryEditColor" Text="{Binding ColorString, Mode=TwoWay}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}"/>
-
+                    <ComboBox SelectedValue="{Binding ColorString, Mode=TwoWay}" x:Uid="StoryEditColor" Width="100" HorizontalAlignment="Left" Header="[header]" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" x:Name="ColorPicker" >
+                        <ComboBox.Items>
+                            <x:String>#006dcc</x:String>
+                            <x:String>#444444</x:String>
+                            <x:String>#666666</x:String>
+                            <x:String>#999999</x:String>
+                            <x:String>#cccccc</x:String>
+                            <x:String>#eeeeee</x:String>
+                            <x:String>#f3f3f3</x:String>
+                            <x:String>#ffffff</x:String>
+                            <x:String>#ff0000</x:String>
+                            <x:String>#ff9900</x:String>
+                            <x:String>#ffff00</x:String>
+                            <x:String>#00ff00</x:String>
+                            <x:String>#00ffff</x:String>
+                            <x:String>#0000ff</x:String>
+                            <x:String>#9900ff</x:String>
+                            <x:String>#ff00ff</x:String>
+                            <x:String>#f4cccc</x:String>
+                            <x:String>#fce5cd</x:String>
+                            <x:String>#fff2cc</x:String>
+                            <x:String>#d9ead3</x:String>
+                            <x:String>#d0e0e3</x:String>
+                            <x:String>#cfe2f3</x:String>
+                            <x:String>#d9d2e9</x:String>
+                            <x:String>#ead1dc</x:String>
+                            <x:String>#ea9999</x:String>
+                            <x:String>#f9cb9c</x:String>
+                            <x:String>#ffe599</x:String>
+                            <x:String>#b6d7a8</x:String>
+                            <x:String>#a2c4c9</x:String>
+                            <x:String>#9fc5e8</x:String>
+                            <x:String>#b4a7d6</x:String>
+                            <x:String>#d5a6bd</x:String>
+                            <x:String>#e06666</x:String>
+                            <x:String>#f6b26b</x:String>
+                            <x:String>#ffd966</x:String>
+                            <x:String>#93c47d</x:String>
+                            <x:String>#76a5af</x:String>
+                            <x:String>#6fa8dc</x:String>
+                            <x:String>#8e7cc3</x:String>
+                            <x:String>#c27ba0</x:String>
+                            <x:String>#cc0000</x:String>
+                            <x:String>#e69138</x:String>
+                            <x:String>#f1c232</x:String>
+                            <x:String>#6aa84f</x:String>
+                            <x:String>#45818e</x:String>
+                            <x:String>#3d85c6</x:String>
+                            <x:String>#674ea7</x:String>
+                            <x:String>#a64d79</x:String>
+                            <x:String>#990000</x:String>
+                            <x:String>#b45f06</x:String>
+                            <x:String>#bf9000</x:String>
+                            <x:String>#38761d</x:String>
+                            <x:String>#134f5c</x:String>
+                            <x:String>#0b5394</x:String>
+                            <x:String>#351c75</x:String>
+                            <x:String>#741b47</x:String>
+                            <x:String>#660000</x:String>
+                            <x:String>#783f04</x:String>
+                            <x:String>#7f6000</x:String>
+                            <x:String>#274e13</x:String>
+                            <x:String>#0c343d</x:String>
+                            <x:String>#073763</x:String>
+                            <x:String>#20124d</x:String>
+                            <x:String>#4c1130</x:String>
+                        </ComboBox.Items>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Rectangle Fill="{Binding Converter={StaticResource ColorConverter}}" Width="20" Height="20" Margin="-5"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <!--<ComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapGrid MaximumRowsOrColumns="8" Orientation="Horizontal" Width="240" Height="240" />
+                            </ItemsPanelTemplate>
+                        </ComboBox.ItemsPanel>-->
+                    </ComboBox>
+                    
                     <TextBox x:Uid="StoryEditComment" Text="{Binding Comments, Mode=TwoWay}" AcceptsReturn="True" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}"
                              Height="200"/>
                 
