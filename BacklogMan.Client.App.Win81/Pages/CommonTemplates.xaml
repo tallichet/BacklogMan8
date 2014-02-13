@@ -118,8 +118,9 @@
                 <ColumnDefinition Width="80" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
+
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
@@ -131,26 +132,32 @@
             </Grid>
 
             <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <TextBlock Text="&#xF0CA;" FontFamily="/Fonts/fontawesome-webfont.ttf#FontAwesome" Style="{StaticResource BaseTextBlockStyle}" Margin="0,0,5,0" />
-                <TextBlock Text="{Binding Name}" Grid.Row="0" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" />
+                <TextBlock Text="{Binding Organization.Name}" Grid.Row="0" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" Margin="0" />
+                <TextBlock Text="{Binding Project.Name}" Grid.Row="0" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap" Margin="0" />
             </StackPanel>
 
-            <TextBlock Text="{Binding Description}" Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                <TextBlock Text="&#xF0CA;" FontFamily="/Fonts/fontawesome-webfont.ttf#FontAwesome" Style="{StaticResource BaseTextBlockStyle}" Margin="0,0,5,0" />
+                <TextBlock Text="{Binding Name}" Grid.Row="0" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="NoWrap" />
+            </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="2" Margin="5">
+            <TextBlock Text="{Binding Description}" Grid.Row="2" Grid.Column="1" Style="{StaticResource BodyTextBlockStyle}" 
+                       TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2" Margin="5">
                 <TextBlock Text="{Binding Path=Statistics.StoriesTotal}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,5,0" />
                 <TextBlock Text="stories" Style="{StaticResource BodyTextBlockStyle}"/>
                 <TextBlock Text="{Binding Path=Statistics.StoriesCompleted}" Style="{StaticResource BodyTextBlockStyle}" Margin="5,0"/>
                 <TextBlock Text="completed" Style="{StaticResource BodyTextBlockStyle}" />
             </StackPanel>
 
-            <Grid Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center">
+            <Grid Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center">
                 <Grid.RenderTransform>
                     <TranslateTransform X="0" Y="4" />
                 </Grid.RenderTransform>
                 <ProgressBar Maximum="100" Value="{Binding Path=Statistics.PercentEstimated}" Height="7" Margin="0">
                     <ProgressBar.Background>
-                        <SolidColorBrush Color="{StaticResource BacklogManMainColor}" />
+                        <SolidColorBrush Color="Transparent" />
                     </ProgressBar.Background>
                     <ProgressBar.Foreground>
                         <SolidColorBrush Color="#639DCC" />

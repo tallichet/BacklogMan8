@@ -88,28 +88,6 @@
                     </ListView>
                 </DataTemplate>
             </HubSection>
-            <HubSection Padding="40,30,40,44" IsHeaderInteractive="False"  Name="sectionProjects" x:Uid="ProjectsSection" >
-                <DataTemplate>
-                    <ListView
-                        x:Name="itemListView"
-                        Margin="-14,-4,0,0"
-                        AutomationProperties.AutomationId="ItemListView"
-                        AutomationProperties.Name="Grouped Items"
-                        ItemsSource="{Binding ProjectsStandalone}"
-                        IsSwipeEnabled="False"
-                        IsItemClickEnabled="True"
-                        ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                        SelectionMode="None"
-                        ItemTemplate="{StaticResource ProjectDataTemplate}"
-                        ItemClick="ItemView_ItemClick">
-                        <ListView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <ItemsWrapGrid />
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
-                    </ListView>
-                </DataTemplate>
-            </HubSection>
         </Hub>
         
         <ProgressBar VerticalAlignment="Top" HorizontalAlignment="Stretch" IsIndeterminate="True" Height="10"
