@@ -114,6 +114,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AutocompleteTextBox.cs" />
     <Compile Include="Controls\DeletionConfirmation.xaml.cs">
       <DependentUpon>DeletionConfirmation.xaml</DependentUpon>
     </Compile>

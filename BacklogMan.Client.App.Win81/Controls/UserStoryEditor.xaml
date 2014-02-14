@@ -3,6 +3,7 @@
     x:Class="BacklogMan.Client.App.Win81.Controls.UserStoryEditor"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="using:BacklogMan.Client.App.Win81.Controls"
     xmlns:local="using:BacklogMan.Client.App.Win81.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -34,7 +35,9 @@
                     <ComboBox x:Uid="StoryEditStatus" x:Name="storyEditStatus"
                               SelectedValue="{Binding Status, Mode=TwoWay}" Width="100" HorizontalAlignment="Left" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
 
-                    <TextBox x:Uid="StoryEditTheme" Text="{Binding Theme, Mode=TwoWay}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
+                    <ctrl:AutocompleteTextBox x:Uid="StoryEditTheme" Text="{Binding Theme, Mode=TwoWay}" Width="200" HorizontalAlignment="Left" 
+                                                AllAutoCompleteValues="{Binding Source={StaticResource Locator}, Path=Main.CurrentProject.Themes}"
+                                              IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" />
 
                     <ComboBox SelectedValue="{Binding ColorString, Mode=TwoWay}" x:Uid="StoryEditColor" Width="100" HorizontalAlignment="Left" Header="[header]" IsEnabled="{Binding IsStoryEditable, ElementName=layoutRoot}" x:Name="ColorPicker" >
                         <ComboBox.Items>
