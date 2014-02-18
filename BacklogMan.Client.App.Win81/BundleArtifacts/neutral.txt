@@ -1,0 +1,4 @@
+MainPackage=C:\Users\Cedric\Source\Repos\BacklogMan8\BacklogMan.Client.App.Win81\bin\Debug\BacklogMan.Client.App.Win81_1.0.0.3_Bundle\BacklogMan.Client.App.Win81_1.0.0.3_AnyCPU_Debug.appx
+SymbolPackage=C:\Users\Cedric\Source\Repos\BacklogMan8\BacklogMan.Client.App.Win81\AppPackages\BacklogMan.Client.App.Win81_1.0.0.3_Debug_Test\BacklogMan.Client.App.Win81_1.0.0.3_AnyCPU_Debug.appxsym
+ResourcePack=C:\Users\Cedric\Source\Repos\BacklogMan8\BacklogMan.Client.App.Win81\bin\Debug\BacklogMan.Client.App.Win81_1.0.0.3_Bundle\BacklogMan.Client.App.Win81_1.0.0.3_scale-140.appx
+ResourcePack=C:\Users\Cedric\Source\Repos\BacklogMan8\BacklogMan.Client.App.Win81\bin\Debug\BacklogMan.Client.App.Win81_1.0.0.3_Bundle\BacklogMan.Client.App.Win81_1.0.0.3_scale-180.appx
