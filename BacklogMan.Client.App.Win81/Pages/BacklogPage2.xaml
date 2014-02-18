@@ -158,10 +158,15 @@
             </ListView.ItemContainerStyle>
         </ListView>
 
-        <Grid x:Name="projectsList"  Width="300" Height="780" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="Transparent" Visibility="Collapsed"
+        <Grid x:Name="projectsList"  Width="300" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="Transparent" Visibility="Collapsed"
               Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
             <ListView ItemsSource="{Binding OrganizationProjects}" Background="#444444" Width="300" MaxHeight="600"  HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                      IsItemClickEnabled="True" ItemClick="selectProject" >
+                      IsItemClickEnabled="True" ItemClick="selectProject" 
+                      Grid.Row="1">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" Foreground="White" />
